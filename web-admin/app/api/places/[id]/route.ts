@@ -7,12 +7,13 @@ export const runtime = 'edge';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const result = await pool.query(
       'SELECT * FROM places WHERE id = $1',
-      [params.id]
+      [id]
     );
     
     if (result.rowCount === 0) {
@@ -37,12 +38,13 @@ export async function GET(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const result = await pool.query(
       'UPDATE places SET is_active = false, updated_at = NOW() WHERE id = $1 RETURNING *',
-      [params.id]
+      [id]
     );
     
     if (result.rowCount === 0) {
