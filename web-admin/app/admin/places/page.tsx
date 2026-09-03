@@ -147,7 +147,7 @@ export default function PlacesPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">⭐ {place.rating.toFixed(1)}</div>
+                      <div className="text-sm text-gray-900">⭐ {parseFloat(String(place.rating)).toFixed(1)}</div>
                       <div className="text-xs text-gray-500">{place.reviews_count} reviews</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
