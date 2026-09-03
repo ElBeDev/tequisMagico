@@ -4,6 +4,7 @@ import { Pool } from '@neondatabase/serverless';
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -16,7 +17,7 @@ export async function GET(request: Request) {
     const params: any[] = [];
     let paramCount = 1;
     
-    if (category) {
+    if (category && category !== 'all') {
       query += ` AND category = $${paramCount}`;
       params.push(category);
       paramCount++;
@@ -36,6 +37,10 @@ export async function GET(request: Request) {
       success: true,
       count: result.rowCount,
       places: result.rows
+    }, {
+      headers: {
+        'Cache-Control': 'no-store, must-revalidate',
+      }
     });
   } catch (error) {
     console.error('Database error:', error);
