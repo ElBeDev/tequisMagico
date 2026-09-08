@@ -130,6 +130,66 @@ final class Event {
     }
 }
 
+// MARK: - Sincronización con el API
+extension Event {
+    convenience init(dto: EventDTO) {
+        self.init(
+            id: dto.id,
+            title: dto.title,
+            shortDescription: dto.shortDescription,
+            fullDescription: dto.fullDescription,
+            startDate: dto.startDate,
+            endDate: dto.endDate,
+            isRecurring: dto.isRecurring,
+            recurrenceRule: dto.recurrenceRule,
+            locationName: dto.locationName,
+            latitude: dto.latitude,
+            longitude: dto.longitude,
+            address: dto.address,
+            category: dto.category,
+            tags: dto.tags,
+            imageURLs: dto.imageURLs,
+            thumbnailURL: dto.thumbnailURL,
+            isFree: dto.isFree,
+            ticketPrice: dto.ticketPrice,
+            ticketURL: dto.ticketURL,
+            requiresReservation: dto.requiresReservation,
+            isFeatured: dto.isFeatured,
+            viewsCount: dto.viewsCount,
+            organizerName: dto.organizerName,
+            organizerContact: dto.organizerContact
+        )
+    }
+
+    /// Actualiza este evento ya guardado con los datos frescos del API (conserva el `id`).
+    func apply(_ dto: EventDTO) {
+        title = dto.title
+        shortDescription = dto.shortDescription
+        fullDescription = dto.fullDescription
+        startDate = dto.startDate
+        endDate = dto.endDate
+        isRecurring = dto.isRecurring
+        recurrenceRule = dto.recurrenceRule
+        locationName = dto.locationName
+        latitude = dto.latitude
+        longitude = dto.longitude
+        address = dto.address
+        category = dto.category
+        tags = dto.tags
+        imageURLs = dto.imageURLs
+        thumbnailURL = dto.thumbnailURL
+        isFree = dto.isFree
+        ticketPrice = dto.ticketPrice
+        ticketURL = dto.ticketURL
+        requiresReservation = dto.requiresReservation
+        isFeatured = dto.isFeatured
+        viewsCount = dto.viewsCount
+        organizerName = dto.organizerName
+        organizerContact = dto.organizerContact
+        updatedAt = Date()
+    }
+}
+
 // MARK: - Sample Data
 extension Event {
     static var sample: Event {

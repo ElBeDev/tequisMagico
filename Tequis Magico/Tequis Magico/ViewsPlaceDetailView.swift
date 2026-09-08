@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 import MapKit
 
 struct PlaceDetailView: View {
-    let place: Place
+    @Bindable var place: Place
+    @Environment(\.modelContext) private var modelContext
     @State private var selectedImageIndex = 0
     
     var body: some View {
@@ -65,9 +67,10 @@ struct PlaceDetailView: View {
                             
                             // Botón favorito
                             Button {
-                                // TODO: Toggle favorito
+                                place.isFavorite.toggle()
+                                try? modelContext.save()
                             } label: {
-                                Image(systemName: "heart")
+                                Image(systemName: place.isFavorite ? "heart.fill" : "heart")
                                     .font(.title2)
                                     .foregroundStyle(.red)
                             }

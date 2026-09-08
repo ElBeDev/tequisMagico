@@ -12,10 +12,8 @@ struct FavoritesView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var places: [Place]
     
-    // TODO: Implementar sistema real de favoritos (UserDefaults o Swift Data)
-    // Por ahora mostramos lugares con rating alto como ejemplo
     var favoritePlaces: [Place] {
-        places.filter { $0.rating >= 4.5 }
+        places.filter { $0.isFavorite }
     }
     
     var body: some View {

@@ -62,7 +62,10 @@ final class Place {
     var updatedAt: Date
     var viewsCount: Int
     var favoritesCount: Int
-    
+
+    // MARK: - Estado local del usuario (no viene del API)
+    var isFavorite: Bool = false
+
     // MARK: - Initializer
     init(
         id: UUID = UUID(),

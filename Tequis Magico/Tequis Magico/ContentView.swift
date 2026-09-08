@@ -55,9 +55,7 @@ struct ContentView: View {
         .tint(.orange) // Color temático de Tequisquiapan
         .task {
             await syncPlacesFromBackend()
-            if events.isEmpty {
-                seedEvents()
-            }
+            await syncEventsFromBackend()
         }
     }
 
@@ -73,6 +71,13 @@ struct ContentView: View {
                     modelContext.insert(Place(dto: dto))
                 }
             }
+            if !remotePlaces.isEmpty {
+                // Lugares que ya no vienen del API (desactivados en el panel) se quitan del cache local.
+                let remoteIDs = Set(remotePlaces.map(\.id))
+                for place in places where !remoteIDs.contains(place.id) {
+                    modelContext.delete(place)
+                }
+            }
             try? modelContext.save()
         } catch {
             // Sin conexión al panel: si no hay nada guardado localmente, usamos el seed offline.
@@ -85,11 +90,32 @@ struct ContentView: View {
         }
     }
 
-    private func seedEvents() {
-        for event in SeedData.createAllEvents() {
-            modelContext.insert(event)
+    private func syncEventsFromBackend() async {
+        do {
+            let remoteEvents = try await EventAPIService.fetchEvents()
+            let existingByID = Dictionary(uniqueKeysWithValues: events.map { ($0.id, $0) })
+            for dto in remoteEvents {
+                if let existing = existingByID[dto.id] {
+                    existing.apply(dto)
+                } else {
+                    modelContext.insert(Event(dto: dto))
+                }
+            }
+            if !remoteEvents.isEmpty {
+                let remoteIDs = Set(remoteEvents.map(\.id))
+                for event in events where !remoteIDs.contains(event.id) {
+                    modelContext.delete(event)
+                }
+            }
+            try? modelContext.save()
+        } catch {
+            if events.isEmpty {
+                for event in SeedData.createAllEvents() {
+                    modelContext.insert(event)
+                }
+                try? modelContext.save()
+            }
         }
-        try? modelContext.save()
     }
 }
 
