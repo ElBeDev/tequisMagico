@@ -8,29 +8,70 @@
 import SwiftUI
 import SwiftData
 
+/// Últimas búsquedas del usuario, guardadas en UserDefaults (más reciente primero, sin duplicados).
+enum SearchHistory {
+    private static let key = "explore.searchHistory"
+    private static let limit = 5
+
+    static func load() -> [String] {
+        UserDefaults.standard.stringArray(forKey: key) ?? []
+    }
+
+    static func add(_ term: String, to history: [String]) -> [String] {
+        var updated = history.filter { $0.lowercased() != term.lowercased() }
+        updated.insert(term, at: 0)
+        updated = Array(updated.prefix(limit))
+        UserDefaults.standard.set(updated, forKey: key)
+        return updated
+    }
+}
+
 struct ExploreView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var places: [Place]
-    
+
     @State private var searchText = ""
     @State private var selectedCategory: PlaceCategory?
-    
+    @State private var searchHistory: [String] = SearchHistory.load()
+
     var filteredPlaces: [Place] {
         var result = places.filter { $0.isActive }
-        
+
         if let category = selectedCategory {
             result = result.filter { $0.category == category }
         }
-        
+
         if !searchText.isEmpty {
-            result = result.filter { 
+            result = result.filter {
                 $0.name.localizedCaseInsensitiveContains(searchText) ||
                 $0.shortDescription.localizedCaseInsensitiveContains(searchText) ||
-                $0.address.localizedCaseInsensitiveContains(searchText)
+                $0.address.localizedCaseInsensitiveContains(searchText) ||
+                $0.tags.contains { $0.localizedCaseInsensitiveContains(searchText) }
             }
         }
-        
+
         return result
+    }
+
+    /// Nombres/tags que empiezan con lo escrito, para autocompletar mientras se teclea.
+    var searchSuggestions: [String] {
+        guard !searchText.isEmpty else { return [] }
+        var suggestions = Set<String>()
+        for place in places {
+            if place.name.localizedCaseInsensitiveContains(searchText) {
+                suggestions.insert(place.name)
+            }
+            for tag in place.tags where tag.localizedCaseInsensitiveContains(searchText) {
+                suggestions.insert(tag)
+            }
+        }
+        return Array(suggestions).sorted().prefix(6).map { $0 }
+    }
+
+    private func commitSearch(_ text: String) {
+        searchText = text
+        guard !text.isEmpty else { return }
+        searchHistory = SearchHistory.add(text, to: searchHistory)
     }
     
     var body: some View {
@@ -67,15 +108,36 @@ struct ExploreView: View {
                                     PlaceCard(place: place)
                                 }
                                 .buttonStyle(.plain)
+                                .transition(.opacity)
                             }
                         }
                         .padding(.horizontal)
                     }
                 }
+                .animation(.easeInOut(duration: 0.2), value: filteredPlaces.map(\.id))
                 .padding(.vertical)
+            }
+            .refreshable {
+                await SyncService.syncPlaces(existing: places, into: modelContext)
             }
             .navigationTitle("Explorar")
             .searchable(text: $searchText, prompt: "Buscar lugares...")
+            .searchSuggestions {
+                if searchText.isEmpty {
+                    ForEach(searchHistory, id: \.self) { term in
+                        Label(term, systemImage: "clock")
+                            .searchCompletion(term)
+                    }
+                } else {
+                    ForEach(searchSuggestions, id: \.self) { suggestion in
+                        Text(suggestion)
+                            .searchCompletion(suggestion)
+                    }
+                }
+            }
+            .onSubmit(of: .search) {
+                commitSearch(searchText)
+            }
             .toolbar {
                 if selectedCategory != nil {
                     ToolbarItem(placement: .topBarTrailing) {

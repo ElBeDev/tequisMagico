@@ -64,6 +64,9 @@ struct EventsView: View {
                     }
                     .padding()
                 }
+                .refreshable {
+                    await SyncService.syncEvents(existing: events, into: modelContext)
+                }
             }
             .navigationTitle("Eventos")
         }

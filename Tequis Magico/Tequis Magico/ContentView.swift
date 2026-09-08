@@ -14,106 +14,142 @@ struct ContentView: View {
     @Query private var events: [Event]
 
     @State private var selectedTab = 0
-    
-    var body: some View {
-        TabView(selection: $selectedTab) {
-            // MARK: - Tab 1: Inicio (Mapa)
-            MapView()
-                .tabItem {
-                    Label("Inicio", systemImage: "map.fill")
-                }
-                .tag(0)
-            
-            // MARK: - Tab 2: Explorar
-            ExploreView()
-                .tabItem {
-                    Label("Explorar", systemImage: "square.grid.2x2.fill")
-                }
-                .tag(1)
-            
-            // MARK: - Tab 3: Eventos
-            EventsView()
-                .tabItem {
-                    Label("Eventos", systemImage: "calendar")
-                }
-                .tag(2)
-            
-            // MARK: - Tab 4: Favoritos
-            FavoritesView()
-                .tabItem {
-                    Label("Favoritos", systemImage: "heart.fill")
-                }
-                .tag(3)
-            
-            // MARK: - Tab 5: Perfil
-            ProfileView()
-                .tabItem {
-                    Label("Perfil", systemImage: "person.fill")
-                }
-                .tag(4)
-        }
-        .tint(.orange) // Color temático de Tequisquiapan
-        .task {
-            await syncPlacesFromBackend()
-            await syncEventsFromBackend()
-        }
-    }
+    @State private var isFirstSync = true
+    @State private var offlineBannerMessage: String?
+    @State private var deepLinkedPlace: Place?
 
-    // MARK: - Sincronización con el Panel (Vercel/Neon)
-    private func syncPlacesFromBackend() async {
-        do {
-            let remotePlaces = try await PlaceAPIService.fetchPlaces()
-            let existingByID = Dictionary(uniqueKeysWithValues: places.map { ($0.id, $0) })
-            for dto in remotePlaces {
-                if let existing = existingByID[dto.id] {
-                    existing.apply(dto)
-                } else {
-                    modelContext.insert(Place(dto: dto))
-                }
+    var body: some View {
+        ZStack(alignment: .top) {
+            TabView(selection: $selectedTab) {
+                // MARK: - Tab 1: Inicio (Mapa)
+                MapView()
+                    .tabItem {
+                        Label("Inicio", systemImage: "map.fill")
+                    }
+                    .tag(0)
+
+                // MARK: - Tab 2: Explorar
+                ExploreView()
+                    .tabItem {
+                        Label("Explorar", systemImage: "square.grid.2x2.fill")
+                    }
+                    .tag(1)
+
+                // MARK: - Tab 3: Eventos
+                EventsView()
+                    .tabItem {
+                        Label("Eventos", systemImage: "calendar")
+                    }
+                    .tag(2)
+
+                // MARK: - Tab 4: Favoritos
+                FavoritesView()
+                    .tabItem {
+                        Label("Favoritos", systemImage: "heart.fill")
+                    }
+                    .tag(3)
+
+                // MARK: - Tab 5: Perfil
+                ProfileView()
+                    .tabItem {
+                        Label("Perfil", systemImage: "person.fill")
+                    }
+                    .tag(4)
             }
-            if !remotePlaces.isEmpty {
-                // Lugares que ya no vienen del API (desactivados en el panel) se quitan del cache local.
-                let remoteIDs = Set(remotePlaces.map(\.id))
-                for place in places where !remoteIDs.contains(place.id) {
-                    modelContext.delete(place)
+            .tint(.orange) // Color temático de Tequisquiapan
+
+            if showLoadingOverlay {
+                Color(.systemBackground)
+                VStack(spacing: 12) {
+                    ProgressView()
+                    Text("Cargando Tequisquiapan...")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
                 }
+                .transition(.opacity)
             }
-            try? modelContext.save()
-        } catch {
-            // Sin conexión al panel: si no hay nada guardado localmente, usamos el seed offline.
-            if places.isEmpty {
+
+            if let message = offlineBannerMessage {
+                OfflineBanner(message: message) {
+                    withAnimation { offlineBannerMessage = nil }
+                }
+                .padding(.top, 8)
+                .transition(.move(edge: .top).combined(with: .opacity))
+                .zIndex(1)
+            }
+        }
+        .animation(.easeInOut, value: showLoadingOverlay)
+        .task {
+            let placesOK = await SyncService.syncPlaces(existing: places, into: modelContext)
+            if !placesOK && places.isEmpty {
                 for place in SeedData.createAllPlaces() {
                     modelContext.insert(place)
                 }
                 try? modelContext.save()
             }
-        }
-    }
 
-    private func syncEventsFromBackend() async {
-        do {
-            let remoteEvents = try await EventAPIService.fetchEvents()
-            let existingByID = Dictionary(uniqueKeysWithValues: events.map { ($0.id, $0) })
-            for dto in remoteEvents {
-                if let existing = existingByID[dto.id] {
-                    existing.apply(dto)
-                } else {
-                    modelContext.insert(Event(dto: dto))
-                }
-            }
-            if !remoteEvents.isEmpty {
-                let remoteIDs = Set(remoteEvents.map(\.id))
-                for event in events where !remoteIDs.contains(event.id) {
-                    modelContext.delete(event)
-                }
-            }
-            try? modelContext.save()
-        } catch {
-            if events.isEmpty {
+            let eventsOK = await SyncService.syncEvents(existing: events, into: modelContext)
+            if !eventsOK && events.isEmpty {
                 for event in SeedData.createAllEvents() {
                     modelContext.insert(event)
                 }
                 try? modelContext.save()
+            }
+
+            if isFirstSync && (!placesOK || !eventsOK) {
+                withAnimation { offlineBannerMessage = "Sin conexión con el panel — mostrando datos guardados" }
+            }
+            isFirstSync = false
+        }
+        .onOpenURL { url in
+            handleDeepLink(url)
+        }
+        .sheet(item: $deepLinkedPlace) { place in
+            PlaceDetailSheet(place: place)
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+        }
+    }
+
+    private var showLoadingOverlay: Bool {
+        isFirstSync && places.isEmpty && events.isEmpty
+    }
+
+    // MARK: - Deep Links (tequismagico://place/<uuid>)
+    private func handleDeepLink(_ url: URL) {
+        guard url.scheme == "tequismagico", url.host == "place" else { return }
+        let idString = url.pathComponents.last(where: { $0 != "/" }) ?? ""
+        guard let id = UUID(uuidString: idString) else { return }
+        deepLinkedPlace = places.first { $0.id == id }
+    }
+}
+
+// MARK: - Banner de "sin conexión"
+private struct OfflineBanner: View {
+    let message: String
+    let onDismiss: () -> Void
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "wifi.slash")
+            Text(message)
+                .font(.footnote)
+                .fontWeight(.medium)
+            Spacer()
+            Button(action: onDismiss) {
+                Image(systemName: "xmark")
+                    .font(.caption)
+            }
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .background(.orange, in: Capsule())
+        .foregroundStyle(.white)
+        .padding(.horizontal)
+        .shadow(color: .black.opacity(0.15), radius: 6, y: 2)
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                withAnimation { onDismiss() }
             }
         }
     }

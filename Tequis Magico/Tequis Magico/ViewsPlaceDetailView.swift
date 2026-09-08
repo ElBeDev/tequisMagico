@@ -290,9 +290,12 @@ struct PlaceDetailView: View {
                             Button("Cancelar", role: .cancel) {}
                         }
 
-                        Button {
-                            sharePlace()
-                        } label: {
+                        ShareLink(
+                            item: shareURL,
+                            subject: Text(place.name),
+                            message: Text(place.shortDescription),
+                            preview: SharePreview(place.name)
+                        ) {
                             Label("Compartir", systemImage: "square.and.arrow.up")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
@@ -325,8 +328,8 @@ struct PlaceDetailView: View {
         }
     }
     
-    private func sharePlace() {
-        // TODO: Implementar share sheet
+    private var shareURL: URL {
+        URL(string: "tequismagico://place/\(place.id.uuidString)")!
     }
 }
 
