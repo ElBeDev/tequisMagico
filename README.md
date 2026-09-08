@@ -19,7 +19,7 @@ tequisMagico/
 - **Backend real**: Neon (Postgres), consultado desde `web-admin/app/api/`.
 - **Panel** (`web-admin/`): Next.js desplegado en Vercel como `tequis-magico` → https://tequis-magico.vercel.app. Lee/escribe directo en Neon.
 - **App iOS** (`Tequis Magico/`): en cada arranque sincroniza `Place` y `Event` desde `GET /api/places` y `GET /api/events` hacia SwiftData (ver `ServicesPlaceAPIService.swift` / `ServicesEventAPIService.swift`), quitando localmente lo que ya no viene activo del API; si no hay conexión y no hay nada guardado, cae a datos locales de respaldo. Favoritos (`Place.isFavorite`) son puramente locales, no se sincronizan.
-- **`database/`**: el esquema (`databaseschema.sql`) y los seeds (`databaseseed_part*.sql`) con los 50 lugares reales ya cargados en Neon. Referencia, no se ejecutan automáticamente.
+- **`database/`**: el esquema (`databaseschema.sql`) y los seeds (`databaseseed_part*.sql`, `databaseseed_events*.sql`, `databaseseed_images.sql`, `databaseseed_business_photos.sql`) con los 50 lugares y 17 eventos reales ya cargados en Neon, incluyendo fotos. Referencia, no se ejecutan automáticamente. Ver `IMAGE_CREDITS.md` para la atribución de cada foto.
 
 ## Flujo de trabajo
 

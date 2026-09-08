@@ -25,13 +25,14 @@
    - ✅ Sheets y modales
 
 4. **Features Implementados**
-   - ✅ Mapa con clusters y filtros por categoría
+   - ✅ Mapa con clusters y filtros por categoría (tap en un pin abre su detalle — el bug que lo cerraba al instante ya se arregló, ver Bugs)
    - ✅ Búsqueda de lugares
-   - ✅ Integración con Apple Maps (direcciones)
+   - ✅ "Cómo llegar" con opción de abrir en Apple Maps o Google Maps (si está instalado)
    - ✅ Llamadas telefónicas desde la app
    - ✅ Enlaces a WhatsApp
    - ✅ Sincronización de `Place` y `Event` contra el backend real (ver abajo), con fallback a datos locales sin conexión
    - ✅ Favoritos reales (locales, por dispositivo)
+   - ✅ Fotos reales en los 50 lugares y 17 eventos (ver sección de Imágenes) + pantalla de créditos en Perfil
 
 ---
 
@@ -52,24 +53,22 @@
 
 ## 📂 Estructura del Proyecto
 
+Los archivos son planos dentro de `Tequis Magico/Tequis Magico/` (Xcode 16 los sincroniza automáticamente vía `PBXFileSystemSynchronizedRootGroup` — no hace falta tocar el `.pbxproj` al agregar un archivo nuevo ahí). El prefijo indica su rol:
+
 ```
-Tequis Magico/
-├── Models/
-│   ├── Place.swift              # Modelo principal de lugares
-│   ├── Event.swift              # Modelo de eventos
-│   ├── PlaceCategory.swift      # Enum de categorías
-│   ├── PriceRange.swift         # Enum de precios
-│   └── BusinessTier.swift       # Enum de suscripciones
-├── Views/
-│   ├── MapView.swift            # Mapa principal
-│   ├── ExploreView.swift        # Exploración
-│   ├── PlaceDetailView.swift   # Detalle de lugar
-│   ├── EventsView.swift         # Lista de eventos
-│   ├── FavoritesView.swift     # Favoritos
-│   └── ProfileView.swift        # Perfil
-├── ContentView.swift            # TabView principal
-└── Tequis_MagicoApp.swift     # Entry point
+Tequis Magico/                        # raíz del repo interno (junto al .xcodeproj)
+├── Info.plist                        # fragment con LSApplicationQueriesSchemes (detectar Google Maps) — fusionado con el generado
+└── Tequis Magico/                    # carpeta que Xcode sincroniza al target
+    ├── Models*.swift                 # Place, Event, PlaceCategory, PriceRange, BusinessTier
+    ├── Views*.swift                  # MapView, ExploreView, PlaceDetailView, EventsView, FavoritesView, ProfileView
+    ├── Services*.swift               # PlaceAPIService/EventAPIService (sync con el backend), MapsOpener
+    ├── Data*.swift                   # Seed local offline (SeedData.createAllPlaces/Events)
+    ├── ContentView.swift             # TabView principal + sincronización al arrancar
+    ├── Tequis_MagicoApp.swift        # Entry point, ModelContainer de SwiftData
+    └── Assets.xcassets
 ```
+
+`Info.plist` vive fuera de esa carpeta a propósito: si se pone dentro, Xcode 16 lo suma dos veces (como recurso del bundle Y como Info.plist del target) y el build falla por "Multiple commands produce". Mismo motivo por el que `README.md`/`.gitignore` de este proyecto tampoco viven ahí adentro.
 
 ---
 
@@ -84,9 +83,9 @@ Tequis Magico/
    - [x] Sincronizar con FavoritesView
 
 2. **Imágenes Reales**
-   - [ ] Configurar Vercel Blob (ya está la dependencia en `web-admin`) para subir fotos reales
-   - [ ] Actualizar `image_urls`/`thumbnail_url` en Neon
-   - [ ] Mostrarlas en `PlaceDetailView`/`MapView` (hoy `imageURLs` casi siempre llega vacío)
+   - [x] Foto representativa por categoría/subcategoría en los 50 lugares y 17 eventos (Wikimedia Commons, con crédito — ver `database/IMAGE_CREDITS.md` y Perfil → Créditos de fotos)
+   - [x] Foto real del negocio (no genérica) para 4 de los 6 lugares destacados — revisado a mano en el sitio oficial de cada uno, nunca de Google Maps (viola sus términos de servicio) ni de redes sociales (no es escrapeable de forma confiable)
+   - [ ] Vincular Vercel Blob (ya está la dependencia en `web-admin`) para que cada negocio suba sus propias fotos — sigue siendo la única vía legítima para cubrir los 50 lugares completos
 
 3. **Datos Reales**
    - [x] 50 lugares reales de Tequisquiapan cargados en Neon (ver `database/databaseseed_part*.sql`)
@@ -172,18 +171,17 @@ Tequis Magico/
 ## 🐛 Bugs Conocidos y TODOs
 
 ### Bugs:
+- [x] ~~Tap en un pin del mapa abría el detalle y se cerraba solo casi al instante~~ — el `Map` tenía `selection: $selectedPlace` Y un `.onTapGesture` manual peleando por el mismo estado; se quitó el binding de `selection` (`ViewsMapView.swift`)
 - [ ] FlowLayout puede no funcionar bien en dispositivos pequeños
 - [ ] AsyncImage no tiene retry logic
-- [ ] No hay manejo de errores en las queries
+- [ ] No hay manejo de errores visible al usuario si falla el sync con el API (falla silenciosa a datos locales)
 
 ### TODOs en el Código:
 ```swift
 // Busca "TODO:" en el código para encontrar:
-- TODO: Implementar sistema real de favoritos
 - TODO: Implementar share sheet
 - TODO: Mostrar paywall de StoreKit
 - TODO: Limpiar caché
-- TODO: Toggle favorito
 ```
 
 ---
@@ -229,12 +227,12 @@ Tequis Magico/
 - Convención de trabajo: los cambios de la app iOS se hacen directo en estos archivos de Xcode; los del panel/Vercel/Neon se manejan como cualquier proyecto Next.js normal en `../web-admin`
 
 ### Para Producción:
-1. **Configurar CloudKit Schema**
-2. **Cuenta de Apple Developer** ($99/año)
-3. **Certificados y provisioning profiles**
-4. **App Store Connect setup**
-5. **Privacy Policy y Terms of Service**
-6. **App Review guidelines compliance**
+1. **Cuenta de Apple Developer** ($99/año)
+2. **Certificados y provisioning profiles**
+3. **App Store Connect setup**
+4. **Privacy Policy y Terms of Service**
+5. **App Review guidelines compliance**
+6. Revisar que `web-admin`/Neon estén en un plan que aguante el tráfico real (hoy es la única fuente de datos de la app)
 
 ### Legal:
 - [ ] Términos y condiciones
