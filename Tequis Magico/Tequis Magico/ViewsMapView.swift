@@ -11,17 +11,19 @@ import SwiftData
 
 struct MapView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(LocationService.self) private var locationService
     @Query private var places: [Place]
-    
+
     @State private var cameraPosition: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 20.5213, longitude: -99.8936), // Centro de Tequisquiapan
             span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         )
     )
-    
+
     @State private var selectedPlace: Place?
     @State private var selectedCategory: PlaceCategory?
+    @State private var showFarAwayAlert = false
     
     var filteredPlaces: [Place] {
         if let category = selectedCategory {
@@ -34,6 +36,7 @@ struct MapView: View {
         ZStack(alignment: .top) {
             // MARK: - Mapa
             Map(position: $cameraPosition) {
+                UserAnnotation()
                 ForEach(filteredPlaces, id: \.id) { place in
                     Annotation(place.name, coordinate: place.coordinate) {
                         PlaceAnnotationView(place: place)
@@ -45,7 +48,27 @@ struct MapView: View {
             }
             .mapStyle(.standard(elevation: .realistic))
             .ignoresSafeArea()
-            
+
+            // MARK: - Botón de "mi ubicación"
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button {
+                        locationService.requestLocation()
+                    } label: {
+                        Image(systemName: "location.fill")
+                            .font(.title3)
+                            .foregroundStyle(.white)
+                            .frame(width: 48, height: 48)
+                            .background(.orange, in: Circle())
+                            .shadow(color: .black.opacity(0.2), radius: 4, y: 2)
+                    }
+                    .padding(.trailing)
+                    .padding(.bottom, 24)
+                }
+            }
+
             // MARK: - Filtros de Categoría
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
@@ -79,6 +102,26 @@ struct MapView: View {
             PlaceDetailSheet(place: place)
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
+        }
+        .onChange(of: locationService.userLocation) { _, newLocation in
+            guard let newLocation else { return }
+            if locationService.isNearTequisquiapan {
+                withAnimation {
+                    cameraPosition = .region(
+                        MKCoordinateRegion(
+                            center: newLocation.coordinate,
+                            span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+                        )
+                    )
+                }
+            } else {
+                showFarAwayAlert = true
+            }
+        }
+        .alert("Pareces estar lejos de Tequisquiapan", isPresented: $showFarAwayAlert) {
+            Button("Entendido", role: .cancel) {}
+        } message: {
+            Text("\"Cerca de mí\" te sirve cuando ya estés por aquí — actívalo de nuevo cuando llegues.")
         }
     }
 }

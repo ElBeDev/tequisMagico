@@ -17,5 +17,7 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Se usa para mostrarte los lugares más cercanos y centrar el mapa en tu ubicación cuando estés en Tequisquiapan.</string>
 </dict>
 </plist>

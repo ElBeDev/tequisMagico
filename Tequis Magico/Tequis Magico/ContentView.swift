@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var isFirstSync = true
     @State private var offlineBannerMessage: String?
     @State private var deepLinkedPlace: Place?
+    @State private var locationService = LocationService()
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -57,6 +58,7 @@ struct ContentView: View {
                     .tag(4)
             }
             .tint(.orange) // Color temático de Tequisquiapan
+            .environment(locationService)
 
             if showLoadingOverlay {
                 Color(.systemBackground)

@@ -28,11 +28,14 @@ enum SearchHistory {
 
 struct ExploreView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(LocationService.self) private var locationService
     @Query private var places: [Place]
 
     @State private var searchText = ""
     @State private var selectedCategory: PlaceCategory?
     @State private var searchHistory: [String] = SearchHistory.load()
+    @State private var sortByDistance = false
+    @State private var showFarAwayAlert = false
 
     var filteredPlaces: [Place] {
         var result = places.filter { $0.isActive }
@@ -50,7 +53,28 @@ struct ExploreView: View {
             }
         }
 
+        if sortByDistance && locationService.isNearTequisquiapan {
+            result = result.sorted {
+                (locationService.distanceInKilometers(from: $0.coordinate) ?? .greatestFiniteMagnitude) <
+                (locationService.distanceInKilometers(from: $1.coordinate) ?? .greatestFiniteMagnitude)
+            }
+        }
+
         return result
+    }
+
+    private func toggleSortByDistance() {
+        if sortByDistance {
+            sortByDistance = false
+            return
+        }
+        if locationService.isNearTequisquiapan {
+            sortByDistance = true
+        } else if locationService.userLocation != nil {
+            showFarAwayAlert = true
+        } else {
+            locationService.requestLocation()
+        }
     }
 
     /// Nombres/tags que empiezan con lo escrito, para autocompletar mientras se teclea.
@@ -78,6 +102,28 @@ struct ExploreView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
+                    // MARK: - Cerca de mí
+                    HStack {
+                        Button {
+                            toggleSortByDistance()
+                        } label: {
+                            Label("Cerca de mí", systemImage: sortByDistance ? "location.fill" : "location")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                                .padding(.horizontal, 14)
+                                .padding(.vertical, 8)
+                                .background(sortByDistance ? Color.orange : Color(.systemBackground))
+                                .foregroundStyle(sortByDistance ? .white : .primary)
+                                .clipShape(Capsule())
+                                .overlay(
+                                    Capsule().strokeBorder(sortByDistance ? Color.clear : Color.gray.opacity(0.3), lineWidth: 1)
+                                )
+                        }
+                        .buttonStyle(.plain)
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+
                     // MARK: - Categorías
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
@@ -108,7 +154,10 @@ struct ExploreView: View {
                                 NavigationLink {
                                     PlaceDetailView(place: place)
                                 } label: {
-                                    PlaceCard(place: place)
+                                    PlaceCard(
+                                        place: place,
+                                        distanceKM: sortByDistance ? locationService.distanceInKilometers(from: place.coordinate) : nil
+                                    )
                                 }
                                 .buttonStyle(.plain)
                                 .transition(.opacity)
@@ -150,6 +199,19 @@ struct ExploreView: View {
                     }
                 }
             }
+            .onChange(of: locationService.userLocation) { _, newLocation in
+                guard newLocation != nil else { return }
+                if locationService.isNearTequisquiapan {
+                    sortByDistance = true
+                } else {
+                    showFarAwayAlert = true
+                }
+            }
+            .alert("Pareces estar lejos de Tequisquiapan", isPresented: $showFarAwayAlert) {
+                Button("Entendido", role: .cancel) {}
+            } message: {
+                Text("\"Cerca de mí\" te sirve cuando ya estés por aquí — actívalo de nuevo cuando llegues.")
+            }
         }
     }
 }
@@ -182,7 +244,8 @@ struct CategoryCard: View {
 // MARK: - Place Card
 struct PlaceCard: View {
     let place: Place
-    
+    var distanceKM: Double? = nil
+
     var body: some View {
         HStack(spacing: 12) {
             // Imagen
@@ -241,7 +304,18 @@ struct PlaceCard: View {
                     Text(place.priceRange.rawValue)
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                    
+
+                    // Distancia (solo con "Cerca de mí" activo)
+                    if let distanceKM {
+                        HStack(spacing: 3) {
+                            Image(systemName: "location.fill")
+                                .font(.caption2)
+                            Text(String(format: "%.1f km", distanceKM))
+                                .font(.caption)
+                        }
+                        .foregroundStyle(.orange)
+                    }
+
                     Spacer()
                     
                     // Badge premium
