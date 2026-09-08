@@ -178,6 +178,27 @@ struct PlaceDetailView: View {
                         .allowsHitTesting(false)
                     }
                     
+                    // MARK: - Horarios
+                    if !scheduleEntries.isEmpty {
+                        Divider()
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Horarios")
+                                .font(.headline)
+
+                            ForEach(scheduleEntries, id: \.day) { entry in
+                                HStack {
+                                    Text(entry.day.capitalized)
+                                        .font(.subheadline)
+                                    Spacer()
+                                    Text(entry.hours)
+                                        .font(.subheadline)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                    }
+
                     // MARK: - Amenities
                     if !place.amenities.isEmpty {
                         Divider()
@@ -330,6 +351,21 @@ struct PlaceDetailView: View {
     
     private var shareURL: URL {
         URL(string: "tequismagico://place/\(place.id.uuidString)")!
+    }
+
+    /// `place.scheduleJSON` es texto JSON crudo, ej. {"lunes":"9:00-18:00",...} — casi siempre nil hoy
+    /// (el panel de admin recién lo puede capturar, la mayoría de los 50 lugares no lo tienen).
+    private var scheduleEntries: [(day: String, hours: String)] {
+        guard let json = place.scheduleJSON, let data = json.data(using: .utf8),
+              let dict = try? JSONDecoder().decode([String: String].self, from: data) else {
+            return []
+        }
+        let order = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+        return dict.sorted { lhs, rhs in
+            let l = order.firstIndex(of: lhs.key.lowercased()) ?? order.count
+            let r = order.firstIndex(of: rhs.key.lowercased()) ?? order.count
+            return l < r
+        }.map { (day: $0.key, hours: $0.value) }
     }
 }
 

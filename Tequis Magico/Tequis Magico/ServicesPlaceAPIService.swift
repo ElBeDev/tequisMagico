@@ -35,6 +35,9 @@ struct PlaceDTO: Decodable {
     let isVerified: Bool
     let viewsCount: Int
     let favoritesCount: Int
+    /// JSON crudo tal como lo captura el panel, ej. {"lunes":"9:00-18:00",...}. Casi siempre nil hoy
+    /// (0 de 50 lugares lo tienen cargado en Neon) — el panel de admin ya permite capturarlo.
+    let scheduleJSON: String?
 
     private enum CodingKeys: String, CodingKey {
         case id, name, category, subcategory, latitude, longitude, address
@@ -54,6 +57,7 @@ struct PlaceDTO: Decodable {
         case isVerified = "is_verified"
         case viewsCount = "views_count"
         case favoritesCount = "favorites_count"
+        case scheduleJSON = "schedule_json"
     }
 
     init(from decoder: Decoder) throws {
@@ -85,6 +89,20 @@ struct PlaceDTO: Decodable {
         isVerified = try c.decodeIfPresent(Bool.self, forKey: .isVerified) ?? false
         viewsCount = try c.decodeIfPresent(Int.self, forKey: .viewsCount) ?? 0
         favoritesCount = try c.decodeIfPresent(Int.self, forKey: .favoritesCount) ?? 0
+        scheduleJSON = Self.decodeScheduleJSON(c, .scheduleJSON)
+    }
+
+    /// Neon/Postgres devuelve la columna JSONB ya como objeto anidado, no como string escapado —
+    /// lo volvemos a codificar a texto porque así lo espera `Place.scheduleJSON` (ver ModelsPlace.swift).
+    private static func decodeScheduleJSON(
+        _ container: KeyedDecodingContainer<CodingKeys>,
+        _ key: CodingKeys
+    ) -> String? {
+        guard let dict = try? container.decodeIfPresent([String: String].self, forKey: key) else {
+            return nil
+        }
+        guard let data = try? JSONEncoder().encode(dict) else { return nil }
+        return String(data: data, encoding: .utf8)
     }
 
     private static func decodeFlexibleDouble(

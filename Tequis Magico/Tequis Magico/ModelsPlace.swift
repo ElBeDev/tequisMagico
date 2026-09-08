@@ -172,6 +172,7 @@ extension Place {
             email: dto.email,
             website: dto.website,
             whatsappNumber: dto.whatsappNumber,
+            scheduleJSON: dto.scheduleJSON,
             amenities: dto.amenities,
             tags: dto.tags,
             rating: dto.rating,
@@ -202,6 +203,7 @@ extension Place {
         email = dto.email
         website = dto.website
         whatsappNumber = dto.whatsappNumber
+        scheduleJSON = dto.scheduleJSON
         amenities = dto.amenities
         tags = dto.tags
         rating = dto.rating
