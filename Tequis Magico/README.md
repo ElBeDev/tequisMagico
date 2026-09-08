@@ -35,6 +35,9 @@
    - ✅ Fotos reales en los 50 lugares y 17 eventos (ver sección de Imágenes) + pantalla de créditos en Perfil
    - ✅ Compartir lugar (share sheet nativo) y deep links `tequismagico://place/<uuid>`
    - ✅ Pull to refresh, loading state inicial y aviso de "sin conexión" en Explorar/Eventos/mapa
+   - ✅ Rutas temáticas (Vino y Queso, Artesanal, Histórica, Aventura) en Explorar
+   - ✅ Siri/App Shortcuts: "busca lugares en Tequis Magico", "qué eventos hay hoy en Tequis Magico"
+   - ✅ Términos, Privacidad y Contacto con contenido real (borrador, ver sección Legal)
 
 ---
 
@@ -87,7 +90,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 2. **Imágenes Reales**
    - [x] Foto representativa por categoría/subcategoría en los 50 lugares y 17 eventos (Wikimedia Commons, con crédito — ver `database/IMAGE_CREDITS.md` y Perfil → Créditos de fotos)
    - [x] Foto real del negocio (no genérica) para 4 de los 6 lugares destacados — revisado a mano en el sitio oficial de cada uno, nunca de Google Maps (viola sus términos de servicio) ni de redes sociales (no es escrapeable de forma confiable)
-   - [ ] Vincular Vercel Blob (ya está la dependencia en `web-admin`) para que cada negocio suba sus propias fotos — sigue siendo la única vía legítima para cubrir los 50 lugares completos
+   - [x] Vercel Blob conectado (`tequis-magico-photos`) — el panel ya sube fotos reales desde el formulario de editar lugar. Sigue faltando que cada negocio pueda subir la suya (necesita login por negocio, ver Fase 2)
 
 3. **Datos Reales**
    - [x] 50 lugares reales de Tequisquiapan cargados en Neon (ver `database/databaseseed_part*.sql`)
@@ -121,6 +124,8 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 
 ## 🛠️ Fase 2: Monetización (1-2 semanas)
 
+> ⏸️ **Diferido a propósito**: todo lo de cobro (StoreKit, Stripe/Conekta) y login por negocio se deja para el final — necesitan cuentas/decisiones externas (Apple Developer, procesador de pagos, proveedor de auth) que le tocan al dueño del proyecto, no son solo código.
+
 ### StoreKit 2 Integration:
 - [ ] Configurar productos en App Store Connect
 - [ ] Implementar paywall para Premium
@@ -145,27 +150,25 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 ## 🎨 Fase 3: Polish & Features Premium (2-3 semanas)
 
 ### Features Avanzados:
-- [ ] **Widgets** (WidgetKit)
+- [ ] **Widgets** (WidgetKit) — **bloqueado, necesita acción tuya**: hay que crear el target de la extensión desde Xcode (File → New → Target → Widget Extension). Editar el `.pbxproj` a mano para esto es demasiado riesgoso (ya vimos lo delicado que es ese archivo con el grupo sincronizado); en cuanto exista el target vacío, le pongo el código.
   - [ ] Widget de evento próximo
   - [ ] Widget de lugar destacado
   - [ ] Widget de ruta del día
 
-- [ ] **App Intents & Siri**
-  - [ ] "Siri, busca restaurantes en Tequisquiapan"
-  - [ ] "Siri, ¿qué eventos hay hoy?"
-  - [ ] Integración con Spotlight
+- [x] **App Intents & Siri**
+  - [x] "Busca lugares/restaurantes en Tequis Magico" (`SearchPlacesIntent`, con parámetro de categoría opcional)
+  - [x] "Qué eventos hay hoy en Tequis Magico" (`TodayEventsIntent`)
+  - [x] Registrados como `AppShortcut` (`TequisMagicoShortcuts`) — verificado con un build limpio que Xcode extrae y entrena las frases (`ExtractAppIntentsMetadata`/`AppIntentsSSUTraining`)
+  - [ ] Integración con Spotlight — no implementado
 
-- [ ] **Visual Intelligence**
-  - [ ] Reconocimiento de edificios históricos
-  - [ ] AR overlay con información
+- [ ] **Visual Intelligence** — diferido indefinidamente. Reconocer edificios/AR overlay necesita un modelo de reconocimiento de imágenes real (Core ML entrenado o un servicio externo); no es algo razonable de improvisar, requeriría su propio proyecto.
 
-- [ ] **Rutas Personalizadas**
-  - [ ] Algoritmo de rutas optimizadas
-  - [ ] Navegación turn-by-turn
-  - [ ] Rutas temáticas (vinos, artesanías, etc.)
+- [x] **Rutas Temáticas** (versión realista de "Rutas Personalizadas")
+  - [x] Agrupación de lugares existentes por subcategoría en rutas curadas (Vino y Queso, Artesanal, Histórica, Aventura) — sección nueva en Explorar
+  - [ ] Algoritmo de rutas optimizadas — no implementado, el orden es solo por rating
+  - [ ] Navegación turn-by-turn propia — se sigue usando "Cómo llegar" (Apple/Google Maps) lugar por lugar, no hay ruteo multi-parada
 
-- [ ] **Notificaciones Push**
-  - [ ] Firebase Cloud Messaging
+- [ ] **Notificaciones Push** — **necesita una decisión tuya**: Firebase Cloud Messaging (cuenta de Google/Firebase nueva) o APNs directo (necesita capacidad de Push en el Apple Developer account). No lo armé todavía porque implica crear infraestructura externa nueva, igual que StoreKit/Stripe.
   - [ ] Notificaciones de eventos próximos
   - [ ] Ofertas de negocios premium
 
@@ -201,8 +204,8 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 - La app sincroniza `Place` y `Event` desde ahí en cada arranque (`ServicesPlaceAPIService.swift`, `ServicesEventAPIService.swift` + `ContentView.swift`)
 - Los códigos de `category`/`price_range`/`business_tier` que da el API son cortos (`"turistico"`, `"moderate"`, `"premium"`) y no el `rawValue` de despliegue de los enums — por eso existen los `init?(dbValue:)` en `ModelsPlaceCategory.swift`, `ModelsPriceRange.swift` y `ModelsBusinessTier.swift`
 
-### Storage de imágenes (pendiente):
-- `@vercel/blob` ya está como dependencia en `web-admin`, pero todavía no se usa
+### Storage de imágenes:
+- Vercel Blob (`tequis-magico-photos`, store público) conectado y en uso desde `web-admin/app/admin/places/PlaceForm.tsx` vía `@vercel/blob/client` (`/api/upload`)
 
 ---
 
@@ -238,10 +241,10 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 6. Revisar que `web-admin`/Neon estén en un plan que aguante el tráfico real (hoy es la única fuente de datos de la app)
 
 ### Legal:
-- [ ] Términos y condiciones
-- [ ] Política de privacidad (LFPDPPP México)
-- [ ] Contrato de suscripción para negocios
-- [ ] Registrar marca "Tequisquiapan Mágico"
+- [x] Términos y condiciones — **borrador** en `ViewsLegalViews.swift` (`LegalTermsView`), visible en Perfil. ⚠️ No es asesoría legal, tiene `[placeholders]` por llenar (nombre del responsable, contacto) y falta que un abogado lo revise antes de publicar.
+- [x] Política de privacidad (LFPDPPP México) — mismo archivo, `LegalPrivacyView`, mismo disclaimer que arriba.
+- [ ] Contrato de suscripción para negocios — pendiente hasta que exista el cobro real (Fase 2, al final)
+- [ ] Registrar marca "Tequisquiapan Mágico" — esto es un trámite ante el IMPI, no es algo que se resuelva con código; te toca a ti directamente
 
 ---
 
