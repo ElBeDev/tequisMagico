@@ -90,7 +90,8 @@ Tequis Magico/
 
 3. **Datos Reales**
    - [x] 50 lugares reales de Tequisquiapan cargados en Neon (ver `database/databaseseed_part*.sql`)
-   - [x] 8 eventos reales cargados en Neon (ver `database/databaseseed_events.sql`)
+   - [x] 17 eventos reales cargados en Neon (ver `database/databaseseed_events*.sql`, incluye info tomada de tequis.travel)
+   - [x] Fotos representativas por categoría en los 50 lugares y 17 eventos (Wikimedia Commons, ver `database/IMAGE_CREDITS.md`)
    - [ ] Completar campos faltantes (horarios `schedule_json`, más teléfonos/websites)
 
 4. **Backend Básico**
