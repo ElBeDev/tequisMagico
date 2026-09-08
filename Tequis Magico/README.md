@@ -178,12 +178,12 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 
 - [ ] **Notificaciones Push** — **necesita una decisión tuya**: Firebase Cloud Messaging (cuenta de Google/Firebase nueva) o APNs directo (necesita capacidad de Push en el Apple Developer account). No lo armé todavía porque implica crear infraestructura externa nueva, igual que StoreKit/Stripe.
   - [ ] Notificaciones de eventos próximos
+  - [ ] Ofertas de negocios premium
 
 - [x] **"Cerca de mí" / ubicación del usuario** — no estaba en el roadmap original, salió de la auditoría. Implementado con una condición clave: como la app es de un solo destino, solo se activa si el usuario de verdad está a ≤25km de Tequisquiapan (`LocationService.isNearTequisquiapan`); si está lejos, muestra una alerta en vez de un mapa/lista vacíos o irrelevantes. Permiso de ubicación se pide solo al tocar el botón, nunca al abrir la app.
   - [x] Botón de ubicación en `MapView` — centra el mapa y muestra el punto azul del usuario
   - [x] Chip "Cerca de mí" en `ExploreView` — ordena por distancia y muestra "X km" por lugar
-  - [x] Verificado con `simctl location set` (dentro de Tequisquiapan funciona; el caso "lejos" usa la misma ruta de código, pendiente que el usuario lo confirme visualmente cuando pueda)
-  - [ ] Ofertas de negocios premium
+  - [x] Verificado con `simctl location set`: caso "cerca" confirmado visualmente en el simulador (el mapa se centró y mostró lugares reales alrededor); caso "lejos" usa la misma ruta de código, pendiente confirmación visual
 
 ---
 
@@ -199,7 +199,6 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 ### 🔍 Auditoría (hallazgos sin código todavía):
 - **Sin tests**: no hay target de Unit/UI Tests en Xcode ni `jest`/`vitest` en `web-admin/package.json`. Cero cobertura automatizada en todo el proyecto.
 - **Sin accesibilidad**: 0 usos de `accessibilityLabel`/`accessibilityHint` en toda la app, no se ha considerado Dynamic Type ni VoiceOver.
-- **Sin "cerca de mí"**: `MapView` usa una región fija centrada en Tequisquiapan, no pide permiso de ubicación (`NSLocationWhenInUseUsageDescription` no existe) ni usa `CLLocationManager`. No es un bug — la feature simplemente no existe.
 - **`views_count`/`favorites_count` nunca se incrementan** (ni la app ni el panel) — confirmado, ya señalado con un aviso visible en `/admin/analytics`.
 - **Rate limiting real pendiente**: el delay fijo en el login (Fase 2) sube el costo de fuerza bruta pero no es rate-limiting de verdad (necesitaría Redis/Upstash o Vercel Firewall — infraestructura nueva, no solo código).
 
