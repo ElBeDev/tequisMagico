@@ -30,7 +30,8 @@
    - ✅ Integración con Apple Maps (direcciones)
    - ✅ Llamadas telefónicas desde la app
    - ✅ Enlaces a WhatsApp
-   - ✅ Sincronización de `Place` contra el backend real (ver abajo), con fallback a datos locales sin conexión
+   - ✅ Sincronización de `Place` y `Event` contra el backend real (ver abajo), con fallback a datos locales sin conexión
+   - ✅ Favoritos reales (locales, por dispositivo)
 
 ---
 
@@ -78,9 +79,9 @@ Tequis Magico/
 
 #### Alta Prioridad:
 1. **Sistema de Favoritos Real**
-   - [ ] UserDefaults o SwiftData para guardar favoritos
-   - [ ] Botón toggle en PlaceDetailView
-   - [ ] Sincronizar con FavoritesView
+   - [x] `Place.isFavorite` en SwiftData (puramente local, no se sincroniza con el API)
+   - [x] Botón toggle en PlaceDetailView
+   - [x] Sincronizar con FavoritesView
 
 2. **Imágenes Reales**
    - [ ] Configurar Vercel Blob (ya está la dependencia en `web-admin`) para subir fotos reales
@@ -89,13 +90,13 @@ Tequis Magico/
 
 3. **Datos Reales**
    - [x] 50 lugares reales de Tequisquiapan cargados en Neon (ver `database/databaseseed_part*.sql`)
+   - [x] 8 eventos reales cargados en Neon (ver `database/databaseseed_events.sql`)
    - [ ] Completar campos faltantes (horarios `schedule_json`, más teléfonos/websites)
 
 4. **Backend Básico**
-   - [x] API REST en `web-admin/app/api/places` (Next.js + Neon), consumida por la app
-   - [x] Sincronización de `Place` al abrir la app (`ContentView.syncPlacesFromBackend`), con upsert por `id`
-   - [ ] API de **Eventos** (`web-admin/app/api/events`) — hoy `Event` sigue siendo 100% local
-   - [ ] Manejo de lugares eliminados (el API ya hace soft-delete con `is_active`, pero la app nunca borra su copia local de uno que dejó de estar activo)
+   - [x] API REST en `web-admin/app/api/places` y `web-admin/app/api/events` (Next.js + Neon), consumida por la app
+   - [x] Sincronización de `Place` y `Event` al abrir la app (`ContentView.swift`), con upsert por `id`
+   - [x] Manejo de lugares/eventos eliminados: si el API deja de devolverlos (soft-delete con `is_active`), la app borra su copia local
 
 #### Media Prioridad:
 5. **Mejoras UX**
@@ -194,8 +195,8 @@ Tequis Magico/
 
 ### Neon + Vercel (Backend real, no CloudKit):
 - Postgres en Neon es la base de datos principal (ver `../database/databaseschema.sql`)
-- `web-admin/app/api/places` (Next.js en Vercel) expone `GET/POST /api/places` y `GET/DELETE /api/places/[id]`
-- La app sincroniza `Place` desde ahí en cada arranque (`ServicesPlaceAPIService.swift` + `ContentView.swift`); `Event` todavía no tiene API y sigue siendo local
+- `web-admin/app/api/` (Next.js en Vercel) expone `GET/POST /api/places`, `GET/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/DELETE /api/events/[id]`
+- La app sincroniza `Place` y `Event` desde ahí en cada arranque (`ServicesPlaceAPIService.swift`, `ServicesEventAPIService.swift` + `ContentView.swift`)
 - Los códigos de `category`/`price_range`/`business_tier` que da el API son cortos (`"turistico"`, `"moderate"`, `"premium"`) y no el `rawValue` de despliegue de los enums — por eso existen los `init?(dbValue:)` en `ModelsPlaceCategory.swift`, `ModelsPriceRange.swift` y `ModelsBusinessTier.swift`
 
 ### Storage de imágenes (pendiente):

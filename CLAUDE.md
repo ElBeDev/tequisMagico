@@ -12,4 +12,5 @@ Una app iOS (SwiftUI + SwiftData) y el panel Next.js/Vercel/Neon que la alimenta
 ## Puntos no obvios
 - El API (`web-admin/app/api/places`) devuelve `category`/`price_range`/`business_tier` como códigos cortos (`"turistico"`, `"moderate"`, `"premium"`), no el `rawValue` de despliegue de esos enums en Swift (`"Sitios Turísticos"`, `"$$"`, etc.) — de ahí los `init?(dbValue:)` en `ModelsPlaceCategory.swift`, `ModelsPriceRange.swift` y `ModelsBusinessTier.swift`.
 - Neon devuelve `latitude`/`longitude`/`rating` como strings (no números JSON) — `ServicesPlaceAPIService.swift` lo maneja con `decodeFlexibleDouble`.
-- No hay API de eventos todavía; `Event` sigue sembrado localmente en la app.
+- Favoritos (`Place.isFavorite`) son puramente locales — no existen en el schema de Neon ni se sincronizan.
+- El sync de `Place`/`Event` borra la copia local de lo que el API deja de devolver activo (soft-delete), pero solo cuando el fetch tiene éxito y no viene vacío — nunca se borra nada si falla la red.

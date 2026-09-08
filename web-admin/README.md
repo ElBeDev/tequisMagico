@@ -1,4 +1,4 @@
-Panel de administración de Tequisquiapan Mágico. Next.js + Neon (Postgres), desplegado en Vercel como `tequis-magico` (https://tequis-magico.vercel.app). Expone `GET/POST /api/places` y `GET/DELETE /api/places/[id]`, consumidos por la app iOS en `../Tequis Magico`. El esquema y seeds de la base están en `../database`. Todavía no hay API de eventos.
+Panel de administración de Tequisquiapan Mágico. Next.js + Neon (Postgres), desplegado en Vercel como `tequis-magico` (https://tequis-magico.vercel.app). Expone `GET/POST /api/places`, `GET/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/DELETE /api/events/[id]`, consumidos por la app iOS en `../Tequis Magico`. El esquema y seeds de la base están en `../database`.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
