@@ -141,7 +141,13 @@ struct ProfileView: View {
                     } label: {
                         Label("Contacto", systemImage: "envelope")
                     }
-                    
+
+                    NavigationLink {
+                        PhotoCreditsView()
+                    } label: {
+                        Label("Créditos de fotos", systemImage: "camera")
+                    }
+
                     HStack {
                         Label("Versión", systemImage: "info.circle")
                         Spacer()
@@ -163,6 +169,54 @@ struct ProfileView: View {
             }
             .navigationTitle("Perfil")
         }
+    }
+}
+
+// MARK: - Créditos de fotos
+/// Atribución requerida por las licencias CC de las fotos de Wikimedia Commons
+/// usadas como imagen representativa por categoría (ver database/IMAGE_CREDITS.md).
+private struct PhotoCredit: Identifiable {
+    let id = UUID()
+    let title: String
+    let author: String
+    let license: String
+    let fileURL: URL
+}
+
+private let photoCredits: [PhotoCredit] = [
+    PhotoCredit(title: "Plaza principal en Tequisquiapan", author: "A01651034 MaferGonzález", license: "CC BY-SA 4.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Plaza_principal_en_Tequisquiapan.jpg")!),
+    PhotoCredit(title: "Iglesia Tequisquiapan", author: "A01197141 Zuriel", license: "CC BY-SA 4.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Iglesia_Tequisquiapan.jpg")!),
+    PhotoCredit(title: "Portales de Tequisquiapan", author: "A01703787 Edith", license: "CC BY-SA 4.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Portales_de_Tequisquiapan.jpg")!),
+    PhotoCredit(title: "Globos Querétaro", author: "Melissaromeroor", license: "CC BY-SA 4.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Globos_Quer%C3%A9taro.jpg")!),
+    PhotoCredit(title: "Cata de quesos y vino", author: "Axel Ricardo Ramos Muñoz", license: "CC BY-SA 4.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Cata_de_quesos_y_vino.jpg")!),
+    PhotoCredit(title: "Tequis Hotel Pool", author: "Carl Campbell", license: "CC BY 2.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Tequis_Hotel_Pool_(4)_-_Flickr_-_Carl_Campbell.jpg")!),
+    PhotoCredit(title: "Gastronomía mexicana", author: "Enrique Damián", license: "CC BY-SA 4.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Gastronom%C3%ADa_mexicana.jpg")!),
+    PhotoCredit(title: "Artesanías en Tequisquiapan", author: "WikiMZC", license: "CC BY-SA 4.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Artesan%C3%ADas_en_Tequisquiapan.jpg")!),
+]
+
+struct PhotoCreditsView: View {
+    var body: some View {
+        List {
+            Section {
+                Text("Las fotos de lugares y eventos son representativas por categoría, tomadas de Wikimedia Commons bajo licencias Creative Commons que requieren atribución.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+            Section("Fotografías") {
+                ForEach(photoCredits) { credit in
+                    Link(destination: credit.fileURL) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(credit.title)
+                                .foregroundStyle(.primary)
+                            Text("\(credit.author) · \(credit.license)")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            }
+        }
+        .navigationTitle("Créditos de fotos")
     }
 }
 
