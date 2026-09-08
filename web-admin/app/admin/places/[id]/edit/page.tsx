@@ -40,6 +40,9 @@ export default function EditPlacePage({ params }: { params: Promise<{ id: string
           images: (p.image_urls && p.image_urls.length > 0)
             ? p.image_urls
             : (p.thumbnail_url ? [p.thumbnail_url] : []),
+          schedule_json: p.schedule_json
+            ? (typeof p.schedule_json === 'string' ? p.schedule_json : JSON.stringify(p.schedule_json))
+            : '',
         });
       })
       .catch(() => setError('Error de conexión'));

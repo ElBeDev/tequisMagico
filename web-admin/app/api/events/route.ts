@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Pool } from '@neondatabase/serverless';
+import { validateEventFields } from '@/lib/validation';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
@@ -58,9 +59,10 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    if (!body.title || !body.category || !body.start_date || !body.end_date) {
+    const validationError = validateEventFields(body, { requireAll: true });
+    if (validationError) {
       return NextResponse.json(
-        { success: false, error: 'Missing required fields' },
+        { success: false, error: validationError },
         { status: 400 }
       );
     }

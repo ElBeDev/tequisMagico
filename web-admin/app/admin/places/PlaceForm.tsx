@@ -27,6 +27,7 @@ export type PlaceFormValues = {
   is_featured: boolean;
   is_verified: boolean;
   images: string[]; // la primera es la portada (thumbnail_url)
+  schedule_json: string; // JSON crudo, ej. {"lunes":"9:00-18:00",...}
 };
 
 const emptyValues: PlaceFormValues = {
@@ -34,6 +35,7 @@ const emptyValues: PlaceFormValues = {
   address: '', short_description: '', full_description: '', price_range: 'moderate',
   phone_number: '', email: '', website: '', whatsapp_number: '',
   amenities: '', tags: '', is_featured: false, is_verified: false, images: [],
+  schedule_json: '',
 };
 
 export function PlaceForm({ initial }: { initial?: Partial<PlaceFormValues> }) {
@@ -85,8 +87,18 @@ export function PlaceForm({ initial }: { initial?: Partial<PlaceFormValues> }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSaving(true);
     setError('');
+
+    if (values.schedule_json.trim()) {
+      try {
+        JSON.parse(values.schedule_json);
+      } catch {
+        setError('Horarios: el JSON no es válido');
+        return;
+      }
+    }
+
+    setSaving(true);
 
     const payload = {
       name: values.name,
@@ -108,6 +120,7 @@ export function PlaceForm({ initial }: { initial?: Partial<PlaceFormValues> }) {
       is_verified: values.is_verified,
       thumbnail_url: values.images[0] || null,
       image_urls: values.images,
+      schedule_json: values.schedule_json.trim() || null,
     };
 
     try {
@@ -181,6 +194,16 @@ export function PlaceForm({ initial }: { initial?: Partial<PlaceFormValues> }) {
       </Field>
       <Field label="Tags (separados por coma)">
         <input value={values.tags} onChange={(e) => set('tags', e.target.value)} className="input" placeholder="Romántico, Familiar" />
+      </Field>
+
+      <Field label="Horarios (JSON, opcional)">
+        <textarea
+          value={values.schedule_json}
+          onChange={(e) => set('schedule_json', e.target.value)}
+          className="input font-mono text-sm"
+          rows={3}
+          placeholder='{"lunes":"9:00-18:00","martes":"9:00-18:00","domingo":"cerrado"}'
+        />
       </Field>
 
       <Field label="Fotos">

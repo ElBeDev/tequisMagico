@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Pool } from '@neondatabase/serverless';
+import { validateEventFields } from '@/lib/validation';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
@@ -49,6 +50,14 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
+
+    const validationError = validateEventFields(body, { requireAll: false });
+    if (validationError) {
+      return NextResponse.json(
+        { success: false, error: validationError },
+        { status: 400 }
+      );
+    }
 
     const fields = Object.keys(body).filter((key) => EDITABLE_FIELDS.includes(key));
     if (fields.length === 0) {

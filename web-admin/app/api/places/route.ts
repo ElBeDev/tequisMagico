@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Pool } from '@neondatabase/serverless';
+import { validatePlaceFields } from '@/lib/validation';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
@@ -57,10 +58,11 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    
-    if (!body.name || !body.category || !body.latitude || !body.longitude) {
+
+    const validationError = validatePlaceFields(body, { requireAll: true });
+    if (validationError) {
       return NextResponse.json(
-        { success: false, error: 'Missing required fields' },
+        { success: false, error: validationError },
         { status: 400 }
       );
     }
@@ -71,9 +73,9 @@ export async function POST(request: Request) {
         address, short_description, full_description, price_range,
         image_urls, thumbnail_url, amenities, tags, phone_number, email,
         website, whatsapp_number, rating, reviews_count,
-        is_verified, is_featured
+        is_verified, is_featured, schedule_json
       ) VALUES (
-        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22
       )
       RETURNING *
     `;
@@ -99,7 +101,8 @@ export async function POST(request: Request) {
       body.rating || 0,
       body.reviews_count || 0,
       body.is_verified || false,
-      body.is_featured || false
+      body.is_featured || false,
+      body.schedule_json || null
     ];
     
     const result = await pool.query(query, values);

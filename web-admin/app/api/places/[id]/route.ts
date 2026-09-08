@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Pool } from '@neondatabase/serverless';
+import { validatePlaceFields } from '@/lib/validation';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
@@ -39,7 +40,7 @@ const EDITABLE_FIELDS = [
   'short_description', 'full_description', 'price_range',
   'phone_number', 'email', 'website', 'whatsapp_number',
   'amenities', 'tags', 'is_featured', 'is_verified',
-  'thumbnail_url', 'image_urls',
+  'thumbnail_url', 'image_urls', 'schedule_json',
 ];
 
 export async function PUT(
@@ -49,6 +50,14 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
+
+    const validationError = validatePlaceFields(body, { requireAll: false });
+    if (validationError) {
+      return NextResponse.json(
+        { success: false, error: validationError },
+        { status: 400 }
+      );
+    }
 
     const fields = Object.keys(body).filter((key) => EDITABLE_FIELDS.includes(key));
     if (fields.length === 0) {
