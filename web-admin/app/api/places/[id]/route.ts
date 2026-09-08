@@ -3,8 +3,6 @@ import { Pool } from '@neondatabase/serverless';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
-export const runtime = 'edge';
-
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -31,6 +29,55 @@ export async function GET(
     console.error('Database error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to fetch place' },
+      { status: 500 }
+    );
+  }
+}
+
+const EDITABLE_FIELDS = [
+  'name', 'category', 'subcategory', 'latitude', 'longitude', 'address',
+  'short_description', 'full_description', 'price_range',
+  'phone_number', 'email', 'website', 'whatsapp_number',
+  'amenities', 'tags', 'is_featured', 'is_verified',
+  'thumbnail_url', 'image_urls',
+];
+
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    const body = await request.json();
+
+    const fields = Object.keys(body).filter((key) => EDITABLE_FIELDS.includes(key));
+    if (fields.length === 0) {
+      return NextResponse.json(
+        { success: false, error: 'No hay campos editables en el body' },
+        { status: 400 }
+      );
+    }
+
+    const setClause = fields.map((field, i) => `${field} = $${i + 1}`).join(', ');
+    const values = fields.map((field) => body[field]);
+
+    const result = await pool.query(
+      `UPDATE places SET ${setClause}, updated_at = NOW() WHERE id = $${fields.length + 1} RETURNING *`,
+      [...values, id]
+    );
+
+    if (result.rowCount === 0) {
+      return NextResponse.json(
+        { success: false, error: 'Place not found' },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ success: true, place: result.rows[0] });
+  } catch (error) {
+    console.error('Database error:', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to update place' },
       { status: 500 }
     );
   }

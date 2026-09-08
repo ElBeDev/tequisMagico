@@ -1,13 +1,15 @@
 import Link from 'next/link';
+import { LogoutButton } from './LogoutButton';
 
 export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 py-6">
+        <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
           <h1 className="text-3xl font-bold text-gray-900">
             🏛️ Tequisquiapan Mágico - Admin
           </h1>
+          <LogoutButton />
         </div>
       </header>
       <main className="max-w-7xl mx-auto px-4 py-8">
@@ -18,7 +20,11 @@ export default function AdminDashboard() {
           </Link>
           <Link href="/admin/places" className="block p-6 bg-white rounded-lg shadow hover:shadow-lg">
             <h2 className="text-xl font-semibold mb-2">⚙️ Gestionar Lugares</h2>
-            <p className="text-gray-600">CRUD de lugares</p>
+            <p className="text-gray-600">Crear, editar y borrar lugares</p>
+          </Link>
+          <Link href="/admin/analytics" className="block p-6 bg-white rounded-lg shadow hover:shadow-lg">
+            <h2 className="text-xl font-semibold mb-2">📊 Analytics</h2>
+            <p className="text-gray-600">Lugares por categoría, mejor calificados</p>
           </Link>
         </div>
       </main>
