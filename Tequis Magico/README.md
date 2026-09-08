@@ -38,6 +38,8 @@
    - ✅ Rutas temáticas (Vino y Queso, Artesanal, Histórica, Aventura) en Explorar
    - ✅ Siri/App Shortcuts: "busca lugares en Tequis Magico", "qué eventos hay hoy en Tequis Magico"
    - ✅ Términos, Privacidad y Contacto con contenido real (borrador, ver sección Legal)
+   - ✅ Ícono de app real (antes vacío — bloqueaba archivar para App Store)
+   - ✅ Horarios (`schedule_json`) sincronizados y mostrados en `PlaceDetailView` — la tubería ya funciona, falta capturar los horarios reales de cada lugar (0 de 50 los tiene hoy)
 
 ---
 
@@ -96,12 +98,14 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
    - [x] 50 lugares reales de Tequisquiapan cargados en Neon (ver `database/databaseseed_part*.sql`)
    - [x] 17 eventos reales cargados en Neon (ver `database/databaseseed_events*.sql`, incluye info tomada de tequis.travel)
    - [x] Fotos representativas por categoría en los 50 lugares y 17 eventos (Wikimedia Commons, ver `database/IMAGE_CREDITS.md`)
-   - [ ] Completar campos faltantes (horarios `schedule_json`, más teléfonos/websites)
+   - [x] `schedule_json` (horarios) ya se sincroniza y se muestra en la app; el panel ya tiene el campo para capturarlo
+   - [ ] Llenar horarios reales y más teléfonos/websites — es captura de datos por negocio, no código; nadie lo ha hecho todavía para los 50 lugares
 
 4. **Backend Básico**
    - [x] API REST en `web-admin/app/api/places` y `web-admin/app/api/events` (Next.js + Neon), consumida por la app
    - [x] Sincronización de `Place` y `Event` al abrir la app (`ContentView.swift`), con upsert por `id`
    - [x] Manejo de lugares/eventos eliminados: si el API deja de devolverlos (soft-delete con `is_active`), la app borra su copia local
+   - [x] Validación server-side en `POST`/`PUT` de `places`/`events` (`web-admin/lib/validation.ts`) — antes solo se checaba que existieran unos cuantos campos, no que fueran válidos (categoría real, lat/lng en rango, fechas coherentes)
 
 #### Media Prioridad:
 5. **Mejoras UX**
@@ -143,6 +147,8 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 - [x] Upload de **varias** imágenes por lugar/evento vía Vercel Blob (`tequis-magico-photos`, store público) — galería con opción de elegir portada; la dependencia llevaba sin usarse desde que se creó el proyecto
 - [x] Bug fix: `POST /api/places` nunca guardaba `thumbnail_url` (solo `image_urls`) — los lugares creados desde el panel salían sin foto en el mapa/lista de la app aunque sí tuvieran `image_urls`
 - [x] Dashboard de analytics básico: por categoría, por nivel de negocio, mejor calificados
+- [x] Validación server-side + delay fijo en login contra fuerza bruta (ver Bugs Conocidos)
+- [x] Campo de horarios (`schedule_json`) en el formulario de lugares
 - [ ] Autenticación **por negocio** (que cada dueño solo vea/edite su propio lugar) — necesita decidir proveedor de auth (Next-Auth, Clerk, etc.) antes de construirlo
 - [ ] Sistema de suscripción con Stripe/Conekta — necesita que el negocio real (dueño del proyecto) tenga cuenta con el procesador antes de integrar pagos reales
 
@@ -171,6 +177,8 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 
 - [ ] **Notificaciones Push** — **necesita una decisión tuya**: Firebase Cloud Messaging (cuenta de Google/Firebase nueva) o APNs directo (necesita capacidad de Push en el Apple Developer account). No lo armé todavía porque implica crear infraestructura externa nueva, igual que StoreKit/Stripe.
   - [ ] Notificaciones de eventos próximos
+
+- [ ] **"Cerca de mí" / ubicación del usuario** — no está en el roadmap original, lo encontramos en la auditoría. `MapView` siempre muestra la región fija de Tequisquiapan; no pide permiso de ubicación ni tiene botón de "centrar en mi ubicación". Bajo riesgo de implementar (solo necesita `CLLocationManager` + declarar `NSLocationWhenInUseUsageDescription` en el `Info.plist`), pero es una decisión de producto que no asumí sin preguntarte.
   - [ ] Ofertas de negocios premium
 
 ---
@@ -179,9 +187,17 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 
 ### Bugs:
 - [x] ~~Tap en un pin del mapa abría el detalle y se cerraba solo casi al instante~~ — el `Map` tenía `selection: $selectedPlace` Y un `.onTapGesture` manual peleando por el mismo estado; se quitó el binding de `selection` (`ViewsMapView.swift`)
+- [x] ~~`POST /api/places` nunca guardaba `thumbnail_url`~~ — corregido, ver Fase 2
 - [ ] FlowLayout puede no funcionar bien en dispositivos pequeños
 - [ ] AsyncImage no tiene retry logic
-- [ ] No hay manejo de errores visible al usuario si falla el sync con el API (falla silenciosa a datos locales)
+- [x] ~~No había manejo de errores visible al usuario si fallaba el sync~~ — banner de "sin conexión" agregado (Fase 1, Mejoras UX)
+
+### 🔍 Auditoría (hallazgos sin código todavía):
+- **Sin tests**: no hay target de Unit/UI Tests en Xcode ni `jest`/`vitest` en `web-admin/package.json`. Cero cobertura automatizada en todo el proyecto.
+- **Sin accesibilidad**: 0 usos de `accessibilityLabel`/`accessibilityHint` en toda la app, no se ha considerado Dynamic Type ni VoiceOver.
+- **Sin "cerca de mí"**: `MapView` usa una región fija centrada en Tequisquiapan, no pide permiso de ubicación (`NSLocationWhenInUseUsageDescription` no existe) ni usa `CLLocationManager`. No es un bug — la feature simplemente no existe.
+- **`views_count`/`favorites_count` nunca se incrementan** (ni la app ni el panel) — confirmado, ya señalado con un aviso visible en `/admin/analytics`.
+- **Rate limiting real pendiente**: el delay fijo en el login (Fase 2) sube el costo de fuerza bruta pero no es rate-limiting de verdad (necesitaría Redis/Upstash o Vercel Firewall — infraestructura nueva, no solo código).
 
 ### TODOs en el Código:
 ```swift
@@ -237,9 +253,11 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 1. **Cuenta de Apple Developer** ($99/año)
 2. **Certificados y provisioning profiles**
 3. **App Store Connect setup**
-4. **Privacy Policy y Terms of Service**
+4. **Privacy Policy y Terms of Service** — hay borrador (ver Legal), falta que las revise un abogado y llenar los `[placeholders]`
 5. **App Review guidelines compliance**
 6. Revisar que `web-admin`/Neon estén en un plan que aguante el tráfico real (hoy es la única fuente de datos de la app)
+7. [x] Ícono de app real — hecho, es un placeholder simple; vale la pena encargar uno profesional antes del lanzamiento público
+8. Sin tests ni accesibilidad (VoiceOver/Dynamic Type) — no bloquea un MVP/TestFlight con pocos usuarios, pero sí conviene antes de un lanzamiento público más grande
 
 ### Legal:
 - [x] Términos y condiciones — **borrador** en `ViewsLegalViews.swift` (`LegalTermsView`), visible en Perfil. ⚠️ No es asesoría legal, tiene `[placeholders]` por llenar (nombre del responsable, contacto) y falta que un abogado lo revise antes de publicar.
