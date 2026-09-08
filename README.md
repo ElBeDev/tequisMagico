@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tequisquiapan Mágico
 
-## Getting Started
+Monorepo del proyecto: una app iOS nativa y el panel web que la alimenta.
 
-First, run the development server:
+## Estructura
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+tequisMagico/
+├── Tequis Magico/        # App iOS (Xcode, SwiftUI + SwiftData)
+│   └── Tequis Magico/README.md   # Estado y roadmap de la app
+├── web-admin/             # Panel de administración (Next.js, deploy en Vercel)
+├── database/              # Esquema y seeds SQL de Neon (Postgres)
+├── app/, lib/              # Restos del scaffold inicial de create-next-app, sin uso (vercel.json ya no los referencia)
+└── vercel.json             # Le dice a Vercel que compile desde web-admin/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Cómo se conectan las piezas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Backend real**: Neon (Postgres), consultado desde `web-admin/app/api/`.
+- **Panel** (`web-admin/`): Next.js desplegado en Vercel como `tequis-magico` → https://tequis-magico.vercel.app. Lee/escribe directo en Neon.
+- **App iOS** (`Tequis Magico/`): en cada arranque sincroniza `Place` desde `GET https://tequis-magico.vercel.app/api/places` hacia SwiftData (ver `ServicesPlaceAPIService.swift`); si no hay conexión, cae a datos locales de respaldo. **Los eventos todavía no tienen API** — se siguen sembrando localmente hasta que se construya `web-admin/app/api/events`.
+- **`database/`**: el esquema (`databaseschema.sql`) y los seeds (`databaseseed_part*.sql`) con los 50 lugares reales ya cargados en Neon. Referencia, no se ejecutan automáticamente.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Flujo de trabajo
 
-## Learn More
+- Todo lo que sea de la **app iOS** (Swift/SwiftUI/SwiftData, `Tequis Magico/`) se edita directo en los archivos del proyecto Xcode.
+- Todo lo que sea del **panel/Vercel/Neon** (`web-admin/`, `database/`) se maneja como cualquier proyecto Next.js normal.
+- Un solo repo, un solo remoto de GitHub — ya no hay repos anidados.
 
-To learn more about Next.js, take a look at the following resources:
+## Detalles por pieza
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- App iOS: [`Tequis Magico/README.md`](<Tequis Magico/README.md>)
+- Panel web: [`web-admin/README.md`](web-admin/README.md)
