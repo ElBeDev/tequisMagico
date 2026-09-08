@@ -25,7 +25,7 @@ export type EventFormValues = {
   is_featured: boolean;
   organizer_name: string;
   organizer_contact: string;
-  thumbnail_url: string;
+  images: string[]; // la primera es la portada (thumbnail_url)
 };
 
 const emptyValues: EventFormValues = {
@@ -33,7 +33,7 @@ const emptyValues: EventFormValues = {
   start_date: '', end_date: '', is_recurring: false,
   location_name: '', latitude: '', longitude: '', address: '',
   tags: '', is_free: false, ticket_price: '', ticket_url: '', requires_reservation: false,
-  is_featured: false, organizer_name: '', organizer_contact: '', thumbnail_url: '',
+  is_featured: false, organizer_name: '', organizer_contact: '', images: [],
 };
 
 function toDateTimeLocal(isoString: string): string {
@@ -60,22 +60,38 @@ export function EventForm({ initial }: { initial?: Partial<EventFormValues> }) {
   const set = <K extends keyof EventFormValues>(key: K, value: EventFormValues[K]) =>
     setValues((v) => ({ ...v, [key]: value }));
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const handleFilesChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    if (files.length === 0) return;
     setUploading(true);
     setError('');
     try {
-      const blob = await upload(file.name, file, {
-        access: 'public',
-        handleUploadUrl: '/api/upload',
-      });
-      set('thumbnail_url', blob.url);
+      for (const file of files) {
+        const blob = await upload(file.name, file, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+        });
+        setValues((v) => ({ ...v, images: [...v.images, blob.url] }));
+      }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al subir la imagen');
+      setError(err instanceof Error ? err.message : 'Error al subir una imagen');
     } finally {
       setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
     }
+  };
+
+  const removeImage = (index: number) => {
+    setValues((v) => ({ ...v, images: v.images.filter((_, i) => i !== index) }));
+  };
+
+  const makeCover = (index: number) => {
+    setValues((v) => {
+      const images = [...v.images];
+      const [chosen] = images.splice(index, 1);
+      images.unshift(chosen);
+      return { ...v, images };
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -103,8 +119,8 @@ export function EventForm({ initial }: { initial?: Partial<EventFormValues> }) {
       is_featured: values.is_featured,
       organizer_name: values.organizer_name || null,
       organizer_contact: values.organizer_contact || null,
-      thumbnail_url: values.thumbnail_url || null,
-      image_urls: values.thumbnail_url ? [values.thumbnail_url] : [],
+      thumbnail_url: values.images[0] || null,
+      image_urls: values.images,
     };
 
     try {
@@ -175,13 +191,40 @@ export function EventForm({ initial }: { initial?: Partial<EventFormValues> }) {
         </Field>
       </div>
 
-      <Field label="Foto">
-        <div className="flex items-center gap-4">
-          {values.thumbnail_url && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={values.thumbnail_url} alt="" className="w-20 h-20 object-cover rounded" />
+      <Field label="Fotos">
+        <div className="space-y-3">
+          {values.images.length > 0 && (
+            <div className="flex flex-wrap gap-3">
+              {values.images.map((url, index) => (
+                <div key={url} className="relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={url} alt="" className="w-24 h-24 object-cover rounded border" />
+                  {index === 0 && (
+                    <span className="absolute top-1 left-1 bg-gray-900 text-white text-[10px] px-1.5 py-0.5 rounded">
+                      Portada
+                    </span>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    className="absolute -top-2 -right-2 w-5 h-5 bg-red-600 text-white rounded-full text-xs leading-5"
+                  >
+                    ×
+                  </button>
+                  {index !== 0 && (
+                    <button
+                      type="button"
+                      onClick={() => makeCover(index)}
+                      className="mt-1 block text-xs text-blue-600 hover:underline"
+                    >
+                      Hacer portada
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
           )}
-          <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} disabled={uploading} />
+          <input ref={fileInputRef} type="file" accept="image/*" multiple onChange={handleFilesChange} disabled={uploading} />
           {uploading && <span className="text-sm text-gray-500">Subiendo...</span>}
         </div>
       </Field>

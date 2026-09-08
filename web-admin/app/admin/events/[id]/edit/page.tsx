@@ -39,7 +39,9 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
           is_featured: !!e.is_featured,
           organizer_name: e.organizer_name ?? '',
           organizer_contact: e.organizer_contact ?? '',
-          thumbnail_url: e.thumbnail_url ?? '',
+          images: (e.image_urls && e.image_urls.length > 0)
+            ? e.image_urls
+            : (e.thumbnail_url ? [e.thumbnail_url] : []),
         });
       })
       .catch(() => setError('Error de conexión'));
