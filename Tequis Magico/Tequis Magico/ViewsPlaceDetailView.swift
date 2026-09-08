@@ -13,6 +13,7 @@ struct PlaceDetailView: View {
     @Bindable var place: Place
     @Environment(\.modelContext) private var modelContext
     @State private var selectedImageIndex = 0
+    @State private var showingMapsChoice = false
     
     var body: some View {
         ScrollView {
@@ -265,7 +266,11 @@ struct PlaceDetailView: View {
                     // MARK: - Botones de Acción
                     VStack(spacing: 12) {
                         Button {
-                            openInMaps()
+                            if MapsOpener.isGoogleMapsInstalled() {
+                                showingMapsChoice = true
+                            } else {
+                                MapsOpener.openAppleMaps(coordinate: place.coordinate, name: place.name)
+                            }
                         } label: {
                             Label("Cómo llegar", systemImage: "arrow.triangle.turn.up.right.circle.fill")
                                 .font(.headline)
@@ -275,7 +280,16 @@ struct PlaceDetailView: View {
                                 .foregroundStyle(.white)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
-                        
+                        .confirmationDialog("Abrir direcciones en...", isPresented: $showingMapsChoice, titleVisibility: .visible) {
+                            Button("Apple Maps") {
+                                MapsOpener.openAppleMaps(coordinate: place.coordinate, name: place.name)
+                            }
+                            Button("Google Maps") {
+                                MapsOpener.openGoogleMaps(coordinate: place.coordinate, name: place.name)
+                            }
+                            Button("Cancelar", role: .cancel) {}
+                        }
+
                         Button {
                             sharePlace()
                         } label: {
@@ -309,14 +323,6 @@ struct PlaceDetailView: View {
         if let url = URL(string: "https://wa.me/\(cleanNumber)") {
             UIApplication.shared.open(url)
         }
-    }
-    
-    private func openInMaps() {
-        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: place.coordinate))
-        mapItem.name = place.name
-        mapItem.openInMaps(launchOptions: [
-            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
-        ])
     }
     
     private func sharePlace() {

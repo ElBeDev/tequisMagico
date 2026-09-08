@@ -33,7 +33,7 @@ struct MapView: View {
     var body: some View {
         ZStack(alignment: .top) {
             // MARK: - Mapa
-            Map(position: $cameraPosition, selection: $selectedPlace) {
+            Map(position: $cameraPosition) {
                 ForEach(filteredPlaces, id: \.id) { place in
                     Annotation(place.name, coordinate: place.coordinate) {
                         PlaceAnnotationView(place: place)
@@ -149,6 +149,7 @@ struct CategoryFilterButton: View {
 struct PlaceDetailSheet: View {
     let place: Place
     @Environment(\.dismiss) private var dismiss
+    @State private var showingMapsChoice = false
     
     var body: some View {
         NavigationStack {
@@ -278,7 +279,11 @@ struct PlaceDetailSheet: View {
                         VStack(spacing: 12) {
                             // Cómo llegar
                             Button {
-                                openInMaps(place: place)
+                                if MapsOpener.isGoogleMapsInstalled() {
+                                    showingMapsChoice = true
+                                } else {
+                                    MapsOpener.openAppleMaps(coordinate: place.coordinate, name: place.name)
+                                }
                             } label: {
                                 Label("Cómo llegar", systemImage: "arrow.triangle.turn.up.right.circle.fill")
                                     .frame(maxWidth: .infinity)
@@ -286,6 +291,15 @@ struct PlaceDetailSheet: View {
                                     .background(place.category.color)
                                     .foregroundStyle(.white)
                                     .clipShape(RoundedRectangle(cornerRadius: 12))
+                            }
+                            .confirmationDialog("Abrir direcciones en...", isPresented: $showingMapsChoice, titleVisibility: .visible) {
+                                Button("Apple Maps") {
+                                    MapsOpener.openAppleMaps(coordinate: place.coordinate, name: place.name)
+                                }
+                                Button("Google Maps") {
+                                    MapsOpener.openGoogleMaps(coordinate: place.coordinate, name: place.name)
+                                }
+                                Button("Cancelar", role: .cancel) {}
                             }
                             
                             // Llamar (si tiene teléfono)
@@ -319,15 +333,6 @@ struct PlaceDetailSheet: View {
                 }
             }
         }
-    }
-    
-    private func openInMaps(place: Place) {
-        let coordinate = place.coordinate
-        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
-        mapItem.name = place.name
-        mapItem.openInMaps(launchOptions: [
-            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
-        ])
     }
     
     private func callPhone(number: String) {
