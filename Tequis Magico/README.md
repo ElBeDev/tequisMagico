@@ -40,6 +40,7 @@
    - ✅ Términos, Privacidad y Contacto con contenido real (borrador, ver sección Legal)
    - ✅ Ícono de app real (antes vacío — bloqueaba archivar para App Store)
    - ✅ Horarios (`schedule_json`) sincronizados y mostrados en `PlaceDetailView` — la tubería ya funciona, falta capturar los horarios reales de cada lugar (0 de 50 los tiene hoy)
+   - ✅ "Cerca de mí" (mapa + Explorar), activo solo si de verdad estás cerca de Tequisquiapan
 
 ---
 
@@ -178,7 +179,10 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 - [ ] **Notificaciones Push** — **necesita una decisión tuya**: Firebase Cloud Messaging (cuenta de Google/Firebase nueva) o APNs directo (necesita capacidad de Push en el Apple Developer account). No lo armé todavía porque implica crear infraestructura externa nueva, igual que StoreKit/Stripe.
   - [ ] Notificaciones de eventos próximos
 
-- [ ] **"Cerca de mí" / ubicación del usuario** — no está en el roadmap original, lo encontramos en la auditoría. `MapView` siempre muestra la región fija de Tequisquiapan; no pide permiso de ubicación ni tiene botón de "centrar en mi ubicación". Bajo riesgo de implementar (solo necesita `CLLocationManager` + declarar `NSLocationWhenInUseUsageDescription` en el `Info.plist`), pero es una decisión de producto que no asumí sin preguntarte.
+- [x] **"Cerca de mí" / ubicación del usuario** — no estaba en el roadmap original, salió de la auditoría. Implementado con una condición clave: como la app es de un solo destino, solo se activa si el usuario de verdad está a ≤25km de Tequisquiapan (`LocationService.isNearTequisquiapan`); si está lejos, muestra una alerta en vez de un mapa/lista vacíos o irrelevantes. Permiso de ubicación se pide solo al tocar el botón, nunca al abrir la app.
+  - [x] Botón de ubicación en `MapView` — centra el mapa y muestra el punto azul del usuario
+  - [x] Chip "Cerca de mí" en `ExploreView` — ordena por distancia y muestra "X km" por lugar
+  - [x] Verificado con `simctl location set` (dentro de Tequisquiapan funciona; el caso "lejos" usa la misma ruta de código, pendiente que el usuario lo confirme visualmente cuando pueda)
   - [ ] Ofertas de negocios premium
 
 ---
