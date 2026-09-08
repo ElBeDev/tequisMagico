@@ -6,10 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ProfileView: View {
+    @Query private var places: [Place]
     @State private var isPremium = false
     @State private var showingSettings = false
+
+    private var favoritesCount: Int {
+        places.filter(\.isFavorite).count
+    }
     
     var body: some View {
         NavigationStack {
@@ -84,7 +90,7 @@ struct ProfileView: View {
                     HStack {
                         Label("Favoritos", systemImage: "heart")
                         Spacer()
-                        Text("0")
+                        Text("\(favoritesCount)")
                             .foregroundStyle(.secondary)
                     }
                     
@@ -122,22 +128,19 @@ struct ProfileView: View {
                 // MARK: - Info
                 Section("Acerca de") {
                     NavigationLink {
-                        Text("Términos y Condiciones")
-                            .navigationTitle("Términos")
+                        LegalTermsView()
                     } label: {
                         Label("Términos y Condiciones", systemImage: "doc.text")
                     }
-                    
+
                     NavigationLink {
-                        Text("Política de Privacidad")
-                            .navigationTitle("Privacidad")
+                        LegalPrivacyView()
                     } label: {
                         Label("Política de Privacidad", systemImage: "hand.raised")
                     }
-                    
+
                     NavigationLink {
-                        Text("Contacto")
-                            .navigationTitle("Contacto")
+                        ContactView()
                     } label: {
                         Label("Contacto", systemImage: "envelope")
                     }

@@ -90,7 +90,10 @@ struct ExploreView: View {
                         }
                         .padding(.horizontal)
                     }
-                    
+
+                    // MARK: - Rutas Temáticas
+                    ThematicRoutesSection()
+
                     // MARK: - Lista de Lugares
                     if filteredPlaces.isEmpty {
                         ContentUnavailableView(
