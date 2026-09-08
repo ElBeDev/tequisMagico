@@ -22,6 +22,10 @@ export default function AdminDashboard() {
             <h2 className="text-xl font-semibold mb-2">⚙️ Gestionar Lugares</h2>
             <p className="text-gray-600">Crear, editar y borrar lugares</p>
           </Link>
+          <Link href="/admin/events" className="block p-6 bg-white rounded-lg shadow hover:shadow-lg">
+            <h2 className="text-xl font-semibold mb-2">📅 Gestionar Eventos</h2>
+            <p className="text-gray-600">Crear, editar y borrar eventos</p>
+          </Link>
           <Link href="/admin/analytics" className="block p-6 bg-white rounded-lg shadow hover:shadow-lg">
             <h2 className="text-xl font-semibold mb-2">📊 Analytics</h2>
             <p className="text-gray-600">Lugares por categoría, mejor calificados</p>
