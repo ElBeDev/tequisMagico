@@ -58,9 +58,14 @@ export default function PlacesPage() {
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
             <h1 className="text-3xl font-bold text-gray-900">📍 Lugares ({places.length})</h1>
-            <Link href="/admin" className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">
-              ← Dashboard
-            </Link>
+            <div className="flex gap-2">
+              <Link href="/admin/places/new" className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                + Nuevo lugar
+              </Link>
+              <Link href="/admin" className="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">
+                ← Dashboard
+              </Link>
+            </div>
           </div>
         </div>
       </header>
@@ -107,9 +112,14 @@ export default function PlacesPage() {
                       <span className="px-2 py-1 bg-gray-100 text-xs rounded">⭐ {parseFloat(p.rating || 0).toFixed(1)}</span>
                     </div>
                   </div>
-                  <button onClick={() => handleDelete(p.id)} className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-                    Eliminar
-                  </button>
+                  <div className="flex gap-2">
+                    <Link href={`/admin/places/${p.id}/edit`} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                      Editar
+                    </Link>
+                    <button onClick={() => handleDelete(p.id)} className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                      Eliminar
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
