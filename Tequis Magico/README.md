@@ -30,7 +30,7 @@
    - ✅ Integración con Apple Maps (direcciones)
    - ✅ Llamadas telefónicas desde la app
    - ✅ Enlaces a WhatsApp
-   - ✅ Datos de ejemplo (sample data)
+   - ✅ Sincronización de `Place` contra el backend real (ver abajo), con fallback a datos locales sin conexión
 
 ---
 
@@ -83,19 +83,19 @@ Tequis Magico/
    - [ ] Sincronizar con FavoritesView
 
 2. **Imágenes Reales**
-   - [ ] Configurar Firebase Storage o CloudKit Assets
-   - [ ] Subir fotos de lugares reales de Tequisquiapan
-   - [ ] Actualizar URLs en los datos de ejemplo
+   - [ ] Configurar Vercel Blob (ya está la dependencia en `web-admin`) para subir fotos reales
+   - [ ] Actualizar `image_urls`/`thumbnail_url` en Neon
+   - [ ] Mostrarlas en `PlaceDetailView`/`MapView` (hoy `imageURLs` casi siempre llega vacío)
 
 3. **Datos Reales**
-   - [ ] Poblar base de datos con 20-30 lugares reales
-   - [ ] Agregar información completa (horarios, teléfonos, etc.)
-   - [ ] Coordenadas GPS precisas
+   - [x] 50 lugares reales de Tequisquiapan cargados en Neon (ver `database/databaseseed_part*.sql`)
+   - [ ] Completar campos faltantes (horarios `schedule_json`, más teléfonos/websites)
 
 4. **Backend Básico**
-   - [ ] Configurar CloudKit schema
-   - [ ] Sincronización de datos
-   - [ ] Sistema de cache para offline
+   - [x] API REST en `web-admin/app/api/places` (Next.js + Neon), consumida por la app
+   - [x] Sincronización de `Place` al abrir la app (`ContentView.syncPlacesFromBackend`), con upsert por `id`
+   - [ ] API de **Eventos** (`web-admin/app/api/events`) — hoy `Event` sigue siendo 100% local
+   - [ ] Manejo de lugares eliminados (el API ya hace soft-delete con `is_active`, pero la app nunca borra su copia local de uno que dejó de estar activo)
 
 #### Media Prioridad:
 5. **Mejoras UX**
@@ -189,19 +189,17 @@ Tequis Magico/
 ## 📊 Arquitectura de Datos
 
 ### Swift Data (Local):
-- Almacenamiento offline
-- Cache de lugares y eventos
+- Cache offline de `Place` y `Event`
 - Favoritos y datos del usuario
 
-### CloudKit (Sync):
-- Base de datos principal
-- Sincronización automática
-- Backup en la nube
+### Neon + Vercel (Backend real, no CloudKit):
+- Postgres en Neon es la base de datos principal (ver `../database/databaseschema.sql`)
+- `web-admin/app/api/places` (Next.js en Vercel) expone `GET/POST /api/places` y `GET/DELETE /api/places/[id]`
+- La app sincroniza `Place` desde ahí en cada arranque (`ServicesPlaceAPIService.swift` + `ContentView.swift`); `Event` todavía no tiene API y sigue siendo local
+- Los códigos de `category`/`price_range`/`business_tier` que da el API son cortos (`"turistico"`, `"moderate"`, `"premium"`) y no el `rawValue` de despliegue de los enums — por eso existen los `init?(dbValue:)` en `ModelsPlaceCategory.swift`, `ModelsPriceRange.swift` y `ModelsBusinessTier.swift`
 
-### Firebase (Opcional):
-- Storage para imágenes/videos
-- Cloud Functions para procesamiento
-- Analytics y Crashlytics
+### Storage de imágenes (pendiente):
+- `@vercel/blob` ya está como dependencia en `web-admin`, pero todavía no se usa
 
 ---
 
@@ -224,11 +222,9 @@ Tequis Magico/
 ## 📝 Notas Importantes
 
 ### Para el Portal Web:
-- **Separado** de esta app iOS
-- Tecnologías recomendadas:
-  - Next.js + CloudKit JS
-  - O: SwiftUI + AppKit (app macOS)
-- Debe compartir el mismo backend (CloudKit)
+- Vive en `../web-admin` (Next.js), en el mismo repo que esta app pero es un deploy aparte en Vercel
+- Comparte el backend real (Neon) con esta app a través de `/api/places`
+- Convención de trabajo: los cambios de la app iOS se hacen directo en estos archivos de Xcode; los del panel/Vercel/Neon se manejan como cualquier proyecto Next.js normal en `../web-admin`
 
 ### Para Producción:
 1. **Configurar CloudKit Schema**
