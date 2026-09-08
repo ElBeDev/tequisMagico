@@ -132,12 +132,13 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
   - [ ] Sin límite de favoritos
 
 ### Panel de Negocios (Web):
-- [ ] Diseñar y desarrollar portal web
-- [ ] Autenticación de negocios
-- [ ] CRUD de lugares
-- [ ] Upload de imágenes/videos
-- [ ] Dashboard de analytics
-- [ ] Sistema de suscripción con Stripe/Conekta
+- [x] Portal web (`web-admin`, Next.js) — hoy es panel de admin único, no self-service por negocio
+- [x] Autenticación: `/admin` y las escrituras del API (`POST`/`PUT`/`DELETE`) están protegidas con contraseña compartida (`ADMIN_PASSWORD`, ver `web-admin/proxy.ts`). **No** hay todavía login por negocio individual — es un solo admin operando todo.
+- [x] CRUD de lugares real: crear y editar con formulario (antes solo se podía crear con curl y borrar desde la UI)
+- [x] Upload de imágenes vía Vercel Blob (`tequis-magico-photos`, store público) — la dependencia llevaba sin usarse desde que se creó el proyecto
+- [x] Dashboard de analytics básico: por categoría, por nivel de negocio, mejor calificados
+- [ ] Autenticación **por negocio** (que cada dueño solo vea/edite su propio lugar) — necesita decidir proveedor de auth (Next-Auth, Clerk, etc.) antes de construirlo
+- [ ] Sistema de suscripción con Stripe/Conekta — necesita que el negocio real (dueño del proyecto) tenga cuenta con el procesador antes de integrar pagos reales
 
 ---
 

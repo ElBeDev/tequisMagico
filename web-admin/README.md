@@ -1,4 +1,6 @@
-Panel de administración de Tequisquiapan Mágico. Next.js + Neon (Postgres), desplegado en Vercel como `tequis-magico` (https://tequis-magico.vercel.app). Expone `GET/POST /api/places`, `GET/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/DELETE /api/events/[id]`, consumidos por la app iOS en `../Tequis Magico`. El esquema y seeds de la base están en `../database`.
+Panel de administración de Tequisquiapan Mágico. Next.js + Neon (Postgres), desplegado en Vercel como `tequis-magico` (https://tequis-magico.vercel.app). Expone `GET/POST/PUT /api/places`, `GET/PUT/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/DELETE /api/events/[id]`, consumidos por la app iOS en `../Tequis Magico`. El esquema y seeds de la base están en `../database`.
+
+`/admin` (login, CRUD de lugares con fotos vía Vercel Blob, analytics) requiere la contraseña en `ADMIN_PASSWORD` — protegido en `proxy.ts` (antes `middleware.ts`; Next.js 16 renombró la convención). Las lecturas del API (`GET`) siguen públicas a propósito, la app las necesita sin login; solo las escrituras y `/api/upload` piden sesión.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
