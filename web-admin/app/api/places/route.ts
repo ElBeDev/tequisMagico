@@ -69,15 +69,15 @@ export async function POST(request: Request) {
       INSERT INTO places (
         name, category, subcategory, latitude, longitude,
         address, short_description, full_description, price_range,
-        image_urls, amenities, tags, phone_number, email,
+        image_urls, thumbnail_url, amenities, tags, phone_number, email,
         website, whatsapp_number, rating, reviews_count,
         is_verified, is_featured
       ) VALUES (
-        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21
       )
       RETURNING *
     `;
-    
+
     const values = [
       body.name,
       body.category,
@@ -89,6 +89,7 @@ export async function POST(request: Request) {
       body.full_description || '',
       body.price_range || 'moderate',
       body.image_urls || [],
+      body.thumbnail_url || null,
       body.amenities || [],
       body.tags || [],
       body.phone_number || null,
