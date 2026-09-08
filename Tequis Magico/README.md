@@ -33,6 +33,8 @@
    - ✅ Sincronización de `Place` y `Event` contra el backend real (ver abajo), con fallback a datos locales sin conexión
    - ✅ Favoritos reales (locales, por dispositivo)
    - ✅ Fotos reales en los 50 lugares y 17 eventos (ver sección de Imágenes) + pantalla de créditos en Perfil
+   - ✅ Compartir lugar (share sheet nativo) y deep links `tequismagico://place/<uuid>`
+   - ✅ Pull to refresh, loading state inicial y aviso de "sin conexión" en Explorar/Eventos/mapa
 
 ---
 
@@ -100,20 +102,20 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 
 #### Media Prioridad:
 5. **Mejoras UX**
-   - [ ] Animaciones de transición
-   - [ ] Pull to refresh
-   - [ ] Loading states
-   - [ ] Error handling
+   - [x] Animaciones de transición básicas (lista de Explorar al filtrar, overlay de carga) — falta pulir más si se quiere algo más elaborado
+   - [x] Pull to refresh en Explorar y Eventos (`SyncService`)
+   - [x] Loading state en el primer arranque sin datos locales
+   - [x] Error handling: banner "sin conexión" cuando el sync inicial falla y cae al seed offline
 
 6. **Search Mejorado**
-   - [ ] Búsqueda por tags
-   - [ ] Autocompletado
-   - [ ] Historial de búsquedas
+   - [x] Búsqueda por tags (además de nombre/descripción/dirección)
+   - [x] Autocompletado (`.searchSuggestions`, sugiere nombres y tags mientras se escribe)
+   - [x] Historial de búsquedas (últimas 5, en `UserDefaults` vía `SearchHistory`)
 
 7. **Share Functionality**
-   - [ ] Share sheet para compartir lugares
-   - [ ] Deep links (tequismagico://place/123)
-   - [ ] Preview en iMessage
+   - [x] Share sheet nativo (`ShareLink`) en PlaceDetailView
+   - [x] Deep links `tequismagico://place/<uuid>` — registrados en Info.plist, manejados en `ContentView.onOpenURL`, abren la hoja de detalle del lugar
+   - [ ] Preview en iMessage con imagen (hoy el `SharePreview` solo lleva título; para la foto habría que cachear la imagen localmente antes de compartir)
 
 ---
 
