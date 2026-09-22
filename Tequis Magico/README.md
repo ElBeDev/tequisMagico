@@ -39,7 +39,7 @@
    - ✅ Siri/App Shortcuts: "busca lugares en Tequis Magico", "qué eventos hay hoy en Tequis Magico"
    - ✅ Términos, Privacidad y Contacto con contenido real (borrador, ver sección Legal)
    - ✅ Ícono de app real (antes vacío — bloqueaba archivar para App Store)
-   - ✅ Horarios (`schedule_json`) sincronizados y mostrados en `PlaceDetailView` — la tubería ya funciona, falta capturar los horarios reales de cada lugar (0 de 50 los tiene hoy)
+   - ✅ Horarios (`schedule_json`) sincronizados y mostrados en `PlaceDetailView` — 7 de 50 lugares ya tienen horario real investigado y verificado, el resto sigue pendiente (ver sección "Datos Reales")
    - ✅ "Cerca de mí" (mapa + Explorar), activo solo si de verdad estás cerca de Tequisquiapan
 
 ---
@@ -100,7 +100,8 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
    - [x] 17 eventos reales cargados en Neon (ver `database/databaseseed_events*.sql`, incluye info tomada de tequis.travel)
    - [x] Fotos representativas por categoría en los 50 lugares y 17 eventos (Wikimedia Commons, ver `database/IMAGE_CREDITS.md`)
    - [x] `schedule_json` (horarios) ya se sincroniza y se muestra en la app; el panel ya tiene el campo para capturarlo
-   - [ ] Llenar horarios reales y más teléfonos/websites — es captura de datos por negocio, no código; nadie lo ha hecho todavía para los 50 lugares
+   - [x] Investigación en internet (teléfono/sitio web/horario) para los 50 lugares — workflow de agentes con research + validación cruzada por lugar. Resultado: 7 lugares con datos nuevos confirmados y ya aplicados en Neon (Viñedos La Redonda, Freixenet México, Templo de Santa María de la Asunción, Viñedos Azteca, La Pila, Parque La Pila, K'puchinos — este último con teléfono corregido, el que había en la BD no era el del sitio oficial)
+   - [ ] **Hallazgo importante, pendiente de decisión**: 6 lugares son negocios reales pero con dirección/teléfono equivocados en la BD (verificado contra su sitio oficial) — Viñedos Puerta del Lobo y Grutas Los Herrera en realidad están en otros municipios (El Marqués y San Joaquín, no Tequisquiapan), Los Rosales Viñedos y Hotel El Relox tienen la dirección/teléfono de una calle distinta a la registrada, La Casa del Atrio apunta al sitio de un hotel homónimo en otra ciudad, y Hotel Posada Tequisquiapan difiere en número de calle y teléfono de la única "Posada Tequisquiapan" indexada. Y ~34 de los 50 lugares no tienen ninguna presencia web indexada (ni sitio, ni redes, ni directorio turístico) — normal para negocios pequeños sin página propia, pero también compatible con que parte de la carga inicial (`database/databaseseed_part*.sql`) haya sido contenido de relleno generado al sembrar la BD, no negocios reales verificados uno por uno. Requiere decisión del dueño del proyecto: verificar in situ / corregir direcciones, o aceptar que son datos sin verificar.
 
 4. **Backend Básico**
    - [x] API REST en `web-admin/app/api/places` y `web-admin/app/api/events` (Next.js + Neon), consumida por la app
