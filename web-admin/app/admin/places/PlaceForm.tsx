@@ -26,6 +26,7 @@ export type PlaceFormValues = {
   tags: string; // comma-separated in the form
   is_featured: boolean;
   is_verified: boolean;
+  content_verified: boolean;
   images: string[]; // la primera es la portada (thumbnail_url)
   schedule_json: string; // JSON crudo, ej. {"lunes":"9:00-18:00",...}
 };
@@ -34,7 +35,7 @@ const emptyValues: PlaceFormValues = {
   name: '', category: 'turistico', subcategory: '', latitude: '', longitude: '',
   address: '', short_description: '', full_description: '', price_range: 'moderate',
   phone_number: '', email: '', website: '', whatsapp_number: '',
-  amenities: '', tags: '', is_featured: false, is_verified: false, images: [],
+  amenities: '', tags: '', is_featured: false, is_verified: false, content_verified: false, images: [],
   schedule_json: '',
 };
 
@@ -118,6 +119,7 @@ export function PlaceForm({ initial }: { initial?: Partial<PlaceFormValues> }) {
       tags: values.tags.split(',').map((s) => s.trim()).filter(Boolean),
       is_featured: values.is_featured,
       is_verified: values.is_verified,
+      content_verified: values.content_verified,
       thumbnail_url: values.images[0] || null,
       image_urls: values.images,
       schedule_json: values.schedule_json.trim() || null,
@@ -252,6 +254,10 @@ export function PlaceForm({ initial }: { initial?: Partial<PlaceFormValues> }) {
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={values.is_verified} onChange={(e) => set('is_verified', e.target.checked)} />
           Verificado
+        </label>
+        <label className="flex items-center gap-2" title="Teléfono/sitio/horario confirmados contra una fuente externa (sitio oficial, directorio de turismo, etc.) — no es lo mismo que 'Verificado', que es la insignia de confianza que ve el usuario">
+          <input type="checkbox" checked={values.content_verified} onChange={(e) => set('content_verified', e.target.checked)} />
+          Info de contacto verificada
         </label>
       </div>
 

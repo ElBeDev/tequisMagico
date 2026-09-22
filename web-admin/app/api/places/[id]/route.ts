@@ -40,7 +40,7 @@ const EDITABLE_FIELDS = [
   'short_description', 'full_description', 'price_range',
   'phone_number', 'email', 'website', 'whatsapp_number',
   'amenities', 'tags', 'is_featured', 'is_verified',
-  'thumbnail_url', 'image_urls', 'schedule_json',
+  'thumbnail_url', 'image_urls', 'schedule_json', 'content_verified',
 ];
 
 export async function PUT(

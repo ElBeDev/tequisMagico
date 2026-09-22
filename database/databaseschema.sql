@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS places (
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW(),
   views_count INTEGER DEFAULT 0,
-  favorites_count INTEGER DEFAULT 0
+  favorites_count INTEGER DEFAULT 0,
+  content_verified BOOLEAN NOT NULL DEFAULT false -- true = teléfono/sitio/horario confirmados contra una fuente externa; distinto de is_verified (insignia de confianza que ve el usuario)
 );
 
 -- TABLA: events

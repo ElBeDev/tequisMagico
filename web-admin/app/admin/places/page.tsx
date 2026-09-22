@@ -10,6 +10,7 @@ export default function PlacesPage() {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [onlyUnverified, setOnlyUnverified] = useState(false);
 
   useEffect(() => {
     fetchPlaces();
@@ -48,9 +49,11 @@ export default function PlacesPage() {
   };
 
   const filteredPlaces = places.filter(place =>
-    (place.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (place.address || '').toLowerCase().includes(searchTerm.toLowerCase())
+    ((place.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (place.address || '').toLowerCase().includes(searchTerm.toLowerCase())) &&
+    (!onlyUnverified || !place.content_verified)
   );
+  const unverifiedCount = places.filter((p) => !p.content_verified).length;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -93,6 +96,14 @@ export default function PlacesPage() {
               <option value="compras">Compras</option>
             </select>
           </div>
+          <label className="flex items-center gap-2 mt-4 text-sm text-gray-700">
+            <input
+              type="checkbox"
+              checked={onlyUnverified}
+              onChange={(e) => setOnlyUnverified(e.target.checked)}
+            />
+            Mostrar solo sin verificar ({unverifiedCount})
+          </label>
         </div>
 
         {loading ? (
@@ -110,6 +121,11 @@ export default function PlacesPage() {
                     <div className="flex gap-2 mt-2">
                       <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">{p.category}</span>
                       <span className="px-2 py-1 bg-gray-100 text-xs rounded">⭐ {parseFloat(p.rating || 0).toFixed(1)}</span>
+                      {!p.content_verified && (
+                        <span className="px-2 py-1 bg-amber-100 text-amber-800 text-xs rounded" title="Teléfono/sitio/horario sin confirmar contra una fuente externa">
+                          Sin verificar
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="flex gap-2">
