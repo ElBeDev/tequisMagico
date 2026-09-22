@@ -23,13 +23,19 @@ enum SyncService {
                     context.insert(Place(dto: dto))
                 }
             }
+            var removedIDs: [String] = []
             if !remotePlaces.isEmpty {
                 let remoteIDs = Set(remotePlaces.map(\.id))
                 for place in places where !remoteIDs.contains(place.id) {
+                    removedIDs.append(place.id.uuidString)
                     context.delete(place)
                 }
             }
             try? context.save()
+
+            let currentPlaces = (try? context.fetch(FetchDescriptor<Place>())) ?? []
+            await SpotlightIndexer.reindexAll(currentPlaces, removedIDs: removedIDs)
+
             return true
         } catch {
             return false

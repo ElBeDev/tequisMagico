@@ -14,6 +14,7 @@ struct PlaceDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var selectedImageIndex = 0
     @State private var showingMapsChoice = false
+    @State private var previewImage: UIImage?
     
     var body: some View {
         ScrollView {
@@ -22,7 +23,7 @@ struct PlaceDetailView: View {
                 TabView(selection: $selectedImageIndex) {
                     if place.hasPhotos {
                         ForEach(Array(place.imageURLs.enumerated()), id: \.offset) { index, imageURL in
-                            AsyncImage(url: URL(string: imageURL)) { image in
+                            RetryableAsyncImage(urlString: imageURL) { image in
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -315,7 +316,7 @@ struct PlaceDetailView: View {
                             item: shareURL,
                             subject: Text(place.name),
                             message: Text(place.shortDescription),
-                            preview: SharePreview(place.name)
+                            preview: SharePreview(place.name, image: sharePreviewImage)
                         ) {
                             Label("Compartir", systemImage: "square.and.arrow.up")
                                 .font(.headline)
@@ -332,6 +333,10 @@ struct PlaceDetailView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .ignoresSafeArea(edges: .top)
+        .task {
+            guard let thumbnailURL = place.thumbnailURL else { return }
+            previewImage = await ImageCache.shared.load(thumbnailURL)
+        }
     }
     
     // MARK: - Actions
@@ -351,6 +356,16 @@ struct PlaceDetailView: View {
     
     private var shareURL: URL {
         URL(string: "tequismagico://place/\(place.id.uuidString)")!
+    }
+
+    /// La foto real una vez que `ImageCache` la tiene lista; mientras tanto, el ícono de
+    /// categoría — así `SharePreview` siempre recibe el mismo tipo (`Image`) sin importar
+    /// si la descarga ya terminó.
+    private var sharePreviewImage: Image {
+        if let previewImage {
+            return Image(uiImage: previewImage)
+        }
+        return Image(systemName: place.category.icon)
     }
 
     /// `place.scheduleJSON` es texto JSON crudo, ej. {"lunes":"9:00-18:00",...} — casi siempre nil hoy

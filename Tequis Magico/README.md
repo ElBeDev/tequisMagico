@@ -123,7 +123,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 7. **Share Functionality**
    - [x] Share sheet nativo (`ShareLink`) en PlaceDetailView
    - [x] Deep links `tequismagico://place/<uuid>` — registrados en Info.plist, manejados en `ContentView.onOpenURL`, abren la hoja de detalle del lugar
-   - [ ] Preview en iMessage con imagen (hoy el `SharePreview` solo lleva título; para la foto habría que cachear la imagen localmente antes de compartir)
+   - [x] Preview en iMessage con imagen — `SharePreview(place.name, image:)` con la miniatura ya cacheada por `ImageCache`; si no hay foto o aún no cargó, cae al ícono de categoría
 
 ---
 
@@ -167,7 +167,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
   - [x] "Busca lugares/restaurantes en Tequis Magico" (`SearchPlacesIntent`, con parámetro de categoría opcional)
   - [x] "Qué eventos hay hoy en Tequis Magico" (`TodayEventsIntent`)
   - [x] Registrados como `AppShortcut` (`TequisMagicoShortcuts`) — verificado con un build limpio que Xcode extrae y entrena las frases (`ExtractAppIntentsMetadata`/`AppIntentsSSUTraining`)
-  - [ ] Integración con Spotlight — no implementado
+  - [x] Integración con Spotlight — `SpotlightIndexer` reindexa los lugares activos (título, descripción, tags, dirección, miniatura) tras cada sync exitoso; tocar un resultado de búsqueda del sistema abre la hoja de detalle vía `CSSearchableItemActionType` en `ContentView`, misma ruta que el deep link
 
 - [ ] **Visual Intelligence** — diferido indefinidamente. Reconocer edificios/AR overlay necesita un modelo de reconocimiento de imágenes real (Core ML entrenado o un servicio externo); no es algo razonable de improvisar, requeriría su propio proyecto.
 
@@ -193,7 +193,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 - [x] ~~Tap en un pin del mapa abría el detalle y se cerraba solo casi al instante~~ — el `Map` tenía `selection: $selectedPlace` Y un `.onTapGesture` manual peleando por el mismo estado; se quitó el binding de `selection` (`ViewsMapView.swift`)
 - [x] ~~`POST /api/places` nunca guardaba `thumbnail_url`~~ — corregido, ver Fase 2
 - [ ] FlowLayout puede no funcionar bien en dispositivos pequeños
-- [ ] AsyncImage no tiene retry logic
+- [x] ~~AsyncImage no tiene retry logic~~ — reemplazado por `RetryableAsyncImage` (2 reintentos con backoff, cache compartido vía `ImageCache`) en las 4 vistas que mostraban fotos (Mapa, Explorar, Eventos, Detalle)
 - [x] ~~No había manejo de errores visible al usuario si fallaba el sync~~ — banner de "sin conexión" agregado (Fase 1, Mejoras UX)
 
 ### 🔍 Auditoría (hallazgos sin código todavía):

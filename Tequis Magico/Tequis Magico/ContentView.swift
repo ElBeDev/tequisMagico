@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import CoreSpotlight
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
@@ -106,6 +107,9 @@ struct ContentView: View {
         .onOpenURL { url in
             handleDeepLink(url)
         }
+        .onContinueUserActivity(CSSearchableItemActionType) { activity in
+            handleSpotlightActivity(activity)
+        }
         .sheet(item: $deepLinkedPlace) { place in
             PlaceDetailSheet(place: place)
                 .presentationDetents([.medium, .large])
@@ -122,6 +126,13 @@ struct ContentView: View {
         guard url.scheme == "tequismagico", url.host == "place" else { return }
         let idString = url.pathComponents.last(where: { $0 != "/" }) ?? ""
         guard let id = UUID(uuidString: idString) else { return }
+        deepLinkedPlace = places.first { $0.id == id }
+    }
+
+    // MARK: - Spotlight (toca un resultado de búsqueda del sistema)
+    private func handleSpotlightActivity(_ activity: NSUserActivity) {
+        guard let identifier = activity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+              let id = UUID(uuidString: identifier) else { return }
         deepLinkedPlace = places.first { $0.id == id }
     }
 }

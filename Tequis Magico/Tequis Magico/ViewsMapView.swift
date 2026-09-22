@@ -200,7 +200,7 @@ struct PlaceDetailSheet: View {
                 VStack(alignment: .leading, spacing: 16) {
                     // MARK: - Imagen Principal
                     if let thumbnailURL = place.thumbnailURL {
-                        AsyncImage(url: URL(string: thumbnailURL)) { image in
+                        RetryableAsyncImage(urlString: thumbnailURL) { image in
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)

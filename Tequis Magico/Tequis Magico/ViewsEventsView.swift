@@ -82,7 +82,7 @@ struct EventCard: View {
             // Imagen
             Group {
                 if let thumbnailURL = event.thumbnailURL {
-                    AsyncImage(url: URL(string: thumbnailURL)) { image in
+                    RetryableAsyncImage(urlString: thumbnailURL) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
