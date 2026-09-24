@@ -1,5 +1,5 @@
 -- Asigna fotos reales de Tequisquiapan (Wikimedia Commons, CC BY-SA/CC BY) a places y events
--- que no tenían thumbnail_url. Ver database/IMAGE_CREDITS.md para autoría y licencia de cada foto.
+-- que no tenían thumbnail_url. Ver docs/datos/creditos-imagenes.md para autoría y licencia de cada foto.
 -- Son fotos representativas por categoría/subcategoría, no necesariamente del negocio exacto.
 
 -- turistico

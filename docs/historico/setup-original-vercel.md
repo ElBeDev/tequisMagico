@@ -1,3 +1,5 @@
+> ⚠️ **Documento histórico**: el plan de setup original del backend. Es de antes de la investigación de septiembre 2026 y no refleja el estado actual. Ver [`../datos/base-de-datos.md`](../datos/base-de-datos.md) para saber qué datos están verificados.
+
 # Database Schema para Vercel Postgres/Blob
 
 ## Setup Instructions

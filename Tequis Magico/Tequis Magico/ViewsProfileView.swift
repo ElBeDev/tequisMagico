@@ -177,7 +177,7 @@ struct ProfileView: View {
 
 // MARK: - Créditos de fotos
 /// Atribución requerida por las licencias CC de las fotos de Wikimedia Commons
-/// usadas como imagen representativa por categoría (ver database/IMAGE_CREDITS.md).
+/// usadas como imagen representativa por categoría (ver docs/datos/creditos-imagenes.md).
 private struct PhotoCredit: Identifiable {
     let id = UUID()
     let title: String

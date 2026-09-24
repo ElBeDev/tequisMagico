@@ -78,7 +78,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
     └── Assets.xcassets
 ```
 
-`Info.plist` vive fuera de esa carpeta a propósito: si se pone dentro, Xcode 16 lo suma dos veces (como recurso del bundle Y como Info.plist del target) y el build falla por "Multiple commands produce". Mismo motivo por el que `README.md`/`.gitignore` de este proyecto tampoco viven ahí adentro.
+`Info.plist` vive fuera de esa carpeta a propósito: si se pone dentro, Xcode 16 lo suma dos veces (como recurso del bundle Y como Info.plist del target) y el build falla por "Multiple commands produce". Mismo motivo por el que `.gitignore` de este proyecto tampoco vive ahí adentro (este roadmap ahora vive en `docs/app-ios/`).
 
 ---
 
@@ -93,21 +93,21 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
    - [x] Sincronizar con FavoritesView
 
 2. **Imágenes Reales**
-   - [x] Foto representativa por categoría/subcategoría en los 50 lugares y 17 eventos (Wikimedia Commons, con crédito — ver `database/IMAGE_CREDITS.md` y Perfil → Créditos de fotos)
+   - [x] Foto representativa por categoría/subcategoría en los 50 lugares y 17 eventos (Wikimedia Commons, con crédito — ver `docs/datos/creditos-imagenes.md` y Perfil → Créditos de fotos)
    - [x] Foto real del negocio (no genérica) para 4 de los 6 lugares destacados — revisado a mano en el sitio oficial de cada uno, nunca de Google Maps (viola sus términos de servicio) ni de redes sociales (no es escrapeable de forma confiable)
    - [x] Vercel Blob conectado (`tequis-magico-photos`) — el panel ya sube fotos reales desde el formulario de editar lugar. Sigue faltando que cada negocio pueda subir la suya (necesita login por negocio, ver Fase 2)
 
 3. **Datos Reales**
    - [x] 50 lugares reales de Tequisquiapan cargados en Neon (ver `database/databaseseed_part*.sql`)
    - [x] 17 eventos reales cargados en Neon (ver `database/databaseseed_events*.sql`, incluye info tomada de tequis.travel)
-   - [x] Fotos representativas por categoría en los 50 lugares y 17 eventos (Wikimedia Commons, ver `database/IMAGE_CREDITS.md`)
+   - [x] Fotos representativas por categoría en los 50 lugares y 17 eventos (Wikimedia Commons, ver `docs/datos/creditos-imagenes.md`)
    - [x] `schedule_json` (horarios) ya se sincroniza y se muestra en la app; el panel ya tiene el campo para capturarlo
    - [x] Investigación en internet (teléfono/sitio web/horario) para los 50 lugares — workflow de agentes con research + validación cruzada por lugar. Resultado: 7 lugares con datos nuevos confirmados y ya aplicados en Neon (Viñedos La Redonda, Freixenet México, Templo de Santa María de la Asunción, Viñedos Azteca, La Pila, Parque La Pila, K'puchinos — este último con teléfono corregido, el que había en la BD no era el del sitio oficial)
    - [x] **Corrección de datos equivocados** (6 negocios reales con dirección/teléfono mal capturados, verificado contra su sitio oficial). Aplicado directo en Neon:
      - Viñedos Puerta del Lobo y Grutas Los Herrera → **desactivados** (`is_active = false`): son reales pero están en El Marqués y San Joaquín, a 60+ km — no pertenecen a una app de un solo destino
      - Hotel El Relox → **desactivado**: su propio sitio (relox.com.mx) lo marca como "próximamente", todavía no opera. Reactivarlo cuando abra (dirección real: Morelos 8, Centro)
      - Los Rosales Viñedos → dirección y coordenadas corregidas (Carretera Tequisquiapan–Ezequiel Montes km 27, no a San Juan del Río); teléfono borrado porque 3 fuentes dan 3 números distintos y el sitio oficial no publica ninguno
-     - La Casa del Atrio → se borró el sitio web (era el de un hotel homónimo en Querétaro capital); dirección y teléfono se dejaron igual, sin confirmar
+     - La Casa del Atrio → se borró el sitio web y se regresó a la foto genérica de hospedaje (ambos eran de un hotel homónimo en Querétaro capital); dirección y teléfono se dejaron igual, sin confirmar
    - [x] Columna `content_verified` en `places` + etiqueta "Sin verificar", filtro y checkbox en el panel (ver Fase 2 → Panel). 11 lugares marcados como verificados; el resto queda sin verificar
    - [ ] **Verificar a mano los lugares sin verificar** (~36 activos): no tienen ninguna presencia web indexada (ni sitio, ni redes, ni directorio turístico), ni siquiera tras dos pasadas de research. Puede ser normal en negocios chicos sin página propia, pero también es compatible con que parte de la carga inicial (`database/databaseseed_part*.sql`) haya sido contenido de relleno, no negocios verificados uno por uno. Hay que llamar o visitar; usar el filtro "Mostrar solo sin verificar" del panel y marcar la casilla al confirmar cada uno
    - [ ] **Hotel Posada Tequisquiapan**: existe una "Posada Tequisquiapan" indexada pero en Moctezuma 6 (no 8) y con teléfono 414-273-0010 (no 414-273-0021). No se tocó porque no es seguro que sea el mismo negocio — confirmar llamando
@@ -164,6 +164,12 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 - [ ] Ver y reactivar lugares desactivados — hoy el panel usa `GET /api/places`, que solo devuelve `is_active = true`, así que un lugar desactivado (o "eliminado" desde el panel) desaparece del panel y solo se puede reactivar por SQL directo en Neon
 - [ ] Autenticación **por negocio** (que cada dueño solo vea/edite su propio lugar) — necesita decidir proveedor de auth (Next-Auth, Clerk, etc.) antes de construirlo
 - [ ] Sistema de suscripción con Stripe/Conekta — necesita que el negocio real (dueño del proyecto) tenga cuenta con el procesador antes de integrar pagos reales
+
+---
+
+## 🌐 Sitio web público (propuesta)
+
+- [ ] Sitio web público a la par de la app: captar turistas desde Google antes del viaje, cubrir Android y darle a cada negocio una página indexable (lo que hace que pague un plan). Propuesta completa en [`../negocio/propuesta-sitio-web.md`](../negocio/propuesta-sitio-web.md) — pendiente de tus decisiones (sección 13 de la propuesta)
 
 ---
 
@@ -231,7 +237,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 - Favoritos y datos del usuario
 
 ### Neon + Vercel (Backend real, no CloudKit):
-- Postgres en Neon es la base de datos principal (ver `../database/databaseschema.sql`)
+- Postgres en Neon es la base de datos principal (ver `database/databaseschema.sql`)
 - `web-admin/app/api/` (Next.js en Vercel) expone `GET/POST /api/places`, `GET/PUT/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/PUT/DELETE /api/events/[id]` (el `DELETE` es soft-delete: pone `is_active = false`)
 - La app sincroniza `Place` y `Event` desde ahí en cada arranque (`ServicesPlaceAPIService.swift`, `ServicesEventAPIService.swift` + `ContentView.swift`)
 - Los códigos de `category`/`price_range`/`business_tier` que da el API son cortos (`"turistico"`, `"moderate"`, `"premium"`) y no el `rawValue` de despliegue de los enums — por eso existen los `init?(dbValue:)` en `ModelsPlaceCategory.swift`, `ModelsPriceRange.swift` y `ModelsBusinessTier.swift`
@@ -260,9 +266,9 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 ## 📝 Notas Importantes
 
 ### Para el Portal Web:
-- Vive en `../web-admin` (Next.js), en el mismo repo que esta app pero es un deploy aparte en Vercel
+- Vive en `web-admin/` (Next.js), en el mismo repo que esta app pero es un deploy aparte en Vercel
 - Comparte el backend real (Neon) con esta app a través de `/api/places`
-- Convención de trabajo: los cambios de la app iOS se hacen directo en estos archivos de Xcode; los del panel/Vercel/Neon se manejan como cualquier proyecto Next.js normal en `../web-admin`
+- Convención de trabajo: los cambios de la app iOS se hacen directo en estos archivos de Xcode; los del panel/Vercel/Neon se manejan como cualquier proyecto Next.js normal en `web-admin/`
 
 ### Para Producción:
 1. **Cuenta de Apple Developer** ($99/año)

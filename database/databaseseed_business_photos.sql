@@ -1,6 +1,6 @@
 -- Reemplaza la foto genérica por categoría con la foto REAL del negocio (tomada de su propio
 -- sitio oficial, no de Google Maps ni redes) para un puñado de lugares destacados.
--- Revisado a mano uno por uno — no se hizo para los 50 lugares. Ver database/IMAGE_CREDITS.md
+-- Revisado a mano uno por uno — no se hizo para los 50 lugares. Ver docs/datos/creditos-imagenes.md
 -- para la fuente y justificación de cada una.
 -- Nota: sólo se pudo hacer para 4 de los 6 lugares "is_featured"; Viñedos La Redonda (sitio en
 -- mantenimiento) y La Estancia Tequisquiapan (sin sitio/redes localizables) se quedan con la

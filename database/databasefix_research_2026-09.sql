@@ -73,6 +73,13 @@ UPDATE places SET is_active = false WHERE id IN (
 -- La Casa del Atrio: el sitio web guardado era el de un hotel homónimo en Querétaro capital.
 UPDATE places SET website = NULL WHERE id = '8abdbe43-f7a4-4253-a4ca-3606fc35d3a4';
 
+-- La Casa del Atrio: la foto también venía de ese hotel de Querétaro capital (aplicado 2026-09-24).
+-- Se regresa a la foto genérica de hospedaje (Wikimedia Commons).
+UPDATE places SET
+  thumbnail_url = 'https://upload.wikimedia.org/wikipedia/commons/8/8f/Tequis_Hotel_Pool_%284%29_-_Flickr_-_Carl_Campbell.jpg',
+  image_urls = ARRAY['https://upload.wikimedia.org/wikipedia/commons/8/8f/Tequis_Hotel_Pool_%284%29_-_Flickr_-_Carl_Campbell.jpg']
+WHERE id = '8abdbe43-f7a4-4253-a4ca-3606fc35d3a4';
+
 -- ===== Marcados como verificados =====
 UPDATE places SET content_verified = true WHERE id IN (
   'e83905fa-1335-4bc7-b117-a917d5246a53', -- Viñedos La Redonda

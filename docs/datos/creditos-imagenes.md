@@ -25,8 +25,13 @@ Para un puñado de lugares destacados (`is_featured = true`) sí conseguimos la 
 |---|---|---|
 | Freixenet México | Cava con botellas de espumoso | [salavive.mx](https://salavive.mx) (sitio oficial actual; el `website` que tenía la DB, freixenet.com.mx, ya no resuelve) |
 | Viñedos Puerta del Lobo | Viñedo con vista al valle | [puertadellobo.mx](https://puertadellobo.mx) |
-| La Casa del Atrio | Habitación del hotel | [lacasadelatrio.com](https://lacasadelatrio.com) (vía su motor de reservas) |
 | Globos Aerostáticos Tequisquiapan | Globos inflándose en Tequisquiapan | [vuelaenglobo.com/tequisquiapan](https://vuelaenglobo.com/tequisquiapan/) |
+
+**Corregido en septiembre 2026:**
+- **La Casa del Atrio**: su foto venía de lacasadelatrio.com, que resultó ser un hotel homónimo en Querétaro capital, no el de Tequisquiapan. Se regresó a la foto genérica de hospedaje.
+- **Viñedos Puerta del Lobo**: se desactivó (el negocio está en El Marqués), así que su foto ya no se muestra.
+
+⚠️ **Permisos**: estas fotos se usan sin permiso escrito de los negocios. Antes de publicarlas en un sitio web público conviene pedirles autorización por escrito o reemplazarlas por fotos propias (ver `docs/negocio/propuesta-sitio-web.md`).
 
 **No se pudo conseguir** (se quedan con la foto genérica de categoría): Viñedos La Redonda (su sitio, laredondavinos.com, está en mantenimiento) y La Estancia Tequisquiapan (no se le encontró sitio ni redes sociales).
 
