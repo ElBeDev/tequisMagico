@@ -33,7 +33,9 @@
    - ✅ Sincronización de `Place` y `Event` contra el backend real (ver abajo), con fallback a datos locales sin conexión
    - ✅ Favoritos reales (locales, por dispositivo)
    - ✅ Fotos reales en los 50 lugares y 17 eventos (ver sección de Imágenes) + pantalla de créditos en Perfil
-   - ✅ Compartir lugar (share sheet nativo) y deep links `tequismagico://place/<uuid>`
+   - ✅ Compartir lugar (share sheet nativo, con la foto del lugar en la preview de iMessage) y deep links `tequismagico://place/<uuid>`
+   - ✅ Lugares indexados en Spotlight (búsqueda del iPhone) — tocar un resultado abre su detalle
+   - ✅ Fotos con reintento automático y caché en memoria (`RetryableAsyncImage` + `ImageCache`)
    - ✅ Pull to refresh, loading state inicial y aviso de "sin conexión" en Explorar/Eventos/mapa
    - ✅ Rutas temáticas (Vino y Queso, Artesanal, Histórica, Aventura) en Explorar
    - ✅ Siri/App Shortcuts: "busca lugares en Tequis Magico", "qué eventos hay hoy en Tequis Magico"
@@ -101,7 +103,14 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
    - [x] Fotos representativas por categoría en los 50 lugares y 17 eventos (Wikimedia Commons, ver `database/IMAGE_CREDITS.md`)
    - [x] `schedule_json` (horarios) ya se sincroniza y se muestra en la app; el panel ya tiene el campo para capturarlo
    - [x] Investigación en internet (teléfono/sitio web/horario) para los 50 lugares — workflow de agentes con research + validación cruzada por lugar. Resultado: 7 lugares con datos nuevos confirmados y ya aplicados en Neon (Viñedos La Redonda, Freixenet México, Templo de Santa María de la Asunción, Viñedos Azteca, La Pila, Parque La Pila, K'puchinos — este último con teléfono corregido, el que había en la BD no era el del sitio oficial)
-   - [ ] **Hallazgo importante, pendiente de decisión**: 6 lugares son negocios reales pero con dirección/teléfono equivocados en la BD (verificado contra su sitio oficial) — Viñedos Puerta del Lobo y Grutas Los Herrera en realidad están en otros municipios (El Marqués y San Joaquín, no Tequisquiapan), Los Rosales Viñedos y Hotel El Relox tienen la dirección/teléfono de una calle distinta a la registrada, La Casa del Atrio apunta al sitio de un hotel homónimo en otra ciudad, y Hotel Posada Tequisquiapan difiere en número de calle y teléfono de la única "Posada Tequisquiapan" indexada. Y ~34 de los 50 lugares no tienen ninguna presencia web indexada (ni sitio, ni redes, ni directorio turístico) — normal para negocios pequeños sin página propia, pero también compatible con que parte de la carga inicial (`database/databaseseed_part*.sql`) haya sido contenido de relleno generado al sembrar la BD, no negocios reales verificados uno por uno. Requiere decisión del dueño del proyecto: verificar in situ / corregir direcciones, o aceptar que son datos sin verificar.
+   - [x] **Corrección de datos equivocados** (6 negocios reales con dirección/teléfono mal capturados, verificado contra su sitio oficial). Aplicado directo en Neon:
+     - Viñedos Puerta del Lobo y Grutas Los Herrera → **desactivados** (`is_active = false`): son reales pero están en El Marqués y San Joaquín, a 60+ km — no pertenecen a una app de un solo destino
+     - Hotel El Relox → **desactivado**: su propio sitio (relox.com.mx) lo marca como "próximamente", todavía no opera. Reactivarlo cuando abra (dirección real: Morelos 8, Centro)
+     - Los Rosales Viñedos → dirección y coordenadas corregidas (Carretera Tequisquiapan–Ezequiel Montes km 27, no a San Juan del Río); teléfono borrado porque 3 fuentes dan 3 números distintos y el sitio oficial no publica ninguno
+     - La Casa del Atrio → se borró el sitio web (era el de un hotel homónimo en Querétaro capital); dirección y teléfono se dejaron igual, sin confirmar
+   - [x] Columna `content_verified` en `places` + etiqueta "Sin verificar", filtro y checkbox en el panel (ver Fase 2 → Panel). 11 lugares marcados como verificados; el resto queda sin verificar
+   - [ ] **Verificar a mano los lugares sin verificar** (~36 activos): no tienen ninguna presencia web indexada (ni sitio, ni redes, ni directorio turístico), ni siquiera tras dos pasadas de research. Puede ser normal en negocios chicos sin página propia, pero también es compatible con que parte de la carga inicial (`database/databaseseed_part*.sql`) haya sido contenido de relleno, no negocios verificados uno por uno. Hay que llamar o visitar; usar el filtro "Mostrar solo sin verificar" del panel y marcar la casilla al confirmar cada uno
+   - [ ] **Hotel Posada Tequisquiapan**: existe una "Posada Tequisquiapan" indexada pero en Moctezuma 6 (no 8) y con teléfono 414-273-0010 (no 414-273-0021). No se tocó porque no es seguro que sea el mismo negocio — confirmar llamando
 
 4. **Backend Básico**
    - [x] API REST en `web-admin/app/api/places` y `web-admin/app/api/events` (Next.js + Neon), consumida por la app
@@ -151,6 +160,8 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 - [x] Dashboard de analytics básico: por categoría, por nivel de negocio, mejor calificados
 - [x] Validación server-side + delay fijo en login contra fuerza bruta (ver Bugs Conocidos)
 - [x] Campo de horarios (`schedule_json`) en el formulario de lugares
+- [x] "Info de contacto verificada" (`content_verified`): etiqueta "Sin verificar" en la lista de lugares, filtro "Mostrar solo sin verificar" y checkbox en el formulario. Es **distinto** de "Verificado" (`is_verified`), que es la insignia de confianza que el usuario ve en la app
+- [ ] Ver y reactivar lugares desactivados — hoy el panel usa `GET /api/places`, que solo devuelve `is_active = true`, así que un lugar desactivado (o "eliminado" desde el panel) desaparece del panel y solo se puede reactivar por SQL directo en Neon
 - [ ] Autenticación **por negocio** (que cada dueño solo vea/edite su propio lugar) — necesita decidir proveedor de auth (Next-Auth, Clerk, etc.) antes de construirlo
 - [ ] Sistema de suscripción con Stripe/Conekta — necesita que el negocio real (dueño del proyecto) tenga cuenta con el procesador antes de integrar pagos reales
 
@@ -221,7 +232,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 
 ### Neon + Vercel (Backend real, no CloudKit):
 - Postgres en Neon es la base de datos principal (ver `../database/databaseschema.sql`)
-- `web-admin/app/api/` (Next.js en Vercel) expone `GET/POST /api/places`, `GET/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/DELETE /api/events/[id]`
+- `web-admin/app/api/` (Next.js en Vercel) expone `GET/POST /api/places`, `GET/PUT/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/PUT/DELETE /api/events/[id]` (el `DELETE` es soft-delete: pone `is_active = false`)
 - La app sincroniza `Place` y `Event` desde ahí en cada arranque (`ServicesPlaceAPIService.swift`, `ServicesEventAPIService.swift` + `ContentView.swift`)
 - Los códigos de `category`/`price_range`/`business_tier` que da el API son cortos (`"turistico"`, `"moderate"`, `"premium"`) y no el `rawValue` de despliegue de los enums — por eso existen los `init?(dbValue:)` en `ModelsPlaceCategory.swift`, `ModelsPriceRange.swift` y `ModelsBusinessTier.swift`
 
