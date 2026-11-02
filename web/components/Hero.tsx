@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { BalloonMark } from './Logo';
 import { EASE, SplitText, gsap, prefersReducedMotion, useGSAP } from '@/lib/motion';
 
 export type HeroSlide = { src: string; alt: string; promise: string };
@@ -10,16 +9,21 @@ export type HeroSlide = { src: string; alt: string; promise: string };
 const SLIDE_SECONDS = 6.5;
 
 /**
- * Portada a pantalla completa. Cada foto entra como cortina con un acercamiento lento,
- * la frase "La promesa de…" se arma letra por letra, abajo corre la barra de la foto
- * en turno, y al bajar la foto se queda atrás (parallax) mientras el texto se desvanece.
+ * Portada a pantalla completa. El nombre del pueblo es el h1, en grande; debajo, la frase "La
+ * promesa de…" se arma letra por letra con cada foto, que entra como cortina con un acercamiento
+ * lento. Las barras de abajo son el control de las fotos (la de turno se llena). Al bajar, la foto
+ * se queda atrás (parallax) mientras el texto se desvanece.
  */
 export default function Hero({
+  title,
+  lead,
   slides,
-  card,
+  actions,
 }: {
+  title: string;
+  lead: string;
   slides: HeroSlide[];
-  card?: { eyebrow: string; title: string; text: string; href: string };
+  actions?: { label: string; href: string }[];
 }) {
   const [index, setIndex] = useState(0);
   const root = useRef<HTMLElement>(null);
@@ -32,9 +36,9 @@ export default function Hero({
       if (reduced.current) return;
       gsap.timeline({ delay: 0.15 })
         .from('[data-hero-slide="0"] img', { scale: 1.3, duration: 2.4, ease: 'expo.out' })
-        .from('[data-hero-mark]', { scale: 0.6, rotate: -20, autoAlpha: 0, duration: 1.2, ease: EASE }, 0.5)
-        .from('[data-hero-lead]', { yPercent: 110, duration: 1, ease: 'expo.out' }, 0.6)
-        .from('[data-hero-card], [data-hero-ui]', { y: 30, autoAlpha: 0, duration: 1, ease: EASE, stagger: 0.1 }, 1);
+        .from('[data-hero-title] > span', { yPercent: 105, duration: 1.3, ease: 'expo.out' }, 0.3)
+        .from('[data-hero-lead]', { y: 24, autoAlpha: 0, duration: 1, ease: EASE }, 0.7)
+        .from('[data-hero-ui], [data-hero-action]', { y: 24, autoAlpha: 0, duration: 1, ease: EASE, stagger: 0.08 }, 0.9);
 
       gsap.to('[data-hero-media]', {
         yPercent: 22, scale: 1.08, ease: 'none',
@@ -63,6 +67,8 @@ export default function Hero({
 
     if (reduced.current) {
       gsap.set(slide, { clipPath: 'inset(0% 0% 0% 0%)' });
+      gsap.set(el.querySelectorAll('[data-hero-progress]'), { scaleX: 0 });
+      gsap.set(el.querySelector(`[data-hero-progress="${index}"]`), { scaleX: 1 });
       const t = setTimeout(next, SLIDE_SECONDS * 1000);
       return () => clearTimeout(t);
     }
@@ -74,12 +80,13 @@ export default function Hero({
         gsap.fromTo(slide.querySelector('img'), { scale: 1.25 }, { scale: 1.05, duration: 2.6, ease: 'expo.out' }),
       );
     }
+    gsap.set(el.querySelectorAll('[data-hero-progress]'), { scaleX: 0 });
     const split = SplitText.create(el.querySelector('[data-hero-promise]'), {
       type: 'chars,words',
       mask: 'chars',
       onSplit: (self) => gsap.from(self.chars, { yPercent: 110, duration: 1, ease: 'expo.out', stagger: 0.022, delay: first ? 0.75 : 0.45 }),
     });
-    tweens.push(gsap.fromTo(el.querySelector('[data-hero-progress]'), { scaleX: 0 }, { scaleX: 1, duration: SLIDE_SECONDS, ease: 'none', onComplete: next }));
+    tweens.push(gsap.fromTo(el.querySelector(`[data-hero-progress="${index}"]`), { scaleX: 0 }, { scaleX: 1, duration: SLIDE_SECONDS, ease: 'none', onComplete: next }));
     return () => {
       tweens.forEach((t) => t.progress(1, true).kill()); // true: sin disparar onComplete (no avanzar de foto)
       split.revert();
@@ -101,49 +108,59 @@ export default function Hero({
             <img src={s.src} alt={s.alt} referrerPolicy="no-referrer" fetchPriority={i === 0 ? 'high' : 'low'} className="size-full scale-105 object-cover" />
           </div>
         ))}
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/45 via-black/10 to-black/65" />
+        {/* Velo neutro: arriba para el header, abajo para el texto. */}
+        <div className="absolute inset-x-0 top-0 z-10 h-40 bg-gradient-to-b from-black/45 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 z-10 h-[70%] bg-gradient-to-t from-black/75 to-transparent" />
       </div>
 
-      <div data-hero-content className="absolute inset-x-0 bottom-0 z-20 mx-auto flex max-w-[1440px] flex-col gap-8 px-5 pb-12 sm:px-14 sm:pb-16 lg:flex-row lg:items-end lg:justify-between">
-        <div className="flex items-end gap-5">
-          <span data-hero-mark className="hidden sm:block">
-            <BalloonMark className="size-28 shrink-0 text-white/60" />
-          </span>
-          <p aria-live="polite">
-            <span className="block overflow-hidden">
-              <span data-hero-lead className="block text-2xl font-bold sm:text-[2rem]">La promesa de</span>
-            </span>
-            <span key={index} data-hero-promise className="block font-display text-[2.2rem] leading-tight sm:text-[3.6rem]">
+      <div data-hero-content className="frame absolute inset-x-0 bottom-0 z-20 pb-10 sm:pb-14">
+        <h1 data-hero-title className="display overflow-hidden pb-[0.08em] text-[clamp(3rem,14vw,11rem)]!">
+          <span className="block">{title}</span>
+        </h1>
+        <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <p data-hero-lead aria-live="polite" className="max-w-[34ch] text-lead leading-snug">
+            {lead} La promesa de{' '}
+            <span key={index} data-hero-promise className="inline-block font-medium">
               {slides[index]?.promise}
             </span>
+            .
           </p>
+          {actions && actions.length > 0 && (
+            <div className="flex flex-wrap gap-3">
+              {actions.map((a, i) => (
+                <Link
+                  key={a.href}
+                  href={a.href}
+                  data-hero-action
+                  className={`rounded-full px-6 py-3.5 font-medium transition-colors duration-300 ${
+                    i === 0 ? 'bg-white text-ink hover:bg-ochre' : 'bg-white/15 hover:bg-white hover:text-ink'
+                  }`}
+                >
+                  {a.label}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
 
-        {card && (
-          <Link
-            href={card.href}
-            data-hero-card
-            className="group block w-full max-w-[270px] rounded-[22px] border border-white/80 p-6 backdrop-blur-[2px] transition-colors duration-500 hover:bg-white hover:text-ink"
-          >
-            <p className="eyebrow !text-[12px]">{card.eyebrow}</p>
-            <p className="mt-1.5 font-display text-xl leading-snug">{card.title}</p>
-            <p className="mt-1 text-[15px] opacity-85">{card.text}</p>
-          </Link>
-        )}
+        {/* Una barra por foto: se llena la de turno y cualquiera lleva a su foto. */}
+        <div data-hero-ui className="mt-10 flex gap-2" role="group" aria-label="Fotos de la portada">
+          {slides.map((s, i) => (
+            <button
+              key={s.src}
+              type="button"
+              onClick={() => setIndex(i)}
+              aria-label={`Foto ${i + 1}: ${s.alt}`}
+              aria-current={i === index}
+              className="group/bar relative h-6 flex-1 sm:max-w-24"
+            >
+              <span className="absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 overflow-hidden rounded-full bg-white/30 transition-colors group-hover/bar:bg-white/50">
+                <span data-hero-progress={i} className="absolute inset-0 origin-left scale-x-0 bg-white" />
+              </span>
+            </button>
+          ))}
+        </div>
       </div>
-
-      {/* Contador y barra de la foto en turno */}
-      <div data-hero-ui className="absolute left-5 top-28 z-20 flex items-center gap-3 text-[12px] font-semibold tracking-[0.15em] sm:left-14 sm:top-32">
-        <span>{String(index + 1).padStart(2, '0')}</span>
-        <span className="relative h-px w-16 bg-white/35">
-          <span data-hero-progress className="absolute inset-0 origin-left bg-white" />
-        </span>
-        <span className="text-white/60">{String(slides.length).padStart(2, '0')}</span>
-      </div>
-
-      <a href="#bienvenidos" data-hero-ui aria-label="Bajar a la bienvenida" className="absolute bottom-0 left-1/2 z-20 hidden h-12 w-px -translate-x-1/2 overflow-hidden bg-white/30 lg:block">
-        <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_1.8s_ease-in-out_infinite] bg-white" />
-      </a>
     </section>
   );
 }

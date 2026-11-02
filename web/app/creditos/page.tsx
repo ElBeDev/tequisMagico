@@ -13,22 +13,22 @@ export default function CreditosPage() {
   const photos = Object.values(PHOTOS);
   return (
     <>
-      <PageIntro eyebrow="Información legal" title="Créditos" serif="de las fotografías">
+      <PageIntro title="Créditos de las fotos">
         Las fotos de este sitio vienen de Wikimedia Commons bajo licencias Creative Commons que piden dar crédito a su autor. Algunas
         fotos de lugares son representativas de su categoría, y las de algunos negocios destacados vienen de su sitio oficial.
       </PageIntro>
-      <ul className="mx-auto grid max-w-[1000px] gap-x-10 border-t border-line px-5 sm:grid-cols-2">
+      <ul className="frame grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
         {photos.map((c) => (
-          <li key={c.page} className="border-b border-line py-5">
-            <a href={c.page} target="_blank" rel="noopener" className="font-display text-xl hover:underline">{c.title}</a>
-            <p className="mt-1 text-[15px] text-muted">
+          <li key={c.page}>
+            <a href={c.page} target="_blank" rel="noopener" className="font-display text-lead leading-tight hover:underline">{c.title}</a>
+            <p className="mt-1 text-muted">
               {c.author} ·{' '}
               <a href={LICENSE_URLS[c.license]} target="_blank" rel="noopener license" className="underline">{c.license}</a>
             </p>
           </li>
         ))}
       </ul>
-      <p className="mx-auto mt-8 max-w-[1000px] px-5 text-[15px] text-muted">
+      <p className="frame mt-14 text-muted">
         Mapas: © colaboradores de OpenStreetMap. Contorno de México: Natural Earth (dominio público).
       </p>
     </>

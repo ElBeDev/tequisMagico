@@ -59,6 +59,12 @@ export const PHOTOS = {
   vinedosDeCote: commons('De_Cote_-_Casa_Vitivinícola_-_Olivos_y_Viñedos.jpg', 'De Cote, Casa Vitivinícola: olivos y viñedos', 'Ruydiez', 'CC BY-SA 4.0'),
   penaBernal: commons('Peña_de_Bernal_(Querétaro).jpg', 'Peña de Bernal (Querétaro)', 'Juan Carlos Fonseca Mata', 'CC BY-SA 4.0'),
   penaBernalNoche: commons('Peña_de_Bernal,_Querétaro_(33184543251).jpg', 'Peña de Bernal de noche', 'Comisión Mexicana de Filmaciones', 'CC BY-SA 2.0'),
+
+  // Pueblos cercanos (sección "Cerca de Tequis" de la portada), revisadas contra la API de Commons, nov 2026.
+  cadereytaPlaza: commons('Plaza_Principal_de_Cadereyta_de_Montes,_Querétaro_(24172888469).jpg', 'Plaza principal de Cadereyta de Montes', 'Comisión Mexicana de Filmaciones', 'CC BY-SA 2.0', 960),
+  ezequielMontesParroquia: commons('Parroquia_de_San_Sebastian_Martir,_Ezequiel_Montes,_Querétaro-_San_Sebastián_parish_(24457610941).jpg', 'Parroquia de San Sebastián Mártir, Ezequiel Montes', 'Comisión Mexicana de Filmaciones', 'CC BY-SA 2.0', 960),
+  sanJuanDelRio: commons('Templo_de_San_Juan_de_Dios_SJR.JPG', 'Templo de San Juan de Dios, San Juan del Río', 'G2357', 'CC BY-SA 4.0', 960),
+  acueductoQueretaro: commons('Acueducto_de_Querétaro_-_Santiago_de_Querétaro,_México.jpg', 'Acueducto de Querétaro', 'Juan Carlos Fonseca Mata', 'CC BY-SA 4.0', 960),
 } satisfies Record<string, Photo>;
 
 export const LICENSE_URLS: Record<Photo['license'], string> = {

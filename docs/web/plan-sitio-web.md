@@ -1,6 +1,6 @@
 # Plan del sitio web público — tequismagico.com
 
-> Estado: **en línea en https://tequismagico.com** (noviembre 2026). Diseño basado en la referencia https://turismo.gov.st/fr (fondo hueso, banda verde olivo, Outfit + Gilda Display, títulos de tres pisos, portada a pantalla completa), llevado al contexto de Tequis.
+> Estado: **en línea en https://tequismagico.com** (noviembre 2026). Diseño basado en la referencia https://turismo.gov.st/fr (fondo hueso, banda verde olivo, Outfit + Gilda Display, títulos de tres pisos, portada a pantalla completa), llevado al contexto de Tequis. Desde el 2 nov 2026 la **presentación de la información** sigue a https://www.visitshropshire.co.uk/ (header con buscador y mega menú, "Explora" con lista + mapa, "Mi viaje", destacado, agenda en tarjetas, pueblos cercanos), conservando la estética y las animaciones.
 > Contexto de negocio: [`../negocio/propuesta-sitio-web.md`](../negocio/propuesta-sitio-web.md).
 > Registro de cómo se hizo (separación, dominio, despliegues, diseño, problemas y arreglos): [`bitacora.md`](bitacora.md).
 
@@ -67,30 +67,36 @@ Rutas: `vino-y-queso`, `artesanal`, `historica`, `aventura`.
 Esto es **qué va** en cada página. El **cómo se ve** está en las secciones 6b y 6c.
 
 ### Elementos comunes
-- **Header:** logo y botón de menú. Es transparente sobre la foto en la portada, `/por-que-tequis` y `/guia-practica`, y se esconde al bajar.
-- **Menú a pantalla completa**, en tres grupos (`web/lib/nav.ts`):
-  - **¿Por qué Tequis?:** Pueblo Mágico, historia, cestería, queso y vino, rutas.
-  - **Planea tu visita:** qué hacer, experiencias, dónde comer, dónde dormir, compras, eventos, mapa.
-  - **Guía práctica:** cómo llegar, cuándo ir, información útil, la app.
-- **Footer:** columnas de links, la palabra gigante "Tequisquiapan" y la nota "Guía independiente; no es un sitio oficial del municipio".
+- **Header en dos pisos** (`web/components/SiteNav.tsx`). Arriba: logo, buscador, "Mi viaje" (con el número de guardados) y "Explorar mapa". Abajo, en escritorio: 8 secciones (Qué hacer, Comer y beber, Dónde dormir, Compras, Eventos, Rutas, ¿Por qué Tequis?, Guía práctica). Es transparente sobre la foto en la portada, `/por-que-tequis` y `/guia-practica`, y se esconde al bajar.
+- **Mega menú:** al pasar el mouse por una sección se abre un panel con columnas de links y una tarjeta destacada con foto. Se arma con los datos reales en `web/lib/nav.ts`: subcategorías con su conteo (llevan a `/lugares/<categoria>?tipo=<subcategoría>`), próximos eventos y rutas. La tarjeta de Qué hacer / Comer / Dormir es un lugar destacado **con información confirmada**.
+- **Buscador** (`web/components/SearchDialog.tsx`): lugares, eventos y páginas, al instante mientras escribes; se abre con el botón, con `/` o con ⌘K. El índice se arma en el servidor (`web/lib/search.ts`) y la búsqueda corre en el navegador.
+- **En celular:** buscador y corazón arriba; las secciones van en el menú verde a pantalla completa.
+- **Footer:** banda ocre "¿Tienes un negocio en Tequis?" (correo a `contacto@tequismagico.com`), columnas de links, caja de la app, la palabra gigante "Tequisquiapan" en salvia sobre verde bosque y la nota "Guía independiente; no es un sitio oficial del municipio".
 
 ### Portada `/`
-1. **Hero:** 5 fotos que rotan, cada una con su frase (un pueblo de cantera, un amanecer en globo, un brindis entre viñedos, manos que tejen mimbre, noches de leyenda). Abajo, una tarjeta con el próximo evento.
-2. **Bienvenidos:** texto de bienvenida con la foto de los portales.
-3. **¿Por qué Tequis?:** palabras grandes (Historia, Cestería, Queso & vino, Peña de Bernal) que llevan a `/por-que-tequis`.
-4. **Experiencias:** Viñedos, Queserías, Globo, Balnearios y Cestería, cada una con foto.
-5. **Ideas de viaje:** carrusel con las 4 rutas, Fiestas, Peña de Bernal y Fin de semana.
-6. **Dónde dormir:** collage de fotos y lista de hoteles.
-7. **Mapa:** México → Tequis → mapa real del pueblo con todos los lugares; botones "Explorar el mapa" y "Cómo llegar".
-8. **Fiestas y eventos:** los próximos, incluidos los que están en curso.
-9. **La app:** invitación a descargarla.
+1. **Hero:** 5 fotos que rotan, cada una con su frase (un pueblo de cantera, un amanecer en globo, un brindis entre viñedos, manos que tejen mimbre, noches de leyenda). Botones "¿Qué hay este mes?" y "Qué hacer".
+2. **Banda ocre del evento:** el que está pasando o el próximo, con "Ver evento" y "Todo el calendario".
+3. **Bienvenidos** (`Intro`): texto, botón "Inspírame" y tres puertas en arco (Qué hacer, Dónde comer, Dónde dormir) con su número de lugares.
+4. **Explora Tequis** (`ExploreTequis`): pestañas por tipo, tarjetas a la izquierda (6 y "Cargar más") y el mapa real fijo a la derecha; pasar el cursor por una tarjeta agranda su pin. En celular se cambia entre lista y mapa.
+5. **Destacado** (`Featured`): tarjeta grande en salvia con un lugar `is_featured` **y** `content_verified`; cambia cada día entre los que haya.
+6. **Fiestas y eventos:** los próximos 3 en tarjetas.
+7. **¿Por qué Tequis?:** palabras grandes (Historia, Cestería, Queso & vino, Peña de Bernal) que llevan a `/por-que-tequis`.
+8. **Experiencias:** Viñedos, Queserías, Globo, Balnearios y Cestería, cada una con foto (banda verde fija).
+9. **Ideas de viaje:** tarjeta terracota con las rutas para arrastrar.
+10. **Mapa:** México → Tequis → mapa real del pueblo con todos los lugares; botones "Explorar el mapa" y "Cómo llegar".
+11. **Cerca de Tequis** (`Surroundings`, datos en `web/lib/surroundings.ts`): Peña de Bernal, Ezequiel Montes, Cadereyta, San Juan del Río y Querétaro, con foto, distancia aproximada y "Cómo llegar", junto a un esquema de carreteras que se dibuja al bajar.
+12. **La app:** invitación con fotos flotando en parallax.
+
+### Mi viaje `/mi-viaje`
+Lo que la persona guardó con el corazón (tarjetas de lugar y evento, fichas). Se guarda **solo en su navegador** (`localStorage`, `web/lib/favorites.ts`), igual que los favoritos de la app viven solo en el teléfono. Muestra lugares y eventos, el mapa de los lugares y "Abrir ruta en Google Maps" (hasta 10 paradas, en el orden en que se guardaron). No se indexa.
 
 ### Lugares `/lugares` y `/lugares/[categoria]`
 1. Título y descripción de la categoría.
 2. Filtros de categoría. Cada filtro es un link a su propia página, para que Google la indexe.
-3. Cuadrícula de tarjetas de lugar.
+3. Filtro por tipo (subcategoría) con `?tipo=`, y cambio entre lista y mapa (`web/components/PlaceExplorer.tsx`). La página lo envuelve en `<Suspense>` con la cuadrícula completa de respaldo: eso es lo que trae el HTML del servidor.
+4. Cuadrícula de tarjetas de lugar.
 
-**Tarjeta de lugar**: foto, categoría (con su color), nombre, descripción corta, subcategoría y precio.
+**Tarjeta de lugar**: foto con la subcategoría encima, corazón para guardar, categoría y precio, nombre, descripción corta y "Ver detalles".
 
 ### Ficha de lugar `/lugar/[slug]`
 1. Migas de pan (Lugares / Categoría).
@@ -177,11 +183,14 @@ En todo el sitio hay scroll suave, textos y fotos que se revelan al entrar, curs
 
 ## 6c. Diseño visual
 
-- **Colores:** fondo hueso `#eeedea`, tinta negra, verde olivo `#38492a` (bandas oscuras), verde salvia `#a3ad94` (al bajar a "¿Por qué Tequis?") y gris piedra `#777673`. Están como variables en `web/app/globals.css`.
-- **Tipografías:** Outfit (texto) y Gilda Display (títulos en serif).
-- **Títulos de tres pisos:** etiqueta pequeña, título en sans y remate en serif (`SectionTitle` en `web/components/Section.tsx`).
-- **Fotos sueltas en arco:** las del collage, la bienvenida, las editoriales y las ideas de viaje tienen un arco de medio punto arriba, como los portales de cantera de la plaza. Llevan sombra que sigue la forma y una línea con la misma forma desplazada detrás (`ArchPhoto` en `web/components/Frame.tsx`).
-- **Tarjetas y botones:** esquinas redondeadas en las tarjetas; botones y filtros en forma de píldora.
+Desde el 2 nov 2026 el diseño sigue las reglas "anti-IA" de tasteskill v2 (https://www.tasteskill.dev/): se quitó todo lo que hace que una página se vea generada y se dejó la idea que sale del lugar, el arco de los portales.
+
+- **Colores** (variables en `web/app/globals.css`): fondo hueso `#eeedea`, tinta `#141412`, un paso de tono `--surface` para separar sin líneas, y campos planos de orilla a orilla: verde `#38492a`, verde bosque `#1f2a1a`, salvia `#a3ad94` y ocre de los portales `#d9a63e`. **Sin terracota ni cremas** (son los colores de las páginas hechas por IA).
+- **Tipografías:** Gilda Display para **todos** los títulos, y Outfit para el texto. Cada título va en una sola cara: sin etiqueta en mayúsculas arriba ni remate en otra tipografía. Hay cinco tamaños (`--step-small/body/lead/head/display`, clases `text-lead`, `.heading`, `.display`), con el interletrado cerrado en los grandes y dos renglones como máximo por título.
+- **Títulos:** `SectionTitle` (título + frase de apoyo opcional) y `PageIntro` en `web/components/Section.tsx`, alineados a la izquierda. Solo hay un momento centrado en la portada (la app).
+- **Marco:** un solo par de márgenes en todo el sitio (`.frame`, `--margin`, 20–48 px, máximo 1600 px).
+- **Fotos:** el arco de medio punto (`ArchPhoto`, `web/components/Frame.tsx`) es la única forma; las demás fotos van con esquinas rectas. Sin sombras ni contornos.
+- **Botones:** planos y redondos. `.btn` (tinta) es el principal; `.btn-outline` es un paso de tono sobre lo que tenga detrás (en realidad ya no lleva contorno). Sin sombras en nada que esté en reposo, sin líneas divisorias, sin desenfoque, sin numeración 01/02 y sin "ver detalles" en tarjetas que ya son link.
 - **Pines del mapa:** gota del color de la categoría con borde blanco. Al tocarla abre una ventana con foto, nombre y "Ver lugar →".
 
 ## 6d. Cómo está hecho (dónde está cada cosa)

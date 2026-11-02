@@ -143,6 +143,37 @@ El detalle está en la sección 6b del plan. Con "reducir movimiento" activado n
 
 ---
 
+## 8. Presentación de la información estilo visitshropshire.co.uk (2 nov 2026)
+
+Se mantuvieron la estética (hueso, verde, Outfit + Gilda, arcos de portal) y las animaciones; cambió **cómo se presenta la información**, tomando la estructura de https://www.visitshropshire.co.uk/ (estudiada en la copia del Internet Archive, porque el sitio bloquea visitas automatizadas).
+
+**Nuevo:**
+- Header en dos pisos con buscador instantáneo, "Mi viaje" y "Explorar mapa"; mega menú con subcategorías, conteos y una tarjeta destacada.
+- "Mi viaje": corazón en tarjetas y fichas, página `/mi-viaje` con mapa y ruta en Google Maps. Solo en el navegador.
+- Portada reorganizada: banda ocre del evento, bienvenida con tres puertas, "Explora Tequis" (lista + mapa fijo sincronizados), destacado, agenda en tarjetas, rutas en tarjeta terracota, "Cerca de Tequis" con esquema de carreteras e invitación a la app con fotos flotando. Se quitó la banda de hospedaje (ahora vive en Explora y en el menú).
+- Listados con filtro por tipo (`?tipo=`) y vista de mapa.
+- Footer verde bosque con banda ocre para negocios.
+- Paleta ampliada: ocre (portales), terracota, salvia y verde bosque (`globals.css`).
+- 4 fotos nuevas de Commons para los pueblos cercanos (salen solas en `/creditos`).
+
+**Problemas encontrados y arreglados:**
+- **La página se veía alejada en celular:** los paneles del mega menú (invisibles, pero con ancho fijo) y la fila de pestañas de Explora (dentro de un grid de una columna automática) hacían que el navegador móvil ensanchara el viewport a 529 px. Los paneles ahora solo existen en escritorio y el grid usa `grid-cols-1`.
+- **Error de ScrollTrigger en celular** ("reading 'end'"): un `data-reveal` dentro de algo con `display:none` creaba un trigger `once` que se borraba a media actualización. `Reveals` ya ignora lo que no se pinta.
+
+---
+
+## 9. Restyle con las reglas de tasteskill (2 nov 2026)
+
+Se aplicó tasteskill v2 (https://www.tasteskill.dev/), un conjunto de reglas para que una página no se vea "hecha por IA". Se usó su protocolo de restyle: se conservaron la estructura, el contenido y las animaciones, y se cambiaron tipografía, color y componentes.
+
+**Se quitó** (el skill lo marca como señal de página generada): etiquetas pequeñas en mayúsculas arriba de cada título, títulos que mezclan negrita sans con remate en serif, sombras en tarjetas, líneas divisorias, botones de contorno de 1 px, desenfoque tipo vidrio, la terracota, el contador 01/05 de la portada, el número "01" de experiencias, el globo que giraba, los puntos que laten, la marca de agua "Bienvenidos", el radio de 22 px en todo y las tarjetas con ícono arriba (guía práctica y la app).
+
+**Se puso en su lugar:** el h1 "Tequisquiapan" en grande en la primera pantalla; títulos en una sola cara y más grandes; cinco tamaños de letra; campos de color planos de orilla a orilla (salvia, ocre, verde, bosque) en vez de cajas redondeadas; separación por pasos de tono; el arco de los portales como la única forma de foto; la agenda como "evento principal + lista" en vez de tres tarjetas iguales; y el footer como cierre (invitación a negocios y el nombre a todo lo ancho).
+
+**Cómo se verificó:** el inspector y el linter del skill no se pudieron correr (el entorno no permitió ejecutar código descargado), así que se revisó con capturas en 1440 y 390 px y con un verificador propio de las reglas medibles. En producción, en 6 páginas y los dos anchos: 0 etiquetas en mayúsculas, sombras, bordes ni desenfoque; h1 en la primera pantalla; ningún título de más de dos renglones; sin errores ni desborde en celular.
+
+---
+
 ## Pendientes
 
 | Pendiente | Quién |

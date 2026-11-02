@@ -86,6 +86,81 @@ export const PRICE_RANGES: Record<string, { symbol: string; label: string }> = {
   luxury: { symbol: '$$$$', label: 'Lujo' },
 };
 
+/** Lo mínimo de un lugar para tarjetas, mapas y buscador (lo que viaja al navegador). */
+export type PlaceSummary = Pick<
+  Place,
+  'id' | 'slug' | 'name' | 'category' | 'subcategory' | 'shortDescription' | 'priceRange' | 'thumbnailUrl' | 'latitude' | 'longitude'
+>;
+
+export function toSummary(p: Place): PlaceSummary {
+  return {
+    id: p.id,
+    slug: p.slug,
+    name: p.name,
+    category: p.category,
+    subcategory: p.subcategory,
+    shortDescription: p.shortDescription,
+    priceRange: p.priceRange,
+    thumbnailUrl: p.thumbnailUrl,
+    latitude: p.latitude,
+    longitude: p.longitude,
+  };
+}
+
+// Subcategorías en plural para menús y filtros ("Viñedos", no "Viñedo"). Lo que no esté aquí
+// se muestra tal cual viene de la base.
+const SUBCATEGORY_PLURALS: Record<string, string> = {
+  'Viñedo': 'Viñedos',
+  'Quesería': 'Queserías',
+  'Globo Aerostático': 'Globo aerostático',
+  'Balneario': 'Balnearios',
+  'Taller': 'Talleres',
+  'Tour': 'Tours',
+  'Restaurante': 'Restaurantes',
+  'Cafetería': 'Cafeterías',
+  'Bar': 'Bares',
+  'Wine Bar': 'Bares de vino',
+  'Pizzería': 'Pizzerías',
+  'Nevería': 'Neverías',
+  'Hotel': 'Hoteles',
+  'Hotel Boutique': 'Hoteles boutique',
+  'Monumento': 'Monumentos',
+  'Museo': 'Museos',
+  'Parque': 'Parques',
+  'Plaza': 'Plazas',
+  'Templo': 'Templos',
+  'Mercado': 'Mercados',
+  'Dulcería': 'Dulcerías',
+};
+
+export function subcategoryPlural(sub: string): string {
+  return SUBCATEGORY_PLURALS[sub] ?? sub;
+}
+
+/** Subcategorías de una lista de lugares, de la más a la menos común. */
+export function subcategoriesOf(places: Pick<Place, 'subcategory'>[]): { name: string; slug: string; count: number }[] {
+  const counts = new Map<string, number>();
+  for (const p of places) if (p.subcategory) counts.set(p.subcategory, (counts.get(p.subcategory) ?? 0) + 1);
+  return [...counts]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'es'))
+    .map(([name, count]) => ({ name, slug: slugify(name), count }));
+}
+
+/** Link a una categoría filtrada por subcategoría (`/lugares/experiencias?tipo=vinedo`). */
+export function subcategoryHref(category: PlaceCategory, sub: string): string {
+  return `/lugares/${CATEGORIES[category].slug}?tipo=${slugify(sub)}`;
+}
+
+// Claves de "Mi viaje" (lib/favorites.ts). Aquí y no allá porque las tarjetas, que son Server
+// Components, también las calculan.
+export const placeKey = (id: string) => `p:${id}`;
+export const eventKey = (id: string) => `e:${id}`;
+
+/** Texto sin acentos y en minúsculas, para comparar búsquedas. */
+export function foldText(text: string): string {
+  return text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+}
+
 export function categoryFromSlug(slug: string): PlaceCategory | null {
   const entry = Object.entries(CATEGORIES).find(([, c]) => c.slug === slug);
   return entry ? (entry[0] as PlaceCategory) : null;

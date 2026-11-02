@@ -41,10 +41,25 @@ export function popupHtml(p: Pick<MapPoint, 'name' | 'subtitle' | 'href' | 'imag
   return `<a class="map-card" href="${escapeHtml(p.href)}">${img}<span class="map-card__body"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.subtitle)}</span><em>Ver lugar →</em></span></a>`;
 }
 
+function fitPoints(map: MLMap, points: MapPoint[], zoom: number, duration: number) {
+  if (points.length === 0) return;
+  if (points.length === 1) {
+    map.easeTo({ center: [points[0].lng, points[0].lat], zoom: Math.max(zoom, 16), duration });
+    return;
+  }
+  const lngs = points.map((p) => p.lng);
+  const lats = points.map((p) => p.lat);
+  map.fitBounds([[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]], { padding: 70, maxZoom: Math.max(zoom, 16), duration });
+}
+
 /**
  * Mapa vectorial (MapLibre + OpenFreeMap) con la paleta del sitio, pines propios y
  * ventanas con foto. `wheelZoom` solo en el mapa grande; en los chicos el scroll sigue
  * bajando la página y se acerca con ctrl/⌘ + rueda o con dos dedos.
+ *
+ * `activeId` agranda el pin de ese punto (la tarjeta bajo el cursor en "Explora Tequis").
+ * `fitOnChange` vuelve a encuadrar cuando cambian los puntos (al cambiar de filtro).
+ * `frame={false}` quita el marco redondeado para usarlo de orilla a orilla.
  */
 export default function PlacesMap({
   points,
@@ -52,16 +67,23 @@ export default function PlacesMap({
   className = 'h-[70vh]',
   zoom = 15,
   wheelZoom = false,
+  activeId = null,
+  fitOnChange = false,
+  frame = true,
 }: {
   points: MapPoint[];
   groups?: { key: string; label: string; color: string }[];
   className?: string;
   zoom?: number;
   wheelZoom?: boolean;
+  activeId?: string | null;
+  fitOnChange?: boolean;
+  frame?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MLMap | null>(null);
-  const markersRef = useRef<Marker[]>([]);
+  const markersRef = useRef<Map<string, Marker>>(new Map());
+  const firstFit = useRef(true);
   const [hidden, setHidden] = useState<Set<string>>(new Set());
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -91,11 +113,7 @@ export default function PlacesMap({
         map.on('load', () => {
           if (cancelled) return;
           // Encuadrar todos los puntos (si hay varios) con margen.
-          if (points.length > 1) {
-            const lngs = points.map((p) => p.lng);
-            const lats = points.map((p) => p.lat);
-            map.fitBounds([[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]], { padding: 70, maxZoom: Math.max(zoom, 16), duration: 0 });
-          }
+          if (points.length > 1) fitPoints(map, points, zoom, 0);
           setReady(true);
         });
       } catch {
@@ -118,20 +136,29 @@ export default function PlacesMap({
     loadMapLibre().then(({ Marker, Popup }) => {
       if (cancelled) return;
       markersRef.current.forEach((m) => m.remove());
-      markersRef.current = visible.map((p) => {
-        const popup = new Popup({ offset: [0, -30], closeButton: false, maxWidth: '260px', className: 'map-popup' }).setHTML(popupHtml(p));
-        return new Marker({ element: pinElement(p.color, p.name), anchor: 'bottom' }).setLngLat([p.lng, p.lat]).setPopup(popup).addTo(map);
-      });
+      markersRef.current = new Map(
+        visible.map((p) => {
+          const popup = new Popup({ offset: [0, -30], closeButton: false, maxWidth: '260px', className: 'map-popup' }).setHTML(popupHtml(p));
+          const marker = new Marker({ element: pinElement(p.color, p.name), anchor: 'bottom' }).setLngLat([p.lng, p.lat]).setPopup(popup).addTo(map);
+          return [p.id, marker];
+        }),
+      );
+      if (fitOnChange && !firstFit.current) fitPoints(map, visible, zoom, 900);
+      firstFit.current = false;
     });
     return () => {
       cancelled = true;
     };
-  }, [ready, visible]);
+  }, [ready, visible, fitOnChange, zoom]);
+
+  useEffect(() => {
+    markersRef.current.forEach((m, id) => m.getElement().classList.toggle('is-active', id === activeId));
+  }, [activeId, visible, ready]);
 
   return (
-    <div>
+    <div className={frame ? '' : 'h-full'}>
       {groups && (
-        <div className="mb-5 flex flex-wrap justify-center gap-2">
+        <div className="mb-5 flex flex-wrap gap-2">
           {groups.map((g) => {
             const off = hidden.has(g.key);
             return (
@@ -147,8 +174,8 @@ export default function PlacesMap({
                     return next;
                   })
                 }
-                className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[15px] transition-colors ${
-                  off ? 'border-line text-muted' : 'border-ink bg-ink text-bg'
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 transition-colors ${
+                  off ? 'bg-surface text-muted' : 'bg-ink text-bg'
                 }`}
               >
                 <span className="size-2.5 rounded-full" style={{ background: g.color, outline: off ? `2px solid ${g.color}` : 'none' }} />
@@ -159,7 +186,7 @@ export default function PlacesMap({
         </div>
       )}
       <div
-        className={`relative w-full overflow-hidden rounded-[28px] bg-surface shadow-[0_30px_60px_-30px_rgba(31,26,23,0.35)] ring-1 ring-ink/10 ${className}`}
+        className={`relative w-full overflow-hidden bg-surface ${className}`}
         {...(wheelZoom ? { 'data-lenis-prevent': true } : {})}
       >
         {/* MapLibre le pone position:relative a su contenedor; por eso va dentro de una caja absoluta y mide 100%. */}

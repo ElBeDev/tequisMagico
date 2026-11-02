@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Bus, Car, Phone } from 'lucide-react';
 import { PHOTOS } from '@/lib/photos';
 import { Feature, PageHero } from '@/components/PageHero';
 import { SectionTitle } from '@/components/Section';
@@ -16,7 +15,6 @@ export const metadata: Metadata = {
 // temporadas: tequis.travel y prensa local. Ver la investigación en docs/web/plan-sitio-web.md.
 const ROUTES = [
   {
-    icon: Car,
     from: 'Desde la Ciudad de México',
     lines: [
       'Unos 180 km, de 2 a 3 horas según el tráfico.',
@@ -25,12 +23,10 @@ const ROUTES = [
     ],
   },
   {
-    icon: Car,
     from: 'Desde Querétaro',
     lines: ['Unos 60 km, alrededor de 50 minutos.', 'Por la carretera estatal 200 Querétaro–Tequisquiapan, la misma de los viñedos.'],
   },
   {
-    icon: Bus,
     from: 'En autobús',
     lines: [
       'Desde la Ciudad de México: ETN Turistar sale directo de la Central del Norte.',
@@ -51,16 +47,15 @@ const SEASONS = [
 export default function GuiaPracticaPage() {
   return (
     <>
-      <PageHero photo={PHOTOS.calleNinosHeroes} alt="Calle Niños Héroes en Tequisquiapan" eyebrow="Guía práctica" title="Todo para tu visita" serif="antes de salir" />
+      <PageHero photo={PHOTOS.calleNinosHeroes} alt="Calle Niños Héroes en Tequisquiapan" title="Guía práctica" lead="Cómo llegar, cuándo ir y lo que conviene saber antes de salir." />
 
-      <section id="como-llegar" className="mx-auto max-w-[1140px] scroll-mt-24 px-5 pt-24">
-        <SectionTitle eyebrow="Cómo llegar" title="En el sureste" serif="de Querétaro" />
-        <div data-reveal="stagger" className="mt-14 grid gap-px overflow-hidden rounded-[28px] border border-line bg-line md:grid-cols-3">
-          {ROUTES.map(({ icon: Icon, from, lines }) => (
-            <div key={from} className="bg-bg p-8">
-              <Icon className="size-7" strokeWidth={1.4} aria-hidden />
-              <h3 className="mt-5 font-display text-2xl">{from}</h3>
-              <ul className="mt-4 space-y-2 text-[16px] leading-relaxed">
+      <section id="como-llegar" className="frame scroll-mt-28 pt-32">
+        <SectionTitle title="Cómo llegar" lead="En el sureste de Querétaro, a unos 180 km de la Ciudad de México." />
+        <div data-reveal="stagger" className="mt-14 space-y-2">
+          {ROUTES.map(({ from, lines }) => (
+            <div key={from} className="grid grid-cols-1 gap-4 bg-surface p-6 sm:p-8 md:grid-cols-[minmax(0,1fr)_2fr] md:gap-12">
+              <h3 className="self-start font-display text-lead leading-none tracking-[-0.01em]">{from}</h3>
+              <ul className="max-w-[60ch] space-y-2">
                 {lines.map((l) => (
                   <li key={l}>{l}</li>
                 ))}
@@ -68,10 +63,10 @@ export default function GuiaPracticaPage() {
             </div>
           ))}
         </div>
-        <p className="mt-6 text-center text-sm text-muted">Tiempos y precios de casetas o autobuses cambian; confírmalos antes de salir.</p>
+        <p className="meta mt-6 text-muted">Tiempos y precios de casetas o autobuses cambian; confírmalos antes de salir.</p>
       </section>
 
-      <Feature id="cuando-ir" photo={PHOTOS.quiosco} alt="Plaza y quiosco de Tequisquiapan" eyebrow="Cuándo ir" title="Sol casi todo el año" serif="y una fiesta cada mes">
+      <Feature id="cuando-ir" photo={PHOTOS.quiosco} alt="Plaza y quiosco de Tequisquiapan" title="Cuándo ir">
         <p>
           El clima es semiseco templado, con unos 17 °C de promedio anual. Llueve sobre todo de junio a septiembre; diciembre y enero
           son los meses más fríos y secos, así que lleva abrigo para las noches.
@@ -80,18 +75,18 @@ export default function GuiaPracticaPage() {
           Entre semana el pueblo está tranquilo. Los fines de semana, los puentes y estas temporadas se llenan, así que conviene
           reservar hospedaje con tiempo:
         </p>
-        <dl className="divide-y divide-line border-y border-line">
+        <dl className="space-y-1">
           {SEASONS.map((s) => (
-            <div key={s.when} className="grid gap-1 py-3 sm:grid-cols-[140px_1fr] sm:gap-4">
-              <dt className="font-semibold">{s.when}</dt>
-              <dd className="text-[16px]">{s.what}</dd>
+            <div key={s.when} className="grid gap-1 py-2 sm:grid-cols-[140px_1fr] sm:gap-4">
+              <dt className="font-medium">{s.when}</dt>
+              <dd>{s.what}</dd>
             </div>
           ))}
         </dl>
         <Link href="/eventos" className="btn-outline">Ver el calendario</Link>
       </Feature>
 
-      <Feature id="info-util" photo={PHOTOS.callejonPiojo} alt="Callejón del Piojo" eyebrow="Información útil" title="Antes de salir" serif="unos consejos" reverse>
+      <Feature id="info-util" photo={PHOTOS.callejonPiojo} alt="Callejón del Piojo" title="Información útil" reverse>
         <ul className="list-disc space-y-3 pl-5">
           <li>El centro se recorre a pie: calles empedradas y callejones como el del Piojo. Lleva calzado cómodo.</li>
           <li>Sol fuerte y aire seco: protector solar, sombrero y agua.</li>
@@ -99,22 +94,19 @@ export default function GuiaPracticaPage() {
           <li>Los horarios pueden cambiar en temporada. En cada ficha te decimos si ya confirmamos el horario con el negocio; si no, llama antes de ir.</li>
           <li>La Presa Centenario cambia mucho de nivel de un año a otro: hay temporadas en que está casi vacía.</li>
         </ul>
-        <div className="space-y-2 rounded-[24px] border border-ink/80 p-6 text-[16px]">
-          <p className="eyebrow !text-[12px]">Teléfonos</p>
-          <p className="flex items-center gap-3"><Phone className="size-4" aria-hidden /> Emergencias: <a href="tel:911" className="font-semibold underline">911</a></p>
-          <p className="flex items-center gap-3">
-            <Phone className="size-4" aria-hidden /> Turismo municipal: <a href="tel:+524142651999" className="font-semibold underline">414 265 1999</a>
-          </p>
-          <p className="text-sm text-muted">Oficina de turismo: Andador Independencia 1, Centro.</p>
+        <div className="space-y-2 bg-surface p-6">
+          <h3 className="font-display text-lead leading-none">Teléfonos</h3>
+          <p className="pt-2">Emergencias: <a href="tel:911" className="font-medium underline">911</a></p>
+          <p>Turismo municipal: <a href="tel:+524142651999" className="font-medium underline">414 265 1999</a></p>
+          <p className="meta text-muted">Oficina de turismo: Andador Independencia 1, Centro.</p>
         </div>
       </Feature>
 
-      <section className="mx-auto max-w-[1140px] px-5 pt-16">
-        <div data-reveal="image" data-cursor-dark className="on-dark flex flex-col items-center gap-6 rounded-[32px] bg-green px-8 py-16 text-center text-white">
-          <p className="text-3xl font-bold">Ya en el pueblo</p>
-          <p className="-mt-3 font-display text-3xl">todo en el mapa</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/mapa" className="btn-outline">Ver el mapa</Link>
+      <section data-cursor-dark className="on-dark -mb-40 mt-16 bg-green py-28 text-white" aria-labelledby="mapa-title">
+        <div className="frame">
+          <h2 id="mapa-title" data-split="lines" className="heading max-w-[14ch]">Ya en el pueblo, todo en el mapa</h2>
+          <div data-reveal="up" className="mt-10 flex flex-wrap gap-3">
+            <Link href="/mapa" className="btn">Ver el mapa</Link>
             <Link href="/lugares/hospedaje" className="btn-outline">Dónde dormir</Link>
             <Link href="/lugares/gastronomia" className="btn-outline">Dónde comer</Link>
           </div>

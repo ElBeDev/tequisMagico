@@ -31,25 +31,25 @@ export default async function RutaPage({ params }: PageProps<'/rutas/[ruta]'>) {
 
   return (
     <>
-      <PageIntro eyebrow="Ruta temática" title={route.title} serif={route.subtitle.toLowerCase()} />
-      <div className="mx-auto grid max-w-[1240px] grid-cols-1 gap-12 px-5 lg:grid-cols-2">
+      <PageIntro title={route.title} lead={`${route.subtitle}.`} />
+      <div className="frame grid grid-cols-1 gap-16 lg:grid-cols-2">
         <div>
-          <h2 className="eyebrow">Paradas sugeridas ({stops.length})</h2>
-          <ol className="mt-4 border-b border-line">
+          <h2 className="font-display text-lead leading-none tracking-[-0.01em]">Paradas sugeridas ({stops.length})</h2>
+          <ol className="mt-6 space-y-1">
             {stops.map((p, i) => (
               <li key={p.id} data-reveal="up">
-                <Link href={`/lugar/${p.slug}`} data-cursor="Ver" className="group flex items-center gap-5 border-t border-line py-5 transition-[padding] duration-500 hover:pl-3">
-                  <span className="w-8 shrink-0 font-display text-3xl">{i + 1}</span>
-                  <Photo src={p.thumbnailUrl} alt={p.name} className="size-20 shrink-0 rounded-t-full rounded-b-xl" />
+                <Link href={`/lugar/${p.slug}`} data-cursor="Ver" className="group -mx-4 flex items-center gap-5 px-4 py-4 transition-colors duration-300 hover:bg-surface">
+                  <span className="w-10 shrink-0 font-display text-4xl leading-none">{i + 1}</span>
+                  <Photo src={p.thumbnailUrl} alt={p.name} className="h-24 w-20 shrink-0 rounded-t-full" />
                   <span className="min-w-0">
-                    <span className="block font-display text-xl group-hover:underline">{p.name}</span>
-                    <span className="block truncate text-[15px] text-muted">{p.subcategory} · {p.shortDescription}</span>
+                    <span className="block font-display text-lead leading-tight group-hover:underline">{p.name}</span>
+                    <span className="block truncate text-muted">{p.subcategory} · {p.shortDescription}</span>
                   </span>
                 </Link>
               </li>
             ))}
           </ol>
-          <p className="mt-4 text-sm text-muted">
+          <p className="meta mt-4 text-muted">
             El orden es solo una sugerencia. Usa &quot;Cómo llegar&quot; en cada lugar para la navegación.
           </p>
           <MoreLink href="/rutas" className="mt-8">Otras rutas</MoreLink>

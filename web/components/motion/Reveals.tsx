@@ -30,18 +30,23 @@ export default function Reveals() {
       }
       const inView = (el: Element) => el.getBoundingClientRect().top < window.innerHeight * 0.92;
       const above = (el: Element) => el.getBoundingClientRect().bottom < 0;
+      // Lo que no se pinta (display:none, p. ej. `hidden md:block` en el celular) se muestra sin
+      // animar: un ScrollTrigger `once` ahí mide 0, se dispara y se borra a media actualización
+      // de ScrollTrigger, que entonces truena con "Cannot read properties of undefined (reading 'end')".
+      const rendered = (el: Element) => el.getClientRects().length > 0;
 
       // Entrada suave del contenido nuevo al navegar.
       gsap.fromTo('main', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6, ease: 'power1.out' });
 
       // up / fade: en lotes, para que una cuadrícula entre escalonada.
       for (const kind of ['up', 'fade'] as const) {
-        const els = gsap.utils.toArray<HTMLElement>(`[data-reveal="${kind}"]`);
+        const all = gsap.utils.toArray<HTMLElement>(`[data-reveal="${kind}"]`);
+        const els = all.filter(rendered);
         // `fade` solo toca la opacidad: si GSAP anima `y`, borra el `translate` de Tailwind del
         // elemento (p. ej. el contorno desplazado de los marcos en arco).
         const from = kind === 'up' ? { y: 50, autoAlpha: 0 } : { autoAlpha: 0 };
         const to = kind === 'up' ? { y: 0, autoAlpha: 1 } : { autoAlpha: 1 };
-        els.filter(above).forEach((el) => gsap.set(el, to));
+        all.filter((el) => !rendered(el) || above(el)).forEach((el) => gsap.set(el, to));
         ScrollTrigger.batch(els.filter((el) => !above(el)), {
           start: 'top 92%',
           once: true,
@@ -51,6 +56,7 @@ export default function Reveals() {
 
       gsap.utils.toArray<HTMLElement>('[data-reveal="stagger"]').forEach((el) => {
         gsap.set(el, { autoAlpha: 1 });
+        if (!rendered(el)) return;
         gsap.fromTo(el.children, { y: 40, autoAlpha: 0 }, {
           y: 0, autoAlpha: 1, duration: 1, ease: EASE, stagger: 0.08,
           scrollTrigger: { trigger: el, start: 'top 90%', once: true },
@@ -60,6 +66,7 @@ export default function Reveals() {
       gsap.utils.toArray<HTMLElement>('[data-reveal="image"]').forEach((el) => {
         const img = el.querySelector('img');
         gsap.set(el, { autoAlpha: 1 });
+        if (!rendered(el)) return;
         const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
         tl.fromTo(el, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'expo.out' });
         if (img) tl.fromTo(img, { scale: 1.3 }, { scale: 1, duration: 1.8, ease: 'expo.out' }, 0);
@@ -68,6 +75,7 @@ export default function Reveals() {
       gsap.utils.toArray<HTMLElement>('[data-split]').forEach((el) => {
         const type = (el.dataset.split as 'lines' | 'words' | 'chars') || 'lines';
         gsap.set(el, { autoAlpha: 1 });
+        if (!rendered(el)) return;
         SplitText.create(el, {
           type: type === 'lines' ? 'lines' : `lines,${type}`,
           mask: type,

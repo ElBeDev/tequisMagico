@@ -64,9 +64,9 @@ export default function BigWords({ items }: { items: BigWord[] }) {
       onPointerMove={(e) => place(e.clientX, e.clientY)}
       onPointerLeave={() => setActive(null)}
     >
-      <ul data-reveal="stagger" className="border-t border-ink/15">
+      <ul data-reveal="stagger">
         {items.map((w, i) => (
-          <li key={w.label} className="border-b border-ink/15">
+          <li key={w.label}>
             <Link
               href={w.href}
               onPointerEnter={(e) => {
@@ -74,14 +74,14 @@ export default function BigWords({ items }: { items: BigWord[] }) {
                 setActive(i);
               }}
               data-cursor="Ver"
-              className={`group flex items-center gap-5 py-5 transition-colors duration-500 sm:py-7 ${active !== null && active !== i ? 'text-ink/25' : 'text-ink/70'} hover:text-ink`}
+              className={`group flex items-center gap-5 py-3 transition-colors duration-500 sm:py-4 ${active !== null && active !== i ? 'text-ink/25' : 'text-ink'} hover:text-ink`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={w.image} alt="" loading="lazy" referrerPolicy="no-referrer" className="h-20 w-16 shrink-0 rounded-t-full rounded-b-lg object-cover lg:hidden" />
-              <span className="font-display text-[clamp(2.2rem,6.5vw,5.6rem)] leading-none tracking-wide transition-transform duration-500 group-hover:translate-x-4">
+              <img src={w.image} alt="" loading="lazy" referrerPolicy="no-referrer" className="h-20 w-16 shrink-0 rounded-t-full object-cover lg:hidden" />
+              <span className="font-display text-[clamp(2.6rem,8.5vw,8rem)] leading-[0.95] tracking-[-0.03em] transition-transform duration-500 group-hover:translate-x-4">
                 {w.label}
               </span>
-              <span className="ml-auto hidden max-w-[200px] text-right text-[15px] leading-snug text-muted lg:block">{w.caption}</span>
+              <span className="ml-auto hidden max-w-[22ch] text-right leading-snug lg:block">{w.caption}</span>
               <ArrowUpRight className="size-8 shrink-0 -translate-x-3 opacity-0 transition duration-500 group-hover:translate-x-0 group-hover:opacity-100" strokeWidth={1.2} aria-hidden />
             </Link>
           </li>
@@ -90,7 +90,7 @@ export default function BigWords({ items }: { items: BigWord[] }) {
 
       <div
         data-follow
-        className="pointer-events-none invisible absolute left-0 top-0 z-10 -ml-[150px] -mt-[190px] hidden h-[380px] w-[300px] overflow-hidden rounded-t-[999px] rounded-b-[22px] drop-shadow-[0_30px_40px_rgba(31,26,23,0.35)] lg:block"
+        className="pointer-events-none invisible absolute left-0 top-0 z-10 -ml-[150px] -mt-[190px] hidden h-[380px] w-[300px] overflow-hidden rounded-t-[999px] lg:block"
         aria-hidden
       >
         {items.map((w, i) => (

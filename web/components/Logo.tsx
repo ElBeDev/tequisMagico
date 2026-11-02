@@ -14,7 +14,7 @@ export function Logo({ className = '' }: { className?: string }) {
   return (
     <span className={`flex items-center gap-3 ${className}`}>
       <BalloonMark className="size-11 shrink-0" />
-      <span className="text-[13px] font-bold uppercase leading-[1.15] tracking-[0.08em]">
+      <span className="font-display text-[1.375rem] leading-[0.95] tracking-[-0.01em]">
         Tequisquiapan
         <br />
         Mágico

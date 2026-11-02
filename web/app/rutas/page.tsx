@@ -16,21 +16,20 @@ export default async function RutasPage() {
   const routes = THEMATIC_ROUTES.map((r) => ({ ...r, stops: placesForRoute(r, places) })).filter((r) => r.stops.length > 0);
   return (
     <>
-      <PageIntro eyebrow="Ideas de viaje" title="Rutas temáticas" serif="Tequis a tu medida">
+      <PageIntro title="Rutas temáticas">
         Lugares que vale la pena visitar juntos, agrupados por tema.
       </PageIntro>
-      <div className="mx-auto grid max-w-[1240px] gap-8 px-5 sm:grid-cols-2">
+      <div className="frame grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2">
         {routes.map((r) => (
-          <Link key={r.slug} href={`/rutas/${r.slug}`} data-cursor="Ver" data-reveal="image" className="group relative block aspect-[4/3] overflow-hidden rounded-[28px] bg-stone text-white">
+          <Link key={r.slug} href={`/rutas/${r.slug}`} data-cursor="Ver" data-reveal="image" className="group relative block aspect-[4/3] overflow-hidden bg-stone text-white">
             {r.stops[0]?.thumbnailUrl && (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={r.stops[0].thumbnailUrl} alt="" loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105" />
+              <img src={r.stops[0].thumbnailUrl} alt="" loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-8">
-              <p className="eyebrow !text-[12px] text-white/80">{r.stops.length} paradas</p>
-              <h2 className="mt-2 font-display text-4xl">{r.title}</h2>
-              <p className="mt-2 text-white/85">{r.subtitle}</p>
+              <h2 className="font-display text-[clamp(2rem,3.4vw,3rem)] leading-none tracking-[-0.02em]">{r.title}</h2>
+              <p className="mt-3 text-white/90">{r.subtitle} · {r.stops.length} paradas</p>
             </div>
           </Link>
         ))}

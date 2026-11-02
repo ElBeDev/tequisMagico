@@ -170,8 +170,8 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
           defaults: { ease: 'none' },
           scrollTrigger: { trigger: el, start: 'top top', end: '+=280%', pin: true, scrub: 0.8, anticipatePin: 1 },
         })
-        .fromTo('[data-mx]', { drawSVG: '0%' }, { drawSVG: '100%', duration: 3 })
-        .fromTo('[data-neighbors]', { autoAlpha: 0 }, { autoAlpha: 1, duration: 2 }, 0.5)
+        .fromTo('[data-mx]', { drawSVG: '0% 35%' }, { drawSVG: '0% 100%', duration: 3 })
+        .fromTo('[data-neighbors]', { autoAlpha: 0.4 }, { autoAlpha: 1, duration: 2 }, 0.5)
         .fromTo('[data-tequis-inner]', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.8, ease: 'back.out(2)' }, 2.6)
         .to('[data-map-title]', { autoAlpha: 0, y: -40, duration: 1 }, 3.6)
         .to(view, { t: 1, duration: 4, ease: 'power1.inOut', onUpdate: apply }, 3.6)
@@ -192,15 +192,10 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
       <div data-town className="invisible absolute inset-0" aria-hidden>
         <div ref={townRef} className="size-full" />
       </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-56 bg-gradient-to-t from-bg via-bg/70 to-transparent" />
 
-      <div data-map-title className="absolute inset-x-0 top-24 z-10 px-5 text-center sm:top-28">
-        <p className="eyebrow">Descubre Tequis</p>
-        <h2 className="mt-3 text-[clamp(1.9rem,3.2vw,2.6rem)] font-bold leading-tight">
-          En el corazón
-          <span className="mt-2 block font-display font-normal">de México</span>
-        </h2>
-        <p className="mx-auto mt-4 max-w-md text-[16px] leading-relaxed">
+      <div data-map-title className="absolute inset-x-0 top-28 z-10 px-5 text-center sm:top-32">
+        <h2 className="heading mx-auto max-w-[14ch]">En el corazón de México</h2>
+        <p className="mx-auto mt-6 max-w-[44ch]">
           A unos 180 km de la Ciudad de México y 60 km de Querétaro. En 1916, Carranza lo declaró centro geográfico del país.
         </p>
       </div>
@@ -217,7 +212,6 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
         <path data-mx d={MX_PATH} fill="none" stroke="currentColor" strokeWidth="1.1" vectorEffect="non-scaling-stroke" />
         <g data-tequis transform={`translate(${TEQUIS_POINT[0]} ${TEQUIS_POINT[1]})`}>
           <g data-tequis-inner>
-            <circle r="20" fill="none" stroke="currentColor" strokeOpacity="0.5" style={{ transformBox: 'fill-box', transformOrigin: 'center', animation: 'pulse-ring 2.4s ease-out infinite' }} />
             <circle r="9" fill="none" stroke="currentColor" strokeOpacity="0.4" />
             <circle r="4.5" fill="currentColor" />
             <text data-tequis-label x="16" y="6" className="fill-current font-display" fontSize="22">Tequisquiapan</text>
@@ -226,10 +220,10 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
       </svg>
 
       <div data-map-final className="invisible absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-4 px-5 text-center sm:bottom-12">
-        <p className="font-display text-2xl sm:text-3xl">{count} lugares para descubrir</p>
+        <p className="font-display text-[clamp(1.75rem,3vw,2.5rem)] leading-none">{count} lugares para descubrir</p>
         <div className="flex flex-wrap justify-center gap-3">
-          <Link href="/mapa" className="btn-outline bg-bg">Explorar el mapa</Link>
-          <Link href="/guia-practica#como-llegar" className="btn-outline bg-bg">Cómo llegar</Link>
+          <Link href="/mapa" className="btn">Explorar el mapa</Link>
+          <Link href="/guia-practica#como-llegar" className="btn bg-bg! text-ink!">Cómo llegar</Link>
         </div>
       </div>
     </section>

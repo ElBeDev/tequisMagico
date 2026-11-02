@@ -19,10 +19,10 @@ export default async function MapaPage() {
 
   return (
     <>
-      <PageIntro eyebrow="Mapa" title="Tequisquiapan" serif="lugar por lugar">
+      <PageIntro title="Mapa de Tequisquiapan">
         Toca un punto para ver el lugar. Filtra por categoría con los botones.
       </PageIntro>
-      <div className="mx-auto max-w-[1240px] px-5">
+      <div className="frame">
       <PlacesMap
         zoom={16}
         wheelZoom

@@ -1,17 +1,31 @@
 @import "tailwindcss";
 
-/* Paleta inspirada en la referencia (fondo hueso, banda verde olivo, banda piedra) llevada a
-   Tequis: el verde de los viñedos y el gris de la cantera. */
+/* Paleta: fondo hueso de cantera (poco saturado), tinta casi negra y campos planos sacados del
+   lugar: el verde de los viñedos, un verde bosque casi negro, el salvia del valle y el ocre de los
+   portales. Sin terracota ni cremas: son los colores de las páginas hechas por IA (tasteskill). */
 :root {
   --bg: #eeedea;
-  --surface: #f7f6f3;
-  --ink: #000000;
+  --surface: #e3e1db; /* un paso de tono más oscuro que el fondo: separa sin líneas ni sombras */
+  --ink: #141412;
   --muted: #55534f;
-  --line: #d3d0ca;
+  --line: #d3d0ca; /* solo para controles de formulario; nada de líneas decorativas */
   --green: #38492a;
   --stone: #777673;
   --accent: #38492a;
   --ok: #2f6b2a;
+  --ochre: #d9a63e;
+  --sage: #a3ad94;
+  --forest: #1f2a1a;
+
+  /* Cinco tamaños, lejos entre sí. */
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --step-head: clamp(2.25rem, 1.4rem + 3.4vw, 4.5rem);
+  --step-display: clamp(2.75rem, 0.6rem + 9.5vw, 10rem);
+
+  /* Un solo par de márgenes para todo el sitio (header, secciones, footer). */
+  --margin: clamp(1.25rem, 3.2vw, 3rem);
 }
 
 @theme inline {
@@ -24,8 +38,16 @@
   --color-stone: var(--stone);
   --color-accent: var(--accent);
   --color-ok: var(--ok);
+  --color-ochre: var(--ochre);
+  --color-sage: var(--sage);
+  --color-forest: var(--forest);
   --font-sans: var(--font-outfit);
   --font-display: var(--font-gilda);
+  --text-small: var(--step-small);
+  --text-body: var(--step-body);
+  --text-lead: var(--step-lead);
+  --text-head: var(--step-head);
+  --text-display: var(--step-display);
 }
 
 html {
@@ -35,36 +57,83 @@ html {
 body {
   background: var(--bg);
   color: var(--ink);
-  font-weight: 300;
+  font-size: var(--step-body);
+  line-height: 1.55;
 }
 
-/* Etiqueta pequeña en mayúsculas que va arriba de cada título de sección. */
-.eyebrow {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+::selection { background: var(--ochre); color: var(--ink); }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+a { text-underline-offset: 0.18em; text-decoration-thickness: 0.07em; }
+
+/* El marco del sitio: mismo ancho máximo y mismos márgenes en todas las secciones. */
+.frame {
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding-inline: var(--margin);
 }
 
-/* Botón con borde, como los "Découvrir" de la referencia. */
-.btn-outline {
+/* Títulos: una sola cara (Gilda), interletrado cerrado, dos renglones como máximo. */
+.display {
+  font-family: var(--font-gilda), serif;
+  font-size: var(--step-display);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.heading {
+  font-family: var(--font-gilda), serif;
+  font-size: var(--step-head);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Dato pequeño (categoría, fecha, estado): en minúsculas normales y a tamaño legible. */
+.meta {
+  font-size: var(--step-small);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Botones planos y redondos. El secundario es un paso de tono sobre lo que tenga detrás (sirve igual
+   en fondo claro, en foto o en campo de color); el primario va en tinta. */
+.btn-outline,
+.btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid currentColor;
   border-radius: 9999px;
-  padding: 0.7rem 1.6rem;
-  font-family: var(--font-gilda), serif;
-  font-size: 1.0625rem;
+  padding: 0.8rem 1.6rem;
+  font-size: var(--step-body);
+  font-weight: 500;
+  line-height: 1.2;
   transition: background-color 0.2s, color 0.2s;
+}
+.btn-outline {
+  background: color-mix(in srgb, currentColor 12%, transparent);
 }
 .btn-outline:hover {
   background: var(--ink);
   color: var(--bg);
 }
 .on-dark .btn-outline:hover {
-  background: #fff;
+  background: var(--bg);
   color: var(--ink);
+}
+.btn {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn:hover {
+  background: var(--green);
+}
+.on-dark .btn {
+  background: var(--bg);
+  color: var(--ink);
+}
+.on-dark .btn:hover {
+  background: var(--ochre);
 }
 
 /* Movimiento lento de la foto de portada (en lugar del video de la referencia). */
@@ -84,13 +153,15 @@ body {
   animation: fade-up 0.8s ease-out both;
 }
 
-@keyframes pulse-ring {
-  0% { transform: scale(0.6); opacity: 0.9; }
-  100% { transform: scale(2.4); opacity: 0; }
+@keyframes heart-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  100% { transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .kenburns, .fade-up { animation: none; }
+  [class*="heart-pop"] { animation: none !important; }
   html { scroll-behavior: auto; }
 }
 
@@ -107,15 +178,15 @@ body {
   height: 34px;
   transform-origin: 50% 100%;
   transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
-  filter: drop-shadow(0 6px 6px rgba(31, 26, 23, 0.28));
 }
 .map-pin__body svg { width: 100%; height: 100%; }
 .map-pin__body path { fill: var(--pin, var(--ink)); stroke: #fff; stroke-width: 1.6; }
 .map-pin__body circle { fill: #fff; }
-.map-pin:hover .map-pin__body { transform: scale(1.3) translateY(-2px); }
+.map-pin:hover .map-pin__body, .map-pin.is-active .map-pin__body { transform: scale(1.3) translateY(-2px); }
+.map-pin.is-active { z-index: 2; }
 .map-popup .maplibregl-popup-content {
   padding: 0;
-  border-radius: 18px;
+  border-radius: 0;
   overflow: hidden;
   box-shadow: 0 24px 50px -18px rgba(31, 26, 23, 0.45);
   background: var(--bg);
@@ -128,7 +199,7 @@ body {
 .map-card__body span { font-size: 13px; color: var(--muted); }
 .map-card__body em { margin-top: 6px; font-style: normal; font-size: 13px; font-weight: 600; }
 .map-card:hover em { text-decoration: underline; }
-.maplibregl-ctrl-group { border-radius: 14px !important; overflow: hidden; box-shadow: 0 8px 20px -10px rgba(31,26,23,.35) !important; }
+.maplibregl-ctrl-group { border-radius: 9999px !important; overflow: hidden; box-shadow: none !important; }
 html.has-cursor .maplibregl-canvas-container, html.has-cursor .maplibregl-canvas { cursor: grab !important; }
 
 /* ---------- Movimiento ---------- */

@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { CATEGORIES, categoryFromSlug, getPlaces } from '@/lib/data';
+import { Suspense } from 'react';
+import { CATEGORIES, categoryFromSlug, getPlaces, toSummary } from '@/lib/data';
 import { CategoryTabs, PlaceGrid } from '@/components/PlaceGrid';
+import PlaceExplorer from '@/components/PlaceExplorer';
 import { PageIntro } from '@/components/Section';
 
 export const revalidate = 300;
@@ -24,19 +26,25 @@ export async function generateMetadata({ params }: PageProps<'/lugares/[categori
 export default async function CategoriaPage({ params }: PageProps<'/lugares/[categoria]'>) {
   const category = categoryFromSlug((await params).categoria);
   if (!category) notFound();
-  const all = await getPlaces();
+  const all = (await getPlaces()).map(toSummary);
   const places = all.filter((p) => p.category === category);
   const c = CATEGORIES[category];
 
   return (
     <>
-      <PageIntro eyebrow="Planea tu visita" title={c.label} serif="en Tequisquiapan">
+      <PageIntro title={`${c.label} en Tequisquiapan`}>
         {c.blurb}
       </PageIntro>
-      <div className="mx-auto max-w-[1240px] px-5">
+      <div className="frame">
         <CategoryTabs places={all} active={category} />
-        <div className="mt-14">
-          {places.length > 0 ? <PlaceGrid places={places} /> : <p className="text-center text-muted">Todavía no hay lugares en esta categoría.</p>}
+        <div className="mt-10">
+          {places.length > 0 ? (
+            <Suspense fallback={<PlaceGrid places={places} reveal={false} className="mt-12" />}>
+              <PlaceExplorer places={places} />
+            </Suspense>
+          ) : (
+            <p className="text-center text-muted">Todavía no hay lugares en esta categoría.</p>
+          )}
         </div>
       </div>
     </>

@@ -2,41 +2,50 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 
-/** Título de sección de tres pisos: etiqueta, título en negrita y remate en serif. */
+/**
+ * Título de sección: una sola cara (Gilda) a tamaño de sección y, si hace falta, una frase de apoyo
+ * debajo en el texto normal. Sin etiqueta arriba ni remate en otra tipografía (tasteskill).
+ */
 export function SectionTitle({
-  eyebrow,
   title,
-  serif,
-  align = 'center',
+  lead,
+  align = 'left',
   as: Tag = 'h2',
+  id,
   className = '',
 }: {
-  eyebrow?: string;
   title: string;
-  serif?: string;
+  lead?: ReactNode;
   align?: 'center' | 'left';
   as?: 'h1' | 'h2';
+  id?: string;
   className?: string;
 }) {
   return (
-    <div className={`${align === 'center' ? 'text-center' : ''} ${className}`}>
-      {eyebrow && <p data-reveal="up" className="eyebrow">{eyebrow}</p>}
-      <Tag data-split="lines" className="mt-3 text-[clamp(1.9rem,3.2vw,2.6rem)] font-bold leading-tight">
+    <div className={`${align === 'center' ? 'mx-auto text-center' : ''} ${className}`}>
+      <Tag id={id} data-split="lines" className="heading max-w-[18ch]" style={align === 'center' ? { marginInline: 'auto' } : undefined}>
         {title}
-        {serif && (
-          <span className="mt-3 block font-display text-[clamp(1.9rem,3.2vw,2.6rem)] font-normal leading-tight">{serif}</span>
-        )}
       </Tag>
+      {lead && (
+        <p data-reveal="up" className={`mt-6 max-w-[46ch] text-lead leading-snug ${align === 'center' ? 'mx-auto' : ''}`}>
+          {lead}
+        </p>
+      )}
     </div>
   );
 }
 
 /** Encabezado de las páginas internas (sin foto de portada): deja espacio para el header fijo. */
-export function PageIntro({ eyebrow, title, serif, children }: { eyebrow?: string; title: string; serif?: string; children?: ReactNode }) {
+export function PageIntro({ title, lead, children }: { title: string; lead?: ReactNode; children?: ReactNode }) {
   return (
-    <div className="mx-auto max-w-3xl px-5 pb-12 pt-36 text-center sm:pt-44">
-      <SectionTitle as="h1" eyebrow={eyebrow} title={title} serif={serif} />
-      {children && <div data-reveal="up" className="mx-auto mt-6 max-w-2xl text-[17px] leading-relaxed">{children}</div>}
+    <div className="frame pb-14 pt-40 sm:pt-48">
+      <h1 data-split="lines" className="display max-w-[14ch]">{title}</h1>
+      {(lead || children) && (
+        <div data-reveal="up" className="mt-8 max-w-[52ch] text-lead leading-snug">
+          {lead}
+          {children}
+        </div>
+      )}
     </div>
   );
 }

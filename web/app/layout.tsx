@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Gilda_Display, Outfit } from "next/font/google";
 import Link from "next/link";
-import { SITE_NAME, SITE_URL } from "@/lib/data";
+import { SITE_NAME, SITE_URL, getEvents, getPlaces, todayInTequis } from "@/lib/data";
+import { buildNav } from "@/lib/nav";
+import { buildSearchIndex } from "@/lib/search";
 import SiteHeader from "@/components/SiteNav";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import Reveals from "@/components/motion/Reveals";
@@ -36,6 +38,8 @@ const FOOTER_LINKS = [
     title: "Explora",
     links: [
       { href: "/lugares", label: "Qué hacer" },
+      { href: "/lugares/gastronomia", label: "Comer y beber" },
+      { href: "/lugares/hospedaje", label: "Dónde dormir" },
       { href: "/eventos", label: "Eventos" },
       { href: "/rutas", label: "Rutas temáticas" },
       { href: "/mapa", label: "Mapa" },
@@ -44,21 +48,29 @@ const FOOTER_LINKS = [
   {
     title: "Útil",
     links: [
+      { href: "/por-que-tequis", label: "¿Por qué Tequis?" },
       { href: "/guia-practica", label: "Guía práctica" },
+      { href: "/mi-viaje", label: "Mi viaje" },
       { href: "/app", label: "La app" },
       { href: "/creditos", label: "Créditos de fotos" },
     ],
   },
-  {
-    title: "Información legal",
-    links: [
-      { href: "/privacidad", label: "Aviso de privacidad" },
-      { href: "/terminos", label: "Términos de uso" },
-    ],
-  },
 ];
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+const LEGAL_LINKS = [
+  { href: "/privacidad", label: "Aviso de privacidad" },
+  { href: "/terminos", label: "Términos de uso" },
+];
+
+// Menú y buscador se arman con los mismos datos del API (con el mismo caché de 5 min que las
+// páginas). Si el API falla, el header sale con las secciones fijas y el buscador sin lugares.
+async function loadHeaderData() {
+  const [places, events] = await Promise.all([getPlaces().catch(() => []), getEvents().catch(() => [])]);
+  return { nav: buildNav(places, events, todayInTequis()), search: buildSearchIndex(places, events) };
+}
+
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const { nav, search } = await loadHeaderData();
   return (
     <html lang="es-MX" className={`${outfit.variable} ${gilda.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
@@ -68,41 +80,56 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SmoothScroll />
         <Reveals />
         <Cursor />
-        <SiteHeader />
+        <SiteHeader nav={nav} search={search} />
 
         <main className="flex-1">{children}</main>
 
-        <footer className="overflow-hidden pt-28">
-          <div className="mx-auto grid max-w-[1140px] gap-12 px-5 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
+        <footer data-cursor-dark className="on-dark mt-40 overflow-hidden bg-forest pt-28 text-white">
+          <div className="frame grid grid-cols-1 gap-16 lg:grid-cols-[1.2fr_1fr]">
             <div data-reveal="up">
-              <p className="text-3xl font-bold leading-tight">Ven a vivir</p>
-              <p className="font-display text-3xl leading-tight">la magia de Tequis.</p>
-              <p className="mt-5 max-w-sm text-[17px] leading-relaxed">
-                Cantera, mimbre, viñedos y fiestas de pueblo, a unos 180 km de la Ciudad de México. Esta guía y nuestra app muestran
-                la misma información.
+              <p className="heading max-w-[17ch]">¿Tienes un negocio en Tequis?</p>
+              <p className="mt-6 max-w-[40ch] text-lead leading-snug text-white/85">
+                Aparece en la guía y en la app, con tus fotos, horarios y la ruta para llegar.
               </p>
+              <a href="mailto:contacto@tequismagico.com?subject=Quiero%20aparecer%20en%20Tequisquiapan%20M%C3%A1gico" className="btn mt-10">
+                Escríbenos
+              </a>
             </div>
-            {FOOTER_LINKS.map((col) => (
-              <nav key={col.title} aria-label={col.title} data-reveal="up">
-                <p className="font-semibold">{col.title}</p>
-                <ul className="mt-5 space-y-3">
-                  {col.links.map((l) => (
-                    <li key={l.href}>
-                      <Link href={l.href} className="hover:underline">{l.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            ))}
+            <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+              {FOOTER_LINKS.map((col) => (
+                <nav key={col.title} aria-label={col.title} data-reveal="up">
+                  <p className="font-medium text-white/60">{col.title}</p>
+                  <ul className="mt-5 space-y-3">
+                    {col.links.map((l) => (
+                      <li key={l.href}>
+                        <Link href={l.href} className="hover:underline">{l.label}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              ))}
+              <div data-reveal="up" className="col-span-2 sm:col-span-1">
+                <p className="font-medium text-white/60">La app</p>
+                <p className="mt-5 max-w-[24ch]">Cerca de mí, favoritos y uso sin conexión.</p>
+                <Link href="/app" className="mt-3 inline-block underline">Conocer la app</Link>
+              </div>
+            </div>
           </div>
-          <p className="mx-auto mt-14 max-w-[1140px] px-5 text-sm text-muted">
-            © {new Date().getFullYear()} {SITE_NAME}. Guía independiente; no es un sitio oficial del municipio.
-          </p>
+          <div className="frame mt-24 flex flex-col gap-3 text-white/65 sm:flex-row sm:items-center sm:justify-between">
+            <p className="meta">© {new Date().getFullYear()} {SITE_NAME}. Guía independiente; no es un sitio oficial del municipio.</p>
+            <ul className="meta flex gap-6">
+              {LEGAL_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="hover:text-white hover:underline">{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
           <p
             aria-hidden
             data-split="chars"
-            className="mt-6 select-none whitespace-nowrap text-center font-display uppercase leading-[0.85] text-white"
-            style={{ fontSize: "clamp(3rem, 11.6vw, 11.5rem)" }}
+            className="mt-10 select-none whitespace-nowrap text-center font-display uppercase leading-[0.8] tracking-[-0.02em] text-sage"
+            style={{ fontSize: "clamp(3rem, 12.4vw, 13rem)" }}
           >
             Tequisquiapan
           </p>

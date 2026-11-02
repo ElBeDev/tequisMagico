@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BadgeCheck, Globe, Info, Mail, MapPin, MessageCircle, Navigation, Phone } from 'lucide-react';
-import { CATEGORIES, PRICE_RANGES, SITE_URL, getPlace, getPlaces, mapsDirectionsUrl, type Place } from '@/lib/data';
+import { CATEGORIES, PRICE_RANGES, SITE_URL, getPlace, getPlaces, mapsDirectionsUrl, placeKey, type Place } from '@/lib/data';
 import { openingHoursSpec, scheduleEntries } from '@/lib/schedule';
 import { JsonLd, Photo, PlaceCard } from '@/components/Cards';
 import { SectionTitle } from '@/components/Section';
 import OpenNow from '@/components/OpenNow';
+import SaveButton from '@/components/SaveButton';
 import PlacesMap from '@/components/PlacesMap';
 
 export const revalidate = 300;
@@ -122,12 +123,12 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
         }}
       />
 
-      <header className="mx-auto max-w-3xl px-5 pb-10 pt-36 text-center sm:pt-44">
-        <nav className="eyebrow !text-[12px] text-muted" aria-label="Ruta de navegación">
+      <header className="frame pb-12 pt-40 sm:pt-48">
+        <nav className="meta text-muted" aria-label="Ruta de navegación">
           <Link href="/lugares" className="hover:text-ink">Lugares</Link> · <Link href={`/lugares/${c.slug}`} className="hover:text-ink">{c.label}</Link>
         </nav>
-        <h1 data-split="lines" className="mt-4 font-display text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.05]">{place.name}</h1>
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[15px] text-muted">
+        <h1 data-split="lines" className="display mt-6 max-w-[13ch]">{place.name}</h1>
+        <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-lead text-muted">
           <span>{place.subcategory}</span>
           {price && <span>· {price.symbol}{price.symbol !== price.label && ` · ${price.label}`}</span>}
           {place.isVerified && (
@@ -137,32 +138,33 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
           )}
           <OpenNow schedule={place.schedule} />
         </div>
+        <SaveButton id={placeKey(place.id)} name={place.name} variant="full" className="mt-6" />
       </header>
 
-      <div className={`mx-auto grid max-w-[1240px] grid-cols-1 gap-2 px-5 ${photos.length > 1 ? 'sm:grid-cols-[2fr_1fr]' : ''}`}>
-        <div data-reveal="image" className="overflow-hidden rounded-[28px]">
+      <div className={`frame grid grid-cols-1 gap-2 ${photos.length > 1 ? 'sm:grid-cols-[2fr_1fr]' : ''}`}>
+        <div data-reveal="image" className="overflow-hidden">
           <Photo src={photos[0] ?? null} alt={place.name} label={place.subcategory} className="aspect-[16/9] w-full" />
         </div>
         {photos.length > 1 && (
           <div className={`hidden gap-2 sm:grid ${photos.length > 2 ? 'grid-rows-2' : ''}`}>
             {photos.slice(1, 3).map((src) => (
-              <Photo key={src} src={src} alt={place.name} className="size-full rounded-[28px]" />
+              <Photo key={src} src={src} alt={place.name} className="size-full" />
             ))}
           </div>
         )}
       </div>
 
-      <div className="mx-auto mt-16 grid max-w-[1140px] grid-cols-1 gap-14 px-5 lg:grid-cols-[minmax(0,1fr)_340px]">
+      <div className="frame mt-20 grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-24">
         <div>
-          {place.shortDescription && <p data-split="lines" className="font-display text-[1.7rem] leading-snug">{place.shortDescription}</p>}
-          {place.fullDescription && <p data-reveal="up" className="mt-5 text-[17px] leading-relaxed">{place.fullDescription}</p>}
+          {place.shortDescription && <p data-split="lines" className="max-w-[26ch] font-display text-[clamp(1.75rem,2.6vw,2.25rem)] leading-[1.15] tracking-[-0.01em]">{place.shortDescription}</p>}
+          {place.fullDescription && <p data-reveal="up" className="mt-6 max-w-[62ch]">{place.fullDescription}</p>}
 
           {place.amenities.length > 0 && (
             <section className="mt-12">
-              <h2 className="eyebrow">Servicios</h2>
+              <h2 className="font-display text-lead leading-none tracking-[-0.01em]">Servicios</h2>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {place.amenities.map((a) => (
-                  <li key={a} className="border border-line px-3 py-1.5 text-[15px]">{a}</li>
+                  <li key={a} className="rounded-full bg-surface px-4 py-1.5">{a}</li>
                 ))}
               </ul>
             </section>
@@ -170,10 +172,10 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
 
           {schedule.length > 0 && (
             <section className="mt-12">
-              <h2 className="eyebrow">Horarios</h2>
-              <dl className="mt-4 divide-y divide-line border-y border-line">
+              <h2 className="font-display text-lead leading-none tracking-[-0.01em]">Horarios</h2>
+              <dl className="mt-4 space-y-1">
                 {schedule.map((s) => (
-                  <div key={s.day} className="flex justify-between gap-4 py-3 text-[15px]">
+                  <div key={s.day} className="flex max-w-md justify-between gap-4 py-2">
                     <dt className="font-medium">{s.day}</dt>
                     <dd className="text-right text-muted">{s.hours}</dd>
                   </div>
@@ -183,7 +185,7 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
           )}
 
           <section className="mt-12">
-            <h2 className="eyebrow">Ubicación</h2>
+            <h2 className="font-display text-lead leading-none tracking-[-0.01em]">Ubicación</h2>
             <div className="mt-4">
               <PlacesMap
                 className="h-80"
@@ -195,7 +197,7 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
         </div>
 
         <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
-          <div data-reveal="up" className="space-y-4 rounded-[24px] border border-ink/80 p-6 text-[15px]">
+          <div data-reveal="up" className="space-y-4 bg-surface p-6">
             {place.address && (
               <p className="flex gap-3"><MapPin className="mt-0.5 size-4 shrink-0" aria-hidden /> {/tequisquiapan/i.test(place.address) ? place.address : `${place.address}, Tequisquiapan, Qro.`}</p>
             )}
@@ -219,20 +221,20 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
                 <Mail className="mt-0.5 size-4 shrink-0" aria-hidden /> {place.email}
               </a>
             )}
-            <a href={mapsDirectionsUrl(place.latitude, place.longitude)} target="_blank" rel="noopener" className="btn-outline mt-2 w-full justify-center">
+            <a href={mapsDirectionsUrl(place.latitude, place.longitude)} target="_blank" rel="noopener" className="btn mt-2 w-full justify-center">
               <Navigation className="size-4" aria-hidden /> Cómo llegar
             </a>
           </div>
 
           {!place.contentVerified && (
-            <p className="flex gap-3 rounded-[20px] bg-surface p-5 text-sm text-muted">
+            <p className="flex gap-3 bg-ochre/40 p-5">
               <Info className="size-4 shrink-0" aria-hidden />
               Todavía no confirmamos el teléfono y el horario de este lugar con el negocio. Llama antes de ir.
             </p>
           )}
 
           {place.tags.length > 0 && (
-            <ul className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-muted">
+            <ul className="meta flex flex-wrap gap-x-3 gap-y-1 text-muted">
               {place.tags.map((t) => (
                 <li key={t}>#{t}</li>
               ))}
@@ -242,8 +244,8 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
       </div>
 
       {nearby.length > 0 && (
-        <section className="mx-auto mt-28 max-w-[1240px] px-5">
-          <SectionTitle eyebrow="Muy cerca" title="Cerca de aquí" serif="para seguir el paseo" />
+        <section className="frame mt-40">
+          <SectionTitle title="Cerca de aquí" />
           <div className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
             {nearby.map((p) => (
               <PlaceCard key={p.id} place={p} />

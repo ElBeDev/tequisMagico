@@ -18,7 +18,7 @@ export default function OpenNow({ schedule }: { schedule: Record<string, string>
   if (!state) return null;
   return (
     <span
-      className={`inline-flex items-center gap-1.5 text-[15px] font-medium ${state.open ? 'text-ok' : 'text-muted'}`}
+      className={`inline-flex items-center gap-1.5 font-medium ${state.open ? 'text-ok' : 'text-muted'}`}
     >
       <span className={`size-1.5 rounded-full ${state.open ? 'bg-ok' : 'bg-muted'}`} />
       {state.label}

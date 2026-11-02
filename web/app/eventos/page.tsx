@@ -21,10 +21,10 @@ export default async function EventosPage() {
 
   return (
     <>
-      <PageIntro eyebrow="Calendario" title="Fiestas y eventos" serif="todo el año en Tequis">
+      <PageIntro title="Fiestas y eventos en Tequis">
         De la Feria Nacional del Queso y Vino a las Posadas: las fechas de lo que pasa en el pueblo.
       </PageIntro>
-      <div className="mx-auto max-w-[1000px] px-5">
+      <div className="frame">
         {happening.length > 0 && <EventGroup title="Está pasando" events={happening} today={today} />}
         <EventGroup title="Próximos" events={upcoming} today={today} empty="No hay eventos próximos por ahora." />
         {past.length > 0 && <EventGroup title="Ya pasaron este año" events={past} today={today} />}
@@ -35,12 +35,12 @@ export default async function EventosPage() {
 
 function EventGroup({ title, events, today, empty }: { title: string; events: TequisEvent[]; today: string; empty?: string }) {
   return (
-    <section className="mt-14 first:mt-0">
-      <h2 className="eyebrow mb-2">{title}</h2>
+    <section className="mt-20 first:mt-0">
+      <h2 className="heading mb-6">{title}</h2>
       {events.length === 0 ? (
-        <p className="border-t border-line py-6 text-muted">{empty}</p>
+        <p className="py-6 text-muted">{empty}</p>
       ) : (
-        <div className="border-b border-line">
+        <div>
           {events.map((e) => (
             <EventCard key={e.id} event={e} today={today} />
           ))}

@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { ArrowDown, ArrowUp } from 'lucide-react';
-import { BalloonMark } from './Logo';
 import { ScrollTrigger, SplitText, gsap, isDesktop, prefersReducedMotion, useGSAP } from '@/lib/motion';
 
 export type Activity = { title: string; image: string; detail: string; cta: string; href: string };
@@ -97,30 +96,25 @@ export default function Activities({ items }: { items: Activity[] }) {
               <img src={a.image} alt={i === index ? a.title : ''} loading="lazy" referrerPolicy="no-referrer" className="size-full object-cover" />
             </div>
           ))}
-          <p className="absolute bottom-6 left-6 z-10 font-display text-7xl leading-none text-white/90 mix-blend-overlay sm:text-8xl" aria-hidden>
-            {String(index + 1).padStart(2, '0')}
-          </p>
         </div>
 
-        <div className="relative flex flex-col items-center justify-center px-6 py-16 text-center sm:px-16">
-          <BalloonMark className="pointer-events-none absolute size-[420px] animate-[spin_60s_linear_infinite] text-white/[0.06]" />
-          <p className="eyebrow relative">Nuestras experiencias</p>
-          <h2 key={item.title} data-act-title className="relative mt-3 font-display text-5xl sm:text-7xl">{item.title}</h2>
-          <p key={item.detail} data-act-fade className="relative mt-6 max-w-md text-[17px] leading-relaxed text-white/90">{item.detail}</p>
-          <span data-act-fade className="relative mt-8 block">
-            <Link href={item.href} className="btn-outline">{item.cta}</Link>
+        <div className="relative flex flex-col justify-center px-[var(--margin)] py-16 pr-20 sm:pr-28 lg:pl-20">
+          <h2 key={item.title} data-act-title className="relative font-display text-[clamp(3rem,6.6vw,7rem)] leading-[0.95] tracking-[-0.03em]">{item.title}</h2>
+          <p key={item.detail} data-act-fade className="relative mt-8 max-w-[38ch] text-lead leading-snug">{item.detail}</p>
+          <span data-act-fade className="relative mt-10 flex flex-wrap items-center gap-6">
+            <Link href={item.href} className="btn">{item.cta}</Link>
+            <Link href="/lugares/experiencias" className="font-medium underline-offset-4 hover:underline">
+              Todas las experiencias
+            </Link>
           </span>
-          <Link href="/lugares/experiencias" className="relative mt-10 text-[15px] font-semibold hover:underline">
-            Todas las experiencias →
-          </Link>
 
           <div className="absolute right-6 top-1/2 flex -translate-y-1/2 flex-col items-center gap-3 sm:right-10">
             <button type="button" onClick={() => go(-1)} aria-label="Anterior" className="p-1 transition hover:-translate-y-0.5 hover:opacity-70">
               <ArrowUp className="size-5" aria-hidden />
             </button>
-            <div className="flex flex-col gap-1.5" aria-hidden>
+            <div className="flex flex-col gap-2" aria-hidden>
               {items.map((a, i) => (
-                <span key={a.title} className={`w-[2px] transition-all duration-500 ${i === index ? 'h-8 bg-white' : 'h-4 bg-white/35'}`} />
+                <span key={a.title} className={`size-2 rounded-full transition-colors duration-500 ${i === index ? 'bg-white' : 'bg-white/30'}`} />
               ))}
             </div>
             <button type="button" onClick={() => go(1)} aria-label="Siguiente" className="p-1 transition hover:translate-y-0.5 hover:opacity-70">

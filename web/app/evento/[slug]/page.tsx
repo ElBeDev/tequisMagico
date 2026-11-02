@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { CalendarDays, MapPin, Navigation, Repeat, Ticket, User } from 'lucide-react';
-import { SITE_URL, eventStatus, formatDateRange, getEvent, getEvents, mapsDirectionsUrl, todayInTequis } from '@/lib/data';
+import { SITE_URL, eventKey, eventStatus, formatDateRange, getEvent, getEvents, mapsDirectionsUrl, todayInTequis } from '@/lib/data';
 import { JsonLd, Photo } from '@/components/Cards';
+import SaveButton from '@/components/SaveButton';
 import PlacesMap from '@/components/PlacesMap';
 
 export const revalidate = 300;
@@ -61,34 +62,38 @@ export default async function EventoPage({ params }: PageProps<'/evento/[slug]'>
   return (
     <article>
       <JsonLd data={jsonLd} />
-      <header className="mx-auto max-w-3xl px-5 pb-10 pt-36 text-center sm:pt-44">
-        <nav className="eyebrow !text-[12px] text-muted" aria-label="Ruta de navegación">
+      <header className="frame pb-12 pt-40 sm:pt-48">
+        <nav className="meta text-muted" aria-label="Ruta de navegación">
           <Link href="/eventos" className="hover:text-ink">Eventos</Link> · {event.category}
         </nav>
-        <h1 data-split="lines" className="mt-4 font-display text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.05]">{event.title}</h1>
-        <p className="mt-4 text-lg">{formatDateRange(event.startDate, event.endDate)}</p>
-        {status === 'happening' && <p className="eyebrow mt-3 text-ok">Está pasando ahora</p>}
+        <h1 data-split="lines" className="display mt-6 max-w-[13ch]">{event.title}</h1>
+        <p className="mt-6 text-lead">
+          {status === 'happening' && <span className="font-medium text-ok">Está pasando: </span>}
+          {formatDateRange(event.startDate, event.endDate)}
+          {event.locationName && <>, {event.locationName}</>}
+        </p>
         {status === 'past' && (
-          <p className="mt-3 text-[15px] text-muted">
+          <p className="mt-3 max-w-[60ch] text-muted">
             Este evento ya pasó{event.isRecurring ? '. Se celebra cada año; publicaremos la próxima fecha en cuanto se anuncie.' : '.'}
           </p>
         )}
+        {status !== 'past' && <SaveButton id={eventKey(event.id)} name={event.title} variant="full" className="mt-6" />}
       </header>
 
-      <div className="mx-auto max-w-[1240px] px-5">
-        <div data-reveal="image" className="overflow-hidden rounded-[28px]">
+      <div className="frame">
+        <div data-reveal="image" className="overflow-hidden">
           <Photo src={event.thumbnailUrl} alt={event.title} label={event.category} className="aspect-[16/9] w-full" />
         </div>
       </div>
 
-      <div className="mx-auto mt-16 grid max-w-[1140px] grid-cols-1 gap-14 px-5 lg:grid-cols-[minmax(0,1fr)_340px]">
+      <div className="frame mt-20 grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-24">
         <div>
-          {event.shortDescription && <p className="font-display text-[1.7rem] leading-snug">{event.shortDescription}</p>}
-          {event.fullDescription && <p className="mt-5 text-[17px] leading-relaxed">{event.fullDescription}</p>}
+          {event.shortDescription && <p className="max-w-[26ch] font-display text-[clamp(1.75rem,2.6vw,2.25rem)] leading-[1.15] tracking-[-0.01em]">{event.shortDescription}</p>}
+          {event.fullDescription && <p className="mt-6 max-w-[62ch]">{event.fullDescription}</p>}
 
           {hasLocation && (
             <section className="mt-12">
-              <h2 className="eyebrow">Dónde</h2>
+              <h2 className="font-display text-lead leading-none tracking-[-0.01em]">Dónde</h2>
               <div className="mt-4">
                 <PlacesMap
                   className="h-80"
@@ -101,7 +106,7 @@ export default async function EventoPage({ params }: PageProps<'/evento/[slug]'>
         </div>
 
         <aside className="lg:sticky lg:top-28 lg:self-start">
-          <ul className="space-y-4 rounded-[24px] border border-ink/80 p-6 text-[15px]">
+          <ul className="space-y-4 bg-surface p-6">
             <li className="flex gap-3"><CalendarDays className="mt-0.5 size-4 shrink-0" aria-hidden /> {formatDateRange(event.startDate, event.endDate)}</li>
             {event.locationName && <li className="flex gap-3"><MapPin className="mt-0.5 size-4 shrink-0" aria-hidden /> {event.locationName}</li>}
             <li className="flex gap-3">
@@ -115,7 +120,7 @@ export default async function EventoPage({ params }: PageProps<'/evento/[slug]'>
             {event.organizerName && <li className="flex gap-3"><User className="mt-0.5 size-4 shrink-0" aria-hidden /> {event.organizerName}</li>}
             {hasLocation && (
               <li>
-                <a href={mapsDirectionsUrl(event.latitude!, event.longitude!)} target="_blank" rel="noopener" className="btn-outline mt-2 w-full justify-center">
+                <a href={mapsDirectionsUrl(event.latitude!, event.longitude!)} target="_blank" rel="noopener" className="btn mt-2 w-full justify-center">
                   <Navigation className="size-4" aria-hidden /> Cómo llegar
                 </a>
               </li>

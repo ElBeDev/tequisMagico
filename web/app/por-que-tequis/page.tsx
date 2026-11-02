@@ -29,46 +29,46 @@ const TIMELINE = [
 export default function PorQueTequisPage() {
   return (
     <>
-      <PageHero photo={PHOTOS.parroquiaTarde} alt="Parroquia de Santa María de la Asunción" eyebrow="¿Por qué Tequis?" title="Un Pueblo Mágico" serif="de agua, cantera y mimbre" />
+      <PageHero photo={PHOTOS.parroquiaTarde} alt="Parroquia de Santa María de la Asunción" title="Por qué Tequis" lead="Un Pueblo Mágico de agua, cantera y mimbre." />
 
-      <section className="mx-auto max-w-2xl px-5 pt-24 text-center">
-        <p data-split="lines" className="font-display text-[1.75rem] leading-snug">
+      <section className="frame grid grid-cols-1 gap-10 pt-32 lg:grid-cols-2 lg:gap-24">
+        <p data-split="lines" className="max-w-[24ch] font-display text-[clamp(1.75rem,2.6vw,2.25rem)] leading-[1.15] tracking-[-0.01em]">
           Desde el 17 de octubre de 2012, Tequisquiapan es Pueblo Mágico: el cuarto de Querétaro, después de Bernal, Jalpan y Cadereyta.
         </p>
-        <p data-reveal="up" className="mt-6 text-[17px] leading-relaxed">
+        <p data-reveal="up" className="max-w-[56ch] self-end">
           Lo que lo hace distinto cabe en un paseo de fin de semana: un centro de portales y cantera, el oficio de la cestería, la
           tradición termal que lo convirtió en destino turístico, los viñedos y queserías de la Ruta Arte, Queso y Vino, y una agenda
           de fiestas que casi no se detiene en todo el año.
         </p>
       </section>
 
-      <section id="nombre" className="mx-auto mt-24 max-w-[1140px] scroll-mt-24 px-5">
-        <div data-reveal="stagger" className="grid gap-px overflow-hidden rounded-[28px] border border-line bg-line md:grid-cols-3">
+      <section id="nombre" className="frame mt-32 scroll-mt-28" aria-labelledby="nombre-title">
+        <h2 id="nombre-title" data-split="lines" className="heading">El nombre</h2>
+        <div data-reveal="stagger" className="mt-12 grid grid-cols-1 gap-2 md:grid-cols-3">
           {[
             { k: 'Tequixquitl', v: 'tequesquite, el salitre mineral' },
             { k: 'Atl', v: 'agua' },
             { k: 'Apan', v: 'lugar' },
           ].map((w) => (
-            <div key={w.k} className="bg-bg p-10 text-center">
-              <p className="font-display text-4xl italic">{w.k}</p>
-              <p className="eyebrow mt-3 !text-[12px] text-muted">{w.v}</p>
+            <div key={w.k} className="bg-surface p-8 sm:p-10">
+              <p className="font-display text-[clamp(2.5rem,4vw,3.5rem)] leading-none tracking-[-0.02em]">{w.k}</p>
+              <p className="mt-4">{w.v}</p>
             </div>
           ))}
         </div>
-        <p data-reveal="up" className="mx-auto mt-8 max-w-2xl text-center text-[17px] leading-relaxed">
+        <p data-reveal="up" className="mt-8 max-w-[60ch]">
           El nombre viene del náhuatl y se suele traducir como <em>lugar sobre el río de tequesquite</em>. En otomí, el pueblo se llama
           <em> Nthe</em>.
         </p>
       </section>
 
-      <section id="historia" className="mx-auto max-w-[1000px] scroll-mt-24 px-5 pt-28">
-        <SectionTitle eyebrow="Historia" title="Casi cinco siglos" serif="alrededor del agua" />
-        <ol className="mt-14 border-l border-ink/20">
+      <section id="historia" className="frame scroll-mt-28 pt-40">
+        <SectionTitle title="Historia" lead="Casi cinco siglos alrededor del agua." />
+        <ol className="mt-14 space-y-10">
           {TIMELINE.map((t) => (
-            <li key={t.year} data-reveal="up" className="relative pb-10 pl-8 last:pb-0 sm:pl-12">
-              <span className="absolute -left-[5px] top-2.5 size-[9px] rounded-full bg-ink" aria-hidden />
-              <p className="font-display text-3xl">{t.year}</p>
-              <p className="mt-2 max-w-2xl text-[17px] leading-relaxed">{t.text}</p>
+            <li key={t.year} data-reveal="up" className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,1fr)_2fr] sm:gap-12">
+              <p className="font-display text-[clamp(2.5rem,4vw,3.5rem)] leading-none tracking-[-0.02em]">{t.year}</p>
+              <p className="max-w-[60ch]">{t.text}</p>
             </li>
           ))}
         </ol>
@@ -78,9 +78,7 @@ export default function PorQueTequisPage() {
         id="patrimonio"
         photo={PHOTOS.temploMagdalena}
         alt="Templo de Santa María Magdalena"
-        eyebrow="Patrimonio"
-        title="Templos, barrios"
-        serif="y capillas de indios"
+        title="Templos, barrios y capillas"
       >
         <p>
           La parroquia de Santa María de la Asunción, neoclásica y de cantera, preside la Plaza Miguel Hidalgo con sus portales, su
@@ -97,9 +95,7 @@ export default function PorQueTequisPage() {
         id="tradiciones"
         photo={PHOTOS.mercadoTequesquicalli}
         alt="Mercado de Artesanías Tequesquicalli"
-        eyebrow="Tradiciones"
-        title="El Paraíso"
-        serif="de la cestería"
+        title="El Paraíso de la cestería"
         reverse
       >
         <p>
@@ -117,7 +113,7 @@ export default function PorQueTequisPage() {
         <Link href="/rutas/artesanal" className="btn-outline">Ruta Artesanal</Link>
       </Feature>
 
-      <Feature id="sabores" photo={PHOTOS.feriaQuesoVino} alt="Feria del Queso y el Vino en Tequisquiapan" eyebrow="Sabores" title="Queso, vino" serif="y cocina de pueblo">
+      <Feature id="sabores" photo={PHOTOS.feriaQuesoVino} alt="Feria del Queso y el Vino en Tequisquiapan" title="Queso, vino y cocina de pueblo">
         <p>
           Tequis es parada de la Ruta Arte, Queso y Vino de Querétaro. En la zona se producen más de 60 etiquetas, y los viñedos del
           municipio están a menos de 20 minutos del centro. Las queserías hacen quesos frescos y madurados, de vaca y de cabra.
@@ -137,9 +133,7 @@ export default function PorQueTequisPage() {
         id="alrededores"
         photo={PHOTOS.penaBernal}
         alt="Peña de Bernal"
-        eyebrow="Alrededores"
         title="La Peña de Bernal"
-        serif="a media hora"
         reverse
       >
         <p>
@@ -153,12 +147,11 @@ export default function PorQueTequisPage() {
         <Link href="/guia-practica#como-llegar" className="btn-outline">Cómo llegar</Link>
       </Feature>
 
-      <section className="mx-auto max-w-[1140px] px-5 pt-16">
-        <div data-reveal="image" data-cursor-dark className="on-dark flex flex-col items-center gap-6 rounded-[32px] bg-green px-8 py-16 text-center text-white">
-          <p className="text-3xl font-bold">¿Listo para ir?</p>
-          <p className="-mt-3 font-display text-3xl">arma tu fin de semana</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/lugares" className="btn-outline">Qué hacer</Link>
+      <section data-cursor-dark className="on-dark -mb-40 mt-24 bg-green py-28 text-white" aria-labelledby="listo-title">
+        <div className="frame">
+          <h2 id="listo-title" data-split="lines" className="heading max-w-[14ch]">Arma tu fin de semana</h2>
+          <div data-reveal="up" className="mt-10 flex flex-wrap gap-3">
+            <Link href="/lugares" className="btn">Qué hacer</Link>
             <Link href="/eventos" className="btn-outline">Fiestas y eventos</Link>
             <Link href="/guia-practica" className="btn-outline">Guía práctica</Link>
           </div>

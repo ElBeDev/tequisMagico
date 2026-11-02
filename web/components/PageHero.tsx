@@ -3,20 +3,18 @@ import type { Photo } from '@/lib/photos';
 import { ArchPhoto } from './Frame';
 
 /** Portada con foto para las páginas editoriales (el header va transparente encima). */
-export function PageHero({ photo, alt, eyebrow, title, serif }: { photo: Photo; alt: string; eyebrow: string; title: string; serif: string }) {
+export function PageHero({ photo, alt, title, lead }: { photo: Photo; alt: string; title: string; lead?: string }) {
   return (
-    <section className="relative flex h-[78svh] min-h-[480px] items-end overflow-hidden bg-black text-white">
+    <section className="relative flex h-[82svh] min-h-[520px] items-end overflow-hidden bg-black text-white">
       <div data-parallax="0.4" className="absolute inset-0 -top-[10%] h-[120%]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={photo.src} alt={alt} referrerPolicy="no-referrer" fetchPriority="high" className="kenburns size-full object-cover" />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/65" />
-      <div className="relative mx-auto w-full max-w-[1140px] px-5 pb-14">
-        <p data-reveal="up" className="eyebrow">{eyebrow}</p>
-        <h1 data-split="lines" data-delay="0.35" className="mt-3 text-4xl font-bold sm:text-5xl">
-          {title}
-          <span className="mt-2 block font-display text-[2.6rem] font-normal leading-tight sm:text-6xl">{serif}</span>
-        </h1>
+      {/* Velo neutro solo bajo el texto: la única degradación que se permite. */}
+      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/65 to-transparent" />
+      <div className="frame relative pb-14 sm:pb-20">
+        <h1 data-split="lines" data-delay="0.35" className="display max-w-[12ch]">{title}</h1>
+        {lead && <p data-reveal="up" className="mt-6 max-w-[40ch] text-lead leading-snug text-white/90">{lead}</p>}
       </div>
     </section>
   );
@@ -27,37 +25,28 @@ export function Feature({
   id,
   photo,
   alt,
-  eyebrow,
   title,
-  serif,
   reverse = false,
   children,
 }: {
   id?: string;
   photo: Photo;
   alt: string;
-  eyebrow: string;
   title: string;
-  serif?: string;
   reverse?: boolean;
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto grid max-w-[1140px] scroll-mt-24 items-center gap-12 px-5 py-20 md:grid-cols-2 md:gap-16">
+    <section id={id} className="frame grid scroll-mt-28 grid-cols-1 items-center gap-12 py-24 md:grid-cols-2 md:gap-20">
       <ArchPhoto
         src={photo.src}
         alt={alt}
         ratio="aspect-[4/5]"
-        outline={reverse ? 'left' : 'right'}
-        className={`mx-auto w-full max-w-[460px] ${reverse ? 'md:order-2' : ''}`}
+        className={`w-full max-w-[560px] ${reverse ? 'md:order-2 md:justify-self-end' : ''}`}
       />
       <div>
-        <p data-reveal="up" className="eyebrow">{eyebrow}</p>
-        <h2 data-split="lines" className="mt-3 text-[clamp(1.9rem,3vw,2.4rem)] font-bold leading-tight">
-          {title}
-          {serif && <span className="mt-2 block font-display font-normal">{serif}</span>}
-        </h2>
-        <div data-reveal="stagger" className="mt-6 space-y-4 text-[17px] leading-relaxed">{children}</div>
+        <h2 data-split="lines" className="heading max-w-[14ch]">{title}</h2>
+        <div data-reveal="stagger" className="mt-8 max-w-[56ch] space-y-4">{children}</div>
       </div>
     </section>
   );
