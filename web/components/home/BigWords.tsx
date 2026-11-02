@@ -16,6 +16,17 @@ export default function BigWords({ items }: { items: BigWord[] }) {
   const root = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<number | null>(null);
   const follow = useRef<{ x: (v: number) => void; y: (v: number) => void } | null>(null);
+  const pointer = useRef({ x: 0, y: 0 });
+
+  // Coloca la foto junto al cursor. Se llama al mover el mouse, al entrar a una palabra y al
+  // hacer scroll: si la palabra pasa por debajo de un cursor quieto, igual queda bien puesta.
+  const place = (clientX = pointer.current.x, clientY = pointer.current.y) => {
+    pointer.current = { x: clientX, y: clientY };
+    const box = root.current?.getBoundingClientRect();
+    if (!box) return;
+    follow.current?.x(clientX - box.left);
+    follow.current?.y(clientY - box.top);
+  };
 
   useGSAP(
     () => {
@@ -25,6 +36,9 @@ export default function BigWords({ items }: { items: BigWord[] }) {
         x: gsap.quickTo(card, 'x', { duration: 0.6, ease: 'power3' }),
         y: gsap.quickTo(card, 'y', { duration: 0.6, ease: 'power3' }),
       };
+      const onScroll = () => place();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      return () => window.removeEventListener('scroll', onScroll);
     },
     { scope: root },
   );
@@ -47,11 +61,7 @@ export default function BigWords({ items }: { items: BigWord[] }) {
     <div
       ref={root}
       className="relative"
-      onPointerMove={(e) => {
-        const box = root.current!.getBoundingClientRect();
-        follow.current?.x(e.clientX - box.left);
-        follow.current?.y(e.clientY - box.top);
-      }}
+      onPointerMove={(e) => place(e.clientX, e.clientY)}
       onPointerLeave={() => setActive(null)}
     >
       <ul data-reveal="stagger" className="border-t border-ink/15">
@@ -59,7 +69,10 @@ export default function BigWords({ items }: { items: BigWord[] }) {
           <li key={w.label} className="border-b border-ink/15">
             <Link
               href={w.href}
-              onPointerEnter={() => setActive(i)}
+              onPointerEnter={(e) => {
+                place(e.clientX, e.clientY);
+                setActive(i);
+              }}
               data-cursor="Ver"
               className={`group flex items-center gap-5 py-5 transition-colors duration-500 sm:py-7 ${active !== null && active !== i ? 'text-ink/25' : 'text-ink/70'} hover:text-ink`}
             >
