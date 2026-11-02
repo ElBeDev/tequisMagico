@@ -6,6 +6,7 @@ Todo lo del proyecto en un solo lugar. Empieza por "El proyecto hoy" y luego ve 
 
 | Documento | Para qué sirve |
 |---|---|
+| [`web/plan-sitio-web.md`](web/plan-sitio-web.md) | Plan del sitio público `tequismagico.com` (`web/`): páginas, contenido de cada una, datos, despliegue y dominio |
 | [`negocio/propuesta-sitio-web.md`](negocio/propuesta-sitio-web.md) | Propuesta del sitio web público: mercado, competencia, modelo de negocio, arquitectura y plan por fases |
 | [`app-ios/roadmap.md`](app-ios/roadmap.md) | Estado completo y roadmap de la app iOS: qué está hecho, qué falta, bugs, auditoría, legal |
 | [`panel/panel-admin.md`](panel/panel-admin.md) | El panel de administración (`web-admin/`): qué hace, cómo se protege, cómo correrlo |
@@ -30,7 +31,7 @@ Fuera de esta carpeta, a propósito:
 | API | `web-admin/app/api/` | En producción. Lectura pública (la usa la app), escritura con contraseña |
 | Base de datos | Neon (Postgres) | 47 lugares activos (11 verificados) y 17 eventos |
 | Fotos | Vercel Blob (`tequis-magico-photos`) + Wikimedia Commons | Genéricas por categoría con crédito, más algunas reales de negocios |
-| Sitio web público | — | **No existe todavía** (ver la propuesta) |
+| Sitio web público | `web/` → tequismagico.com | Estructura y datos listos, diseño pendiente, sin desplegar (ver [`web/plan-sitio-web.md`](web/plan-sitio-web.md)) |
 | App Android | — | **No existe** |
 
 ### Cuentas y servicios en uso

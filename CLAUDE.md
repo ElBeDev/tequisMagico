@@ -2,11 +2,12 @@
 
 # Tequisquiapan Mágico — monorepo
 
-Una app iOS (SwiftUI + SwiftData) y el panel Next.js/Vercel/Neon que la alimenta, en un solo repo. Toda la documentación está en [`docs/`](docs/README.md): roadmap de la app, panel, base de datos y propuestas de negocio.
+Una app iOS (SwiftUI + SwiftData), el panel Next.js/Vercel/Neon que la alimenta y el sitio público `tequismagico.com` (`web/`), en un solo repo. Toda la documentación está en [`docs/`](docs/README.md): roadmap de la app, panel, base de datos y propuestas de negocio.
 
 ## Convención de trabajo
 - **App iOS** (`Tequis Magico/`): se edita directo en los archivos Swift del proyecto Xcode, no a través del asistente integrado de Xcode.
 - **Panel/Vercel/Neon** (`web-admin/`, `database/`): se trabaja como cualquier proyecto Next.js normal.
+- **Sitio público** (`web/`): otro proyecto Next.js, desplegado en el proyecto de Vercel `tequis-magico-web` (Root Directory = `web`) con el dominio `tequismagico.com` (DNS en Hostinger). Plan y estructura en [`docs/web/plan-sitio-web.md`](docs/web/plan-sitio-web.md).
 - Es un solo repo con un solo remoto de GitHub — no vuelvas a inicializar un `.git` dentro de `Tequis Magico/` (eso fue justo el bug que causó una historia divergida, resuelto en el commit `ae52063`).
 
 ## Puntos no obvios
@@ -25,3 +26,7 @@ Una app iOS (SwiftUI + SwiftData) y el panel Next.js/Vercel/Neon que la alimenta
 - El panel lista lugares con `GET /api/places`, que filtra `is_active = true`: un lugar desactivado (o "eliminado" desde el panel, que es soft-delete) desaparece del panel y solo se reactiva por SQL en Neon.
 - `next dev` en `web-admin` lee `.env.local`, no `.env.production.local` (que es lo que deja `vercel env pull --environment=production`). Para probar el panel en local, `DATABASE_URL`/`ADMIN_PASSWORD`/`BLOB_READ_WRITE_TOKEN` tienen que estar en `.env.local` (gitignoreado por `.env*`).
 - `SpotlightIndexer.reindexAll` se llama desde dentro de `ServicesSyncService.syncPlaces`, no desde las vistas — así cualquier sync (arranque, pull-to-refresh) reindexa Spotlight sin que cada vista tenga que acordarse de hacerlo. Los `CSSearchableItem` usan `place.id.uuidString` como identificador único, la misma cadena que ya usa el deep link `tequismagico://place/<uuid>`, así que `ContentView` resuelve un toque en resultados de Spotlight (`CSSearchableItemActionType`) con la misma lógica que `handleDeepLink`.
+- `web/` no lee Neon: consume el mismo `GET /api/places` y `GET /api/events` públicos que la app (`web/lib/data.ts`, ISR de 5 min), así web y app muestran exactamente lo mismo sin compartir credenciales. Los slugs de `/lugar/[slug]` se derivan del nombre (no hay columna `slug`): renombrar un lugar en el panel cambia su URL.
+- `web/` **no muestra** `rating`/`reviews_count`: son datos de la carga inicial, no reseñas reales, y publicarlas en una web indexada sería presentar reseñas inventadas. Tampoco van en el JSON-LD; teléfono y horario solo entran al JSON-LD si `content_verified = true`.
+- Fotos editoriales de `web/` (portada, historia, guía) viven en `web/lib/photos.ts` con autor y licencia; `commons()` calcula la ruta md5 de Wikimedia sola. Toda foto nueva ahí aparece automáticamente en `/creditos`.
+- El proyecto de Vercel del panel (`tequis-magico`) sigue con Root Directory `.` y depende del `vercel.json` + `package.json` de la raíz (restos del scaffold). Para limpiar la raíz, primero cambia su Root Directory a `web-admin` en Vercel y después borra `vercel.json`, `package*.json`, `app/`, `lib/`, `public/` y configs de la raíz.
