@@ -2,5 +2,5 @@
   "buildCommand": "cd web-admin && npm run build",
   "outputDirectory": "web-admin/.next",
   "devCommand": "cd web-admin && npm run dev",
-  "installCommand": "cd web-admin && npm install"
+  "installCommand": "npm install --no-audit --no-fund && cd web-admin && npm install"
 }
