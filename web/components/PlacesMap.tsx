@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import 'leaflet/dist/leaflet.css';
-import type { Map as LeafletMap, LayerGroup } from 'leaflet';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import type { Map as MLMap, Marker } from 'maplibre-gl';
+import { loadMapLibre, tequisMapStyle } from '@/lib/mapStyle';
 
 export type MapPoint = {
   id: string;
@@ -12,50 +13,95 @@ export type MapPoint = {
   lat: number;
   lng: number;
   color: string;
+  image?: string | null;
   group?: string;
 };
 
 // Centro del pueblo (Plaza Miguel Hidalgo).
-const TEQUIS_CENTER: [number, number] = [20.5218, -99.8917];
+const TEQUIS_CENTER: [number, number] = [-99.8917, 20.5218];
 
 function escapeHtml(text: string) {
   return text.replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
 }
 
-/** Mapa con Leaflet + teselas de OpenStreetMap. `groups` agrega filtros por categoría. */
+/** Gota de mapa en HTML (para Marker de MapLibre). Se reutiliza en la portada. */
+export function pinElement(color: string, label?: string) {
+  const el = document.createElement('div');
+  el.className = 'map-pin';
+  // __drop lo anima la portada (caída de pines); __body tiene el hover. Separados para que
+  // la animación por JS y la transición CSS no se pisen.
+  el.innerHTML = `<span class="map-pin__drop"><span class="map-pin__body" style="--pin:${color}"><svg viewBox="0 0 26 34" aria-hidden="true"><path d="M13 33C11 26 1 20.5 1 12.6a12 12 0 0 1 24 0C25 20.5 15 26 13 33Z"/><circle cx="13" cy="12.6" r="4.4"/></svg></span></span>`;
+  if (label) el.setAttribute('aria-label', label);
+  return el;
+}
+
+/** Contenido de la ventana de un lugar: foto, nombre, tipo y link. */
+export function popupHtml(p: Pick<MapPoint, 'name' | 'subtitle' | 'href' | 'image'>) {
+  const img = p.image ? `<img src="${escapeHtml(p.image)}" alt="" referrerpolicy="no-referrer" loading="lazy">` : '';
+  return `<a class="map-card" href="${escapeHtml(p.href)}">${img}<span class="map-card__body"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.subtitle)}</span><em>Ver lugar →</em></span></a>`;
+}
+
+/**
+ * Mapa vectorial (MapLibre + OpenFreeMap) con la paleta del sitio, pines propios y
+ * ventanas con foto. `wheelZoom` solo en el mapa grande; en los chicos el scroll sigue
+ * bajando la página y se acerca con ctrl/⌘ + rueda o con dos dedos.
+ */
 export default function PlacesMap({
   points,
   groups,
   className = 'h-[70vh]',
   zoom = 15,
+  wheelZoom = false,
 }: {
   points: MapPoint[];
   groups?: { key: string; label: string; color: string }[];
   className?: string;
   zoom?: number;
+  wheelZoom?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<LeafletMap | null>(null);
-  const layerRef = useRef<LayerGroup | null>(null);
+  const mapRef = useRef<MLMap | null>(null);
+  const markersRef = useRef<Marker[]>([]);
   const [hidden, setHidden] = useState<Set<string>>(new Set());
   const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   const visible = useMemo(() => points.filter((p) => !p.group || !hidden.has(p.group)), [points, hidden]);
 
   useEffect(() => {
     let cancelled = false;
-    import('leaflet').then((L) => {
-      if (cancelled || !containerRef.current || mapRef.current) return;
-      const center: [number, number] = points.length === 1 ? [points[0].lat, points[0].lng] : TEQUIS_CENTER;
-      const map = L.map(containerRef.current, { scrollWheelZoom: false }).setView(center, zoom);
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 19,
-      }).addTo(map);
-      layerRef.current = L.layerGroup().addTo(map);
-      mapRef.current = map;
-      setReady(true);
-    });
+    (async () => {
+      try {
+        const [{ Map, NavigationControl }, style] = await Promise.all([loadMapLibre(), tequisMapStyle()]);
+        if (cancelled || !containerRef.current) return;
+        const center: [number, number] = points.length === 1 ? [points[0].lng, points[0].lat] : TEQUIS_CENTER;
+        const map = new Map({
+          container: containerRef.current,
+          style,
+          center,
+          zoom,
+          attributionControl: { compact: true },
+          cooperativeGestures: !wheelZoom,
+          scrollZoom: wheelZoom,
+          dragRotate: false,
+          pitchWithRotate: false,
+        });
+        map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
+        mapRef.current = map;
+        map.on('load', () => {
+          if (cancelled) return;
+          // Encuadrar todos los puntos (si hay varios) con margen.
+          if (points.length > 1) {
+            const lngs = points.map((p) => p.lng);
+            const lats = points.map((p) => p.lat);
+            map.fitBounds([[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]], { padding: 70, maxZoom: Math.max(zoom, 16), duration: 0 });
+          }
+          setReady(true);
+        });
+      } catch {
+        if (!cancelled) setFailed(true);
+      }
+    })();
     return () => {
       cancelled = true;
       mapRef.current?.remove();
@@ -66,19 +112,20 @@ export default function PlacesMap({
   }, []);
 
   useEffect(() => {
-    if (!ready) return;
-    import('leaflet').then((L) => {
-      const layer = layerRef.current;
-      if (!layer) return;
-      layer.clearLayers();
-      for (const p of visible) {
-        L.circleMarker([p.lat, p.lng], { radius: 8, color: '#fff', weight: 2, fillColor: p.color, fillOpacity: 1 })
-          .bindPopup(
-            `<strong>${escapeHtml(p.name)}</strong><br><span style="opacity:.7">${escapeHtml(p.subtitle)}</span><br><a href="${p.href}">Ver detalles →</a>`,
-          )
-          .addTo(layer);
-      }
+    const map = mapRef.current;
+    if (!ready || !map) return;
+    let cancelled = false;
+    loadMapLibre().then(({ Marker, Popup }) => {
+      if (cancelled) return;
+      markersRef.current.forEach((m) => m.remove());
+      markersRef.current = visible.map((p) => {
+        const popup = new Popup({ offset: [0, -30], closeButton: false, maxWidth: '260px', className: 'map-popup' }).setHTML(popupHtml(p));
+        return new Marker({ element: pinElement(p.color, p.name), anchor: 'bottom' }).setLngLat([p.lng, p.lat]).setPopup(popup).addTo(map);
+      });
     });
+    return () => {
+      cancelled = true;
+    };
   }, [ready, visible]);
 
   return (
@@ -100,18 +147,31 @@ export default function PlacesMap({
                     return next;
                   })
                 }
-                className={`inline-flex items-center gap-2 border px-3.5 py-1.5 text-[15px] transition ${
-                  off ? 'border-line text-muted opacity-60' : 'border-ink'
+                className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[15px] transition-colors ${
+                  off ? 'border-line text-muted' : 'border-ink bg-ink text-bg'
                 }`}
               >
-                <span className="size-2.5 rounded-full" style={{ background: off ? 'transparent' : g.color, outline: `2px solid ${g.color}` }} />
+                <span className="size-2.5 rounded-full" style={{ background: g.color, outline: off ? `2px solid ${g.color}` : 'none' }} />
                 {g.label}
               </button>
             );
           })}
         </div>
       )}
-      <div ref={containerRef} className={`w-full overflow-hidden border border-line ${className}`} />
+      <div
+        className={`relative w-full overflow-hidden rounded-[28px] bg-surface shadow-[0_30px_60px_-30px_rgba(31,26,23,0.35)] ring-1 ring-ink/10 ${className}`}
+        {...(wheelZoom ? { 'data-lenis-prevent': true } : {})}
+      >
+        {/* MapLibre le pone position:relative a su contenedor; por eso va dentro de una caja absoluta y mide 100%. */}
+        <div className="absolute inset-0">
+          <div ref={containerRef} className="size-full" />
+        </div>
+        {failed && (
+          <p className="absolute inset-0 flex items-center justify-center p-6 text-center text-muted">
+            No pudimos cargar el mapa. Revisa tu conexión e intenta de nuevo.
+          </p>
+        )}
+      </div>
     </div>
   );
 }

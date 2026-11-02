@@ -10,7 +10,7 @@ export function CategoryTabs({ places, active }: { places: Place[]; active: Plac
       key={href}
       href={href}
       aria-current={isActive ? 'page' : undefined}
-      className={`whitespace-nowrap border px-4 py-2 text-[15px] transition ${
+      className={`whitespace-nowrap rounded-full border px-4 py-2 text-[15px] transition-colors ${
         isActive ? 'border-ink bg-ink text-bg' : 'border-line hover:border-ink'
       }`}
     >

@@ -24,7 +24,9 @@ export default async function MapaPage() {
       </PageIntro>
       <div className="mx-auto max-w-[1240px] px-5">
       <PlacesMap
-        zoom={14}
+        zoom={16}
+        wheelZoom
+        className="h-[75vh]"
         groups={groups}
         points={places.map((p) => ({
           id: p.id,
@@ -34,6 +36,7 @@ export default async function MapaPage() {
           lat: p.latitude,
           lng: p.longitude,
           color: CATEGORIES[p.category].color,
+          image: p.thumbnailUrl,
           group: p.category,
         }))}
       />

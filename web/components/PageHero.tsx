@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Photo } from '@/lib/photos';
+import { ArchPhoto } from './Frame';
 
 /** Portada con foto para las páginas editoriales (el header va transparente encima). */
 export function PageHero({ photo, alt, eyebrow, title, serif }: { photo: Photo; alt: string; eyebrow: string; title: string; serif: string }) {
@@ -43,10 +44,13 @@ export function Feature({
 }) {
   return (
     <section id={id} className="mx-auto grid max-w-[1140px] scroll-mt-24 items-center gap-12 px-5 py-20 md:grid-cols-2 md:gap-16">
-      <div data-reveal="image" className={`aspect-[4/5] overflow-hidden ${reverse ? 'md:order-2' : ''}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={photo.src} alt={alt} loading="lazy" referrerPolicy="no-referrer" className="size-full object-cover" />
-      </div>
+      <ArchPhoto
+        src={photo.src}
+        alt={alt}
+        ratio="aspect-[4/5]"
+        outline={reverse ? 'left' : 'right'}
+        className={`mx-auto w-full max-w-[460px] ${reverse ? 'md:order-2' : ''}`}
+      />
       <div>
         <p data-reveal="up" className="eyebrow">{eyebrow}</p>
         <h2 data-split="lines" className="mt-3 text-[clamp(1.9rem,3vw,2.4rem)] font-bold leading-tight">

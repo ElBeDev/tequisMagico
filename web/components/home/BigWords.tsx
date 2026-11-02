@@ -77,7 +77,7 @@ export default function BigWords({ items }: { items: BigWord[] }) {
               className={`group flex items-center gap-5 py-5 transition-colors duration-500 sm:py-7 ${active !== null && active !== i ? 'text-ink/25' : 'text-ink/70'} hover:text-ink`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={w.image} alt="" loading="lazy" referrerPolicy="no-referrer" className="size-16 shrink-0 object-cover lg:hidden" />
+              <img src={w.image} alt="" loading="lazy" referrerPolicy="no-referrer" className="h-20 w-16 shrink-0 rounded-t-full rounded-b-lg object-cover lg:hidden" />
               <span className="font-display text-[clamp(2.2rem,6.5vw,5.6rem)] leading-none tracking-wide transition-transform duration-500 group-hover:translate-x-4">
                 {w.label}
               </span>
@@ -88,7 +88,11 @@ export default function BigWords({ items }: { items: BigWord[] }) {
         ))}
       </ul>
 
-      <div data-follow className="pointer-events-none invisible absolute left-0 top-0 z-10 -ml-[150px] -mt-[190px] hidden h-[380px] w-[300px] overflow-hidden lg:block" aria-hidden>
+      <div
+        data-follow
+        className="pointer-events-none invisible absolute left-0 top-0 z-10 -ml-[150px] -mt-[190px] hidden h-[380px] w-[300px] overflow-hidden rounded-t-[999px] rounded-b-[22px] drop-shadow-[0_30px_40px_rgba(31,26,23,0.35)] lg:block"
+        aria-hidden
+      >
         {items.map((w, i) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img key={w.label} data-follow-img={i} src={w.image} alt="" referrerPolicy="no-referrer" className="absolute inset-0 size-full object-cover" />

@@ -55,7 +55,7 @@ export default function GuiaPracticaPage() {
 
       <section id="como-llegar" className="mx-auto max-w-[1140px] scroll-mt-24 px-5 pt-24">
         <SectionTitle eyebrow="Cómo llegar" title="En el sureste" serif="de Querétaro" />
-        <div data-reveal="stagger" className="mt-14 grid gap-px border border-line bg-line md:grid-cols-3">
+        <div data-reveal="stagger" className="mt-14 grid gap-px overflow-hidden rounded-[28px] border border-line bg-line md:grid-cols-3">
           {ROUTES.map(({ icon: Icon, from, lines }) => (
             <div key={from} className="bg-bg p-8">
               <Icon className="size-7" strokeWidth={1.4} aria-hidden />
@@ -99,7 +99,7 @@ export default function GuiaPracticaPage() {
           <li>Los horarios pueden cambiar en temporada. En cada ficha te decimos si ya confirmamos el horario con el negocio; si no, llama antes de ir.</li>
           <li>La Presa Centenario cambia mucho de nivel de un año a otro: hay temporadas en que está casi vacía.</li>
         </ul>
-        <div className="space-y-2 border border-ink p-6 text-[16px]">
+        <div className="space-y-2 rounded-[24px] border border-ink/80 p-6 text-[16px]">
           <p className="eyebrow !text-[12px]">Teléfonos</p>
           <p className="flex items-center gap-3"><Phone className="size-4" aria-hidden /> Emergencias: <a href="tel:911" className="font-semibold underline">911</a></p>
           <p className="flex items-center gap-3">
@@ -110,7 +110,7 @@ export default function GuiaPracticaPage() {
       </Feature>
 
       <section className="mx-auto max-w-[1140px] px-5 pt-16">
-        <div data-reveal="image" data-cursor-dark className="on-dark flex flex-col items-center gap-6 bg-green px-8 py-16 text-center text-white">
+        <div data-reveal="image" data-cursor-dark className="on-dark flex flex-col items-center gap-6 rounded-[32px] bg-green px-8 py-16 text-center text-white">
           <p className="text-3xl font-bold">Ya en el pueblo</p>
           <p className="-mt-3 font-display text-3xl">todo en el mapa</p>
           <div className="flex flex-wrap justify-center gap-4">

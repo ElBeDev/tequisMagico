@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# copiado de node_modules en predev/prebuild (worker de MapLibre)
+/public/maplibre-gl-worker.mjs

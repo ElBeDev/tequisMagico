@@ -123,7 +123,7 @@ export default function Hero({
           <Link
             href={card.href}
             data-hero-card
-            className="group block w-full max-w-[270px] border border-white/80 p-6 backdrop-blur-[2px] transition-colors duration-500 hover:bg-white hover:text-ink"
+            className="group block w-full max-w-[270px] rounded-[22px] border border-white/80 p-6 backdrop-blur-[2px] transition-colors duration-500 hover:bg-white hover:text-ink"
           >
             <p className="eyebrow !text-[12px]">{card.eyebrow}</p>
             <p className="mt-1.5 font-display text-xl leading-snug">{card.title}</p>

@@ -90,7 +90,7 @@ export default function SiteHeader() {
                   {group.label} <ChevronDown className="size-3.5 transition group-hover:rotate-180" aria-hidden />
                 </button>
                 <div className="invisible absolute left-1/2 top-full w-64 -translate-x-1/2 pt-3 opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                  <ul className="border border-line bg-bg py-3 text-ink shadow-xl">
+                  <ul className="overflow-hidden rounded-[20px] border border-line bg-bg py-3 text-ink shadow-xl">
                     {group.links.map((l) => (
                       <li key={l.href}>
                         <Link href={l.href} className="block px-5 py-2 text-[15px] hover:bg-surface">
@@ -110,7 +110,7 @@ export default function SiteHeader() {
             aria-label="Abrir menú"
             aria-expanded={menuOpen}
             data-intro
-            className="group/burger flex size-12 flex-col items-center justify-center gap-[6px] border border-current transition-colors hover:bg-current"
+            className="group/burger flex size-12 flex-col items-center justify-center gap-[6px] rounded-full border border-current transition-colors hover:bg-current"
           >
             <span className="h-[2px] w-6 bg-current transition-all group-hover/burger:w-4 group-hover/burger:bg-bg" />
             <span className="h-[2px] w-6 bg-current transition-all group-hover/burger:bg-bg" />
@@ -125,7 +125,7 @@ export default function SiteHeader() {
             <Link href="/" aria-label="Inicio">
               <Logo />
             </Link>
-            <button type="button" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú" className="flex size-12 items-center justify-center border border-current">
+            <button type="button" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú" className="flex size-12 items-center justify-center rounded-full border border-current">
               <X className="size-6" aria-hidden />
             </button>
           </div>

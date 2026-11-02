@@ -140,13 +140,13 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
       </header>
 
       <div className={`mx-auto grid max-w-[1240px] grid-cols-1 gap-2 px-5 ${photos.length > 1 ? 'sm:grid-cols-[2fr_1fr]' : ''}`}>
-        <div data-reveal="image" className="overflow-hidden">
+        <div data-reveal="image" className="overflow-hidden rounded-[28px]">
           <Photo src={photos[0] ?? null} alt={place.name} label={place.subcategory} className="aspect-[16/9] w-full" />
         </div>
         {photos.length > 1 && (
           <div className={`hidden gap-2 sm:grid ${photos.length > 2 ? 'grid-rows-2' : ''}`}>
             {photos.slice(1, 3).map((src) => (
-              <Photo key={src} src={src} alt={place.name} className="size-full" />
+              <Photo key={src} src={src} alt={place.name} className="size-full rounded-[28px]" />
             ))}
           </div>
         )}
@@ -188,14 +188,14 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
               <PlacesMap
                 className="h-80"
                 zoom={16}
-                points={[{ id: place.id, name: place.name, href: `/lugar/${place.slug}`, subtitle: place.address, lat: place.latitude, lng: place.longitude, color: '#38492a' }]}
+                points={[{ id: place.id, name: place.name, href: `/lugar/${place.slug}`, subtitle: place.address, lat: place.latitude, lng: place.longitude, color: '#38492a', image: place.thumbnailUrl }]}
               />
             </div>
           </section>
         </div>
 
         <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
-          <div data-reveal="up" className="space-y-4 border border-ink p-6 text-[15px]">
+          <div data-reveal="up" className="space-y-4 rounded-[24px] border border-ink/80 p-6 text-[15px]">
             {place.address && (
               <p className="flex gap-3"><MapPin className="mt-0.5 size-4 shrink-0" aria-hidden /> {/tequisquiapan/i.test(place.address) ? place.address : `${place.address}, Tequisquiapan, Qro.`}</p>
             )}
@@ -225,7 +225,7 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
           </div>
 
           {!place.contentVerified && (
-            <p className="flex gap-3 bg-surface p-5 text-sm text-muted">
+            <p className="flex gap-3 rounded-[20px] bg-surface p-5 text-sm text-muted">
               <Info className="size-4 shrink-0" aria-hidden />
               Todavía no confirmamos el teléfono y el horario de este lugar con el negocio. Llama antes de ir.
             </p>

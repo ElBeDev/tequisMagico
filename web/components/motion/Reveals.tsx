@@ -37,12 +37,15 @@ export default function Reveals() {
       // up / fade: en lotes, para que una cuadrícula entre escalonada.
       for (const kind of ['up', 'fade'] as const) {
         const els = gsap.utils.toArray<HTMLElement>(`[data-reveal="${kind}"]`);
+        // `fade` solo toca la opacidad: si GSAP anima `y`, borra el `translate` de Tailwind del
+        // elemento (p. ej. el contorno desplazado de los marcos en arco).
         const from = kind === 'up' ? { y: 50, autoAlpha: 0 } : { autoAlpha: 0 };
-        els.filter(above).forEach((el) => gsap.set(el, { autoAlpha: 1, y: 0 }));
+        const to = kind === 'up' ? { y: 0, autoAlpha: 1 } : { autoAlpha: 1 };
+        els.filter(above).forEach((el) => gsap.set(el, to));
         ScrollTrigger.batch(els.filter((el) => !above(el)), {
           start: 'top 92%',
           once: true,
-          onEnter: (batch) => gsap.fromTo(batch, from, { y: 0, autoAlpha: 1, duration: 1.1, ease: EASE, stagger: 0.09, overwrite: true }),
+          onEnter: (batch) => gsap.fromTo(batch, from, { ...to, duration: 1.1, ease: EASE, stagger: 0.09, overwrite: true }),
         });
       }
 

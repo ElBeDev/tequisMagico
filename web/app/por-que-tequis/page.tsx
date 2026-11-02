@@ -43,7 +43,7 @@ export default function PorQueTequisPage() {
       </section>
 
       <section id="nombre" className="mx-auto mt-24 max-w-[1140px] scroll-mt-24 px-5">
-        <div data-reveal="stagger" className="grid gap-px border border-line bg-line md:grid-cols-3">
+        <div data-reveal="stagger" className="grid gap-px overflow-hidden rounded-[28px] border border-line bg-line md:grid-cols-3">
           {[
             { k: 'Tequixquitl', v: 'tequesquite, el salitre mineral' },
             { k: 'Atl', v: 'agua' },
@@ -154,7 +154,7 @@ export default function PorQueTequisPage() {
       </Feature>
 
       <section className="mx-auto max-w-[1140px] px-5 pt-16">
-        <div data-reveal="image" data-cursor-dark className="on-dark flex flex-col items-center gap-6 bg-green px-8 py-16 text-center text-white">
+        <div data-reveal="image" data-cursor-dark className="on-dark flex flex-col items-center gap-6 rounded-[32px] bg-green px-8 py-16 text-center text-white">
           <p className="text-3xl font-bold">¿Listo para ir?</p>
           <p className="-mt-3 font-display text-3xl">arma tu fin de semana</p>
           <div className="flex flex-wrap justify-center gap-4">

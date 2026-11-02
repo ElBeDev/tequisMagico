@@ -76,7 +76,7 @@ export default async function EventoPage({ params }: PageProps<'/evento/[slug]'>
       </header>
 
       <div className="mx-auto max-w-[1240px] px-5">
-        <div data-reveal="image" className="overflow-hidden">
+        <div data-reveal="image" className="overflow-hidden rounded-[28px]">
           <Photo src={event.thumbnailUrl} alt={event.title} label={event.category} className="aspect-[16/9] w-full" />
         </div>
       </div>
@@ -93,7 +93,7 @@ export default async function EventoPage({ params }: PageProps<'/evento/[slug]'>
                 <PlacesMap
                   className="h-80"
                   zoom={16}
-                  points={[{ id: event.id, name: event.locationName ?? event.title, href: `/evento/${event.slug}`, subtitle: event.address ?? '', lat: event.latitude!, lng: event.longitude!, color: '#38492a' }]}
+                  points={[{ id: event.id, name: event.locationName ?? event.title, href: `/evento/${event.slug}`, subtitle: event.address ?? '', lat: event.latitude!, lng: event.longitude!, color: '#38492a', image: event.thumbnailUrl }]}
                 />
               </div>
             </section>
@@ -101,7 +101,7 @@ export default async function EventoPage({ params }: PageProps<'/evento/[slug]'>
         </div>
 
         <aside className="lg:sticky lg:top-28 lg:self-start">
-          <ul className="space-y-4 border border-ink p-6 text-[15px]">
+          <ul className="space-y-4 rounded-[24px] border border-ink/80 p-6 text-[15px]">
             <li className="flex gap-3"><CalendarDays className="mt-0.5 size-4 shrink-0" aria-hidden /> {formatDateRange(event.startDate, event.endDate)}</li>
             {event.locationName && <li className="flex gap-3"><MapPin className="mt-0.5 size-4 shrink-0" aria-hidden /> {event.locationName}</li>}
             <li className="flex gap-3">

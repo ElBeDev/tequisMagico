@@ -21,7 +21,7 @@ export default async function RutasPage() {
       </PageIntro>
       <div className="mx-auto grid max-w-[1240px] gap-8 px-5 sm:grid-cols-2">
         {routes.map((r) => (
-          <Link key={r.slug} href={`/rutas/${r.slug}`} data-cursor="Ver" data-reveal="image" className="group relative block aspect-[4/3] overflow-hidden bg-stone text-white">
+          <Link key={r.slug} href={`/rutas/${r.slug}`} data-cursor="Ver" data-reveal="image" className="group relative block aspect-[4/3] overflow-hidden rounded-[28px] bg-stone text-white">
             {r.stops[0]?.thumbnailUrl && (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={r.stops[0].thumbnailUrl} alt="" loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105" />

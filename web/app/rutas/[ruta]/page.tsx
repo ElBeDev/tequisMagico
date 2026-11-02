@@ -40,7 +40,7 @@ export default async function RutaPage({ params }: PageProps<'/rutas/[ruta]'>) {
               <li key={p.id} data-reveal="up">
                 <Link href={`/lugar/${p.slug}`} data-cursor="Ver" className="group flex items-center gap-5 border-t border-line py-5 transition-[padding] duration-500 hover:pl-3">
                   <span className="w-8 shrink-0 font-display text-3xl">{i + 1}</span>
-                  <Photo src={p.thumbnailUrl} alt={p.name} className="size-20 shrink-0" />
+                  <Photo src={p.thumbnailUrl} alt={p.name} className="size-20 shrink-0 rounded-t-full rounded-b-xl" />
                   <span className="min-w-0">
                     <span className="block font-display text-xl group-hover:underline">{p.name}</span>
                     <span className="block truncate text-[15px] text-muted">{p.subcategory} · {p.shortDescription}</span>
@@ -59,7 +59,7 @@ export default async function RutaPage({ params }: PageProps<'/rutas/[ruta]'>) {
             <PlacesMap
               className="h-[60vh]"
               zoom={13}
-              points={stops.map((p, i) => ({ id: p.id, name: `${i + 1}. ${p.name}`, href: `/lugar/${p.slug}`, subtitle: p.subcategory, lat: p.latitude, lng: p.longitude, color: '#38492a' }))}
+              points={stops.map((p, i) => ({ id: p.id, name: `${i + 1}. ${p.name}`, href: `/lugar/${p.slug}`, subtitle: p.subcategory, lat: p.latitude, lng: p.longitude, color: '#38492a', image: p.thumbnailUrl }))}
             />
           </div>
         )}

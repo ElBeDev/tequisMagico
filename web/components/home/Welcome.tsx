@@ -15,10 +15,17 @@ export default function Welcome({ image, alt }: { image: string; alt: string }) 
     () => {
       if (prefersReducedMotion()) return;
       const frame = root.current!.querySelector<HTMLElement>('[data-welcome-frame]')!;
+      const clip = frame.querySelector<HTMLElement>('[data-welcome-clip]')!;
       const grow = () => Math.max(1, Math.min(window.innerWidth / frame.offsetWidth, 2.6));
-      gsap.fromTo(frame, { scale: grow }, {
-        scale: 1, ease: 'none',
-        scrollTrigger: { trigger: frame, start: 'top bottom', end: 'center 55%', scrub: 0.6, invalidateOnRefresh: true },
+      const st = { trigger: frame, start: 'top bottom', end: 'center 55%', scrub: 0.6, invalidateOnRefresh: true };
+      // Al encogerse, el rectángulo se vuelve arco de portal.
+      gsap.fromTo(frame, { scale: grow }, { scale: 1, ease: 'none', scrollTrigger: st });
+      gsap.fromTo(clip, { borderRadius: '0px 0px 0px 0px' }, {
+        borderRadius: () => `${frame.offsetWidth / 2}px ${frame.offsetWidth / 2}px 24px 24px`, ease: 'power1.in', scrollTrigger: st,
+      });
+      gsap.fromTo('[data-welcome-outline]', { autoAlpha: 0, x: 0, y: 0 }, {
+        autoAlpha: 1, x: 18, y: 18, ease: 'none',
+        scrollTrigger: { trigger: frame, start: 'center 70%', end: 'center 45%', scrub: true },
       });
       gsap.fromTo(frame.querySelector('img'), { scale: 1 }, {
         scale: 1.25, ease: 'none',
@@ -49,9 +56,18 @@ export default function Welcome({ image, alt }: { image: string; alt: string }) 
       </p>
       <h1 data-split="chars" className="relative font-display text-[clamp(2.6rem,4.5vw,3.4rem)] leading-tight">Tequisquiapan</h1>
       <p data-reveal="up" className="eyebrow relative mt-3">Pueblo Mágico de Querétaro</p>
-      <div data-welcome-frame className="relative z-10 mx-auto mt-12 aspect-[16/10] w-full max-w-[560px] origin-top overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image} alt={alt} referrerPolicy="no-referrer" loading="lazy" className="size-full object-cover" />
+      <div data-welcome-frame className="relative z-10 mx-auto mt-12 aspect-[4/3] w-full max-w-[520px] origin-top">
+        <span
+          data-welcome-outline
+          aria-hidden
+          className="invisible absolute inset-0 rounded-t-[999px] rounded-b-[24px] border border-ink/35"
+        />
+        <div className="relative size-full drop-shadow-[0_34px_44px_rgba(31,26,23,0.3)]">
+          <div data-welcome-clip className="size-full overflow-hidden rounded-t-[999px] rounded-b-[24px]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={image} alt={alt} referrerPolicy="no-referrer" loading="lazy" className="size-full object-cover" />
+          </div>
+        </div>
       </div>
       <div data-reveal="stagger" className="relative mx-auto mt-14 max-w-xl space-y-1 text-[17px] leading-relaxed">
         <p>Descubre un pueblo de calles empedradas y portales de cantera,</p>

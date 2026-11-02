@@ -10,6 +10,7 @@ import ColorShift from '@/components/home/ColorShift';
 import DragRow from '@/components/home/DragRow';
 import MapStory from '@/components/home/MapStory';
 import { MoreLink, SectionTitle } from '@/components/Section';
+import { ArchPhoto } from '@/components/Frame';
 
 export const revalidate = 300;
 
@@ -124,16 +125,10 @@ export default async function Home() {
           <div className="relative bg-bg text-ink">
             <div className="mx-auto grid max-w-[1140px] items-start gap-10 px-5 pb-28 md:grid-cols-[0.8fr_1fr_1.2fr]">
               <div data-parallax="-0.4" className="-mt-24 hidden md:block">
-                <div data-reveal="image" className="aspect-[3/4] overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={PHOTOS.portalesPlaza.src} alt="Portales de la plaza" referrerPolicy="no-referrer" loading="lazy" className="size-full object-cover" />
-                </div>
+                <ArchPhoto src={PHOTOS.portalesPlaza.src} alt="Portales de la plaza" outline="left" className="-rotate-3" />
               </div>
               <div data-parallax="0.25" className="-mt-40">
-                <div data-reveal="image" className="aspect-[3/4] overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={PHOTOS.parroquiaNoche.src} alt="El centro de Tequis de noche" referrerPolicy="no-referrer" loading="lazy" className="size-full object-cover" />
-                </div>
+                <ArchPhoto src={PHOTOS.parroquiaNoche.src} alt="El centro de Tequis de noche" className="rotate-2" />
               </div>
               <div className="pt-6">
                 <p data-reveal="up" className="text-[17px] leading-relaxed">
@@ -158,7 +153,7 @@ export default async function Home() {
 
       <MapStory
         count={places.length}
-        places={places.map((p) => ({ slug: p.slug, name: p.name, subcategory: p.subcategory, lat: p.latitude, lng: p.longitude }))}
+        places={places.map((p) => ({ slug: p.slug, name: p.name, subcategory: p.subcategory, lat: p.latitude, lng: p.longitude, image: p.thumbnailUrl }))}
       />
 
       {/* Eventos */}
@@ -178,7 +173,7 @@ export default async function Home() {
 
       {/* App */}
       <section className="mx-auto max-w-[1140px] px-5 pt-28">
-        <div data-reveal="image" data-cursor-dark className="on-dark relative overflow-hidden bg-green px-8 py-20 text-center text-white">
+        <div data-reveal="image" data-cursor-dark className="on-dark relative overflow-hidden rounded-[32px] bg-green px-8 py-20 text-center text-white">
           <div data-reveal="stagger" className="relative flex flex-col items-center gap-6">
             <p className="eyebrow">La app</p>
             <p className="text-3xl font-bold">Tequis en tu bolsillo</p>
