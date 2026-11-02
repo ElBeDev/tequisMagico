@@ -27,7 +27,7 @@ export default function AppPage() {
         <p className="eyebrow mt-8">Muy pronto en el App Store</p>
       </PageIntro>
 
-      <ul className="mx-auto grid max-w-[1000px] gap-px border border-line bg-line px-0 sm:grid-cols-2 lg:grid-cols-3">
+      <ul data-reveal="stagger" className="mx-auto grid max-w-[1000px] gap-px border border-line bg-line px-0 sm:grid-cols-2 lg:grid-cols-3">
         {FEATURES.map(({ icon: Icon, title, text }) => (
           <li key={title} className="bg-bg p-8">
             <Icon className="size-7" strokeWidth={1.4} aria-hidden />

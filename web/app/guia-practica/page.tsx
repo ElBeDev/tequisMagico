@@ -55,7 +55,7 @@ export default function GuiaPracticaPage() {
 
       <section id="como-llegar" className="mx-auto max-w-[1140px] scroll-mt-24 px-5 pt-24">
         <SectionTitle eyebrow="Cómo llegar" title="En el sureste" serif="de Querétaro" />
-        <div className="mt-14 grid gap-px border border-line bg-line md:grid-cols-3">
+        <div data-reveal="stagger" className="mt-14 grid gap-px border border-line bg-line md:grid-cols-3">
           {ROUTES.map(({ icon: Icon, from, lines }) => (
             <div key={from} className="bg-bg p-8">
               <Icon className="size-7" strokeWidth={1.4} aria-hidden />
@@ -110,7 +110,7 @@ export default function GuiaPracticaPage() {
       </Feature>
 
       <section className="mx-auto max-w-[1140px] px-5 pt-16">
-        <div className="on-dark flex flex-col items-center gap-6 bg-green px-8 py-16 text-center text-white">
+        <div data-reveal="image" data-cursor-dark className="on-dark flex flex-col items-center gap-6 bg-green px-8 py-16 text-center text-white">
           <p className="text-3xl font-bold">Ya en el pueblo</p>
           <p className="-mt-3 font-display text-3xl">todo en el mapa</p>
           <div className="flex flex-wrap justify-center gap-4">

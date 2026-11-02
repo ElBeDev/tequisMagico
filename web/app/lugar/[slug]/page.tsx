@@ -126,7 +126,7 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
         <nav className="eyebrow !text-[12px] text-muted" aria-label="Ruta de navegación">
           <Link href="/lugares" className="hover:text-ink">Lugares</Link> · <Link href={`/lugares/${c.slug}`} className="hover:text-ink">{c.label}</Link>
         </nav>
-        <h1 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.05]">{place.name}</h1>
+        <h1 data-split="lines" className="mt-4 font-display text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.05]">{place.name}</h1>
         <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[15px] text-muted">
           <span>{place.subcategory}</span>
           {price && <span>· {price.symbol}{price.symbol !== price.label && ` · ${price.label}`}</span>}
@@ -140,7 +140,9 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
       </header>
 
       <div className={`mx-auto grid max-w-[1240px] grid-cols-1 gap-2 px-5 ${photos.length > 1 ? 'sm:grid-cols-[2fr_1fr]' : ''}`}>
-        <Photo src={photos[0] ?? null} alt={place.name} label={place.subcategory} className="aspect-[16/9] w-full" />
+        <div data-reveal="image" className="overflow-hidden">
+          <Photo src={photos[0] ?? null} alt={place.name} label={place.subcategory} className="aspect-[16/9] w-full" />
+        </div>
         {photos.length > 1 && (
           <div className={`hidden gap-2 sm:grid ${photos.length > 2 ? 'grid-rows-2' : ''}`}>
             {photos.slice(1, 3).map((src) => (
@@ -152,8 +154,8 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
 
       <div className="mx-auto mt-16 grid max-w-[1140px] grid-cols-1 gap-14 px-5 lg:grid-cols-[minmax(0,1fr)_340px]">
         <div>
-          {place.shortDescription && <p className="font-display text-[1.7rem] leading-snug">{place.shortDescription}</p>}
-          {place.fullDescription && <p className="mt-5 text-[17px] leading-relaxed">{place.fullDescription}</p>}
+          {place.shortDescription && <p data-split="lines" className="font-display text-[1.7rem] leading-snug">{place.shortDescription}</p>}
+          {place.fullDescription && <p data-reveal="up" className="mt-5 text-[17px] leading-relaxed">{place.fullDescription}</p>}
 
           {place.amenities.length > 0 && (
             <section className="mt-12">
@@ -193,7 +195,7 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
         </div>
 
         <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
-          <div className="space-y-4 border border-ink p-6 text-[15px]">
+          <div data-reveal="up" className="space-y-4 border border-ink p-6 text-[15px]">
             {place.address && (
               <p className="flex gap-3"><MapPin className="mt-0.5 size-4 shrink-0" aria-hidden /> {/tequisquiapan/i.test(place.address) ? place.address : `${place.address}, Tequisquiapan, Qro.`}</p>
             )}

@@ -21,7 +21,7 @@ export function CategoryPill({ category, className = '' }: { category: Place['ca
 export function PlaceCard({ place }: { place: Place }) {
   const price = PRICE_RANGES[place.priceRange];
   return (
-    <Link href={`/lugar/${place.slug}`} className="group block">
+    <Link href={`/lugar/${place.slug}`} data-cursor="Ver" data-reveal="up" className="group block">
       <div className="overflow-hidden">
         <Photo
           src={place.thumbnailUrl}
@@ -44,9 +44,9 @@ export function PlaceCard({ place }: { place: Place }) {
 }
 
 /** Tarjeta vertical con el texto en serif encima de la foto (las "ideas de viaje" de la referencia). */
-export function StoryCard({ href, image, title, kicker }: { href: string; image: string | null; title: string; kicker?: string }) {
+export function StoryCard({ href, image, title, kicker, cursor = 'Ver' }: { href: string; image: string | null; title: string; kicker?: string; cursor?: string }) {
   return (
-    <Link href={href} className="group relative block aspect-[3/4] w-[260px] shrink-0 overflow-hidden bg-stone sm:w-[300px]">
+    <Link href={href} data-cursor={cursor} className="group relative block aspect-[3/4] w-[260px] shrink-0 overflow-hidden bg-stone sm:w-[300px]">
       {image && (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={image} alt="" loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105" />
@@ -54,7 +54,7 @@ export function StoryCard({ href, image, title, kicker }: { href: string; image:
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 p-7 text-white">
         {kicker && <p className="eyebrow !text-[11px] text-white/80">{kicker}</p>}
-        <p className="mt-2 font-display text-[1.7rem] leading-[1.1]">{title}</p>
+        <p className="mt-2 font-display text-[1.7rem] leading-[1.1] transition-transform duration-500 group-hover:-translate-y-1">{title}</p>
       </div>
     </Link>
   );
@@ -66,7 +66,7 @@ export function EventCard({ event, today }: { event: TequisEvent; today: string 
   const status = eventStatus(event, today);
   const start = new Date(`${event.startDate}T00:00:00Z`);
   return (
-    <Link href={`/evento/${event.slug}`} className="group flex gap-5 border-t border-line py-6">
+    <Link href={`/evento/${event.slug}`} data-cursor="Ver" data-reveal="up" className="group flex gap-5 border-t border-line py-6 transition-[padding] duration-500 hover:px-3">
       <div className="w-16 shrink-0 text-center">
         <p className="font-display text-4xl leading-none">{start.getUTCDate()}</p>
         <p className="eyebrow mt-1 !text-[11px]">{new Intl.DateTimeFormat('es-MX', { month: 'short', timeZone: 'UTC' }).format(start).replace('.', '')}</p>

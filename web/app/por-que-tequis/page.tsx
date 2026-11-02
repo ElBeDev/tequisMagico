@@ -32,10 +32,10 @@ export default function PorQueTequisPage() {
       <PageHero photo={PHOTOS.parroquiaTarde} alt="Parroquia de Santa María de la Asunción" eyebrow="¿Por qué Tequis?" title="Un Pueblo Mágico" serif="de agua, cantera y mimbre" />
 
       <section className="mx-auto max-w-2xl px-5 pt-24 text-center">
-        <p className="font-display text-[1.75rem] leading-snug">
+        <p data-split="lines" className="font-display text-[1.75rem] leading-snug">
           Desde el 17 de octubre de 2012, Tequisquiapan es Pueblo Mágico: el cuarto de Querétaro, después de Bernal, Jalpan y Cadereyta.
         </p>
-        <p className="mt-6 text-[17px] leading-relaxed">
+        <p data-reveal="up" className="mt-6 text-[17px] leading-relaxed">
           Lo que lo hace distinto cabe en un paseo de fin de semana: un centro de portales y cantera, el oficio de la cestería, la
           tradición termal que lo convirtió en destino turístico, los viñedos y queserías de la Ruta Arte, Queso y Vino, y una agenda
           de fiestas que casi no se detiene en todo el año.
@@ -43,7 +43,7 @@ export default function PorQueTequisPage() {
       </section>
 
       <section id="nombre" className="mx-auto mt-24 max-w-[1140px] scroll-mt-24 px-5">
-        <div className="grid gap-px border border-line bg-line md:grid-cols-3">
+        <div data-reveal="stagger" className="grid gap-px border border-line bg-line md:grid-cols-3">
           {[
             { k: 'Tequixquitl', v: 'tequesquite, el salitre mineral' },
             { k: 'Atl', v: 'agua' },
@@ -55,7 +55,7 @@ export default function PorQueTequisPage() {
             </div>
           ))}
         </div>
-        <p className="mx-auto mt-8 max-w-2xl text-center text-[17px] leading-relaxed">
+        <p data-reveal="up" className="mx-auto mt-8 max-w-2xl text-center text-[17px] leading-relaxed">
           El nombre viene del náhuatl y se suele traducir como <em>lugar sobre el río de tequesquite</em>. En otomí, el pueblo se llama
           <em> Nthe</em>.
         </p>
@@ -65,7 +65,7 @@ export default function PorQueTequisPage() {
         <SectionTitle eyebrow="Historia" title="Casi cinco siglos" serif="alrededor del agua" />
         <ol className="mt-14 border-l border-ink/20">
           {TIMELINE.map((t) => (
-            <li key={t.year} className="relative pb-10 pl-8 last:pb-0 sm:pl-12">
+            <li key={t.year} data-reveal="up" className="relative pb-10 pl-8 last:pb-0 sm:pl-12">
               <span className="absolute -left-[5px] top-2.5 size-[9px] rounded-full bg-ink" aria-hidden />
               <p className="font-display text-3xl">{t.year}</p>
               <p className="mt-2 max-w-2xl text-[17px] leading-relaxed">{t.text}</p>
@@ -154,7 +154,7 @@ export default function PorQueTequisPage() {
       </Feature>
 
       <section className="mx-auto max-w-[1140px] px-5 pt-16">
-        <div className="on-dark flex flex-col items-center gap-6 bg-green px-8 py-16 text-center text-white">
+        <div data-reveal="image" data-cursor-dark className="on-dark flex flex-col items-center gap-6 bg-green px-8 py-16 text-center text-white">
           <p className="text-3xl font-bold">¿Listo para ir?</p>
           <p className="-mt-3 font-display text-3xl">arma tu fin de semana</p>
           <div className="flex flex-wrap justify-center gap-4">

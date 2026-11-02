@@ -3,6 +3,9 @@ import { Gilda_Display, Outfit } from "next/font/google";
 import Link from "next/link";
 import { SITE_NAME, SITE_URL } from "@/lib/data";
 import SiteHeader from "@/components/SiteNav";
+import SmoothScroll from "@/components/motion/SmoothScroll";
+import Reveals from "@/components/motion/Reveals";
+import Cursor from "@/components/motion/Cursor";
 import "./globals.css";
 
 const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"] });
@@ -23,6 +26,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#eeedea",
 };
+
+// Corre antes del primer pintado: marca <html> para que el CSS oculte lo que va a entrar
+// animado (evita el parpadeo). Si en 4 s las animaciones no arrancaron, lo muestra todo.
+const MOTION_SCRIPT = `(function(){var d=document.documentElement;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('motion-ready'))d.classList.remove('motion')},4000)})()`;
 
 const FOOTER_LINKS = [
   {
@@ -53,15 +60,21 @@ const FOOTER_LINKS = [
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-MX" className={`${outfit.variable} ${gilda.variable} h-full antialiased`}>
+    <html lang="es-MX" className={`${outfit.variable} ${gilda.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: MOTION_SCRIPT }} />
+      </head>
       <body className="flex min-h-full flex-col font-sans">
+        <SmoothScroll />
+        <Reveals />
+        <Cursor />
         <SiteHeader />
 
         <main className="flex-1">{children}</main>
 
         <footer className="overflow-hidden pt-28">
           <div className="mx-auto grid max-w-[1140px] gap-12 px-5 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
-            <div>
+            <div data-reveal="up">
               <p className="text-3xl font-bold leading-tight">Ven a vivir</p>
               <p className="font-display text-3xl leading-tight">la magia de Tequis.</p>
               <p className="mt-5 max-w-sm text-[17px] leading-relaxed">
@@ -70,7 +83,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               </p>
             </div>
             {FOOTER_LINKS.map((col) => (
-              <nav key={col.title} aria-label={col.title}>
+              <nav key={col.title} aria-label={col.title} data-reveal="up">
                 <p className="font-semibold">{col.title}</p>
                 <ul className="mt-5 space-y-3">
                   {col.links.map((l) => (
@@ -87,8 +100,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </p>
           <p
             aria-hidden
-            className="mt-6 select-none whitespace-nowrap text-center font-display uppercase leading-[0.8] text-white"
-            style={{ fontSize: "clamp(3rem, 12.4vw, 12rem)" }}
+            data-split="chars"
+            className="mt-6 select-none whitespace-nowrap text-center font-display uppercase leading-[0.85] text-white"
+            style={{ fontSize: "clamp(3rem, 11.6vw, 11.5rem)" }}
           >
             Tequisquiapan
           </p>

@@ -153,6 +153,20 @@ Lo que se puede mostrar sin tocar la base. Útil para que el diseño no pida cam
 
 ---
 
+## 6b. Animación e interacción
+
+Inspirada en lo que hace la referencia, que usa GSAP + ScrollTrigger + Lenis. En la portada:
+
+- **Portada:** las fotos entran como cortina, la frase entra letra por letra, hay un contador con barra de progreso y parallax al bajar.
+- **Bienvenida:** la foto se encoge hasta quedar enmarcada y la palabra gigante se desliza.
+- **Palabras grandes:** una foto sigue al cursor, y el fondo pasa de hueso a verde salvia.
+- **Experiencias:** la banda verde se queda fija y el scroll va cambiando de experiencia (en celular, flechas o deslizar).
+- **Ideas de viaje:** carrusel que se arrastra con inercia.
+- **Hospedaje:** foto en parallax y collage a distintas velocidades.
+- **Mapa:** fijo mientras se dibuja México, late Tequis, hace zoom al pueblo y caen los pines de los lugares reales, que llevan a su ficha.
+
+En todo el sitio hay scroll suave, textos y fotos que se revelan al entrar, cursor con etiqueta, header que se esconde al bajar y un menú que abre como cortina. Con "reducir movimiento" activado no se anima nada y todo se ve.
+
 ## 7. Contenido editorial y fotos
 
 - Los textos de `/por-que-tequis`, `/guia-practica` y la portada salen de una investigación con fuentes (Wikipedia, tequis.travel, gob.mx/Sectur, INEGI, queretaro.travel, prensa), noviembre 2026. Donde las fuentes no coinciden, el texto se queda con lo que sí coincide:

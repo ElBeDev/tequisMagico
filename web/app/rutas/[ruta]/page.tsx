@@ -37,8 +37,8 @@ export default async function RutaPage({ params }: PageProps<'/rutas/[ruta]'>) {
           <h2 className="eyebrow">Paradas sugeridas ({stops.length})</h2>
           <ol className="mt-4 border-b border-line">
             {stops.map((p, i) => (
-              <li key={p.id}>
-                <Link href={`/lugar/${p.slug}`} className="group flex items-center gap-5 border-t border-line py-5">
+              <li key={p.id} data-reveal="up">
+                <Link href={`/lugar/${p.slug}`} data-cursor="Ver" className="group flex items-center gap-5 border-t border-line py-5 transition-[padding] duration-500 hover:pl-3">
                   <span className="w-8 shrink-0 font-display text-3xl">{i + 1}</span>
                   <Photo src={p.thumbnailUrl} alt={p.name} className="size-20 shrink-0" />
                   <span className="min-w-0">

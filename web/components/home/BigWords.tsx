@@ -1,0 +1,86 @@
+'use client';
+
+import Link from 'next/link';
+import { useRef, useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import { gsap, isDesktop, useGSAP } from '@/lib/motion';
+
+export type BigWord = { label: string; href: string; image: string; caption: string };
+
+/**
+ * Palabras gigantes en serif (el "Nature / Culture & patrimoine" de la referencia). Al pasar
+ * el mouse, la palabra se rellena y una foto sigue al cursor; en el celular cada palabra
+ * lleva su foto en miniatura.
+ */
+export default function BigWords({ items }: { items: BigWord[] }) {
+  const root = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState<number | null>(null);
+  const follow = useRef<{ x: (v: number) => void; y: (v: number) => void } | null>(null);
+
+  useGSAP(
+    () => {
+      if (!isDesktop()) return;
+      const card = root.current!.querySelector<HTMLElement>('[data-follow]')!;
+      follow.current = {
+        x: gsap.quickTo(card, 'x', { duration: 0.6, ease: 'power3' }),
+        y: gsap.quickTo(card, 'y', { duration: 0.6, ease: 'power3' }),
+      };
+    },
+    { scope: root },
+  );
+
+  useGSAP(
+    () => {
+      const card = root.current!.querySelector<HTMLElement>('[data-follow]');
+      if (!card) return;
+      gsap.to(card, { autoAlpha: active === null ? 0 : 1, scale: active === null ? 0.85 : 1, rotate: active === null ? -4 : 0, duration: 0.45, ease: 'power3.out' });
+      if (active !== null) {
+        const img = card.querySelector(`[data-follow-img="${active}"]`);
+        gsap.fromTo(img, { clipPath: 'inset(100% 0% 0% 0%)', scale: 1.2 }, { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 0.7, ease: 'expo.out' });
+        card.querySelectorAll<HTMLElement>('[data-follow-img]').forEach((el) => (el.style.zIndex = el === img ? '2' : '1'));
+      }
+    },
+    { scope: root, dependencies: [active] },
+  );
+
+  return (
+    <div
+      ref={root}
+      className="relative"
+      onPointerMove={(e) => {
+        const box = root.current!.getBoundingClientRect();
+        follow.current?.x(e.clientX - box.left);
+        follow.current?.y(e.clientY - box.top);
+      }}
+      onPointerLeave={() => setActive(null)}
+    >
+      <ul data-reveal="stagger" className="border-t border-ink/15">
+        {items.map((w, i) => (
+          <li key={w.label} className="border-b border-ink/15">
+            <Link
+              href={w.href}
+              onPointerEnter={() => setActive(i)}
+              data-cursor="Ver"
+              className={`group flex items-center gap-5 py-5 transition-colors duration-500 sm:py-7 ${active !== null && active !== i ? 'text-ink/25' : 'text-ink/70'} hover:text-ink`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={w.image} alt="" loading="lazy" referrerPolicy="no-referrer" className="size-16 shrink-0 object-cover lg:hidden" />
+              <span className="font-display text-[clamp(2.2rem,6.5vw,5.6rem)] leading-none tracking-wide transition-transform duration-500 group-hover:translate-x-4">
+                {w.label}
+              </span>
+              <span className="ml-auto hidden max-w-[200px] text-right text-[15px] leading-snug text-muted lg:block">{w.caption}</span>
+              <ArrowUpRight className="size-8 shrink-0 -translate-x-3 opacity-0 transition duration-500 group-hover:translate-x-0 group-hover:opacity-100" strokeWidth={1.2} aria-hidden />
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      <div data-follow className="pointer-events-none invisible absolute left-0 top-0 z-10 -ml-[150px] -mt-[190px] hidden h-[380px] w-[300px] overflow-hidden lg:block" aria-hidden>
+        {items.map((w, i) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img key={w.label} data-follow-img={i} src={w.image} alt="" referrerPolicy="no-referrer" className="absolute inset-0 size-full object-cover" />
+        ))}
+      </div>
+    </div>
+  );
+}

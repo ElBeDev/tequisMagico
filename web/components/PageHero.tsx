@@ -5,12 +5,14 @@ import type { Photo } from '@/lib/photos';
 export function PageHero({ photo, alt, eyebrow, title, serif }: { photo: Photo; alt: string; eyebrow: string; title: string; serif: string }) {
   return (
     <section className="relative flex h-[78svh] min-h-[480px] items-end overflow-hidden bg-black text-white">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={photo.src} alt={alt} referrerPolicy="no-referrer" fetchPriority="high" className="kenburns absolute inset-0 size-full object-cover" />
+      <div data-parallax="0.4" className="absolute inset-0 -top-[10%] h-[120%]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={photo.src} alt={alt} referrerPolicy="no-referrer" fetchPriority="high" className="kenburns size-full object-cover" />
+      </div>
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/65" />
       <div className="relative mx-auto w-full max-w-[1140px] px-5 pb-14">
-        <p className="eyebrow">{eyebrow}</p>
-        <h1 className="mt-3 text-4xl font-bold sm:text-5xl">
+        <p data-reveal="up" className="eyebrow">{eyebrow}</p>
+        <h1 data-split="lines" data-delay="0.35" className="mt-3 text-4xl font-bold sm:text-5xl">
           {title}
           <span className="mt-2 block font-display text-[2.6rem] font-normal leading-tight sm:text-6xl">{serif}</span>
         </h1>
@@ -41,15 +43,17 @@ export function Feature({
 }) {
   return (
     <section id={id} className="mx-auto grid max-w-[1140px] scroll-mt-24 items-center gap-12 px-5 py-20 md:grid-cols-2 md:gap-16">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={photo.src} alt={alt} loading="lazy" referrerPolicy="no-referrer" className={`aspect-[4/5] w-full object-cover md:aspect-[4/5] ${reverse ? 'md:order-2' : ''}`} />
+      <div data-reveal="image" className={`aspect-[4/5] overflow-hidden ${reverse ? 'md:order-2' : ''}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={photo.src} alt={alt} loading="lazy" referrerPolicy="no-referrer" className="size-full object-cover" />
+      </div>
       <div>
-        <p className="eyebrow">{eyebrow}</p>
-        <h2 className="mt-3 text-[clamp(1.9rem,3vw,2.4rem)] font-bold leading-tight">
+        <p data-reveal="up" className="eyebrow">{eyebrow}</p>
+        <h2 data-split="lines" className="mt-3 text-[clamp(1.9rem,3vw,2.4rem)] font-bold leading-tight">
           {title}
           {serif && <span className="mt-2 block font-display font-normal">{serif}</span>}
         </h2>
-        <div className="mt-6 space-y-4 text-[17px] leading-relaxed">{children}</div>
+        <div data-reveal="stagger" className="mt-6 space-y-4 text-[17px] leading-relaxed">{children}</div>
       </div>
     </section>
   );

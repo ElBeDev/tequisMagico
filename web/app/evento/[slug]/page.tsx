@@ -65,7 +65,7 @@ export default async function EventoPage({ params }: PageProps<'/evento/[slug]'>
         <nav className="eyebrow !text-[12px] text-muted" aria-label="Ruta de navegación">
           <Link href="/eventos" className="hover:text-ink">Eventos</Link> · {event.category}
         </nav>
-        <h1 className="mt-4 font-display text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.05]">{event.title}</h1>
+        <h1 data-split="lines" className="mt-4 font-display text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.05]">{event.title}</h1>
         <p className="mt-4 text-lg">{formatDateRange(event.startDate, event.endDate)}</p>
         {status === 'happening' && <p className="eyebrow mt-3 text-ok">Está pasando ahora</p>}
         {status === 'past' && (
@@ -76,7 +76,9 @@ export default async function EventoPage({ params }: PageProps<'/evento/[slug]'>
       </header>
 
       <div className="mx-auto max-w-[1240px] px-5">
-        <Photo src={event.thumbnailUrl} alt={event.title} label={event.category} className="aspect-[16/9] w-full" />
+        <div data-reveal="image" className="overflow-hidden">
+          <Photo src={event.thumbnailUrl} alt={event.title} label={event.category} className="aspect-[16/9] w-full" />
+        </div>
       </div>
 
       <div className="mx-auto mt-16 grid max-w-[1140px] grid-cols-1 gap-14 px-5 lg:grid-cols-[minmax(0,1fr)_340px]">

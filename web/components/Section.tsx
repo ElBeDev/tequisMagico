@@ -20,8 +20,8 @@ export function SectionTitle({
 }) {
   return (
     <div className={`${align === 'center' ? 'text-center' : ''} ${className}`}>
-      {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-      <Tag className="mt-3 text-[clamp(1.9rem,3.2vw,2.6rem)] font-bold leading-tight">
+      {eyebrow && <p data-reveal="up" className="eyebrow">{eyebrow}</p>}
+      <Tag data-split="lines" className="mt-3 text-[clamp(1.9rem,3.2vw,2.6rem)] font-bold leading-tight">
         {title}
         {serif && (
           <span className="mt-3 block font-display text-[clamp(1.9rem,3.2vw,2.6rem)] font-normal leading-tight">{serif}</span>
@@ -36,15 +36,16 @@ export function PageIntro({ eyebrow, title, serif, children }: { eyebrow?: strin
   return (
     <div className="mx-auto max-w-3xl px-5 pb-12 pt-36 text-center sm:pt-44">
       <SectionTitle as="h1" eyebrow={eyebrow} title={title} serif={serif} />
-      {children && <div className="mx-auto mt-6 max-w-2xl text-[17px] leading-relaxed">{children}</div>}
+      {children && <div data-reveal="up" className="mx-auto mt-6 max-w-2xl text-[17px] leading-relaxed">{children}</div>}
     </div>
   );
 }
 
 export function MoreLink({ href, children, className = '' }: { href: string; children: ReactNode; className?: string }) {
   return (
-    <Link href={href} className={`inline-flex items-center gap-2 font-semibold hover:underline ${className}`}>
-      {children} <ArrowRight className="size-4" aria-hidden />
+    <Link href={href} className={`group inline-flex items-center gap-2 font-semibold ${className}`}>
+      <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">{children}</span>
+      <ArrowRight className="size-4 transition-transform duration-500 group-hover:translate-x-1.5" aria-hidden />
     </Link>
   );
 }
