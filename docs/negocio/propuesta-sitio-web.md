@@ -1,6 +1,8 @@
 # Propuesta: sitio web público de Tequisquiapan Mágico
 
-> Estado: propuesta, nada construido todavía. Septiembre 2026.
+> **Actualización 1 nov 2026:** el sitio ya está en línea en https://tequismagico.com. Hay dos diferencias con esta propuesta. Vive en `web/`, no en `web-publica/`. Y lee el mismo API público que la app, no la base de Neon directo, así no comparte credenciales y muestra exactamente lo mismo que la app. El estado actual está en [`../web/plan-sitio-web.md`](../web/plan-sitio-web.md) y el registro de lo que se hizo en [`../web/bitacora.md`](../web/bitacora.md). El análisis de mercado, modelo de negocio y riesgos de abajo sigue vigente.
+
+> Estado original (septiembre 2026): propuesta, nada construido todavía.
 > Objetivo: que cuando alguien planee un viaje a Tequisquiapan, lo primero que encuentre en Google sea nuestro sitio, y que ya estando en el pueblo use nuestra app.
 
 ---

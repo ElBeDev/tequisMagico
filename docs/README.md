@@ -6,7 +6,8 @@ Todo lo del proyecto en un solo lugar. Empieza por "El proyecto hoy" y luego ve 
 
 | Documento | Para qué sirve |
 |---|---|
-| [`web/plan-sitio-web.md`](web/plan-sitio-web.md) | Plan del sitio público `tequismagico.com` (`web/`): páginas, contenido de cada una, datos, despliegue y dominio |
+| [`web/plan-sitio-web.md`](web/plan-sitio-web.md) | El sitio público `tequismagico.com` (`web/`): páginas, contenido, datos, animaciones, diseño, dónde está cada cosa en el código, despliegue y dominio |
+| [`web/bitacora.md`](web/bitacora.md) | Registro de cómo se hizo la web: separación de la app, registro y DNS del dominio, despliegues, diseño, problemas y arreglos, pendientes |
 | [`negocio/propuesta-sitio-web.md`](negocio/propuesta-sitio-web.md) | Propuesta del sitio web público: mercado, competencia, modelo de negocio, arquitectura y plan por fases |
 | [`app-ios/roadmap.md`](app-ios/roadmap.md) | Estado completo y roadmap de la app iOS: qué está hecho, qué falta, bugs, auditoría, legal |
 | [`panel/panel-admin.md`](panel/panel-admin.md) | El panel de administración (`web-admin/`): qué hace, cómo se protege, cómo correrlo |
@@ -20,7 +21,7 @@ Fuera de esta carpeta, a propósito:
 
 ---
 
-## El proyecto hoy (septiembre 2026)
+## El proyecto hoy (noviembre 2026)
 
 ### Qué existe
 
@@ -31,26 +32,32 @@ Fuera de esta carpeta, a propósito:
 | API | `web-admin/app/api/` | En producción. Lectura pública (la usa la app), escritura con contraseña |
 | Base de datos | Neon (Postgres) | 47 lugares activos (11 verificados) y 17 eventos |
 | Fotos | Vercel Blob (`tequis-magico-photos`) + Wikimedia Commons | Genéricas por categoría con crédito, más algunas reales de negocios |
-| Sitio web público | `web/` → tequismagico.com | Estructura y datos listos, diseño pendiente, sin desplegar (ver [`web/plan-sitio-web.md`](web/plan-sitio-web.md)) |
+| Sitio web público | `web/` → https://tequismagico.com | **En línea** desde el 1 nov 2026. Mismos datos que la app (lee el mismo API), diseño basado en turismo.gov.st, animaciones, mapa real del pueblo (ver [`web/plan-sitio-web.md`](web/plan-sitio-web.md) y [`web/bitacora.md`](web/bitacora.md)) |
 | App Android | — | **No existe** |
 
 ### Cuentas y servicios en uso
 - **GitHub**: `ElBeDev/tequisMagico` (un solo repo para todo).
-- **Vercel**: proyecto `tequis-magico` (despliega `web-admin/` en cada push a `main`).
+- **Vercel**, dos proyectos que se despliegan en cada push a `main`:
+  - `tequis-magico`: el panel (`web-admin/`).
+  - `tequis-magico-web`: el sitio público (`web/`, dominio `tequismagico.com`).
+- **Hostinger**: registro y DNS de `tequismagico.com` (vence el **2 nov 2027**).
+- **OpenFreeMap**: teselas de los mapas de la web (gratis, sin cuenta).
 - **Neon**: base Postgres de producción.
 - **Vercel Blob**: store `tequis-magico-photos`.
 
 ### Lo más importante pendiente
 
-1. **Verificar ~36 lugares** que no tienen ninguna presencia en internet (llamar o visitar; usar el filtro del panel). Es lo que más pesa antes de publicar la app o lanzar la web.
-2. **Decidir el sitio web** (ver [`negocio/propuesta-sitio-web.md`](negocio/propuesta-sitio-web.md), sección 13).
-3. **Permisos de las fotos reales de negocios**: se tomaron de sus sitios sin autorización escrita.
+1. **Verificar ~36 lugares** que no tienen ninguna presencia en internet (llamar o visitar; usar el filtro del panel). La web ya está publicada, así que esos datos ya están a la vista de Google: es lo que más pesa.
+2. **Permisos de las fotos reales de negocios**: se tomaron de sus sitios sin autorización escrita, y la web ya las publica.
+3. **Pendientes de la web** (detalle en [`web/bitacora.md`](web/bitacora.md#pendientes)):
+   - Crear el correo `contacto@tequismagico.com`.
+   - Cambiar el Root Directory del panel a `web-admin` en Vercel.
+   - Renovar el dominio antes del 2 nov 2027.
 4. **Lo que depende de tus cuentas o decisiones**:
    - Apple Developer (publicar la app, universal links, push).
    - Proveedor de push (Firebase o APNs).
    - Crear el target de Widgets en Xcode.
    - Cobro (Stripe/Conekta) y login por negocio.
-   - Dominio.
    - Registro de marca en el IMPI.
    - Revisión legal de Términos y Privacidad.
 5. **Técnico menor**:

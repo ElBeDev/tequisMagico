@@ -2,7 +2,7 @@
 
 Todas las fotos de `places`/`events` vienen de Wikimedia Commons bajo licencias libres que exigen atribución. Son fotos **representativas por categoría** (p. ej. una foto genérica de "quesería" para todos los negocios de esa subcategoría), no necesariamente del negocio exacto — excepción hecha de las de la Plaza Miguel Hidalgo, la Iglesia y los globos, que sí son de Tequisquiapan/Querétaro específicamente.
 
-La app muestra el crédito agregado en Perfil → Créditos de fotos (`ViewsProfileView.swift`). Si se reemplaza cualquiera de estas fotos por una real del negocio, hay que quitar su fila de aquí.
+La app muestra el crédito agregado en Perfil → Créditos de fotos (`ViewsProfileView.swift`). La web (tequismagico.com) usa las mismas fotos de la base y, además, 16 fotos editoriales de Tequis (portada, historia, guía) que viven en `web/lib/photos.ts` con autor y licencia; todas aparecen solas en https://tequismagico.com/creditos. Si se reemplaza cualquiera de estas fotos por una real del negocio, hay que quitar su fila de aquí.
 
 | Foto | Autor | Licencia | Uso |
 |---|---|---|---|
@@ -31,7 +31,7 @@ Para un puñado de lugares destacados (`is_featured = true`) sí conseguimos la 
 - **La Casa del Atrio**: su foto venía de lacasadelatrio.com, que resultó ser un hotel homónimo en Querétaro capital, no el de Tequisquiapan. Se regresó a la foto genérica de hospedaje.
 - **Viñedos Puerta del Lobo**: se desactivó (el negocio está en El Marqués), así que su foto ya no se muestra.
 
-⚠️ **Permisos**: estas fotos se usan sin permiso escrito de los negocios. Antes de publicarlas en un sitio web público conviene pedirles autorización por escrito o reemplazarlas por fotos propias (ver `docs/negocio/propuesta-sitio-web.md`).
+⚠️ **Permisos**: estas fotos se usan sin permiso escrito de los negocios, y desde el 1 nov 2026 la web pública (tequismagico.com) ya las muestra. Hay que pedirles autorización por escrito o reemplazarlas por fotos propias (ver `docs/negocio/propuesta-sitio-web.md`).
 
 **No se pudo conseguir** (se quedan con la foto genérica de categoría): Viñedos La Redonda (su sitio, laredondavinos.com, está en mantenimiento) y La Estancia Tequisquiapan (no se le encontró sitio ni redes sociales).
 
