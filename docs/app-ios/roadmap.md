@@ -171,6 +171,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 
 - [x] Sitio web público a la par de la app: captar turistas desde Google antes del viaje, cubrir Android y darle a cada negocio una página indexable (lo que hace que pague un plan). **En línea en https://tequismagico.com desde el 1 nov 2026** (`web/`). Lee el mismo API que la app. Ver [`../web/plan-sitio-web.md`](../web/plan-sitio-web.md) y [`../web/bitacora.md`](../web/bitacora.md); la propuesta de negocio original está en [`../negocio/propuesta-sitio-web.md`](../negocio/propuesta-sitio-web.md)
 - [ ] Link del App Store en `/app` cuando se publique la app
+- [x] Rediseño de la web (2 nov 2026): buscador, mega menú, "Explora" con lista + mapa, "Mi viaje" (favoritos en el navegador con ruta a Google Maps), pueblos cercanos y diseño con las reglas de tasteskill. Ver [`../web/bitacora.md`](../web/bitacora.md) §8–10
 - [ ] Quitar `rating`/`reviews_count` también de la app (la web no los muestra porque no son reseñas reales)
 
 ---

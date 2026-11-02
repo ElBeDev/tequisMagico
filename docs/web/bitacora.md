@@ -4,7 +4,7 @@ Registro en orden de lo que se hizo para separar la web de la app, registrar y c
 
 ---
 
-## Resumen: qué tenemos (1 nov 2026)
+## Resumen: qué tenemos (2 nov 2026)
 
 | Pieza | Dónde | Estado |
 |---|---|---|
@@ -14,7 +14,8 @@ Registro en orden de lo que se hizo para separar la web de la app, registrar y c
 | DNS | Hostinger | `A @` y `CNAME www` apuntando a Vercel; `www` redirige al dominio sin www |
 | Datos | `GET /api/places` y `GET /api/events` del panel | Los mismos que usa la app iOS; la web se regenera cada 5 min |
 | Mapas | MapLibre + OpenFreeMap | Sin API key ni costo |
-| Fotos editoriales | Wikimedia Commons (`web/lib/photos.ts`) | 24 fotos con autor y licencia, listadas en `/creditos` |
+| Fotos editoriales | Wikimedia Commons (`web/lib/photos.ts`) | 28 fotos con autor y licencia, listadas en `/creditos` |
+| Diseño | Estética de turismo.gov.st, información estilo visitshropshire.co.uk, reglas de tasteskill v2 | Ver secciones 5 a 10 y `plan-sitio-web.md` §6c |
 
 ---
 
@@ -172,6 +173,20 @@ Se aplicó tasteskill v2 (https://www.tasteskill.dev/), un conjunto de reglas pa
 
 **Cómo se verificó:** el inspector y el linter del skill no se pudieron correr (el entorno no permitió ejecutar código descargado), así que se revisó con capturas en 1440 y 390 px y con un verificador propio de las reglas medibles. En producción, en 6 páginas y los dos anchos: 0 etiquetas en mayúsculas, sombras, bordes ni desenfoque; h1 en la primera pantalla; ningún título de más de dos renglones; sin errores ni desborde en celular.
 
+**Problemas encontrados en las capturas y arreglados:** una foto flotante de la invitación a la app tapaba el título en celular, las etiquetas del esquema de carreteras se encimaban, y tres títulos ocupaban tres renglones ("Rutas por Tequis", "La Peña de Bernal" y el del footer se acortaron o ensancharon).
+
+**Autoevaluación con la rúbrica del skill:** diseño 7.5, usabilidad 8, creatividad 7.5, contenido 7 (≈ 7.6). Lo que falta pulir está en Pendientes.
+
+---
+
+## 10. Publicación del rediseño (2 nov 2026)
+
+Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estilo Visit Shropshire y restyle sin AI slop"), con 53 archivos: 36 modificados, 16 nuevos y 1 borrado (`Welcome.tsx`). Vercel lo publicó en unos 2 minutos; se comprobó en línea que la portada nueva sale y que `/`, `/lugares`, `/eventos`, `/mi-viaje`, `/rutas` y `/app` responden 200.
+
+- El HTML de la portada pasó de unos 124 kB a 256 kB sin comprimir (menú, buscador y Explora traen los datos de todos los lugares).
+- `web/AGENTS.md` y `web/CLAUDE.md` entraron al repo: los genera `next dev` y, si no se suben, vuelven a aparecer como cambios pendientes.
+- El push a `main` también redespliega el panel (`tequis-magico`); no se tocó su código.
+
 ---
 
 ## Pendientes
@@ -186,3 +201,7 @@ Se aplicó tasteskill v2 (https://www.tasteskill.dev/), un conjunto de reglas pa
 | Confirmar la fecha de la "Fiesta de la Fundación" en la base (las fuentes dicen 24 jun, 24 jul o 25 jul) | Datos |
 | Revisión legal del aviso de privacidad y los términos | Abogado |
 | Link real del App Store en `/app` cuando se publique la app | Código |
+| Bajar la portada a los cinco tamaños de letra del sistema (hoy hay ~12, sobre todo en el esquema de carreteras) | Código |
+| Darle más vida al arranque del mapa México → Tequis | Código |
+| Buscar una forma menos "de plantilla" para Explora que la cuadrícula de tarjetas | Código |
+| Revisar el peso del HTML de la portada (256 kB sin comprimir) si afecta la carga en celular | Código |

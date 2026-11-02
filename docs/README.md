@@ -32,7 +32,7 @@ Fuera de esta carpeta, a propósito:
 | API | `web-admin/app/api/` | En producción. Lectura pública (la usa la app), escritura con contraseña |
 | Base de datos | Neon (Postgres) | 47 lugares activos (11 verificados) y 17 eventos |
 | Fotos | Vercel Blob (`tequis-magico-photos`) + Wikimedia Commons | Genéricas por categoría con crédito, más algunas reales de negocios |
-| Sitio web público | `web/` → https://tequismagico.com | **En línea** desde el 1 nov 2026. Mismos datos que la app (lee el mismo API), diseño basado en turismo.gov.st, animaciones, mapa real del pueblo (ver [`web/plan-sitio-web.md`](web/plan-sitio-web.md) y [`web/bitacora.md`](web/bitacora.md)) |
+| Sitio web público | `web/` → https://tequismagico.com | **En línea** desde el 1 nov 2026. Mismos datos que la app (lee el mismo API). Estética y animaciones de turismo.gov.st; desde el 2 nov, información presentada como visitshropshire.co.uk (buscador, mega menú, "Explora" con lista + mapa, "Mi viaje" con ruta, pueblos cercanos) y diseño con las reglas anti-IA de tasteskill (ver [`web/plan-sitio-web.md`](web/plan-sitio-web.md) y [`web/bitacora.md`](web/bitacora.md)) |
 | App Android | — | **No existe** |
 
 ### Cuentas y servicios en uso
@@ -50,7 +50,7 @@ Fuera de esta carpeta, a propósito:
 1. **Verificar ~36 lugares** que no tienen ninguna presencia en internet (llamar o visitar; usar el filtro del panel). La web ya está publicada, así que esos datos ya están a la vista de Google: es lo que más pesa.
 2. **Permisos de las fotos reales de negocios**: se tomaron de sus sitios sin autorización escrita, y la web ya las publica.
 3. **Pendientes de la web** (detalle en [`web/bitacora.md`](web/bitacora.md#pendientes)):
-   - Crear el correo `contacto@tequismagico.com`.
+   - Crear el correo `contacto@tequismagico.com` (ya lo usan los legales y el botón para negocios del footer).
    - Cambiar el Root Directory del panel a `web-admin` en Vercel.
    - Renovar el dominio antes del 2 nov 2027.
 4. **Lo que depende de tus cuentas o decisiones**:

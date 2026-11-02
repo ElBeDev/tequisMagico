@@ -1,6 +1,9 @@
 # Plan del sitio web público — tequismagico.com
 
-> Estado: **en línea en https://tequismagico.com** (noviembre 2026). Diseño basado en la referencia https://turismo.gov.st/fr (fondo hueso, banda verde olivo, Outfit + Gilda Display, títulos de tres pisos, portada a pantalla completa), llevado al contexto de Tequis. Desde el 2 nov 2026 la **presentación de la información** sigue a https://www.visitshropshire.co.uk/ (header con buscador y mega menú, "Explora" con lista + mapa, "Mi viaje", destacado, agenda en tarjetas, pueblos cercanos), conservando la estética y las animaciones.
+> Estado: **en línea en https://tequismagico.com** (noviembre 2026). Tres referencias, cada una para algo distinto:
+> - **Estética y animaciones:** https://turismo.gov.st/fr (fondo hueso, verde olivo, Outfit + Gilda Display, portada a pantalla completa, GSAP).
+> - **Presentación de la información** (desde el 2 nov 2026): https://www.visitshropshire.co.uk/ (header con buscador y mega menú, "Explora" con lista + mapa, "Mi viaje", destacado, pueblos cercanos).
+> - **Reglas de diseño** (desde el 2 nov 2026): tasteskill v2, https://www.tasteskill.dev/, para que la página no se vea hecha por IA (ver §6c).
 > Contexto de negocio: [`../negocio/propuesta-sitio-web.md`](../negocio/propuesta-sitio-web.md).
 > Registro de cómo se hizo (separación, dominio, despliegues, diseño, problemas y arreglos): [`bitacora.md`](bitacora.md).
 
@@ -71,21 +74,23 @@ Esto es **qué va** en cada página. El **cómo se ve** está en las secciones 6
 - **Mega menú:** al pasar el mouse por una sección se abre un panel con columnas de links y una tarjeta destacada con foto. Se arma con los datos reales en `web/lib/nav.ts`: subcategorías con su conteo (llevan a `/lugares/<categoria>?tipo=<subcategoría>`), próximos eventos y rutas. La tarjeta de Qué hacer / Comer / Dormir es un lugar destacado **con información confirmada**.
 - **Buscador** (`web/components/SearchDialog.tsx`): lugares, eventos y páginas, al instante mientras escribes; se abre con el botón, con `/` o con ⌘K. El índice se arma en el servidor (`web/lib/search.ts`) y la búsqueda corre en el navegador.
 - **En celular:** buscador y corazón arriba; las secciones van en el menú verde a pantalla completa.
-- **Footer:** banda ocre "¿Tienes un negocio en Tequis?" (correo a `contacto@tequismagico.com`), columnas de links, caja de la app, la palabra gigante "Tequisquiapan" en salvia sobre verde bosque y la nota "Guía independiente; no es un sitio oficial del municipio".
+- **Footer** (verde bosque, en `web/app/layout.tsx`): título "¿Tienes un negocio en Tequis?" con botón de correo a `contacto@tequismagico.com`, columnas de links (Explora, Útil), texto de la app, legales, la palabra gigante "Tequisquiapan" en salvia y la nota "Guía independiente; no es un sitio oficial del municipio".
+- **Datos del header:** el layout pide lugares y eventos al API para armar el menú y el índice del buscador. Si el API falla, el header sale sin datos en vez de romper la página.
 
 ### Portada `/`
-1. **Hero:** 5 fotos que rotan, cada una con su frase (un pueblo de cantera, un amanecer en globo, un brindis entre viñedos, manos que tejen mimbre, noches de leyenda). Botones "¿Qué hay este mes?" y "Qué hacer".
-2. **Banda ocre del evento:** el que está pasando o el próximo, con "Ver evento" y "Todo el calendario".
-3. **Bienvenidos** (`Intro`): texto, botón "Inspírame" y tres puertas en arco (Qué hacer, Dónde comer, Dónde dormir) con su número de lugares.
-4. **Explora Tequis** (`ExploreTequis`): pestañas por tipo, tarjetas a la izquierda (6 y "Cargar más") y el mapa real fijo a la derecha; pasar el cursor por una tarjeta agranda su pin. En celular se cambia entre lista y mapa.
-5. **Destacado** (`Featured`): tarjeta grande en salvia con un lugar `is_featured` **y** `content_verified`; cambia cada día entre los que haya.
-6. **Fiestas y eventos:** los próximos 3 en tarjetas.
-7. **¿Por qué Tequis?:** palabras grandes (Historia, Cestería, Queso & vino, Peña de Bernal) que llevan a `/por-que-tequis`.
-8. **Experiencias:** Viñedos, Queserías, Globo, Balnearios y Cestería, cada una con foto (banda verde fija).
-9. **Ideas de viaje:** tarjeta terracota con las rutas para arrastrar.
-10. **Mapa:** México → Tequis → mapa real del pueblo con todos los lugares; botones "Explorar el mapa" y "Cómo llegar".
-11. **Cerca de Tequis** (`Surroundings`, datos en `web/lib/surroundings.ts`): Peña de Bernal, Ezequiel Montes, Cadereyta, San Juan del Río y Querétaro, con foto, distancia aproximada y "Cómo llegar", junto a un esquema de carreteras que se dibuja al bajar.
-12. **La app:** invitación con fotos flotando en parallax.
+En orden, todo en `web/app/page.tsx`:
+1. **Hero** (`Hero`): h1 "Tequisquiapan" en grande y "Pueblo Mágico de Querétaro, a dos horas de la Ciudad de México", seguido de una frase que rota con cada foto ("La promesa de un pueblo de cantera", "…de un amanecer en globo", etc.). 5 fotos; las barras de abajo marcan el avance y sirven para cambiar de foto. Botones "¿Qué hay este mes?" y "Qué hacer".
+2. **Banda ocre del evento** (`EventStrip`): el que está pasando o el próximo, con "Ver evento" y "Todo el calendario".
+3. **Bienvenidos a Tequis** (`Intro`): texto, botón "Inspírame" y tres puertas en arco (Qué hacer, Dónde comer, Dónde dormir) con su número de lugares, a distintas velocidades de parallax.
+4. **Explora Tequis** (`ExploreTequis`, campo verde bosque): pestañas por tipo, tarjetas a la izquierda (6 y "Cargar más") y el mapa real fijo a la derecha; pasar el cursor por una tarjeta agranda su pin. En celular se cambia entre lista y mapa.
+5. **Destacado** (`Featured`, campo salvia): un lugar `is_featured` **y** `content_verified`; cambia cada día entre los que haya.
+6. **Fiestas y eventos:** el próximo evento en grande y los siguientes en lista, con la fecha grande a la izquierda.
+7. **Un pueblo de agua, cantera y mimbre:** palabras grandes (Historia, Cestería, Queso & vino, Peña de Bernal) que llevan a `/por-que-tequis`; el fondo cambia a salvia.
+8. **Experiencias** (`Activities`): Viñedos, Queserías, Globo, Balnearios y Cestería, cada una con foto (banda verde fija).
+9. **Rutas por Tequis** (campo ocre): las rutas en tarjetas de arco para arrastrar, más "Un fin de semana en Tequis".
+10. **Mapa** (`MapStory`): México → Tequis → mapa real del pueblo con todos los lugares; botones "Explorar el mapa" y "Cómo llegar".
+11. **Cerca de Tequis** (`Surroundings`, datos en `web/lib/surroundings.ts`): Peña de Bernal, Ezequiel Montes, Cadereyta, San Juan del Río y Querétaro, con foto, distancia aproximada y "Cómo llegar", junto a un esquema de carreteras con anillos de 15 y 30 km.
+12. **La app** (`AppInvite`, paso de tono `surface`): invitación con fotos en parallax. Es el único bloque centrado del sitio.
 
 ### Mi viaje `/mi-viaje`
 Lo que la persona guardó con el corazón (tarjetas de lugar y evento, fichas). Se guarda **solo en su navegador** (`localStorage`, `web/lib/favorites.ts`), igual que los favoritos de la app viven solo en el teléfono. Muestra lugares y eventos, el mapa de los lugares y "Abrir ruta en Google Maps" (hasta 10 paradas, en el orden en que se guardaron). No se indexa.
@@ -96,7 +101,7 @@ Lo que la persona guardó con el corazón (tarjetas de lugar y evento, fichas). 
 3. Filtro por tipo (subcategoría) con `?tipo=`, y cambio entre lista y mapa (`web/components/PlaceExplorer.tsx`). La página lo envuelve en `<Suspense>` con la cuadrícula completa de respaldo: eso es lo que trae el HTML del servidor.
 4. Cuadrícula de tarjetas de lugar.
 
-**Tarjeta de lugar**: foto con la subcategoría encima, corazón para guardar, categoría y precio, nombre, descripción corta y "Ver detalles".
+**Tarjeta de lugar** (`PlaceCard` en `web/components/Cards.tsx`): foto recta con la subcategoría encima, corazón para guardar, nombre, descripción corta, categoría y precio. Toda la tarjeta es el link (sin "Ver detalles").
 
 ### Ficha de lugar `/lugar/[slug]`
 1. Migas de pan (Lugares / Categoría).
@@ -114,7 +119,7 @@ Lo que la persona guardó con el corazón (tarjetas de lugar y evento, fichas). 
 ### Eventos `/eventos`
 Tres grupos, igual que en la app: **En curso**, **Próximos** y **Ya pasaron**.
 
-**Tarjeta de evento**: foto, estado, título, fechas y lugar.
+**Evento en lista** (`EventCard`): renglón con el día grande, el mes, título, estado, fechas, lugar y foto. **Evento con foto grande** (`EventTile`): el primero de la agenda y los de "Mi viaje".
 
 ### Ficha de evento `/evento/[slug]`
 1. Foto.
@@ -171,13 +176,15 @@ Lo que se puede mostrar sin tocar la base. Útil para que el diseño no pida cam
 
 Inspirada en lo que hace la referencia, que usa GSAP + ScrollTrigger + Lenis. En la portada:
 
-- **Portada:** las fotos entran como cortina, la frase entra letra por letra, hay un contador con barra de progreso y parallax al bajar.
-- **Bienvenida:** la foto se encoge hasta quedar enmarcada y la palabra gigante se desliza.
+- **Portada:** las fotos entran como cortina, la frase que rota entra letra por letra, las barras de abajo marcan el avance (y se pueden tocar) y hay parallax al bajar.
+- **Bienvenidos:** las tres puertas en arco suben a distintas velocidades.
+- **Explora Tequis:** la lista y el mapa están sincronizados; al pasar por una tarjeta su pin crece.
 - **Palabras grandes:** una foto sigue al cursor, y el fondo pasa de hueso a verde salvia.
 - **Experiencias:** la banda verde se queda fija y el scroll va cambiando de experiencia (en celular, flechas o deslizar).
-- **Ideas de viaje:** carrusel que se arrastra con inercia.
-- **Hospedaje:** foto en parallax y collage a distintas velocidades.
-- **Mapa:** se queda fijo mientras se dibuja México, late Tequis y hace zoom al pueblo. Al terminar el zoom, el dibujo se funde con el mapa real de calles, alineado al mismo encuadre, y caen los pines. Cada pin muestra la foto del lugar al pasar el mouse y lleva a su ficha.
+- **Rutas:** carrusel que se arrastra con inercia.
+- **Mapa:** se queda fijo mientras termina de dibujarse México (arranca con un tercio del contorno ya trazado) y hace zoom al pueblo. Al terminar el zoom, el dibujo se funde con el mapa real de calles, alineado al mismo encuadre, y caen los pines. Cada pin muestra la foto del lugar al pasar el mouse y lleva a su ficha.
+- **Cerca de Tequis:** el esquema de carreteras se dibuja al bajar.
+- **Corazón:** al guardar, el corazón late una vez.
 
 En todo el sitio hay scroll suave, textos y fotos que se revelan al entrar, cursor con etiqueta, header que se esconde al bajar y un menú que abre como cortina. Con "reducir movimiento" activado no se anima nada y todo se ve.
 
@@ -200,11 +207,21 @@ Desde el 2 nov 2026 el diseño sigue las reglas "anti-IA" de tasteskill v2 (http
 | Lectura del API, tipos, slugs, categorías, rutas, fechas | `web/lib/data.ts` |
 | Horarios, "abierto ahora" y horario para schema.org | `web/lib/schedule.ts` |
 | Fotos editoriales con autor y licencia | `web/lib/photos.ts` |
-| Menú | `web/lib/nav.ts` |
+| Menú y mega menú (secciones, subcategorías, tarjeta destacada) | `web/lib/nav.ts` |
+| Índice del buscador | `web/lib/search.ts` |
+| "Mi viaje" (favoritos en `localStorage`) | `web/lib/favorites.ts` |
+| Pueblos cercanos (distancias y coordenadas) | `web/lib/surroundings.ts` |
 | Contorno de México para el mapa animado (generado con d3-geo, Mercator) | `web/lib/mexico-outline.ts` |
 | Carga de MapLibre y estilo del mapa | `web/lib/mapStyle.ts` |
 | Registro de GSAP y utilidades de movimiento | `web/lib/motion.ts` |
 | Scroll suave, revelados por atributo y cursor | `web/components/motion/` |
+| Header, mega menú y menú de celular | `web/components/SiteNav.tsx` |
+| Buscador | `web/components/SearchDialog.tsx` |
+| Corazón para guardar | `web/components/SaveButton.tsx` |
+| Página "Mi viaje" (lista, mapa y ruta) | `web/components/TripPlanner.tsx` |
+| Listados con filtro `?tipo=` y lista/mapa | `web/components/PlaceExplorer.tsx` |
+| Tarjetas de lugar y evento | `web/components/Cards.tsx` |
+| Títulos de sección e intro de página | `web/components/Section.tsx`, `PageHero.tsx` |
 | Secciones de la portada | `web/components/Hero.tsx`, `Activities.tsx` y `web/components/home/` |
 | Mapa de lugares (fichas, rutas, `/mapa`) | `web/components/PlacesMap.tsx` |
 | Marco en arco | `web/components/Frame.tsx` |
@@ -226,7 +243,7 @@ Las páginas son Server Components y se animan **por atributos** (`data-reveal`,
   - **Centro geográfico:** se presenta como "decretado por Carranza en 1916", aclarando que el centro geográfico real está en Zacatecas.
   - **Número de edición de la Feria del Queso y el Vino:** no se cita; las fuentes no cuadran.
   - **Presa Centenario:** no se presenta como atractivo estable, porque su nivel cambia mucho de un año a otro.
-- Las fotos editoriales son 16 fotos de Tequis en Wikimedia Commons, con autor y licencia verificados uno por uno, más las 8 genéricas de la base. Viven en `web/lib/photos.ts` y aparecen solas en `/creditos`.
+- Las fotos editoriales son 28 de Wikimedia Commons, con autor y licencia verificados uno por uno: 16 de Tequis, 4 de los pueblos cercanos (Cadereyta, Ezequiel Montes, San Juan del Río y el acueducto de Querétaro) y las 8 genéricas de la base. Viven en `web/lib/photos.ts` y aparecen solas en `/creditos`.
 - Lo que **no** se usó de tequis.travel: ni textos ni fotos (es el sitio oficial del municipio). Solo se consultó como fuente de datos.
 
 ## 8. Despliegue y dominio
@@ -247,3 +264,4 @@ La lista completa, con quién hace cada cosa, está en [`bitacora.md`](bitacora.
 - **Permisos** de las fotos tomadas de sitios de negocios. La web ya las publica.
 - **Revisión legal** del aviso de privacidad y los términos.
 - **Link real del App Store** cuando se publique la app.
+- **Diseño, lo que falta pulir:** la portada usa más tamaños de letra que los cinco del sistema (sobre todo en el esquema de carreteras); el arranque del mapa México → Tequis se ve algo vacío; "Explora" sigue siendo una cuadrícula de tarjetas.
