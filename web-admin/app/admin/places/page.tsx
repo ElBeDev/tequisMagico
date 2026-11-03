@@ -5,6 +5,24 @@ import Link from 'next/link';
 
 type Place = any;
 
+/**
+ * Qué le falta a un lugar para darlo por confirmado. La foto cuenta como "genérica" si la
+ * comparte con otro lugar (las de categoría de Wikimedia), y la ubicación como "aproximada" si
+ * otro lugar tiene exactamente las mismas coordenadas (pines encimados en el mapa).
+ */
+function missingFields(p: Place, all: Place[]): string[] {
+  const photo = p.thumbnail_url || p.image_urls?.[0];
+  const sameCoords = (a: Place) => Number(a.latitude) === Number(p.latitude) && Number(a.longitude) === Number(p.longitude);
+  const missing: string[] = [];
+  if (!p.phone_number && !p.whatsapp_number) missing.push('teléfono');
+  if (!p.schedule_json || Object.keys(typeof p.schedule_json === 'string' ? JSON.parse(p.schedule_json) : p.schedule_json).length === 0) missing.push('horario');
+  if (!p.website) missing.push('sitio web');
+  if (!photo) missing.push('foto');
+  else if (all.some((o) => o.id !== p.id && (o.thumbnail_url || o.image_urls?.[0]) === photo)) missing.push('foto propia');
+  if (all.some((o) => o.id !== p.id && sameCoords(o))) missing.push('ubicación precisa');
+  return missing;
+}
+
 export default function PlacesPage() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [loading, setLoading] = useState(true);
@@ -118,6 +136,9 @@ export default function PlacesPage() {
                   <div>
                     <h3 className="text-xl font-bold">{p.name}</h3>
                     <p className="text-gray-600 text-sm">{p.address}</p>
+                    {!p.content_verified && missingFields(p, places).length > 0 && (
+                      <p className="mt-1 text-sm text-amber-800">Le falta: {missingFields(p, places).join(', ')}</p>
+                    )}
                     <div className="flex gap-2 mt-2">
                       <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">{p.category}</span>
                       <span className="px-2 py-1 bg-gray-100 text-xs rounded">⭐ {parseFloat(p.rating || 0).toFixed(1)}</span>
