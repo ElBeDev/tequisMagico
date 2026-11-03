@@ -55,6 +55,7 @@ tequisMagico/
 | `/mapa` | Mapa completo | Todos los lugares con filtro por categoría |
 | `/por-que-tequis` | Por qué Tequis | Pueblo Mágico, origen del nombre, historia (línea de tiempo), patrimonio, cestería, queso y vino, Peña de Bernal |
 | `/guia-practica` | Guía práctica | Cómo llegar (auto y autobús), cuándo ir (clima y temporadas), información útil y teléfonos |
+| `/guias` y `/guias/[slug]` | Guías de viaje | Fin de semana, viñedos y queserías, Tequis con niños, Peña de Bernal (contenido en `web/lib/guides.ts`) |
 | `/app` | La app | Qué ofrece la app y cómo descargarla |
 | `/creditos` | Créditos de fotos | Obligatorio por las licencias CC |
 | `/privacidad`, `/terminos` | Legales | Aviso de privacidad (LFPDPPP) y términos |
@@ -82,12 +83,12 @@ En orden, todo en `web/app/page.tsx`:
 1. **Hero** (`Hero`): h1 "Tequisquiapan" en grande y "Pueblo Mágico de Querétaro, a dos horas de la Ciudad de México", seguido de una frase que rota con cada foto ("La promesa de un pueblo de cantera", "…de un amanecer en globo", etc.). 5 fotos; las barras de abajo marcan el avance y sirven para cambiar de foto. Botones "¿Qué hay este mes?" y "Qué hacer".
 2. **Banda ocre del evento** (`EventStrip`): el que está pasando o el próximo, con "Ver evento" y "Todo el calendario".
 3. **Bienvenidos a Tequis** (`Intro`): texto, botón "Inspírame" y tres puertas en arco (Qué hacer, Dónde comer, Dónde dormir) con su número de lugares, a distintas velocidades de parallax.
-4. **Explora Tequis** (`ExploreTequis`, campo verde bosque): pestañas por tipo, tarjetas a la izquierda (6 y "Cargar más") y el mapa real fijo a la derecha; pasar el cursor por una tarjeta agranda su pin. En celular se cambia entre lista y mapa.
+4. **Explora Tequis** (`ExploreTequis`, campo verde bosque): pestañas por tipo, a la izquierda un índice de guía impresa (nombre en Gilda, miniatura en arco, tipo y precio; 8 y "Cargar más") y el mapa real fijo a la derecha; pasar el cursor por un renglón agranda su pin. En celular se cambia entre lista y mapa.
 5. **Destacado** (`Featured`, campo salvia): un lugar `is_featured` **y** `content_verified`; cambia cada día entre los que haya.
 6. **Fiestas y eventos:** el próximo evento en grande y los siguientes en lista, con la fecha grande a la izquierda.
 7. **Un pueblo de agua, cantera y mimbre:** palabras grandes (Historia, Cestería, Queso & vino, Peña de Bernal) que llevan a `/por-que-tequis`; el fondo cambia a salvia.
 8. **Experiencias** (`Activities`): Viñedos, Queserías, Globo, Balnearios y Cestería, cada una con foto (banda verde fija).
-9. **Rutas por Tequis** (campo ocre): las rutas en tarjetas de arco para arrastrar, más "Un fin de semana en Tequis".
+9. **Rutas y guías** (campo ocre): las rutas y las guías en tarjetas de arco para arrastrar.
 10. **Mapa** (`MapStory`): México → Tequis → mapa real del pueblo con todos los lugares; botones "Explorar el mapa" y "Cómo llegar".
 11. **Cerca de Tequis** (`Surroundings`, datos en `web/lib/surroundings.ts`): Peña de Bernal, Ezequiel Montes, Cadereyta, San Juan del Río y Querétaro, con foto, distancia aproximada y "Cómo llegar", junto a un esquema de carreteras con anillos de 15 y 30 km.
 12. **La app** (`AppInvite`, paso de tono `surface`): invitación con fotos en parallax. Es el único bloque centrado del sitio.
@@ -168,7 +169,7 @@ Lo que se puede mostrar sin tocar la base. Útil para que el diseño no pida cam
   - Migas de pan, `sitemap.xml` y URL canónica.
   - **Imagen para compartir** (`web/app/opengraph-image.tsx`): 1200×630 con "Tequisquiapan" en Gilda y la parroquia en arco, generada en el build. Las fichas de lugar y evento usan su propia foto.
   - Teléfono y horario solo van a los datos estructurados cuando `content_verified = true`.
-- **Fotos:** hotlink, igual que en la app (Wikimedia Commons y algunos sitios de negocios). Las de Commons que vienen de la base se piden ya reducidas (`commonsThumb` en `web/lib/data.ts`): 960 px en tarjetas, mapas y destacados, y 1280 px en la galería de la ficha. Las de sitios de negocios se quedan en su tamaño original.
+- **Fotos:** hotlink, igual que en la app (Wikimedia Commons y algunos sitios de negocios). Cada `<img>` toma sus atributos de `photoAttrs` (`web/lib/images.ts`): las de Commons llevan `srcset` con los anchos estándar de Wikimedia (500/960/1280/1920) y `crossOrigin="anonymous"` (sin la cookie de Wikimedia); las de los hosts de `OPTIMIZED_HOSTS` (sitios de negocios y Vercel Blob) pasan por el optimizador de Vercel. En celular, la portada bajó de 7.2 MB a 2.7 MB.
 - **Analítica:** Vercel Web Analytics y Speed Insights (`<Analytics />` y `<SpeedInsights />` en el layout). Sin cookies; el aviso de privacidad lo menciona.
 - **Mapas:** MapLibre GL con teselas vectoriales de OpenFreeMap, sin API key ni costo, recoloreadas con la paleta del sitio (`web/lib/mapStyle.ts`). Muestran el crédito de OpenFreeMap/OpenStreetMap. En los mapas chicos la rueda del mouse sigue bajando la página; para acercar se usa ctrl/⌘ + rueda o dos dedos. En `/mapa` la rueda sí acerca.
 
@@ -184,7 +185,7 @@ Inspirada en lo que hace la referencia, que usa GSAP + ScrollTrigger + Lenis. En
 - **Palabras grandes:** una foto sigue al cursor, y el fondo pasa de hueso a verde salvia.
 - **Experiencias:** la banda verde se queda fija y el scroll va cambiando de experiencia (en celular, flechas o deslizar).
 - **Rutas:** carrusel que se arrastra con inercia.
-- **Mapa:** se queda fijo mientras termina de dibujarse México (arranca con un tercio del contorno ya trazado) y hace zoom al pueblo. Al terminar el zoom, el dibujo se funde con el mapa real de calles, alineado al mismo encuadre, y caen los pines. Cada pin muestra la foto del lugar al pasar el mouse y lleva a su ficha.
+- **Mapa:** se queda fijo mientras termina de dibujarse México (arranca relleno con el paso de tono y un tercio del contorno trazado). Aparecen Ciudad de México y Querétaro con su distancia y una línea punteada a Tequis, y al hacer zoom se abren hasta salir del encuadre. Al terminar el zoom, el dibujo se funde con el mapa real de calles, alineado al mismo encuadre, y caen los pines. Cada pin muestra la foto del lugar al pasar el mouse y lleva a su ficha.
 - **Cerca de Tequis:** el esquema de carreteras se dibuja al bajar.
 - **Corazón:** al guardar, el corazón late una vez.
 
@@ -195,7 +196,7 @@ En todo el sitio hay scroll suave, textos y fotos que se revelan al entrar, curs
 Desde el 2 nov 2026 el diseño sigue las reglas "anti-IA" de tasteskill v2 (https://www.tasteskill.dev/): se quitó todo lo que hace que una página se vea generada y se dejó la idea que sale del lugar, el arco de los portales.
 
 - **Colores** (variables en `web/app/globals.css`): fondo hueso `#eeedea`, tinta `#141412`, un paso de tono `--surface` para separar sin líneas, y campos planos de orilla a orilla: verde `#38492a`, verde bosque `#1f2a1a`, salvia `#a3ad94` y ocre de los portales `#d9a63e`. **Sin terracota ni cremas** (son los colores de las páginas hechas por IA).
-- **Tipografías:** Gilda Display para **todos** los títulos, y Outfit para el texto. Cada título va en una sola cara: sin etiqueta en mayúsculas arriba ni remate en otra tipografía. Hay cinco tamaños (`--step-small/body/lead/head/display`, clases `text-lead`, `.heading`, `.display`), con el interletrado cerrado en los grandes y dos renglones como máximo por título.
+- **Tipografías:** Gilda Display para **todos** los títulos, y Outfit para el texto. Cada título va en una sola cara: sin etiqueta en mayúsculas arriba ni remate en otra tipografía. Hay seis tamaños (`--step-small/body/lead/title/head/display`, clases `text-lead`, `text-title`, `.heading`, `.display`; `title` es para títulos de tarjeta, fechas y citas). Fuera de la escala solo quedan el nombre gigante de la portada y el logo, con el interletrado cerrado en los grandes y dos renglones como máximo por título.
 - **Títulos:** `SectionTitle` (título + frase de apoyo opcional) y `PageIntro` en `web/components/Section.tsx`, alineados a la izquierda. Solo hay un momento centrado en la portada (la app).
 - **Marco:** un solo par de márgenes en todo el sitio (`.frame`, `--margin`, 20–48 px, máximo 1600 px).
 - **Fotos:** el arco de medio punto (`ArchPhoto`, `web/components/Frame.tsx`) es la única forma; las demás fotos van con esquinas rectas. Sin sombras ni contornos.
@@ -266,4 +267,5 @@ La lista completa, con quién hace cada cosa, está en [`bitacora.md`](bitacora.
 - **Permisos** de las fotos tomadas de sitios de negocios. La web ya las publica.
 - **Revisión legal** del aviso de privacidad y los términos.
 - **Link real del App Store** cuando se publique la app.
-- **Diseño, lo que falta pulir:** la portada usa más tamaños de letra que los cinco del sistema (sobre todo en el esquema de carreteras); el arranque del mapa México → Tequis se ve algo vacío; "Explora" sigue siendo una cuadrícula de tarjetas.
+- **Corregir la base** con `database/databasefix_research_2026-11.sql` (propuesta, no aplicada): direcciones de viñedos, La Redonda fuera de destacados y 11 lugares que no existen.
+- **Versión en inglés:** por decidir.

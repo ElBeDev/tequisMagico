@@ -13,6 +13,7 @@ Todo lo del proyecto en un solo lugar. Empieza por "El proyecto hoy" y luego ve 
 | [`panel/panel-admin.md`](panel/panel-admin.md) | El panel de administración (`web-admin/`): qué hace, cómo se protege, cómo correrlo |
 | [`datos/base-de-datos.md`](datos/base-de-datos.md) | La base en Neon: archivos SQL, qué datos están verificados y cuáles no |
 | [`datos/creditos-imagenes.md`](datos/creditos-imagenes.md) | Origen y licencia de cada foto (atribución obligatoria) |
+| [`datos/investigacion-guias-2026-11.md`](datos/investigacion-guias-2026-11.md) | Investigación con fuentes de las guías de la web: viñedos, queserías, familia, Bernal; lugares de la base que no existen |
 | [`historico/`](historico/) | Documentos viejos (catálogo original de los 50 lugares y setup inicial). **No reflejan el estado actual** |
 
 Fuera de esta carpeta, a propósito:

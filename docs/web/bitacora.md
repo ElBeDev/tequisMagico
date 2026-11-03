@@ -202,6 +202,34 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 
 ---
 
+## 12. Rendimiento, diseño, guías y datos (2 nov 2026)
+
+**Rendimiento** (Lighthouse en celular, portada): de 7.2 MB a 2.7 MB. Rendimiento queda entre 92 y 99 (varía de una corrida a otra), accesibilidad pasa de 96 a 100 y buenas prácticas de 79 a 96.
+- Las fotos de Commons ahora llevan `srcset`, y `photoAttrs` (`web/lib/images.ts`) se usa en todas las `<img>`. Las fotos de negocios pasan por el optimizador de Vercel: la de globos bajó de 500 kB a 38 kB.
+- Se quitó la cookie de terceros de Wikimedia con `crossOrigin="anonymous"`.
+- Los 256 kB de HTML de la portada son 43 kB comprimidos con brotli, así que no hizo falta tocarlos.
+- Se corrigieron dos fallas de accesibilidad: `aria-label` en `<span>`/`<p>` (lo ponía SplitText) y el botón "Guardar en mi viaje", cuyo nombre accesible no coincidía con su texto.
+
+**Diseño:**
+- Escala de seis tamaños (se agregó `title`).
+- El mapa de la portada arranca relleno y muestra Ciudad de México y Querétaro, que se abren durante el zoom. El relleno se va al empezar el zoom porque, si no, se ve el borde del `<svg>`.
+- Explora pasó de cuadrícula de tarjetas a un índice de guía con miniaturas en arco.
+
+**Guías** (`/guias`): cuatro guías con fuentes, escritas a partir de una investigación con un agente que está guardada en `docs/datos/investigacion-guias-2026-11.md`. En la revisión se quitaron frases que no venían de ninguna fuente.
+
+**Lo que encontró la investigación:**
+- Viñedos La Redonda suspendió operaciones en dic-2025 por un conflicto legal, y sigue como destacado en la base.
+- 11 lugares de la carga inicial no existen o existen con otro nombre y en otro lugar.
+- Las direcciones y coordenadas de Freixenet, Azteca y La Redonda caen dentro de Tequis, pero están en Ezequiel Montes.
+- La Estación Bernal no es un mirador acondicionado; ya se corrigió en `/por-que-tequis`.
+- La corrección de la base está en `database/databasefix_research_2026-11.sql` (**propuesta, no aplicada**).
+
+**Panel:** cada lugar sin confirmar dice qué le falta (teléfono, horario, sitio web, foto propia, ubicación precisa).
+
+**Build:** `fetchJSON` reintenta, porque un 500 pasajero del API tumbó un build local.
+
+---
+
 ## Pendientes
 
 | Pendiente | Quién |
@@ -214,8 +242,7 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 | Confirmar la fecha de la "Fiesta de la Fundación" en la base (las fuentes dicen 24 jun, 24 jul o 25 jul) | Datos |
 | Revisión legal del aviso de privacidad y los términos | Abogado |
 | Link real del App Store en `/app` cuando se publique la app | Código |
-| Bajar la portada a los cinco tamaños de letra del sistema (hoy hay ~12, sobre todo en el esquema de carreteras) | Código |
-| Darle más vida al arranque del mapa México → Tequis | Código |
-| Buscar una forma menos "de plantilla" para Explora que la cuadrícula de tarjetas | Código |
-| Revisar el peso del HTML de la portada (256 kB sin comprimir) si afecta la carga en celular | Código |
 | Fotos reales para los lugares: hoy 17 restaurantes comparten la misma foto genérica | Tú / negocios |
+| Revisar y correr `database/databasefix_research_2026-11.sql` en Neon (viñedos, La Redonda, 11 lugares que no existen) | Tú |
+| Dar de alta lugares reales que encontró la investigación (De Cote, Cava Bocanegra, Finca VAI, mercados, balnearios; lista en `docs/datos/investigacion-guias-2026-11.md`) | Tú en el panel |
+| Versión en inglés | Por decidir |
