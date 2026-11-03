@@ -189,13 +189,16 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 
 ---
 
-## 11. Fotos ligeras, imagen para compartir y analítica (2 nov 2026)
+## 11. Fotos ligeras, imagen para compartir, analítica y Search Console (2 nov 2026)
 
 **Fotos:** las fotos de Commons de la base apuntaban al archivo original. La de los portales pesaba 2.8 MB y salía 8 veces en `/lugares`. Ahora `getPlaces`/`getEvents` las piden en una versión reducida de Wikimedia: 960 px en tarjetas (160–280 kB) y 1280 px en la galería (100–470 kB). Wikimedia sirve los dos anchos de las 8 fotos de la base. Si el original es más angosto, también responde 200. Las 3 fotos de sitios de negocios (globos, cava) siguen en su tamaño original, de 440–510 kB.
 
 **Imagen para compartir:** la portada no tenía `og:image`, así que un link en WhatsApp salía sin foto. Ahora la genera `web/app/opengraph-image.tsx` en el build, con las fuentes en `web/assets/` (Gilda Display y Outfit, licencia OFL incluida) y la foto de la parroquia embebida. Sirve para todas las páginas menos las fichas de lugar y evento, que usan su propia foto. También se agregó `twitter:card = summary_large_image`.
 
-**Analítica:** se agregaron `@vercel/analytics` y `@vercel/speed-insights` en el layout, y el aviso de privacidad ya lo menciona. **Para que registren datos hay que activarlas en el proyecto `tequis-magico-web` de Vercel** (pestañas Analytics y Speed Insights). Mientras no estén activas, el script responde 404 y no pasa nada.
+**Google Search Console:** el sitio se dio de alta como propiedad de tipo Dominio. El TXT de verificación está en el DNS de Hostinger. El sitemap se envió con la URL completa (`https://tequismagico.com/sitemap.xml`), porque en una propiedad de dominio no basta con la ruta. Quedó en "Correcto" con 83 páginas descubiertas.
+- **El dominio ya existió antes:** hubo otro sitio de 2016 a 2019 (Internet Archive). Search Console mostró un sitemap con error 403 leído en 2018, que viene del dueño anterior. Pueden aparecer 404 de sus URLs viejas en "Páginas"; no hay que hacer nada.
+
+**Analítica:** se agregaron `@vercel/analytics` y `@vercel/speed-insights` en el layout, y el aviso de privacidad ya lo menciona. Se activaron en el proyecto `tequis-magico-web` de Vercel. Web Analytics necesitó un redeploy después de activarla: hasta entonces `/_vercel/insights/script.js` respondía 404.
 
 ---
 
@@ -215,6 +218,4 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 | Darle más vida al arranque del mapa México → Tequis | Código |
 | Buscar una forma menos "de plantilla" para Explora que la cuadrícula de tarjetas | Código |
 | Revisar el peso del HTML de la portada (256 kB sin comprimir) si afecta la carga en celular | Código |
-| Activar Web Analytics y Speed Insights en el proyecto `tequis-magico-web` de Vercel (el código ya está) | Tú en Vercel |
-| Dar de alta `tequismagico.com` en Google Search Console y enviar `/sitemap.xml` | Tú |
 | Fotos reales para los lugares: hoy 17 restaurantes comparten la misma foto genérica | Tú / negocios |

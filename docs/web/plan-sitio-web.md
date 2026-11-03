@@ -253,7 +253,7 @@ Las páginas son Server Components y se animan **por atributos** (`data-reveal`,
 - **Vercel:** proyecto `tequis-magico-web`, Root Directory = `web`, conectado a `ElBeDev/tequisMagico` (rama `main`). Cada push a `main` lo redespliega. Variable `NEXT_PUBLIC_SITE_URL=https://tequismagico.com`.
 - **Dominios:** `tequismagico.com` y `www.tequismagico.com` (redirige con 308 al dominio sin www).
 - **Registro:** comprado en Hostinger el 1 nov 2026; **vence el 2 nov 2027**.
-- **DNS en Hostinger:** `A @ → 216.198.79.1, 64.29.17.1` y `CNAME www → 5aacadb8be777d2d.vercel-dns-017.com.`. Son los valores que recomienda Vercel. Se reemplazaron los registros de la página de estacionamiento de Hostinger; el dominio no tenía correo ni otros registros.
+- **DNS en Hostinger:** `A @ → 216.198.79.1, 64.29.17.1` y `CNAME www → 5aacadb8be777d2d.vercel-dns-017.com.`. Son los valores que recomienda Vercel. Además hay un `TXT @` con `google-site-verification=…` (2 nov 2026) para Google Search Console: no lo borres o se pierde la verificación. Se reemplazaron los registros de la página de estacionamiento de Hostinger; el dominio no tenía correo ni otros registros.
 - **Pendiente:** cambiar el Root Directory del proyecto del panel (`tequis-magico`) a `web-admin` para poder borrar los restos del scaffold en la raíz (ver CLAUDE.md).
 
 ## 9. Pendientes
