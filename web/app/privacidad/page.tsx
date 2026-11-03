@@ -21,6 +21,7 @@ export default function PrivacidadPage() {
         <p>Este sitio se puede usar sin crear una cuenta ni darnos datos personales. No usamos cookies de publicidad ni de seguimiento.</p>
         <p>Si nos escribes, o si un negocio se registra con nosotros, recibimos los datos que nos compartas: nombre, correo y teléfono.</p>
         <p>Nuestro proveedor de hospedaje (Vercel) registra datos técnicos de cada visita, como la dirección IP y el navegador, para operar y proteger el sitio.</p>
+        <p>También medimos cuántas personas visitan cada página y qué tan rápido carga, con Vercel Web Analytics y Speed Insights. Esas estadísticas son anónimas y agregadas: no usan cookies ni nos permiten saber quién eres.</p>
       </LegalSection>
       <LegalSection title="Para qué usamos tus datos">
         <p>Para operar y mejorar el sitio y la app, responder tus mensajes y gestionar la información que publican los negocios.</p>

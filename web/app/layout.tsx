@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Gilda_Display, Outfit } from "next/font/google";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE_NAME, SITE_URL, getEvents, getPlaces, todayInTequis } from "@/lib/data";
 import { buildNav } from "@/lib/nav";
 import { buildSearchIndex } from "@/lib/search";
@@ -23,6 +25,7 @@ export const metadata: Metadata = {
     "Qué hacer en Tequisquiapan: viñedos, queserías, cestería, hoteles, restaurantes, fiestas con fecha y rutas por el Pueblo Mágico de Querétaro.",
   applicationName: SITE_NAME,
   openGraph: { siteName: SITE_NAME, locale: "es_MX", type: "website" },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
@@ -134,6 +137,8 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             Tequisquiapan
           </p>
         </footer>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

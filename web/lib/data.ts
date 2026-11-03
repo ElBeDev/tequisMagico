@@ -218,7 +218,23 @@ async function fetchJSON<T>(path: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
+// Las fotos de Commons en la base apuntan al archivo original (hasta ~3 MB cada una). Se piden
+// en un ancho estándar de Wikimedia: 960 px para tarjetas, mapas y destacados (alcanza para
+// pantallas retina) y 1280 px para la galería de la ficha. Lo que no sea de Commons se queda igual.
+const COMMONS_ORIGINAL = /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/([0-9a-f]\/[0-9a-f]{2})\/([^/]+\.(?:jpe?g|png|webp))$/i;
+
+function commonsThumb(url: string, width: 960 | 1280): string {
+  const m = url.match(COMMONS_ORIGINAL);
+  return m ? `https://upload.wikimedia.org/wikipedia/commons/thumb/${m[1]}/${m[2]}/${width}px-${m[2]}` : url;
+}
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
+function photoUrls(raw: any): { imageUrls: string[]; thumbnailUrl: string | null } {
+  const images: string[] = raw.image_urls ?? [];
+  const thumb: string | null = raw.thumbnail_url ?? images[0] ?? null;
+  return { imageUrls: images.map((u) => commonsThumb(u, 1280)), thumbnailUrl: thumb && commonsThumb(thumb, 960) };
+}
+
 export async function getPlaces(): Promise<Place[]> {
   const data = await fetchJSON<{ places: any[] }>('/api/places?limit=1000');
   const places: Place[] = data.places
@@ -235,8 +251,7 @@ export async function getPlaces(): Promise<Place[]> {
       shortDescription: p.short_description ?? '',
       fullDescription: p.full_description ?? '',
       priceRange: p.price_range ?? 'moderate',
-      imageUrls: p.image_urls ?? [],
-      thumbnailUrl: p.thumbnail_url ?? p.image_urls?.[0] ?? null,
+      ...photoUrls(p),
       phoneNumber: p.phone_number || null,
       email: p.email || null,
       website: p.website || null,
@@ -271,8 +286,7 @@ export async function getEvents(): Promise<TequisEvent[]> {
     address: e.address || null,
     category: e.category ?? '',
     tags: e.tags ?? [],
-    imageUrls: e.image_urls ?? [],
-    thumbnailUrl: e.thumbnail_url ?? e.image_urls?.[0] ?? null,
+    ...photoUrls(e),
     isFree: !!e.is_free,
     ticketPrice: e.ticket_price || null,
     ticketUrl: e.ticket_url || null,

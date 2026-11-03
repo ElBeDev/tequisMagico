@@ -165,9 +165,11 @@ Lo que se puede mostrar sin tocar la base. Útil para que el diseño no pida cam
 - **SEO:**
   - Título y descripción por página.
   - Datos estructurados de schema.org: `Restaurant`, `Hotel`, `Winery`, `Event`, etc.
-  - Migas de pan, `sitemap.xml`, imagen para compartir y URL canónica.
+  - Migas de pan, `sitemap.xml` y URL canónica.
+  - **Imagen para compartir** (`web/app/opengraph-image.tsx`): 1200×630 con "Tequisquiapan" en Gilda y la parroquia en arco, generada en el build. Las fichas de lugar y evento usan su propia foto.
   - Teléfono y horario solo van a los datos estructurados cuando `content_verified = true`.
-- **Fotos:** hotlink, igual que en la app (Wikimedia Commons y algunos sitios de negocios).
+- **Fotos:** hotlink, igual que en la app (Wikimedia Commons y algunos sitios de negocios). Las de Commons que vienen de la base se piden ya reducidas (`commonsThumb` en `web/lib/data.ts`): 960 px en tarjetas, mapas y destacados, y 1280 px en la galería de la ficha. Las de sitios de negocios se quedan en su tamaño original.
+- **Analítica:** Vercel Web Analytics y Speed Insights (`<Analytics />` y `<SpeedInsights />` en el layout). Sin cookies; el aviso de privacidad lo menciona.
 - **Mapas:** MapLibre GL con teselas vectoriales de OpenFreeMap, sin API key ni costo, recoloreadas con la paleta del sitio (`web/lib/mapStyle.ts`). Muestran el crédito de OpenFreeMap/OpenStreetMap. En los mapas chicos la rueda del mouse sigue bajando la página; para acercar se usa ctrl/⌘ + rueda o dos dedos. En `/mapa` la rueda sí acerca.
 
 ---
