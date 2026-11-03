@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { ScrollTrigger, SplitText, gsap, isDesktop, prefersReducedMotion, useGSAP } from '@/lib/motion';
 import { photoAttrs } from '@/lib/images';
+import { href, type Lang } from '@/lib/i18n';
 
 export type Activity = { title: string; image: string; detail: string; cta: string; href: string };
 
@@ -13,7 +14,8 @@ export type Activity = { title: string; image: string; detail: string; cta: stri
  * pasando de una actividad a otra (foto que entra como cortina, título letra por letra);
  * las flechas llevan a la posición de scroll de cada una. En el celular, flechas y deslizar.
  */
-export default function Activities({ items }: { items: Activity[] }) {
+export default function Activities({ items, lang }: { items: Activity[]; lang: Lang }) {
+  const en = lang === 'en';
   const [index, setIndex] = useState(0);
   const root = useRef<HTMLElement>(null);
   const pin = useRef<ScrollTrigger | null>(null);
@@ -79,8 +81,8 @@ export default function Activities({ items }: { items: Activity[] }) {
       ref={root}
       data-cursor-dark
       className="on-dark relative overflow-hidden bg-green text-white"
-      aria-roledescription="carrusel"
-      aria-label="Experiencias"
+      aria-roledescription={en ? 'carousel' : 'carrusel'}
+      aria-label={en ? 'Experiences' : 'Experiencias'}
       onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
       onTouchEnd={(e) => {
         if (touchX.current === null) return;
@@ -104,13 +106,13 @@ export default function Activities({ items }: { items: Activity[] }) {
           <p key={item.detail} data-act-fade className="relative mt-8 max-w-[38ch] text-lead leading-snug">{item.detail}</p>
           <span data-act-fade className="relative mt-10 flex flex-wrap items-center gap-6">
             <Link href={item.href} className="btn">{item.cta}</Link>
-            <Link href="/lugares/experiencias" className="font-medium underline-offset-4 hover:underline">
-              Todas las experiencias
+            <Link href={href(lang, '/lugares/experiencias')} className="font-medium underline-offset-4 hover:underline">
+              {en ? 'All experiences' : 'Todas las experiencias'}
             </Link>
           </span>
 
           <div className="absolute right-6 top-1/2 flex -translate-y-1/2 flex-col items-center gap-3 sm:right-10">
-            <button type="button" onClick={() => go(-1)} aria-label="Anterior" className="p-1 transition hover:-translate-y-0.5 hover:opacity-70">
+            <button type="button" onClick={() => go(-1)} aria-label={en ? 'Previous' : 'Anterior'} className="p-1 transition hover:-translate-y-0.5 hover:opacity-70">
               <ArrowUp className="size-5" aria-hidden />
             </button>
             <div className="flex flex-col gap-2" aria-hidden>
@@ -118,7 +120,7 @@ export default function Activities({ items }: { items: Activity[] }) {
                 <span key={a.title} className={`size-2 rounded-full transition-colors duration-500 ${i === index ? 'bg-white' : 'bg-white/30'}`} />
               ))}
             </div>
-            <button type="button" onClick={() => go(1)} aria-label="Siguiente" className="p-1 transition hover:translate-y-0.5 hover:opacity-70">
+            <button type="button" onClick={() => go(1)} aria-label={en ? 'Next' : 'Siguiente'} className="p-1 transition hover:translate-y-0.5 hover:opacity-70">
               <ArrowDown className="size-5" aria-hidden />
             </button>
           </div>

@@ -1,3 +1,5 @@
+import type { Lang } from './i18n';
+import { GUIDES_EN } from './i18n/guides-en';
 import { PHOTOS, type Photo } from './photos';
 
 // Guías editoriales (/guias). El texto se escribió a partir de una investigación con fuentes
@@ -386,7 +388,14 @@ export const GUIDES: Guide[] = [
   },
 ];
 
-export function getGuide(slug: string): Guide | undefined {
-  return GUIDES.find((g) => g.slug === slug);
+/** Las guías en el idioma pedido (mismo orden en los dos: la posición las empareja). */
+export function guidesFor(lang: Lang): Guide[] {
+  return lang === 'en' ? GUIDES_EN : GUIDES;
+}
+
+/** Una guía por su slug en español (el de la carpeta interna), en el idioma pedido. */
+export function getGuide(esSlug: string, lang: Lang = 'es'): Guide | undefined {
+  const i = GUIDES.findIndex((g) => g.slug === esSlug);
+  return i === -1 ? undefined : guidesFor(lang)[i];
 }
 

@@ -13,7 +13,7 @@ export type BigWord = { label: string; href: string; image: string; caption: str
  * el mouse, la palabra se rellena y una foto sigue al cursor; en el celular cada palabra
  * lleva su foto en miniatura.
  */
-export default function BigWords({ items }: { items: BigWord[] }) {
+export default function BigWords({ items, cursor = 'Ver' }: { items: BigWord[]; cursor?: string }) {
   const root = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<number | null>(null);
   const follow = useRef<{ x: (v: number) => void; y: (v: number) => void } | null>(null);
@@ -74,7 +74,7 @@ export default function BigWords({ items }: { items: BigWord[] }) {
                 place(e.clientX, e.clientY);
                 setActive(i);
               }}
-              data-cursor="Ver"
+              data-cursor={cursor}
               className={`group flex items-center gap-5 py-3 transition-colors duration-500 sm:py-4 ${active !== null && active !== i ? 'text-ink/25' : 'text-ink'} hover:text-ink`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}

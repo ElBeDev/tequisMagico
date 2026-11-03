@@ -2,6 +2,9 @@
 // web-admin), así la web y la app muestran exactamente lo mismo. El panel sigue siendo el
 // único lugar donde se edita; aquí todo es solo lectura.
 
+import type { Lang } from './i18n';
+import { EVENTS_EN, PLACES_EN, SUBCATEGORIES_EN, TERMS_EN } from './i18n/data-en';
+
 const API_BASE = process.env.TEQUIS_API_URL ?? 'https://tequis-magico.vercel.app';
 
 // Cada cuántos segundos se vuelve a pedir al API (ISR). Lo que se edite en el panel tarda
@@ -18,7 +21,10 @@ export type Place = {
   slug: string;
   name: string;
   category: PlaceCategory;
+  /** Subcategoría en el idioma de la página (lo que se muestra). */
   subcategory: string;
+  /** Subcategoría en español, tal cual viene del API: es la clave para rutas y filtros. */
+  subcategoryKey: string;
   latitude: number;
   longitude: number;
   address: string;
@@ -31,7 +37,10 @@ export type Place = {
   email: string | null;
   website: string | null;
   whatsappNumber: string | null;
+  /** Horario tal cual viene del API (claves y texto en español): para calcular "abierto ahora". */
   schedule: Record<string, string> | null;
+  /** El mismo horario con el texto en el idioma de la página: para mostrarlo. */
+  scheduleText: Record<string, string> | null;
   amenities: string[];
   tags: string[];
   isFeatured: boolean;
@@ -77,6 +86,22 @@ export const CATEGORIES: Record<PlaceCategory, { label: string; slug: string; co
   rutas: { label: 'Rutas', slug: 'rutas', color: '#0d9488', blurb: 'Recorridos a pie, en bici y por los viñedos.' },
 };
 
+const CATEGORIES_EN: Record<PlaceCategory, { label: string; blurb: string }> = {
+  turistico: { label: 'Sights', blurb: 'Plazas, churches, museums and monuments in town.' },
+  experiencias: { label: 'Experiences', blurb: 'Wineries, cheese makers, hot-air balloons, spas and workshops.' },
+  gastronomia: { label: 'Food & drink', blurb: 'Restaurants, cafés, street food and bars.' },
+  hospedaje: { label: 'Where to stay', blurb: 'Hotels, inns and boutique hotels.' },
+  eventos: { label: 'Events', blurb: 'Festivals, fairs and exhibitions.' },
+  compras: { label: 'Shopping', blurb: 'Crafts, local products, wine and cheese.' },
+  rutas: { label: 'Routes', blurb: 'Walking, cycling and winery routes.' },
+};
+
+/** Categoría con su nombre y descripción en el idioma de la página. */
+export function categoryInfo(lang: Lang, category: PlaceCategory) {
+  const c = CATEGORIES[category];
+  return lang === 'en' ? { ...c, ...CATEGORIES_EN[category] } : c;
+}
+
 // Mismos valores que `PriceRange` en ModelsPriceRange.swift.
 export const PRICE_RANGES: Record<string, { symbol: string; label: string }> = {
   free: { symbol: 'Gratis', label: 'Gratis' },
@@ -85,11 +110,22 @@ export const PRICE_RANGES: Record<string, { symbol: string; label: string }> = {
   expensive: { symbol: '$$$', label: 'Caro' },
   luxury: { symbol: '$$$$', label: 'Lujo' },
 };
+const PRICE_RANGES_EN: Record<string, { symbol: string; label: string }> = {
+  free: { symbol: 'Free', label: 'Free' },
+  budget: { symbol: '$', label: 'Budget' },
+  moderate: { symbol: '$$', label: 'Moderate' },
+  expensive: { symbol: '$$$', label: 'Pricey' },
+  luxury: { symbol: '$$$$', label: 'Luxury' },
+};
+
+export function priceInfo(lang: Lang, range: string): { symbol: string; label: string } | undefined {
+  return (lang === 'en' ? PRICE_RANGES_EN : PRICE_RANGES)[range];
+}
 
 /** Lo mínimo de un lugar para tarjetas, mapas y buscador (lo que viaja al navegador). */
 export type PlaceSummary = Pick<
   Place,
-  'id' | 'slug' | 'name' | 'category' | 'subcategory' | 'shortDescription' | 'priceRange' | 'thumbnailUrl' | 'latitude' | 'longitude'
+  'id' | 'slug' | 'name' | 'category' | 'subcategory' | 'subcategoryKey' | 'shortDescription' | 'priceRange' | 'thumbnailUrl' | 'latitude' | 'longitude'
 >;
 
 export function toSummary(p: Place): PlaceSummary {
@@ -99,6 +135,7 @@ export function toSummary(p: Place): PlaceSummary {
     name: p.name,
     category: p.category,
     subcategory: p.subcategory,
+    subcategoryKey: p.subcategoryKey,
     shortDescription: p.shortDescription,
     priceRange: p.priceRange,
     thumbnailUrl: p.thumbnailUrl,
@@ -133,17 +170,19 @@ const SUBCATEGORY_PLURALS: Record<string, string> = {
   'Dulcería': 'Dulcerías',
 };
 
-export function subcategoryPlural(sub: string): string {
-  return SUBCATEGORY_PLURALS[sub] ?? sub;
+/** Plural de una subcategoría (clave en español) en el idioma pedido. */
+export function subcategoryPlural(key: string, lang: Lang = 'es'): string {
+  if (lang === 'en') return SUBCATEGORIES_EN[key]?.plural ?? key;
+  return SUBCATEGORY_PLURALS[key] ?? key;
 }
 
-/** Subcategorías de una lista de lugares, de la más a la menos común. */
-export function subcategoriesOf(places: Pick<Place, 'subcategory'>[]): { name: string; slug: string; count: number }[] {
+/** Subcategorías (por su clave en español) de una lista de lugares, de la más a la menos común. */
+export function subcategoriesOf(places: Pick<Place, 'subcategoryKey'>[]): { key: string; slug: string; count: number }[] {
   const counts = new Map<string, number>();
-  for (const p of places) if (p.subcategory) counts.set(p.subcategory, (counts.get(p.subcategory) ?? 0) + 1);
+  for (const p of places) if (p.subcategoryKey) counts.set(p.subcategoryKey, (counts.get(p.subcategoryKey) ?? 0) + 1);
   return [...counts]
     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'es'))
-    .map(([name, count]) => ({ name, slug: slugify(name), count }));
+    .map(([key, count]) => ({ key, slug: slugify(key), count }));
 }
 
 /** Link a una categoría filtrada por subcategoría (`/lugares/experiencias?tipo=vinedo`). */
@@ -244,7 +283,7 @@ function photoUrls(raw: any): { imageUrls: string[]; thumbnailUrl: string | null
   return { imageUrls: images.map((u) => commonsThumb(u, 1280)), thumbnailUrl: thumb && commonsThumb(thumb, 960) };
 }
 
-export async function getPlaces(): Promise<Place[]> {
+export async function getPlaces(lang: Lang = 'es'): Promise<Place[]> {
   const data = await fetchJSON<{ places: any[] }>('/api/places?limit=1000');
   const places: Place[] = data.places
     .filter((p) => p.category in CATEGORIES)
@@ -254,6 +293,7 @@ export async function getPlaces(): Promise<Place[]> {
       name: p.name,
       category: p.category,
       subcategory: p.subcategory ?? '',
+      subcategoryKey: p.subcategory ?? '',
       latitude: toNumber(p.latitude) ?? 0,
       longitude: toNumber(p.longitude) ?? 0,
       address: p.address ?? '',
@@ -266,6 +306,7 @@ export async function getPlaces(): Promise<Place[]> {
       website: p.website || null,
       whatsappNumber: p.whatsapp_number || null,
       schedule: toSchedule(p.schedule_json),
+      scheduleText: toSchedule(p.schedule_json),
       amenities: p.amenities ?? [],
       tags: p.tags ?? [],
       isFeatured: !!p.is_featured,
@@ -275,10 +316,45 @@ export async function getPlaces(): Promise<Place[]> {
     }));
   // Slugs asignados en orden de creación estable (id) para que no cambien si cambia el rating.
   assignSlugs([...places].sort((a, b) => a.id.localeCompare(b.id)), (p) => p.name);
-  return places;
+  return lang === 'en' ? places.map(placeToEnglish) : places;
 }
 
-export async function getEvents(): Promise<TequisEvent[]> {
+// Lo que llegue sin traducción (un lugar nuevo en el panel) se queda en español.
+const term = (t: string) => TERMS_EN[t] ?? t;
+
+function placeToEnglish(p: Place): Place {
+  const t = PLACES_EN[p.id];
+  const schedule = p.schedule && {
+    ...Object.fromEntries(Object.entries(p.schedule).map(([day, v]) => [day, v.replace(/^cerrado$/i, 'Closed')])),
+    ...t?.schedule,
+  };
+  return {
+    ...p,
+    subcategory: SUBCATEGORIES_EN[p.subcategoryKey]?.singular ?? p.subcategory,
+    shortDescription: t?.shortDescription ?? p.shortDescription,
+    fullDescription: t?.fullDescription ?? p.fullDescription,
+    scheduleText: schedule,
+    amenities: p.amenities.map(term),
+    tags: p.tags.map(term),
+  };
+}
+
+function eventToEnglish(e: TequisEvent): TequisEvent {
+  const t = EVENTS_EN[e.id];
+  return {
+    ...e,
+    title: t?.title ?? e.title,
+    shortDescription: t?.shortDescription ?? e.shortDescription,
+    fullDescription: t?.fullDescription ?? e.fullDescription,
+    locationName: t?.locationName ?? e.locationName,
+    ticketPrice: t?.ticketPrice ?? e.ticketPrice,
+    organizerName: t?.organizerName ?? e.organizerName,
+    category: term(e.category),
+    tags: e.tags.map(term),
+  };
+}
+
+export async function getEvents(lang: Lang = 'es'): Promise<TequisEvent[]> {
   const data = await fetchJSON<{ events: any[] }>('/api/events?limit=1000');
   const events: TequisEvent[] = data.events.map((e) => ({
     id: e.id,
@@ -305,16 +381,16 @@ export async function getEvents(): Promise<TequisEvent[]> {
     organizerContact: e.organizer_contact || null,
   }));
   assignSlugs([...events].sort((a, b) => a.id.localeCompare(b.id)), (e) => e.title);
-  return events;
+  return lang === 'en' ? events.map(eventToEnglish) : events;
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
-export async function getPlace(slug: string): Promise<Place | null> {
-  return (await getPlaces()).find((p) => p.slug === slug) ?? null;
+export async function getPlace(slug: string, lang: Lang = 'es'): Promise<Place | null> {
+  return (await getPlaces(lang)).find((p) => p.slug === slug) ?? null;
 }
 
-export async function getEvent(slug: string): Promise<TequisEvent | null> {
-  return (await getEvents()).find((e) => e.slug === slug) ?? null;
+export async function getEvent(slug: string, lang: Lang = 'es'): Promise<TequisEvent | null> {
+  return (await getEvents(lang)).find((e) => e.slug === slug) ?? null;
 }
 
 // --- Fechas ---------------------------------------------------------------------------
@@ -334,7 +410,12 @@ export function eventStatus(event: TequisEvent, today = todayInTequis()): EventS
   return 'happening';
 }
 
-export function formatDateRange(start: string, end: string): string {
+export function formatDateRange(start: string, end: string, lang: Lang = 'es'): string {
+  if (lang === 'en') {
+    const f = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', day: 'numeric', month: 'long', year: 'numeric' });
+    const a = new Date(`${start}T00:00:00Z`);
+    return start === end ? f.format(a) : f.formatRange(a, new Date(`${end}T00:00:00Z`));
+  }
   const fmt = (d: string, opts: Intl.DateTimeFormatOptions) =>
     new Intl.DateTimeFormat('es-MX', { timeZone: 'UTC', ...opts }).format(new Date(`${d}T00:00:00Z`));
   if (start === end) return fmt(start, { day: 'numeric', month: 'long', year: 'numeric' });
@@ -357,9 +438,21 @@ export const THEMATIC_ROUTES = [
 
 export type ThematicRoute = (typeof THEMATIC_ROUTES)[number];
 
+const ROUTES_EN: Record<string, { title: string; subtitle: string }> = {
+  'vino-y-queso': { title: 'Wine and Cheese Route', subtitle: 'Wineries and cheese makers' },
+  artesanal: { title: 'Crafts Route', subtitle: 'Crafts, market and sweets' },
+  historica: { title: 'Historic Route', subtitle: 'Plazas, churches and monuments' },
+  aventura: { title: 'Adventure Route', subtitle: 'Balloons, hot springs and nature' },
+};
+
+/** Título y subtítulo de una ruta temática en el idioma pedido. */
+export function routeText(lang: Lang, route: ThematicRoute): { title: string; subtitle: string } {
+  return lang === 'en' ? ROUTES_EN[route.slug] : route;
+}
+
 /** Los lugares de una ruta, en el mismo orden que la app (el API ya los trae por rating). */
-export function placesForRoute(route: ThematicRoute, places: Place[]): Place[] {
-  return places.filter((p) => (route.subcategories as readonly string[]).includes(p.subcategory));
+export function placesForRoute<T extends Pick<Place, 'subcategoryKey'>>(route: ThematicRoute, places: T[]): T[] {
+  return places.filter((p) => (route.subcategories as readonly string[]).includes(p.subcategoryKey));
 }
 
 export function mapsDirectionsUrl(lat: number, lng: number): string {

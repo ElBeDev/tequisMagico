@@ -20,11 +20,17 @@ export default function Hero({
   lead,
   slides,
   actions,
+  promisePrefix = 'La promesa de',
+  photosLabel = 'Fotos de la portada',
+  photoLabel = 'Foto',
 }: {
   title: string;
   lead: string;
   slides: HeroSlide[];
   actions?: { label: string; href: string }[];
+  promisePrefix?: string;
+  photosLabel?: string;
+  photoLabel?: string;
 }) {
   const [index, setIndex] = useState(0);
   const root = useRef<HTMLElement>(null);
@@ -121,7 +127,7 @@ export default function Hero({
         </h1>
         <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <p data-hero-lead aria-live="polite" className="max-w-[34ch] text-lead leading-snug">
-            {lead} La promesa de{' '}
+            {lead} {promisePrefix}{' '}
             <span className="sr-only">{slides[index]?.promise}</span>
             <span key={index} data-hero-promise aria-hidden className="inline-block font-medium">
               {slides[index]?.promise}
@@ -147,13 +153,13 @@ export default function Hero({
         </div>
 
         {/* Una barra por foto: se llena la de turno y cualquiera lleva a su foto. */}
-        <div data-hero-ui className="mt-10 flex gap-2" role="group" aria-label="Fotos de la portada">
+        <div data-hero-ui className="mt-10 flex gap-2" role="group" aria-label={photosLabel}>
           {slides.map((s, i) => (
             <button
               key={s.src}
               type="button"
               onClick={() => setIndex(i)}
-              aria-label={`Foto ${i + 1}: ${s.alt}`}
+              aria-label={`${photoLabel} ${i + 1}: ${s.alt}`}
               aria-current={i === index}
               className="group/bar relative h-6 flex-1 sm:max-w-24"
             >

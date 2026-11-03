@@ -12,11 +12,36 @@ import { Logo } from './Logo';
 import { MoreLink } from './Section';
 import SearchDialog from './SearchDialog';
 import { photoAttrs } from '@/lib/images';
+import { dict } from '@/lib/dict';
+import { enToEs, href, otherLangPath, type Lang } from '@/lib/i18n';
 
 // Páginas que abren con una foto a pantalla completa: ahí el header va transparente y en
 // blanco encima de la foto, y se vuelve sólido al bajar (o al abrir un panel del menú). Las
 // guías (`/guias/<slug>`) también abren con foto.
 const OVERLAY_PATHS = ['/', '/por-que-tequis', '/guia-practica'];
+
+/** La ruta interna en español de la URL visible, para comparar sin importar el idioma. */
+function esPathOf(pathname: string): string {
+  return pathname === '/en' || pathname.startsWith('/en/') ? enToEs(pathname.slice(3)) : pathname;
+}
+
+/** Botón al otro idioma, a la misma página. `hrefLang` para que los buscadores lo entiendan. */
+function LangSwitch({ lang, pathname, className = '' }: { lang: Lang; pathname: string; className?: string }) {
+  const t = dict(lang);
+  const other = otherLangPath(pathname);
+  return (
+    <a
+      href={other.path}
+      hrefLang={other.lang}
+      lang={other.lang}
+      aria-label={t.otherLangLabel}
+      title={t.otherLang}
+      className={`flex h-11 items-center rounded-full px-3 font-semibold tracking-wide transition-opacity hover:opacity-70 ${className}`}
+    >
+      {t.otherLangShort}
+    </a>
+  );
+}
 
 function isTyping(target: EventTarget | null) {
   const el = target as HTMLElement | null;
@@ -28,9 +53,11 @@ function isTyping(target: EventTarget | null) {
  * y el mapa; abajo las secciones, cada una con su panel (columnas de links y una tarjeta
  * destacada). En celular, buscador y corazón quedan arriba y el resto va en el menú verde.
  */
-export default function SiteHeader({ nav, search }: { nav: NavSection[]; search: SearchItem[] }) {
+export default function SiteHeader({ nav, search, lang }: { nav: NavSection[]; search: SearchItem[]; lang: Lang }) {
   const pathname = usePathname();
-  const overlay = OVERLAY_PATHS.includes(pathname) || pathname.startsWith('/guias/');
+  const esPath = esPathOf(pathname);
+  const overlay = OVERLAY_PATHS.includes(esPath) || esPath.startsWith('/guias/');
+  const t = dict(lang);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -129,7 +156,7 @@ export default function SiteHeader({ nav, search }: { nav: NavSection[]; search:
         } ${hidden && !menuOpen && panel === null ? 'header-hidden' : ''}`}
       >
         <div className={`frame flex items-center gap-3 transition-[padding] duration-500 ${transparent ? 'pb-2 pt-6' : 'py-3'}`}>
-          <Link href="/" aria-label="Tequisquiapan Mágico, inicio" data-intro className="shrink-0" onMouseEnter={closePanelSoon}>
+          <Link href={href(lang, '/')} aria-label={t.logoLabel} data-intro className="shrink-0" onMouseEnter={closePanelSoon}>
             <Logo />
           </Link>
 
@@ -142,7 +169,7 @@ export default function SiteHeader({ nav, search }: { nav: NavSection[]; search:
             }`}
           >
             <Search className="size-4 shrink-0 opacity-70" aria-hidden />
-            <span className="flex-1 truncate opacity-80">Busca lugares, eventos y más…</span>
+            <span className="flex-1 truncate opacity-80">{t.searchPlaceholder}</span>
             <kbd className="meta hidden rounded-full bg-current/10 px-2 font-sans opacity-60 lg:inline">/</kbd>
           </button>
 
@@ -150,20 +177,24 @@ export default function SiteHeader({ nav, search }: { nav: NavSection[]; search:
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              aria-label="Buscar"
+              aria-label={t.search}
               data-intro
               className="flex size-11 items-center justify-center rounded-full transition-opacity hover:opacity-70 md:hidden"
             >
               <Search className="size-5" aria-hidden />
             </button>
+            {/* En celular no cabe junto al menú: ahí va dentro del menú verde. */}
+            <span data-intro className="hidden sm:block">
+              <LangSwitch lang={lang} pathname={pathname} />
+            </span>
             <Link
-              href="/mi-viaje"
+              href={href(lang, '/mi-viaje')}
               data-intro
-              aria-label={count ? `Mi viaje: ${count} guardados` : 'Mi viaje'}
+              aria-label={count ? t.myTripCount(count) : t.myTrip}
               className="relative flex h-11 items-center gap-2 rounded-full px-3 font-medium transition-opacity hover:opacity-70"
             >
               <Heart className={`size-5 ${count ? 'fill-current' : ''}`} aria-hidden />
-              <span className="hidden lg:inline">Mi viaje</span>
+              <span className="hidden lg:inline">{t.myTrip}</span>
               {count > 0 && (
                 <span className="absolute right-0 top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-ochre px-1.5 text-small font-semibold text-ink lg:static">
                   {count}
@@ -171,18 +202,18 @@ export default function SiteHeader({ nav, search }: { nav: NavSection[]; search:
               )}
             </Link>
             <Link
-              href="/mapa"
+              href={href(lang, '/mapa')}
               data-intro
               className={`hidden items-center gap-2 rounded-full px-5 py-2.5 font-medium transition-colors sm:flex ${
                 transparent ? 'bg-white text-ink hover:bg-ochre' : 'bg-ink text-bg hover:bg-green'
               }`}
             >
-              <MapPinned className="size-4" aria-hidden /> Explorar mapa
+              <MapPinned className="size-4" aria-hidden /> {t.exploreMap}
             </Link>
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
-              aria-label="Abrir menú"
+              aria-label={t.openMenu}
               aria-expanded={menuOpen}
               data-intro
               className="group/burger ml-1 flex size-11 flex-col items-center justify-center gap-[6px] rounded-full bg-current/15 transition-colors hover:bg-current lg:hidden"
@@ -194,7 +225,7 @@ export default function SiteHeader({ nav, search }: { nav: NavSection[]; search:
           </div>
         </div>
 
-        <nav aria-label="Principal" className="hidden lg:block">
+        <nav aria-label={t.mainNav} className="hidden lg:block">
           <ul className="frame flex flex-wrap items-center pb-2 [&>li:first-child]:-ml-4">
             {nav.map((s, i) => (
               <li key={s.href} data-intro onMouseEnter={() => openPanel(i)}>
@@ -216,19 +247,20 @@ export default function SiteHeader({ nav, search }: { nav: NavSection[]; search:
         </nav>
 
         {nav.map((s, i) => (
-          <MegaPanel key={s.href} section={s} open={panel === i} loadImage={seen.has(i)} onEnter={() => openPanel(i)} />
+          <MegaPanel key={s.href} section={s} lang={lang} open={panel === i} loadImage={seen.has(i)} onEnter={() => openPanel(i)} />
         ))}
       </header>
 
-      <SearchDialog items={search} open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <SearchDialog items={search} lang={lang} open={searchOpen} onClose={() => setSearchOpen(false)} />
 
       {menuOpen && (
-        <div ref={menuRef} role="dialog" aria-modal="true" aria-label="Menú" data-lenis-prevent data-cursor-dark className="fixed inset-0 z-40 overflow-y-auto bg-green text-white">
+        <div ref={menuRef} role="dialog" aria-modal="true" aria-label={t.menu} data-lenis-prevent data-cursor-dark className="fixed inset-0 z-40 overflow-y-auto bg-green text-white">
           <div className="frame flex items-center justify-between py-6">
-            <Link href="/" aria-label="Inicio">
+            <Link href={href(lang, '/')} aria-label={t.home}>
               <Logo />
             </Link>
-            <button type="button" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú" className="flex size-11 items-center justify-center rounded-full bg-white/15">
+            <LangSwitch lang={lang} pathname={pathname} className="ml-auto mr-2" />
+            <button type="button" onClick={() => setMenuOpen(false)} aria-label={t.closeMenu} className="flex size-11 items-center justify-center rounded-full bg-white/15">
               <X className="size-6" aria-hidden />
             </button>
           </div>
@@ -241,10 +273,10 @@ export default function SiteHeader({ nav, search }: { nav: NavSection[]; search:
               }}
               className="flex flex-1 items-center gap-3 rounded-full bg-white/15 px-5 py-3 text-left"
             >
-              <Search className="size-4" aria-hidden /> Busca lugares, eventos y más…
+              <Search className="size-4" aria-hidden /> {t.searchPlaceholder}
             </button>
-            <Link href="/mapa" className="btn-outline">
-              <MapPinned className="size-4" aria-hidden /> Mapa
+            <Link href={href(lang, '/mapa')} className="btn-outline">
+              <MapPinned className="size-4" aria-hidden /> {t.map}
             </Link>
           </div>
           <div className="frame grid gap-x-12 gap-y-10 pb-16 pt-10 sm:grid-cols-2 md:grid-cols-3">
@@ -271,7 +303,7 @@ export default function SiteHeader({ nav, search }: { nav: NavSection[]; search:
   );
 }
 
-function MegaPanel({ section: s, open, loadImage, onEnter }: { section: NavSection; open: boolean; loadImage: boolean; onEnter: () => void }) {
+function MegaPanel({ section: s, lang, open, loadImage, onEnter }: { section: NavSection; lang: Lang; open: boolean; loadImage: boolean; onEnter: () => void }) {
   const wide = s.groups.length === 1 && s.groups[0].links.length > 6;
   return (
     <div
@@ -307,7 +339,7 @@ function MegaPanel({ section: s, open, loadImage, onEnter }: { section: NavSecti
         </div>
 
         {s.feature && (
-          <Link href={s.feature.href} data-cursor="Ver" className="group relative block aspect-[4/3.4] self-start overflow-hidden rounded-t-[999px] bg-stone text-white">
+          <Link href={s.feature.href} data-cursor={dict(lang).cursorView} className="group relative block aspect-[4/3.4] self-start overflow-hidden rounded-t-[999px] bg-stone text-white">
             {loadImage && (
               // eslint-disable-next-line @next/next/no-img-element
               <img {...photoAttrs(s.feature.image, '400px')} alt="" className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105" />

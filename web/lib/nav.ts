@@ -1,9 +1,10 @@
 import {
-  CATEGORIES,
   THEMATIC_ROUTES,
+  categoryInfo,
   eventStatus,
   formatDateRange,
   placesForRoute,
+  routeText,
   subcategoriesOf,
   subcategoryHref,
   subcategoryPlural,
@@ -11,139 +12,198 @@ import {
   type PlaceCategory,
   type TequisEvent,
 } from './data';
-import { GUIDES } from './guides';
+import { GUIDES, guidesFor } from './guides';
+import { href, pick, type Lang } from './i18n';
 import { PHOTOS } from './photos';
 
 // Menú principal al estilo de visitshropshire.co.uk: una fila de secciones y, al pasar el
 // mouse, un panel con columnas de links (armadas con los datos reales: subcategorías con su
-// conteo, próximos eventos) y una tarjeta destacada con foto.
+// conteo, próximos eventos) y una tarjeta destacada con foto. Los `href` ya salen en el idioma
+// de la página.
 
 export type NavLink = { href: string; label: string; meta?: string };
 export type NavGroup = { title: string; href?: string; links: NavLink[] };
 export type NavFeature = { image: string; eyebrow: string; title: string; href: string; cta: string };
 export type NavSection = { label: string; href: string; groups: NavGroup[]; feature?: NavFeature; all: NavLink };
 
-function categoryGroup(places: Place[], category: PlaceCategory, title = CATEGORIES[category].label): NavGroup {
+function categoryGroup(lang: Lang, places: Place[], category: PlaceCategory, title = categoryInfo(lang, category).label): NavGroup {
   const inCategory = places.filter((p) => p.category === category);
   return {
     title,
-    href: `/lugares/${CATEGORIES[category].slug}`,
-    links: subcategoriesOf(inCategory).map((s) => ({ href: subcategoryHref(category, s.name), label: subcategoryPlural(s.name), meta: String(s.count) })),
+    href: href(lang, `/lugares/${categoryInfo(lang, category).slug}`),
+    links: subcategoriesOf(inCategory).map((s) => ({
+      href: href(lang, subcategoryHref(category, s.key)),
+      label: subcategoryPlural(s.key, lang),
+      meta: String(s.count),
+    })),
   };
 }
 
 /** Un lugar destacado y con información confirmada de la categoría, para la tarjeta del panel. */
-function featuredFeature(places: Place[], category: PlaceCategory): NavFeature | undefined {
+function featuredFeature(lang: Lang, places: Place[], category: PlaceCategory): NavFeature | undefined {
   const p = places.find((x) => x.category === category && x.isFeatured && x.contentVerified && x.thumbnailUrl);
   if (!p) return undefined;
-  return { image: p.thumbnailUrl!, eyebrow: 'Destacado', title: p.name, href: `/lugar/${p.slug}`, cta: 'Ver detalles' };
+  return {
+    image: p.thumbnailUrl!,
+    eyebrow: pick(lang, { es: 'Destacado', en: 'Featured' }),
+    title: p.name,
+    href: href(lang, `/lugar/${p.slug}`),
+    cta: pick(lang, { es: 'Ver detalles', en: 'See details' }),
+  };
 }
 
-export function buildNav(places: Place[], events: TequisEvent[], today: string): NavSection[] {
+export function buildNav(places: Place[], events: TequisEvent[], today: string, lang: Lang = 'es'): NavSection[] {
+  const L = (es: string, en: string) => (lang === 'en' ? en : es);
+  const h = (path: string) => href(lang, path);
   const upcoming = events.filter((e) => eventStatus(e, today) !== 'past');
   const next = upcoming[0];
   const routes = THEMATIC_ROUTES.map((r) => ({ r, n: placesForRoute(r, places).length })).filter((x) => x.n > 0);
+  const guides = guidesFor(lang);
 
   return [
     {
-      label: 'Qué hacer',
-      href: '/lugares',
-      groups: [categoryGroup(places, 'experiencias'), categoryGroup(places, 'turistico')],
-      feature: featuredFeature(places, 'experiencias') ?? {
-        image: PHOTOS.vinedosDeCote.src, eyebrow: 'Ruta', title: 'Ruta del Vino y Queso', href: '/rutas/vino-y-queso', cta: 'Ver la ruta',
+      label: L('Qué hacer', 'Things to do'),
+      href: h('/lugares'),
+      groups: [categoryGroup(lang, places, 'experiencias'), categoryGroup(lang, places, 'turistico')],
+      feature: featuredFeature(lang, places, 'experiencias') ?? {
+        image: PHOTOS.vinedosDeCote.src,
+        eyebrow: L('Ruta', 'Route'),
+        title: routeText(lang, THEMATIC_ROUTES[0]).title,
+        href: h('/rutas/vino-y-queso'),
+        cta: L('Ver la ruta', 'See the route'),
       },
-      all: { href: '/lugares', label: 'Todo lo que hacer en Tequis' },
+      all: { href: h('/lugares'), label: L('Todo lo que hacer en Tequis', 'Everything to do in Tequis') },
     },
     {
-      label: 'Comer y beber',
-      href: '/lugares/gastronomia',
-      groups: [categoryGroup(places, 'gastronomia', 'Dónde comer')],
-      feature: featuredFeature(places, 'gastronomia') ?? {
-        image: PHOTOS.cata.src, eyebrow: 'Sabores', title: 'Queso y vino de la región', href: '/por-que-tequis#sabores', cta: 'Leer más',
+      label: L('Comer y beber', 'Food & drink'),
+      href: h('/lugares/gastronomia'),
+      groups: [categoryGroup(lang, places, 'gastronomia', L('Dónde comer', 'Where to eat'))],
+      feature: featuredFeature(lang, places, 'gastronomia') ?? {
+        image: PHOTOS.cata.src,
+        eyebrow: L('Sabores', 'Flavors'),
+        title: L('Queso y vino de la región', 'Local cheese and wine'),
+        href: h('/por-que-tequis#sabores'),
+        cta: L('Leer más', 'Read more'),
       },
-      all: { href: '/lugares/gastronomia', label: 'Todos los restaurantes' },
+      all: { href: h('/lugares/gastronomia'), label: L('Todos los restaurantes', 'All restaurants') },
     },
     {
-      label: 'Dónde dormir',
-      href: '/lugares/hospedaje',
-      groups: [categoryGroup(places, 'hospedaje', 'Hospedaje')],
-      feature: featuredFeature(places, 'hospedaje') ?? {
-        image: PHOTOS.alberca.src, eyebrow: 'Consejo', title: 'En temporada alta, reserva con tiempo', href: '/guia-practica#cuando-ir', cta: 'Cuándo ir',
+      label: L('Dónde dormir', 'Where to stay'),
+      href: h('/lugares/hospedaje'),
+      groups: [categoryGroup(lang, places, 'hospedaje', L('Hospedaje', 'Hotels'))],
+      feature: featuredFeature(lang, places, 'hospedaje') ?? {
+        image: PHOTOS.alberca.src,
+        eyebrow: L('Consejo', 'Tip'),
+        title: L('En temporada alta, reserva con tiempo', 'Book early in high season'),
+        href: h('/guia-practica#cuando-ir'),
+        cta: L('Cuándo ir', 'When to go'),
       },
-      all: { href: '/lugares/hospedaje', label: 'Todo el hospedaje' },
+      all: { href: h('/lugares/hospedaje'), label: L('Todo el hospedaje', 'All places to stay') },
     },
     {
-      label: 'Compras',
-      href: '/lugares/compras',
-      groups: [categoryGroup(places, 'compras', 'Compras y artesanías')],
+      label: L('Compras', 'Shopping'),
+      href: h('/lugares/compras'),
+      groups: [categoryGroup(lang, places, 'compras', L('Compras y artesanías', 'Shopping and crafts'))],
       feature: {
-        image: PHOTOS.mercadoTequesquicalli.src, eyebrow: 'Tradición', title: 'El Paraíso de la Cestería', href: '/por-que-tequis#tradiciones', cta: 'Conocer la historia',
+        image: PHOTOS.mercadoTequesquicalli.src,
+        eyebrow: L('Tradición', 'Tradition'),
+        title: L('El Paraíso de la Cestería', 'The basket-weaving capital'),
+        href: h('/por-que-tequis#tradiciones'),
+        cta: L('Conocer la historia', 'Read the story'),
       },
-      all: { href: '/lugares/compras', label: 'Todas las tiendas' },
+      all: { href: h('/lugares/compras'), label: L('Todas las tiendas', 'All shops') },
     },
     {
-      label: 'Eventos',
-      href: '/eventos',
+      label: L('Eventos', 'Events'),
+      href: h('/eventos'),
       groups: [
         {
-          title: 'Próximos',
-          href: '/eventos',
-          links: upcoming.slice(0, 6).map((e) => ({ href: `/evento/${e.slug}`, label: e.title, meta: formatDateRange(e.startDate, e.endDate) })),
+          title: L('Próximos', 'Coming up'),
+          href: h('/eventos'),
+          links: upcoming.slice(0, 6).map((e) => ({ href: h(`/evento/${e.slug}`), label: e.title, meta: formatDateRange(e.startDate, e.endDate, lang) })),
         },
       ],
       feature: next && {
         image: next.thumbnailUrl ?? PHOTOS.parroquiaNoche.src,
-        eyebrow: eventStatus(next, today) === 'happening' ? 'Está pasando' : 'Próximo evento',
+        eyebrow: eventStatus(next, today) === 'happening' ? L('Está pasando', 'Happening now') : L('Próximo evento', 'Next event'),
         title: next.title,
-        href: `/evento/${next.slug}`,
-        cta: 'Ver evento',
+        href: h(`/evento/${next.slug}`),
+        cta: L('Ver evento', 'View event'),
       },
-      all: { href: '/eventos', label: 'Calendario completo' },
+      all: { href: h('/eventos'), label: L('Calendario completo', 'Full calendar') },
     },
     {
-      label: 'Rutas',
-      href: '/rutas',
-      groups: [{ title: 'Rutas temáticas', href: '/rutas', links: routes.map(({ r, n }) => ({ href: `/rutas/${r.slug}`, label: r.title, meta: `${n} paradas` })) }],
-      feature: { image: PHOTOS.calleNinosHeroes.src, eyebrow: 'Mi viaje', title: 'Guarda lo que te guste y arma tu ruta', href: '/mi-viaje', cta: 'Ver mi viaje' },
-      all: { href: '/rutas', label: 'Todas las rutas' },
-    },
-    {
-      label: '¿Por qué Tequis?',
-      href: '/por-que-tequis',
+      label: L('Rutas', 'Routes'),
+      href: h('/rutas'),
       groups: [
         {
-          title: 'Un Pueblo Mágico',
-          href: '/por-que-tequis',
+          title: L('Rutas temáticas', 'Themed routes'),
+          href: h('/rutas'),
+          links: routes.map(({ r, n }) => ({ href: h(`/rutas/${r.slug}`), label: routeText(lang, r).title, meta: L(`${n} paradas`, `${n} stops`) })),
+        },
+      ],
+      feature: {
+        image: PHOTOS.calleNinosHeroes.src,
+        eyebrow: L('Mi viaje', 'My trip'),
+        title: L('Guarda lo que te guste y arma tu ruta', 'Save what you like and plan your route'),
+        href: h('/mi-viaje'),
+        cta: L('Ver mi viaje', 'See my trip'),
+      },
+      all: { href: h('/rutas'), label: L('Todas las rutas', 'All routes') },
+    },
+    {
+      label: L('¿Por qué Tequis?', 'Why Tequis?'),
+      href: h('/por-que-tequis'),
+      groups: [
+        {
+          title: L('Un Pueblo Mágico', 'A Pueblo Mágico'),
+          href: h('/por-que-tequis'),
           links: [
-            { href: '/por-que-tequis#historia', label: 'Historia' },
-            { href: '/por-que-tequis#tradiciones', label: 'Cestería y tradiciones' },
-            { href: '/por-que-tequis#sabores', label: 'Queso y vino' },
-            { href: '/por-que-tequis#alrededores', label: 'Peña de Bernal y alrededores' },
+            { href: h('/por-que-tequis#historia'), label: L('Historia', 'History') },
+            { href: h('/por-que-tequis#tradiciones'), label: L('Cestería y tradiciones', 'Basketry and traditions') },
+            { href: h('/por-que-tequis#sabores'), label: L('Queso y vino', 'Cheese and wine') },
+            { href: h('/por-que-tequis#alrededores'), label: L('Peña de Bernal y alrededores', 'Peña de Bernal and around') },
           ],
         },
       ],
-      feature: { image: PHOTOS.penaBernal.src, eyebrow: 'Alrededores', title: 'La Peña de Bernal, a media hora', href: '/por-que-tequis#alrededores', cta: 'Leer más' },
-      all: { href: '/por-que-tequis', label: 'Por qué venir a Tequis' },
+      feature: {
+        image: PHOTOS.penaBernal.src,
+        eyebrow: L('Alrededores', 'Nearby'),
+        title: L('La Peña de Bernal, a media hora', 'Peña de Bernal, half an hour away'),
+        href: h('/por-que-tequis#alrededores'),
+        cta: L('Leer más', 'Read more'),
+      },
+      all: { href: h('/por-que-tequis'), label: L('Por qué venir a Tequis', 'Why visit Tequis') },
     },
     {
-      label: 'Guía práctica',
-      href: '/guia-practica',
+      label: L('Guía práctica', 'Plan your trip'),
+      href: h('/guia-practica'),
       groups: [
         {
-          title: 'Antes de ir',
-          href: '/guia-practica',
+          title: L('Antes de ir', 'Before you go'),
+          href: h('/guia-practica'),
           links: [
-            { href: '/guia-practica#como-llegar', label: 'Cómo llegar' },
-            { href: '/guia-practica#cuando-ir', label: 'Cuándo visitar' },
-            { href: '/guia-practica#info-util', label: 'Información útil' },
-            { href: '/mapa', label: 'Mapa del pueblo' },
-            { href: '/app', label: 'La app' },
+            { href: h('/guia-practica#como-llegar'), label: L('Cómo llegar', 'Getting there') },
+            { href: h('/guia-practica#cuando-ir'), label: L('Cuándo visitar', 'When to visit') },
+            { href: h('/guia-practica#info-util'), label: L('Información útil', 'Useful info') },
+            { href: h('/mapa'), label: L('Mapa del pueblo', 'Town map') },
+            { href: h('/app'), label: L('La app', 'The app') },
           ],
         },
-        { title: 'Guías', href: '/guias', links: GUIDES.map((g) => ({ href: `/guias/${g.slug}`, label: g.title })) },
+        {
+          title: L('Guías', 'Guides'),
+          href: h('/guias'),
+          links: GUIDES.map((g, i) => ({ href: h(`/guias/${g.slug}`), label: guides[i].title })),
+        },
       ],
-      feature: { image: PHOTOS.pendulo.src, eyebrow: 'Dato', title: 'El centro geográfico de México', href: '/por-que-tequis#historia', cta: 'Leer más' },
-      all: { href: '/guia-practica', label: 'Toda la guía práctica' },
+      feature: {
+        image: PHOTOS.pendulo.src,
+        eyebrow: L('Dato', 'Fun fact'),
+        title: L('El centro geográfico de México', 'The geographic center of Mexico'),
+        href: h('/por-que-tequis#historia'),
+        cta: L('Leer más', 'Read more'),
+      },
+      all: { href: h('/guia-practica'), label: L('Toda la guía práctica', 'All travel tips') },
     },
   ];
 }

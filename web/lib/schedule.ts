@@ -2,6 +2,9 @@
 // Aquí se ordena para mostrarlo y se intenta entender para calcular "abierto ahora"; si un
 // día no se puede interpretar (p.ej. horarios de misa), simplemente no se muestra el estado.
 
+import { dict } from './dict';
+import type { Lang } from './i18n';
+
 export const DAYS = [
   { key: 'lunes', label: 'Lunes', aliases: ['lunes'] },
   { key: 'martes', label: 'Martes', aliases: ['martes'] },
@@ -12,11 +15,13 @@ export const DAYS = [
   { key: 'domingo', label: 'Domingo', aliases: ['domingo'] },
 ] as const;
 
-export function scheduleEntries(schedule: Record<string, string> | null): { day: string; hours: string }[] {
+/** Días con su horario, en orden, con el nombre del día en el idioma de la página. */
+export function scheduleEntries(schedule: Record<string, string> | null, lang: Lang = 'es'): { day: string; hours: string }[] {
   if (!schedule) return [];
-  return DAYS.flatMap((d) => {
+  const names = dict(lang).days;
+  return DAYS.flatMap((d, i) => {
     const raw = d.aliases.map((a) => schedule[a]).find((v) => v != null);
-    return raw ? [{ day: d.label, hours: raw }] : [];
+    return raw ? [{ day: names[i], hours: raw }] : [];
   });
 }
 
@@ -56,8 +61,9 @@ export function parseHours(text: string): Range[] | null {
 export type OpenState = { open: boolean; label: string } | null;
 
 /** Estado en este momento, en hora de Tequisquiapan. */
-export function openState(schedule: Record<string, string> | null, now = new Date()): OpenState {
+export function openState(schedule: Record<string, string> | null, lang: Lang = 'es', now = new Date()): OpenState {
   if (!schedule) return null;
+  const t = dict(lang);
   const parts = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/Mexico_City',
     weekday: 'short',
@@ -87,14 +93,14 @@ export function openState(schedule: Record<string, string> | null, now = new Dat
 
   // Rango de ayer que cruzó la medianoche (bar que cierra a la 1:00).
   const spill = yesterday?.find((r) => r.close > 24 * 60 && minutes < r.close - 24 * 60);
-  if (spill) return { open: true, label: `Abierto ahora · cierra a las ${fmt(spill.close)}` };
+  if (spill) return { open: true, label: `${t.openNow} · ${t.closesAt(fmt(spill.close))}` };
 
   const current = today.find((r) => minutes >= r.open && minutes < r.close);
-  if (current) return { open: true, label: `Abierto ahora · cierra a las ${fmt(current.close)}` };
+  if (current) return { open: true, label: `${t.openNow} · ${t.closesAt(fmt(current.close))}` };
 
   const next = today.find((r) => r.open > minutes);
-  if (next) return { open: false, label: `Cerrado ahora · abre a las ${fmt(next.open)}` };
-  return { open: false, label: 'Cerrado ahora' };
+  if (next) return { open: false, label: `${t.closedNow} · ${t.opensAt(fmt(next.open))}` };
+  return { open: false, label: t.closedNow };
 }
 
 /** Horario en formato schema.org (`Mo 09:00-18:00`), solo si todos los días se entienden. */

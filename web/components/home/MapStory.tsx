@@ -9,6 +9,8 @@ import { MX_PATH, MX_PROJ, MX_VIEWBOX, NEIGHBORS_PATH, TEQUIS_POINT, projectLatL
 import { loadMapLibre, tequisMapStyle } from '@/lib/mapStyle';
 import { ScrollTrigger, gsap, prefersReducedMotion, useGSAP } from '@/lib/motion';
 import { pinElement, popupHtml } from '@/components/PlacesMap';
+import { dict } from '@/lib/dict';
+import { href, type Lang } from '@/lib/i18n';
 
 export type MapPlace = { slug: string; name: string; subcategory: string; lat: number; lng: number; image: string | null };
 
@@ -20,8 +22,8 @@ const TOWN = { lat: 20.5218, lng: -99.8917, dLat: 0.011, dLng: 0.016 };
 // Las dos ciudades de referencia del texto, con su distancia por carretera. Aparecen antes del
 // zoom y se abren hacia los lados hasta salir del encuadre mientras se acerca al pueblo.
 const CITIES = [
-  { key: 'cdmx', name: 'Ciudad de México', km: 'unos 180 km', at: projectLatLng(19.4326, -99.1332), dx: 14, anchor: 'start' },
-  { key: 'qro', name: 'Querétaro', km: 'unos 60 km', at: projectLatLng(20.5888, -100.3899), dx: -14, anchor: 'end' },
+  { key: 'cdmx', name: { es: 'Ciudad de México', en: 'Mexico City' }, km: { es: 'unos 180 km', en: 'about 180 km' }, at: projectLatLng(19.4326, -99.1332), dx: 14, anchor: 'start' },
+  { key: 'qro', name: { es: 'Querétaro', en: 'Querétaro' }, km: { es: 'unos 60 km', en: 'about 60 km' }, at: projectLatLng(20.5888, -100.3899), dx: -14, anchor: 'end' },
 ] as const;
 
 function unproject(x: number, y: number): [number, number] {
@@ -36,7 +38,8 @@ function unproject(x: number, y: number): [number, number] {
  * pueblo; ahí el dibujo se funde con el mapa real (MapLibre, alineado al mismo encuadre
  * porque ambos son Mercator) y caen los pines de los lugares, que llevan a su ficha.
  */
-export default function MapStory({ places, count }: { places: MapPlace[]; count: number }) {
+export default function MapStory({ places, count, lang }: { places: MapPlace[]; count: number; lang: Lang }) {
+  const en = lang === 'en';
   const root = useRef<HTMLElement>(null);
   const svg = useRef<SVGSVGElement>(null);
   const townRef = useRef<HTMLDivElement>(null);
@@ -115,12 +118,12 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
             pinsRef.current = places.map((p) => {
               const pin = pinElement('var(--ink)', p.name);
               const popup = new Popup({ offset: [0, -30], closeButton: false, closeOnClick: false, maxWidth: '260px', className: 'map-popup' }).setHTML(
-                popupHtml({ name: p.name, subtitle: p.subcategory, href: `/lugar/${p.slug}`, image: p.image }),
+                popupHtml({ name: p.name, subtitle: p.subcategory, href: href(lang, `/lugar/${p.slug}`), image: p.image }, dict(lang).viewPlace),
               );
               new Marker({ element: pin, anchor: 'bottom' }).setLngLat([p.lng, p.lat]).addTo(map);
               pin.addEventListener('mouseenter', () => popup.setLngLat([p.lng, p.lat]).addTo(map));
               pin.addEventListener('mouseleave', () => popup.remove());
-              pin.addEventListener('click', () => router.push(`/lugar/${p.slug}`));
+              pin.addEventListener('click', () => router.push(href(lang, `/lugar/${p.slug}`)));
               return pin.firstElementChild as HTMLElement;
             });
             applyPins(prefersReducedMotion() ? 1 : pinsProgress.current);
@@ -141,7 +144,7 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
       mapRef.current?.remove();
       mapRef.current = null;
     };
-    // Se monta una vez; places/target no cambian en la vida de la página.
+    // Se monta una vez; places/target/lang no cambian en la vida de la página.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -208,9 +211,11 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
       </div>
 
       <div data-map-title className="absolute inset-x-0 top-28 z-10 px-5 text-center sm:top-32">
-        <h2 className="heading mx-auto max-w-[14ch]">En el corazón de México</h2>
+        <h2 className="heading mx-auto max-w-[14ch]">{en ? 'In the heart of Mexico' : 'En el corazón de México'}</h2>
         <p className="mx-auto mt-6 max-w-[44ch]">
-          A unos 180 km de la Ciudad de México y 60 km de Querétaro. En 1916, Carranza lo declaró centro geográfico del país.
+          {en
+            ? 'About 180 km from Mexico City and 60 km from Querétaro. In 1916, Carranza declared it the geographic center of the country.'
+            : 'A unos 180 km de la Ciudad de México y 60 km de Querétaro. En 1916, Carranza lo declaró centro geográfico del país.'}
         </p>
       </div>
 
@@ -220,7 +225,7 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
         preserveAspectRatio="xMidYMid meet"
         className="pointer-events-none absolute inset-x-0 bottom-0 top-[22%] mx-auto h-[78%] w-full max-w-[1200px] overflow-hidden"
         role="img"
-        aria-label={`Mapa de México que se acerca a Tequisquiapan y sus ${count} lugares`}
+        aria-label={en ? `Map of Mexico zooming into Tequisquiapan and its ${count} places` : `Mapa de México que se acerca a Tequisquiapan y sus ${count} lugares`}
       >
         <path data-neighbors d={NEIGHBORS_PATH} fill="none" stroke="currentColor" strokeOpacity="0.22" strokeWidth="0.8" vectorEffect="non-scaling-stroke" />
         {/* El relleno está desde el principio: el contorno se dibuja encima de una forma que ya se ve. */}
@@ -238,8 +243,8 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
             />
             <g data-city-mark transform={`translate(${c.at[0]} ${c.at[1]})`}>
               <circle r="4" fill="currentColor" />
-              <text x={c.dx} y="6" textAnchor={c.anchor} fontSize="18" className="fill-current font-display">{c.name}</text>
-              <text x={c.dx} y="26" textAnchor={c.anchor} fontSize="14" className="fill-muted">{c.km}</text>
+              <text x={c.dx} y="6" textAnchor={c.anchor} fontSize="18" className="fill-current font-display">{c.name[lang]}</text>
+              <text x={c.dx} y="26" textAnchor={c.anchor} fontSize="14" className="fill-muted">{c.km[lang]}</text>
             </g>
           </g>
         ))}
@@ -253,10 +258,10 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
       </svg>
 
       <div data-map-final className="invisible absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-4 px-5 text-center sm:bottom-12">
-        <p className="font-display text-title leading-none">{count} lugares para descubrir</p>
+        <p className="font-display text-title leading-none">{en ? `${count} places to discover` : `${count} lugares para descubrir`}</p>
         <div className="flex flex-wrap justify-center gap-3">
-          <Link href="/mapa" className="btn">Explorar el mapa</Link>
-          <Link href="/guia-practica#como-llegar" className="btn bg-bg! text-ink!">Cómo llegar</Link>
+          <Link href={href(lang, '/mapa')} className="btn">{en ? 'Explore the map' : 'Explorar el mapa'}</Link>
+          <Link href={href(lang, '/guia-practica#como-llegar')} className="btn bg-bg! text-ink!">{en ? 'Getting there' : 'Cómo llegar'}</Link>
         </div>
       </div>
     </section>

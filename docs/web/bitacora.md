@@ -230,6 +230,18 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 
 ---
 
+## 13. Versión en inglés y correcciones de la base (2 nov 2026)
+
+**Inglés:** todo el sitio está en `/en`, con un botón ES/EN arriba que lleva a la misma página en el otro idioma.
+- **Cómo está hecho:** las páginas pasaron a `web/app/[lang]/`. `proxy.ts` deja el español en las URLs de siempre (por dentro, `/es/...`) y traduce las rutas en inglés (`/en/places/food-and-drink`) a las carpetas internas.
+- **SEO:** cada página declara su canónica y su `hreflang`, el sitemap lleva las 88 páginas por partida doble (176 URLs) y la imagen para compartir tiene versión en inglés.
+- **Traducción:** dos agentes tradujeron los datos del API (47 lugares, 17 eventos, 26 subcategorías y 241 términos, en `lib/i18n/data-en.ts`) y las 4 guías (`lib/i18n/guides-en.ts`). La interfaz (`lib/dict.ts`) y las páginas editoriales se tradujeron a mano. Los legales en inglés aclaran que, en caso de diferencia, vale la versión en español.
+- **Verificado en local:** las 40 rutas en los dos idiomas responden 200 y las inexistentes 404. No quedó texto en español en las páginas en inglés, salvo nombres propios. Viewport de 390 px en celular. Lighthouse de `/en` en celular: rendimiento 96, accesibilidad 96 (corregido después: el `role="tabpanel"` de Explora estaba en el `<ul>`), buenas prácticas 96 y SEO 100.
+
+**SQL de la base:** se pidió aplicar `database/databasefix_research_2026-11.sql`, pero el entorno bloqueó el acceso a la base de producción desde aquí. **Sigue sin aplicarse**: hay que correrlo en el editor SQL de Neon.
+
+---
+
 ## Pendientes
 
 | Pendiente | Quién |
@@ -245,4 +257,4 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 | Fotos reales para los lugares: hoy 17 restaurantes comparten la misma foto genérica | Tú / negocios |
 | Revisar y correr `database/databasefix_research_2026-11.sql` en Neon (viñedos, La Redonda, 11 lugares que no existen) | Tú |
 | Dar de alta lugares reales que encontró la investigación (De Cote, Cava Bocanegra, Finca VAI, mercados, balnearios; lista en `docs/datos/investigacion-guias-2026-11.md`) | Tú en el panel |
-| Versión en inglés | Por decidir |
+| Traducir en `web/lib/i18n/data-en.ts` cada lugar o evento nuevo (si no, sale en español en `/en`) | Código |

@@ -5,6 +5,8 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import type { Map as MLMap, Marker } from 'maplibre-gl';
 import { loadMapLibre, tequisMapStyle } from '@/lib/mapStyle';
 import { photoAttrsHtml } from '@/lib/images';
+import { dict } from '@/lib/dict';
+import type { Lang } from '@/lib/i18n';
 
 export type MapPoint = {
   id: string;
@@ -37,9 +39,9 @@ export function pinElement(color: string, label?: string) {
 }
 
 /** Contenido de la ventana de un lugar: foto, nombre, tipo y link. */
-export function popupHtml(p: Pick<MapPoint, 'name' | 'subtitle' | 'href' | 'image'>) {
+export function popupHtml(p: Pick<MapPoint, 'name' | 'subtitle' | 'href' | 'image'>, cta = dict('es').viewPlace) {
   const img = p.image ? `<img ${photoAttrsHtml(p.image, '240px', escapeHtml)} alt="" loading="lazy">` : '';
-  return `<a class="map-card" href="${escapeHtml(p.href)}">${img}<span class="map-card__body"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.subtitle)}</span><em>Ver lugar →</em></span></a>`;
+  return `<a class="map-card" href="${escapeHtml(p.href)}">${img}<span class="map-card__body"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.subtitle)}</span><em>${escapeHtml(cta)}</em></span></a>`;
 }
 
 function fitPoints(map: MLMap, points: MapPoint[], zoom: number, duration: number) {
@@ -71,6 +73,7 @@ export default function PlacesMap({
   activeId = null,
   fitOnChange = false,
   frame = true,
+  lang = 'es',
 }: {
   points: MapPoint[];
   groups?: { key: string; label: string; color: string }[];
@@ -80,6 +83,7 @@ export default function PlacesMap({
   activeId?: string | null;
   fitOnChange?: boolean;
   frame?: boolean;
+  lang?: Lang;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MLMap | null>(null);
@@ -139,7 +143,7 @@ export default function PlacesMap({
       markersRef.current.forEach((m) => m.remove());
       markersRef.current = new Map(
         visible.map((p) => {
-          const popup = new Popup({ offset: [0, -30], closeButton: false, maxWidth: '260px', className: 'map-popup' }).setHTML(popupHtml(p));
+          const popup = new Popup({ offset: [0, -30], closeButton: false, maxWidth: '260px', className: 'map-popup' }).setHTML(popupHtml(p, dict(lang).viewPlace));
           const marker = new Marker({ element: pinElement(p.color, p.name), anchor: 'bottom' }).setLngLat([p.lng, p.lat]).setPopup(popup).addTo(map);
           return [p.id, marker];
         }),
@@ -150,7 +154,7 @@ export default function PlacesMap({
     return () => {
       cancelled = true;
     };
-  }, [ready, visible, fitOnChange, zoom]);
+  }, [ready, visible, fitOnChange, zoom, lang]);
 
   useEffect(() => {
     markersRef.current.forEach((m, id) => m.getElement().classList.toggle('is-active', id === activeId));
@@ -196,7 +200,7 @@ export default function PlacesMap({
         </div>
         {failed && (
           <p className="absolute inset-0 flex items-center justify-center p-6 text-center text-muted">
-            No pudimos cargar el mapa. Revisa tu conexión e intenta de nuevo.
+            {lang === 'en' ? 'We couldn’t load the map. Check your connection and try again.' : 'No pudimos cargar el mapa. Revisa tu conexión e intenta de nuevo.'}
           </p>
         )}
       </div>

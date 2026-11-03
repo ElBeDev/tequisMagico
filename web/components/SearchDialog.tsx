@@ -7,8 +7,9 @@ import { ArrowRight, Search, X } from 'lucide-react';
 import { foldText } from '@/lib/data';
 import type { SearchItem } from '@/lib/search';
 import { photoAttrs } from '@/lib/images';
+import { dict } from '@/lib/dict';
+import { href, type Lang } from '@/lib/i18n';
 
-const SUGGESTIONS = ['Viñedos', 'Queserías', 'Globo', 'Hotel', 'Restaurante', 'Artesanías', 'Feria del Queso'];
 const PER_GROUP = 6;
 
 /** Todas las palabras tienen que aparecer; pesa más si aparecen en el nombre o al inicio. */
@@ -27,7 +28,8 @@ function score(item: SearchItem, words: string[]): number {
  * Buscador a pantalla completa: lugares, eventos y páginas del sitio, al instante mientras
  * escribes. Flechas para moverte, Enter para abrir, Esc para cerrar.
  */
-export default function SearchDialog({ items, open, onClose }: { items: SearchItem[]; open: boolean; onClose: () => void }) {
+export default function SearchDialog({ items, lang, open, onClose }: { items: SearchItem[]; lang: Lang; open: boolean; onClose: () => void }) {
+  const t = dict(lang);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -75,7 +77,7 @@ export default function SearchDialog({ items, open, onClose }: { items: SearchIt
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Buscar en el sitio"
+      aria-label={t.searchSite}
       data-lenis-prevent
       className="fixed inset-0 z-50 overflow-y-auto bg-forest/80 px-4 pb-10 pt-20 sm:pt-28"
       onMouseDown={(e) => e.target === e.currentTarget && onClose()}
@@ -103,20 +105,20 @@ export default function SearchDialog({ items, open, onClose }: { items: SearchIt
               setQuery(e.target.value);
               setActive(0);
             }}
-            placeholder="Busca lugares, eventos y más…"
-            aria-label="Buscar"
+            placeholder={t.searchPlaceholder}
+            aria-label={t.search}
             className="min-w-0 flex-1 bg-transparent py-2 font-display text-lead outline-none placeholder:text-muted"
           />
-          <button type="button" onClick={onClose} aria-label="Cerrar buscador" className="flex size-10 items-center justify-center rounded-full hover:bg-surface">
+          <button type="button" onClick={onClose} aria-label={lang === 'en' ? 'Close search' : 'Cerrar buscador'} className="flex size-10 items-center justify-center rounded-full hover:bg-surface">
             <X className="size-5" aria-hidden />
           </button>
         </div>
 
         {!query.trim() ? (
           <div className="px-6 py-6">
-            <p className="meta text-muted">Lo más buscado</p>
+            <p className="meta text-muted">{lang === 'en' ? 'Popular searches' : 'Lo más buscado'}</p>
             <div className="mt-3 flex flex-wrap gap-2">
-              {SUGGESTIONS.map((s) => (
+              {t.searchSuggestions.map((s) => (
                 <button key={s} type="button" onClick={() => setQuery(s)} className="rounded-full bg-surface px-4 py-1.5 transition-colors hover:bg-ink hover:text-bg">
                   {s}
                 </button>
@@ -125,16 +127,20 @@ export default function SearchDialog({ items, open, onClose }: { items: SearchIt
           </div>
         ) : groups.length === 0 ? (
           <div className="px-6 py-10 text-center">
-            <p className="font-display text-lead">No encontramos «{query}»</p>
+            <p className="font-display text-lead">{t.searchNone(query)}</p>
             <p className="mt-2 text-muted">
-              Prueba con otra palabra o <Link href="/lugares" onClick={onClose} className="underline">mira todos los lugares</Link>.
+              {lang === 'en' ? 'Try another word or ' : 'Prueba con otra palabra o '}
+              <Link href={href(lang, '/lugares')} onClick={onClose} className="underline">
+                {lang === 'en' ? 'see all places' : 'mira todos los lugares'}
+              </Link>
+              .
             </p>
           </div>
         ) : (
           <div className="max-h-[60vh] overflow-y-auto py-3">
             {groups.map((g) => (
               <section key={g.kind} className="px-3 pb-2">
-                <p className="meta px-3 py-2 text-muted">{g.kind}</p>
+                <p className="meta px-3 py-2 text-muted">{t.searchGroups[g.kind]}</p>
                 <ul>
                   {g.results.map((r, n) => {
                     const idx = g.start + n;

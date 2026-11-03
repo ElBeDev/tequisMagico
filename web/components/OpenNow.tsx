@@ -1,19 +1,20 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import type { Lang } from '@/lib/i18n';
 import { openState, type OpenState } from '@/lib/schedule';
 
 // Se calcula en el navegador: la página está cacheada varios minutos y "abierto ahora"
 // tiene que reflejar la hora real de quien la ve.
-export default function OpenNow({ schedule }: { schedule: Record<string, string> | null }) {
+export default function OpenNow({ schedule, lang }: { schedule: Record<string, string> | null; lang: Lang }) {
   const [state, setState] = useState<OpenState>(null);
 
   useEffect(() => {
-    const update = () => setState(openState(schedule));
+    const update = () => setState(openState(schedule, lang));
     update();
     const timer = setInterval(update, 60_000);
     return () => clearInterval(timer);
-  }, [schedule]);
+  }, [schedule, lang]);
 
   if (!state) return null;
   return (

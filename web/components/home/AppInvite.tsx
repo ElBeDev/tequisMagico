@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { SITE_NAME } from '@/lib/data';
 import { photoAttrs } from '@/lib/images';
+import { href, type Lang } from '@/lib/i18n';
 
 export type FloatingPhoto = { src: string; alt: string };
 
@@ -22,7 +23,8 @@ const SLOTS = [
  * el bloque del boletín de visitshropshire.co.uk (aquí no hay boletín: la app es el "sigue en
  * contacto").
  */
-export default function AppInvite({ photos }: { photos: FloatingPhoto[] }) {
+export default function AppInvite({ photos, lang }: { photos: FloatingPhoto[]; lang: Lang }) {
+  const en = lang === 'en';
   return (
     <section className="relative -mb-40 mt-40 overflow-hidden bg-surface py-40 sm:py-52" aria-labelledby="app-title">
       {photos.slice(0, SLOTS.length).map((p, i) => (
@@ -36,13 +38,15 @@ export default function AppInvite({ photos }: { photos: FloatingPhoto[] }) {
 
       {/* El único momento centrado de la portada. */}
       <div className="relative mx-auto flex max-w-2xl flex-col items-center px-5 text-center">
-        <h2 id="app-title" data-split="lines" className="heading max-w-[12ch]">Tequis en tu bolsillo</h2>
+        <h2 id="app-title" data-split="lines" className="heading max-w-[12ch]">{en ? 'Tequis in your pocket' : 'Tequis en tu bolsillo'}</h2>
         <p data-reveal="up" className="mt-6 max-w-[40ch] text-lead leading-snug">
-          La app de {SITE_NAME} tiene la misma información que este sitio, más &quot;cerca de mí&quot;, favoritos y uso sin conexión.
+          {en
+            ? `The ${SITE_NAME} app has the same information as this site, plus “near me”, favorites and offline use.`
+            : `La app de ${SITE_NAME} tiene la misma información que este sitio, más “cerca de mí”, favoritos y uso sin conexión.`}
         </p>
         <div data-reveal="up" className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link href="/app" className="btn">Conocer la app</Link>
-          <Link href="/mi-viaje" className="btn-outline">Ver mi viaje</Link>
+          <Link href={href(lang, '/app')} className="btn">{en ? 'About the app' : 'Conocer la app'}</Link>
+          <Link href={href(lang, '/mi-viaje')} className="btn-outline">{en ? 'See my trip' : 'Ver mi viaje'}</Link>
         </div>
       </div>
     </section>

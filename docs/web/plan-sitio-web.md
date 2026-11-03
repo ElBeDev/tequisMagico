@@ -59,7 +59,8 @@ tequisMagico/
 | `/app` | La app | Qué ofrece la app y cómo descargarla |
 | `/creditos` | Créditos de fotos | Obligatorio por las licencias CC |
 | `/privacidad`, `/terminos` | Legales | Aviso de privacidad (LFPDPPP) y términos |
-| `/sitemap.xml`, `/robots.txt` | Para Google | Se generan solos |
+| `/sitemap.xml`, `/robots.txt` | Para Google | Se generan solos (el sitemap trae las dos versiones de cada página con `hreflang`) |
+| `/en/...` | Versión en inglés | Todas las páginas, con rutas en inglés: `/en/places`, `/en/place/[slug]`, `/en/events`, `/en/routes`, `/en/map`, `/en/why-tequis`, `/en/travel-tips`, `/en/guides`, `/en/my-trip`, `/en/app`, `/en/credits`, `/en/privacy`, `/en/terms` |
 
 Categorías (mismos códigos que la app): `sitios-turisticos`, `experiencias`, `gastronomia`, `hospedaje`, `compras` (y `eventos`, `rutas`, que hoy no tienen lugares).
 Rutas: `vino-y-queso`, `artesanal`, `historica`, `aventura`.
@@ -268,4 +269,4 @@ La lista completa, con quién hace cada cosa, está en [`bitacora.md`](bitacora.
 - **Revisión legal** del aviso de privacidad y los términos.
 - **Link real del App Store** cuando se publique la app.
 - **Corregir la base** con `database/databasefix_research_2026-11.sql` (propuesta, no aplicada): direcciones de viñedos, La Redonda fuera de destacados y 11 lugares que no existen.
-- **Versión en inglés:** por decidir.
+- **Inglés:** traducir los lugares y eventos nuevos en `web/lib/i18n/data-en.ts` (mientras tanto salen en español en `/en`).

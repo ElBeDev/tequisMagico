@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import { CATEGORIES, PRICE_RANGES, eventKey, eventStatus, formatDateRange, placeKey, type Place, type PlaceSummary, type TequisEvent } from '@/lib/data';
+import { categoryInfo, eventKey, eventStatus, formatDateRange, placeKey, priceInfo, type Place, type PlaceSummary, type TequisEvent } from '@/lib/data';
+import { dict } from '@/lib/dict';
+import { href, type Lang } from '@/lib/i18n';
 import SaveButton from './SaveButton';
 import { GRID_SIZES, photoAttrs } from '@/lib/images';
 
@@ -16,20 +18,20 @@ export function Photo({ src, alt, label, sizes = GRID_SIZES, className = '' }: {
   return <img {...photoAttrs(src, sizes)} alt={alt} loading="lazy" className={`object-cover ${className}`} />;
 }
 
-export function CategoryPill({ category, className = '' }: { category: Place['category']; className?: string }) {
-  return <span className={`meta ${className}`}>{CATEGORIES[category].label}</span>;
+export function CategoryPill({ category, lang, className = '' }: { category: Place['category']; lang: Lang; className?: string }) {
+  return <span className={`meta ${className}`}>{categoryInfo(lang, category).label}</span>;
 }
 
 /**
  * Tarjeta de lugar: foto con esquinas rectas, el tipo encima de la foto y el corazón. `boxed` la
  * pone sobre un paso de tono (para fondos oscuros), sin sombra ni borde.
  */
-export function PlaceCard({ place, variant = 'plain', reveal = true }: { place: PlaceSummary; variant?: 'plain' | 'boxed'; reveal?: boolean }) {
-  const price = PRICE_RANGES[place.priceRange];
+export function PlaceCard({ place, lang, variant = 'plain', reveal = true }: { place: PlaceSummary; lang: Lang; variant?: 'plain' | 'boxed'; reveal?: boolean }) {
+  const price = priceInfo(lang, place.priceRange);
   const boxed = variant === 'boxed';
   return (
     <article {...(reveal ? { 'data-reveal': 'up' } : {})} className="group relative h-full">
-      <Link href={`/lugar/${place.slug}`} data-cursor="Ver" className={`flex h-full flex-col ${boxed ? 'bg-bg text-ink' : ''}`}>
+      <Link href={href(lang, `/lugar/${place.slug}`)} data-cursor={dict(lang).cursorView} className={`flex h-full flex-col ${boxed ? 'bg-bg text-ink' : ''}`}>
         <div className="relative overflow-hidden bg-surface">
           <Photo
             src={place.thumbnailUrl}
@@ -45,22 +47,22 @@ export function PlaceCard({ place, variant = 'plain', reveal = true }: { place: 
           <h3 className="font-display text-lead leading-[1.05] tracking-[-0.01em] decoration-1 group-hover:underline">{place.name}</h3>
           {place.shortDescription && <p className="mt-2 line-clamp-2 text-muted">{place.shortDescription}</p>}
           <p className="meta mt-auto pt-3 text-muted">
-            {CATEGORIES[place.category].label}
+            {categoryInfo(lang, place.category).label}
             {price && <> · {price.symbol}</>}
           </p>
         </div>
       </Link>
-      <SaveButton id={placeKey(place.id)} name={place.name} className="absolute right-3 top-3" />
+      <SaveButton id={placeKey(place.id)} name={place.name} lang={lang} className="absolute right-3 top-3" />
     </article>
   );
 }
 
 /** Renglón de índice (guías): miniatura en arco, nombre en Gilda, tipo y precio, y el corazón. */
-export function PlaceRow({ place }: { place: PlaceSummary }) {
-  const price = PRICE_RANGES[place.priceRange];
+export function PlaceRow({ place, lang }: { place: PlaceSummary; lang: Lang }) {
+  const price = priceInfo(lang, place.priceRange);
   return (
     <li className="relative">
-      <Link href={`/lugar/${place.slug}`} data-cursor="Ver" className="-mx-4 flex items-center gap-5 py-4 pl-4 pr-16 transition-colors duration-300 hover:bg-surface">
+      <Link href={href(lang, `/lugar/${place.slug}`)} data-cursor={dict(lang).cursorView} className="-mx-4 flex items-center gap-5 py-4 pl-4 pr-16 transition-colors duration-300 hover:bg-surface">
         <Photo src={place.thumbnailUrl} alt="" label={place.subcategory} sizes="64px" className="h-20 w-16 shrink-0 rounded-t-full" />
         <span className="min-w-0 flex-1">
           <span className="block font-display text-lead leading-[1.05] tracking-[-0.01em]">{place.name}</span>
@@ -70,7 +72,7 @@ export function PlaceRow({ place }: { place: PlaceSummary }) {
           </span>
         </span>
       </Link>
-      <SaveButton id={placeKey(place.id)} name={place.name} className="absolute right-0 top-1/2 -translate-y-1/2" />
+      <SaveButton id={placeKey(place.id)} name={place.name} lang={lang} className="absolute right-0 top-1/2 -translate-y-1/2" />
     </li>
   );
 }
@@ -93,24 +95,22 @@ export function StoryCard({ href, image, title, kicker, cursor = 'Ver' }: { href
   );
 }
 
-const STATUS_LABEL = { upcoming: 'Próximamente', happening: 'Está pasando', past: 'Ya pasó' } as const;
-
 /** Renglón de evento: la fecha grande a la izquierda, sin líneas; el paso de tono aparece al pasar el cursor. */
-export function EventCard({ event, today }: { event: TequisEvent; today: string }) {
+export function EventCard({ event, today, lang }: { event: TequisEvent; today: string; lang: Lang }) {
   const status = eventStatus(event, today);
   const start = new Date(`${event.startDate}T00:00:00Z`);
   return (
-    <Link href={`/evento/${event.slug}`} data-cursor="Ver" data-reveal="up" className="group -mx-4 flex items-center gap-6 px-4 py-5 transition-colors duration-300 hover:bg-surface">
+    <Link href={href(lang, `/evento/${event.slug}`)} data-cursor={dict(lang).cursorView} data-reveal="up" className="group -mx-4 flex items-center gap-6 px-4 py-5 transition-colors duration-300 hover:bg-surface">
       <div className="w-20 shrink-0">
         <p className="font-display text-title leading-none tracking-[-0.02em]">{start.getUTCDate()}</p>
-        <p className="meta mt-1 text-muted">{new Intl.DateTimeFormat('es-MX', { month: 'long', timeZone: 'UTC' }).format(start)}</p>
+        <p className="meta mt-1 text-muted">{new Intl.DateTimeFormat(dict(lang).monthLocale, { month: 'long', timeZone: 'UTC' }).format(start)}</p>
       </div>
       <div className="min-w-0 flex-1">
         <h3 className="font-display text-lead leading-[1.05]">{event.title}</h3>
         <p className="mt-1.5 text-muted">
-          <span className={status === 'happening' ? 'font-medium text-ok' : ''}>{STATUS_LABEL[status]}</span>
+          <span className={status === 'happening' ? 'font-medium text-ok' : ''}>{dict(lang).eventStatus[status]}</span>
           {' · '}
-          {formatDateRange(event.startDate, event.endDate)}
+          {formatDateRange(event.startDate, event.endDate, lang)}
           {event.locationName && <> · {event.locationName}</>}
         </p>
       </div>
@@ -122,25 +122,25 @@ export function EventCard({ event, today }: { event: TequisEvent; today: string 
 }
 
 /** Evento con foto grande (el primero de la agenda de la portada, "Mi viaje"). */
-export function EventTile({ event, today, reveal = true, large = false }: { event: TequisEvent; today: string; reveal?: boolean; large?: boolean }) {
+export function EventTile({ event, today, lang, reveal = true, large = false }: { event: TequisEvent; today: string; lang: Lang; reveal?: boolean; large?: boolean }) {
   const status = eventStatus(event, today);
   return (
     <article {...(reveal ? { 'data-reveal': 'up' } : {})} className="group relative h-full">
-      <Link href={`/evento/${event.slug}`} data-cursor="Ver" className="flex h-full flex-col">
+      <Link href={href(lang, `/evento/${event.slug}`)} data-cursor={dict(lang).cursorView} className="flex h-full flex-col">
         <div className="overflow-hidden bg-surface">
           <Photo src={event.thumbnailUrl} alt={event.title} label={event.category} className={`${large ? 'aspect-[16/11]' : 'aspect-[4/3]'} w-full transition-transform duration-700 group-hover:scale-105`} />
         </div>
         <div className="pt-5">
           <p className="text-muted">
-            <span className={status === 'happening' ? 'font-medium text-ok' : ''}>{status === 'happening' ? 'Está pasando' : event.category}</span>
+            <span className={status === 'happening' ? 'font-medium text-ok' : ''}>{status === 'happening' ? dict(lang).happeningNow : event.category}</span>
             {' · '}
-            {formatDateRange(event.startDate, event.endDate)}
+            {formatDateRange(event.startDate, event.endDate, lang)}
           </p>
           <h3 className={`mt-2 font-display leading-[1.02] tracking-[-0.015em] group-hover:underline ${large ? 'text-title' : 'text-lead'}`}>{event.title}</h3>
           {event.shortDescription && <p className="mt-2 line-clamp-2 max-w-[48ch] text-muted">{event.shortDescription}</p>}
         </div>
       </Link>
-      <SaveButton id={eventKey(event.id)} name={event.title} className="absolute right-3 top-3" />
+      <SaveButton id={eventKey(event.id)} name={event.title} lang={lang} className="absolute right-3 top-3" />
     </article>
   );
 }

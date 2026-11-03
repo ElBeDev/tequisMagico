@@ -7,7 +7,7 @@ import { gsap, prefersReducedMotion } from '@/lib/motion';
  * Fila horizontal que se arrastra con el mouse (con inercia), además del scroll nativo en
  * touch y trackpad. Mientras se arrastra, las tarjetas se inclinan un poco según la velocidad.
  */
-export default function DragRow({ children, className = '' }: { children: ReactNode; className?: string }) {
+export default function DragRow({ children, cursor = 'Arrastra', className = '' }: { children: ReactNode; cursor?: string; className?: string }) {
   const row = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function DragRow({ children, className = '' }: { children: ReactN
   return (
     <div
       ref={row}
-      data-cursor="Arrastra"
+      data-cursor={cursor}
       className={`no-scrollbar flex select-none overflow-x-auto [&_img]:pointer-events-none ${className}`}
       onDragStart={(e) => e.preventDefault()}
     >

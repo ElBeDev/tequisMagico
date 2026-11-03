@@ -7,6 +7,7 @@ import { mapsDirectionsUrl } from '@/lib/data';
 import type { Nearby } from '@/lib/surroundings';
 import { SectionTitle } from '@/components/Section';
 import { photoAttrs } from '@/lib/images';
+import { href, type Lang } from '@/lib/i18n';
 
 const VB_W = 700;
 const VB_H = 460;
@@ -43,7 +44,8 @@ function road([ax, ay]: readonly [number, number], [bx, by]: readonly [number, n
  * cada lugar y un esquema de carreteras que se dibuja al entrar a pantalla, sobre dos círculos de
  * tono (15 y 30 km alrededor del pueblo). Pasar el cursor por uno resalta el otro.
  */
-export default function Surroundings({ center, places }: { center: { lat: number; lng: number }; places: Nearby[] }) {
+export default function Surroundings({ center, places, lang }: { center: { lat: number; lng: number }; places: Nearby[]; lang: Lang }) {
+  const en = lang === 'en';
   const [active, setActive] = useState<string | null>(null);
   const { project, pxPerKm } = makeProjection(center, places);
   const home = project(center.lat, center.lng);
@@ -53,7 +55,11 @@ export default function Surroundings({ center, places }: { center: { lat: number
     <section className="frame pt-40" aria-labelledby="cerca-title">
       <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
         <div>
-          <SectionTitle id="cerca-title" title="Cerca de Tequis" lead="Pueblos a menos de una hora que no te puedes perder." />
+          <SectionTitle
+            id="cerca-title"
+            title={en ? 'Near Tequis' : 'Cerca de Tequis'}
+            lead={en ? 'Towns less than an hour away that are worth the trip.' : 'Pueblos a menos de una hora que no te puedes perder.'}
+          />
           <ul className="mt-12 space-y-2" onMouseLeave={() => setActive(null)}>
             {places.map((p) => (
               <li
@@ -67,18 +73,18 @@ export default function Surroundings({ center, places }: { center: { lat: number
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-baseline gap-x-3">
                     <h3 className="font-display text-lead leading-none">
-                      {p.href ? <Link href={p.href} className="hover:underline">{p.name}</Link> : p.name}
+                      {p.href ? <Link href={href(lang, p.href)} className="hover:underline">{p.name}</Link> : p.name}
                     </h3>
-                    <span className="meta text-muted">unos {p.km} km</span>
+                    <span className="meta text-muted">{en ? `about ${p.km} km` : `unos ${p.km} km`}</span>
                   </div>
-                  <p className="mt-2 line-clamp-2 text-muted">{p.text}</p>
+                  <p className="mt-2 line-clamp-2 text-muted">{en ? p.textEn : p.text}</p>
                   <a
                     href={mapsDirectionsUrl(p.lat, p.lng)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="meta mt-2 inline-flex items-center gap-1 hover:underline"
                   >
-                    Cómo llegar <ArrowUpRight className="size-3.5" aria-hidden />
+                    {en ? 'Directions' : 'Cómo llegar'} <ArrowUpRight className="size-3.5" aria-hidden />
                   </a>
                 </div>
               </li>
@@ -87,7 +93,7 @@ export default function Surroundings({ center, places }: { center: { lat: number
         </div>
 
         <div className="relative">
-          <svg viewBox={`0 0 ${VB_W} ${VB_H}`} className="relative w-full" role="img" aria-label="Esquema de carreteras de Tequisquiapan a los pueblos cercanos">
+          <svg viewBox={`0 0 ${VB_W} ${VB_H}`} className="relative w-full" role="img" aria-label={en ? 'Road diagram from Tequisquiapan to nearby towns' : 'Esquema de carreteras de Tequisquiapan a los pueblos cercanos'}>
             {[...RINGS_KM].reverse().map((km) => (
               <g key={km}>
                 <circle cx={home[0]} cy={home[1]} r={km * pxPerKm} className="fill-surface" fillOpacity={km === RINGS_KM[0] ? 1 : 0.55} />
