@@ -80,6 +80,9 @@ export default function Reveals() {
           type: type === 'lines' ? 'lines' : `lines,${type}`,
           mask: type,
           autoSplit: true,
+          // SplitText pone aria-label en el elemento y esconde los pedazos; en un <p> o <span>
+          // aria-label no está permitido, así que ahí se deja el texto partido tal cual.
+          aria: /^H[1-6]$/.test(el.tagName) ? 'auto' : 'none',
           onSplit: (self) => {
             const parts = type === 'chars' ? self.chars : type === 'words' ? self.words : self.lines;
             const anim = { yPercent: 0, duration: type === 'chars' ? 1 : 1.2, ease: 'expo.out', stagger: type === 'chars' ? 0.025 : 0.08 };

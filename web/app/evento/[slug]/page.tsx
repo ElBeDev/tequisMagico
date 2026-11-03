@@ -82,7 +82,7 @@ export default async function EventoPage({ params }: PageProps<'/evento/[slug]'>
 
       <div className="frame">
         <div data-reveal="image" className="overflow-hidden">
-          <Photo src={event.thumbnailUrl} alt={event.title} label={event.category} className="aspect-[16/9] w-full" />
+          <Photo src={event.thumbnailUrl} alt={event.title} label={event.category} sizes="100vw" className="aspect-[16/9] w-full" />
         </div>
       </div>
 

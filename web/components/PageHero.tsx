@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { Photo } from '@/lib/photos';
 import { ArchPhoto } from './Frame';
+import { photoAttrs } from '@/lib/images';
 
 /** Portada con foto para las páginas editoriales (el header va transparente encima). */
 export function PageHero({ photo, alt, title, lead }: { photo: Photo; alt: string; title: string; lead?: string }) {
@@ -8,7 +9,7 @@ export function PageHero({ photo, alt, title, lead }: { photo: Photo; alt: strin
     <section className="relative flex h-[82svh] min-h-[520px] items-end overflow-hidden bg-black text-white">
       <div data-parallax="0.4" className="absolute inset-0 -top-[10%] h-[120%]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={photo.src} alt={alt} referrerPolicy="no-referrer" fetchPriority="high" className="kenburns size-full object-cover" />
+        <img {...photoAttrs(photo.src)} alt={alt} fetchPriority="high" className="kenburns size-full object-cover" />
       </div>
       {/* Velo neutro solo bajo el texto: la única degradación que se permite. */}
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/65 to-transparent" />

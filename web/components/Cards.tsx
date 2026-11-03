@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { CATEGORIES, PRICE_RANGES, eventKey, eventStatus, formatDateRange, placeKey, type Place, type PlaceSummary, type TequisEvent } from '@/lib/data';
 import SaveButton from './SaveButton';
+import { GRID_SIZES, photoAttrs } from '@/lib/images';
 
 /** Foto del lugar/evento o, si no hay, un bloque liso con el nombre de su categoría. */
-export function Photo({ src, alt, label, className = '' }: { src: string | null; alt: string; label?: string; className?: string }) {
+export function Photo({ src, alt, label, sizes = GRID_SIZES, className = '' }: { src: string | null; alt: string; label?: string; sizes?: string; className?: string }) {
   if (!src) {
     return (
       <div className={`flex items-end bg-stone p-4 font-display text-lg text-white ${className}`} aria-hidden>
@@ -12,7 +13,7 @@ export function Photo({ src, alt, label, className = '' }: { src: string | null;
     );
   }
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src={src} alt={alt} loading="lazy" referrerPolicy="no-referrer" className={`object-cover ${className}`} />;
+  return <img {...photoAttrs(src, sizes)} alt={alt} loading="lazy" className={`object-cover ${className}`} />;
 }
 
 export function CategoryPill({ category, className = '' }: { category: Place['category']; className?: string }) {
@@ -60,7 +61,7 @@ export function StoryCard({ href, image, title, kicker, cursor = 'Ver' }: { href
     <Link href={href} data-cursor={cursor} className="group relative block aspect-[3/4] w-[260px] shrink-0 overflow-hidden rounded-t-[999px] bg-stone sm:w-[300px]">
       {image && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={image} alt="" loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <img {...photoAttrs(image, '(min-width: 640px) 400px, 80vw')} alt="" loading="lazy" className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105" />
       )}
       {/* Velo neutro solo bajo el texto. */}
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />

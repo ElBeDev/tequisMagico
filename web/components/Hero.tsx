@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { EASE, SplitText, gsap, prefersReducedMotion, useGSAP } from '@/lib/motion';
+import { photoAttrs } from '@/lib/images';
 
 export type HeroSlide = { src: string; alt: string; promise: string };
 
@@ -84,6 +85,7 @@ export default function Hero({
     const split = SplitText.create(el.querySelector('[data-hero-promise]'), {
       type: 'chars,words',
       mask: 'chars',
+      aria: 'none', // el texto para lectores de pantalla va en el <span className="sr-only"> de al lado
       onSplit: (self) => gsap.from(self.chars, { yPercent: 110, duration: 1, ease: 'expo.out', stagger: 0.022, delay: first ? 0.75 : 0.45 }),
     });
     tweens.push(gsap.fromTo(el.querySelector(`[data-hero-progress="${index}"]`), { scaleX: 0 }, { scaleX: 1, duration: SLIDE_SECONDS, ease: 'none', onComplete: next }));
@@ -105,7 +107,7 @@ export default function Hero({
             aria-hidden={i !== index}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={s.src} alt={s.alt} referrerPolicy="no-referrer" fetchPriority={i === 0 ? 'high' : 'low'} className="size-full scale-105 object-cover" />
+            <img {...photoAttrs(s.src)} alt={s.alt} fetchPriority={i === 0 ? 'high' : 'low'} className="size-full scale-105 object-cover" />
           </div>
         ))}
         {/* Velo neutro: arriba para el header, abajo para el texto. */}
@@ -120,7 +122,8 @@ export default function Hero({
         <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <p data-hero-lead aria-live="polite" className="max-w-[34ch] text-lead leading-snug">
             {lead} La promesa de{' '}
-            <span key={index} data-hero-promise className="inline-block font-medium">
+            <span className="sr-only">{slides[index]?.promise}</span>
+            <span key={index} data-hero-promise aria-hidden className="inline-block font-medium">
               {slides[index]?.promise}
             </span>
             .

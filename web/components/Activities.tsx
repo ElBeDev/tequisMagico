@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { ScrollTrigger, SplitText, gsap, isDesktop, prefersReducedMotion, useGSAP } from '@/lib/motion';
+import { photoAttrs } from '@/lib/images';
 
 export type Activity = { title: string; image: string; detail: string; cta: string; href: string };
 
@@ -93,7 +94,7 @@ export default function Activities({ items }: { items: Activity[] }) {
           {items.map((a, i) => (
             <div key={a.title} data-act-img={i} className="absolute inset-0 overflow-hidden" style={{ zIndex: i === 0 ? 2 : 0 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={a.image} alt={i === index ? a.title : ''} loading="lazy" referrerPolicy="no-referrer" className="size-full object-cover" />
+              <img {...photoAttrs(a.image, '(min-width: 1024px) 50vw, 100vw')} alt={i === index ? a.title : ''} loading="lazy" className="size-full object-cover" />
             </div>
           ))}
         </div>

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { Map as MLMap, Marker } from 'maplibre-gl';
 import { loadMapLibre, tequisMapStyle } from '@/lib/mapStyle';
+import { photoAttrsHtml } from '@/lib/images';
 
 export type MapPoint = {
   id: string;
@@ -37,7 +38,7 @@ export function pinElement(color: string, label?: string) {
 
 /** Contenido de la ventana de un lugar: foto, nombre, tipo y link. */
 export function popupHtml(p: Pick<MapPoint, 'name' | 'subtitle' | 'href' | 'image'>) {
-  const img = p.image ? `<img src="${escapeHtml(p.image)}" alt="" referrerpolicy="no-referrer" loading="lazy">` : '';
+  const img = p.image ? `<img ${photoAttrsHtml(p.image, '240px', escapeHtml)} alt="" loading="lazy">` : '';
   return `<a class="map-card" href="${escapeHtml(p.href)}">${img}<span class="map-card__body"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.subtitle)}</span><em>Ver lugar →</em></span></a>`;
 }
 

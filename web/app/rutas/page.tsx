@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { THEMATIC_ROUTES, getPlaces, placesForRoute } from '@/lib/data';
 import { PageIntro } from '@/components/Section';
+import { photoAttrs } from '@/lib/images';
 
 export const revalidate = 300;
 
@@ -24,7 +25,7 @@ export default async function RutasPage() {
           <Link key={r.slug} href={`/rutas/${r.slug}`} data-cursor="Ver" data-reveal="image" className="group relative block aspect-[4/3] overflow-hidden bg-stone text-white">
             {r.stops[0]?.thumbnailUrl && (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={r.stops[0].thumbnailUrl} alt="" loading="lazy" referrerPolicy="no-referrer" className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <img {...photoAttrs(r.stops[0].thumbnailUrl, '(min-width: 768px) 50vw, 100vw')} alt="" loading="lazy" className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105" />
             )}
             <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-8">

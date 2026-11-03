@@ -11,6 +11,7 @@ import type { SearchItem } from '@/lib/search';
 import { Logo } from './Logo';
 import { MoreLink } from './Section';
 import SearchDialog from './SearchDialog';
+import { photoAttrs } from '@/lib/images';
 
 // Páginas que abren con una foto a pantalla completa: ahí el header va transparente y en
 // blanco encima de la foto, y se vuelve sólido al bajar (o al abrir un panel del menú).
@@ -308,7 +309,7 @@ function MegaPanel({ section: s, open, loadImage, onEnter }: { section: NavSecti
           <Link href={s.feature.href} data-cursor="Ver" className="group relative block aspect-[4/3.4] self-start overflow-hidden rounded-t-[999px] bg-stone text-white">
             {loadImage && (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={s.feature.image} alt="" referrerPolicy="no-referrer" className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105" />
+              <img {...photoAttrs(s.feature.image, '400px')} alt="" className="absolute inset-0 size-full object-cover transition duration-700 group-hover:scale-105" />
             )}
             <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
             <span className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-2 p-6">

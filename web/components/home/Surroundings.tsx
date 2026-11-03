@@ -6,6 +6,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { mapsDirectionsUrl } from '@/lib/data';
 import type { Nearby } from '@/lib/surroundings';
 import { SectionTitle } from '@/components/Section';
+import { photoAttrs } from '@/lib/images';
 
 const VB_W = 700;
 const VB_H = 460;
@@ -62,7 +63,7 @@ export default function Surroundings({ center, places }: { center: { lat: number
                 className={`-mx-4 flex gap-5 px-4 py-4 transition-colors duration-300 ${active === p.key ? 'bg-surface' : ''}`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.image} alt={p.name} loading="lazy" referrerPolicy="no-referrer" className="aspect-[4/3] w-24 shrink-0 object-cover sm:w-36" />
+                <img {...photoAttrs(p.image, '144px')} alt={p.name} loading="lazy" className="aspect-[4/3] w-24 shrink-0 object-cover sm:w-36" />
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-baseline gap-x-3">
                     <h3 className="font-display text-lead leading-none">

@@ -143,12 +143,12 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
 
       <div className={`frame grid grid-cols-1 gap-2 ${photos.length > 1 ? 'sm:grid-cols-[2fr_1fr]' : ''}`}>
         <div data-reveal="image" className="overflow-hidden">
-          <Photo src={photos[0] ?? null} alt={place.name} label={place.subcategory} className="aspect-[16/9] w-full" />
+          <Photo src={photos[0] ?? null} alt={place.name} label={place.subcategory} sizes={photos.length > 1 ? '(min-width: 640px) 66vw, 100vw' : '100vw'} className="aspect-[16/9] w-full" />
         </div>
         {photos.length > 1 && (
           <div className={`hidden gap-2 sm:grid ${photos.length > 2 ? 'grid-rows-2' : ''}`}>
             {photos.slice(1, 3).map((src) => (
-              <Photo key={src} src={src} alt={place.name} className="size-full" />
+              <Photo key={src} src={src} alt={place.name} sizes="33vw" className="size-full" />
             ))}
           </div>
         )}

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { gsap, isDesktop, useGSAP } from '@/lib/motion';
+import { photoAttrs } from '@/lib/images';
 
 export type BigWord = { label: string; href: string; image: string; caption: string };
 
@@ -77,7 +78,7 @@ export default function BigWords({ items }: { items: BigWord[] }) {
               className={`group flex items-center gap-5 py-3 transition-colors duration-500 sm:py-4 ${active !== null && active !== i ? 'text-ink/25' : 'text-ink'} hover:text-ink`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={w.image} alt="" loading="lazy" referrerPolicy="no-referrer" className="h-20 w-16 shrink-0 rounded-t-full object-cover lg:hidden" />
+              <img {...photoAttrs(w.image, '64px')} alt="" loading="lazy" className="h-20 w-16 shrink-0 rounded-t-full object-cover lg:hidden" />
               <span className="font-display text-[clamp(2.6rem,8.5vw,8rem)] leading-[0.95] tracking-[-0.03em] transition-transform duration-500 group-hover:translate-x-4">
                 {w.label}
               </span>
@@ -95,7 +96,7 @@ export default function BigWords({ items }: { items: BigWord[] }) {
       >
         {items.map((w, i) => (
           // eslint-disable-next-line @next/next/no-img-element
-          <img key={w.label} data-follow-img={i} src={w.image} alt="" referrerPolicy="no-referrer" className="absolute inset-0 size-full object-cover" />
+          <img key={w.label} data-follow-img={i} {...photoAttrs(w.image, '400px')} alt="" className="absolute inset-0 size-full object-cover" />
         ))}
       </div>
     </div>

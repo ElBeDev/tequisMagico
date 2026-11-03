@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowRight, Search, X } from 'lucide-react';
 import { foldText } from '@/lib/data';
 import type { SearchItem } from '@/lib/search';
+import { photoAttrs } from '@/lib/images';
 
 const SUGGESTIONS = ['Viñedos', 'Queserías', 'Globo', 'Hotel', 'Restaurante', 'Artesanías', 'Feria del Queso'];
 const PER_GROUP = 6;
@@ -150,7 +151,7 @@ export default function SearchDialog({ items, open, onClose }: { items: SearchIt
                         >
                           {r.image ? (
                             // eslint-disable-next-line @next/next/no-img-element
-                            <img src={r.image} alt="" referrerPolicy="no-referrer" loading="lazy" className="size-12 shrink-0 object-cover" />
+                            <img {...photoAttrs(r.image, '48px')} alt="" loading="lazy" className="size-12 shrink-0 object-cover" />
                           ) : (
                             <span className="flex size-12 shrink-0 items-center justify-center bg-sage">
                               <ArrowRight className="size-4" aria-hidden />

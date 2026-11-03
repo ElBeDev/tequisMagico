@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { SITE_NAME } from '@/lib/data';
+import { photoAttrs } from '@/lib/images';
 
 export type FloatingPhoto = { src: string; alt: string };
 
@@ -28,7 +29,7 @@ export default function AppInvite({ photos }: { photos: FloatingPhoto[] }) {
         <div key={p.src} aria-hidden data-parallax={SLOTS[i].speed} className={`pointer-events-none absolute ${SLOTS[i].cls}`}>
           <div data-reveal="image" className={`aspect-[4/5] overflow-hidden ${i % 2 ? '' : 'rounded-t-[999px]'}`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={p.src} alt="" loading="lazy" referrerPolicy="no-referrer" className="size-full object-cover" />
+            <img {...photoAttrs(p.src, '300px')} alt="" loading="lazy" className="size-full object-cover" />
           </div>
         </div>
       ))}
