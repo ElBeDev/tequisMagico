@@ -212,10 +212,19 @@ function dateOnly(value: string): string {
   return String(value).slice(0, 10);
 }
 
-async function fetchJSON<T>(path: string): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, { next: { revalidate: REVALIDATE_SECONDS } });
-  if (!res.ok) throw new Error(`API ${path} respondió ${res.status}`);
-  return res.json() as Promise<T>;
+// Reintenta errores de red y 5xx: el build pide el API desde muchas páginas a la vez y un 500
+// pasajero (Neon despertando) tiraba todo el despliegue.
+async function fetchJSON<T>(path: string, attempt = 1): Promise<T> {
+  try {
+    const res = await fetch(`${API_BASE}${path}`, { next: { revalidate: REVALIDATE_SECONDS } });
+    if (res.status >= 500) throw new Error(`API ${path} respondió ${res.status}`);
+    if (!res.ok) throw Object.assign(new Error(`API ${path} respondió ${res.status}`), { final: true });
+    return (await res.json()) as T;
+  } catch (err) {
+    if (attempt >= 3 || (err as { final?: boolean }).final) throw err;
+    await new Promise((r) => setTimeout(r, 600 * attempt));
+    return fetchJSON<T>(path, attempt + 1);
+  }
 }
 
 // Las fotos de Commons en la base apuntan al archivo original (hasta ~3 MB cada una). Se piden

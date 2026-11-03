@@ -88,7 +88,7 @@ export default async function EventoPage({ params }: PageProps<'/evento/[slug]'>
 
       <div className="frame mt-20 grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-24">
         <div>
-          {event.shortDescription && <p className="max-w-[26ch] font-display text-[clamp(1.75rem,2.6vw,2.25rem)] leading-[1.15] tracking-[-0.01em]">{event.shortDescription}</p>}
+          {event.shortDescription && <p className="max-w-[26ch] font-display text-title leading-[1.15] tracking-[-0.01em]">{event.shortDescription}</p>}
           {event.fullDescription && <p className="mt-6 max-w-[62ch]">{event.fullDescription}</p>}
 
           {hasLocation && (

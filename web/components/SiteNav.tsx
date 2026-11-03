@@ -249,7 +249,7 @@ export default function SiteHeader({ nav, search }: { nav: NavSection[]; search:
           <div className="frame grid gap-x-12 gap-y-10 pb-16 pt-10 sm:grid-cols-2 md:grid-cols-3">
             {nav.map((s) => (
               <div key={s.href}>
-                <p className="overflow-hidden font-display text-[2.75rem] leading-none tracking-[-0.02em] sm:text-5xl">
+                <p className="overflow-hidden font-display text-head leading-none tracking-[-0.02em]">
                   <Link href={s.href} data-menu-big className="block hover:underline">{s.label}</Link>
                 </p>
                 <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2">

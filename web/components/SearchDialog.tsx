@@ -125,7 +125,7 @@ export default function SearchDialog({ items, open, onClose }: { items: SearchIt
           </div>
         ) : groups.length === 0 ? (
           <div className="px-6 py-10 text-center">
-            <p className="font-display text-xl">No encontramos «{query}»</p>
+            <p className="font-display text-lead">No encontramos «{query}»</p>
             <p className="mt-2 text-muted">
               Prueba con otra palabra o <Link href="/lugares" onClick={onClose} className="underline">mira todos los lugares</Link>.
             </p>
@@ -158,7 +158,7 @@ export default function SearchDialog({ items, open, onClose }: { items: SearchIt
                             </span>
                           )}
                           <span className="min-w-0 flex-1">
-                            <span className="block truncate font-display text-lg leading-tight">{r.title}</span>
+                            <span className="block truncate font-display text-lead leading-tight">{r.title}</span>
                             <span className="meta block truncate text-muted">{r.subtitle}</span>
                           </span>
                         </Link>

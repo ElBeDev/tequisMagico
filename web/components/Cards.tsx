@@ -7,7 +7,7 @@ import { GRID_SIZES, photoAttrs } from '@/lib/images';
 export function Photo({ src, alt, label, sizes = GRID_SIZES, className = '' }: { src: string | null; alt: string; label?: string; sizes?: string; className?: string }) {
   if (!src) {
     return (
-      <div className={`flex items-end bg-stone p-4 font-display text-lg text-white ${className}`} aria-hidden>
+      <div className={`flex items-end bg-stone p-4 font-display text-lead text-white ${className}`} aria-hidden>
         {label}
       </div>
     );
@@ -82,7 +82,7 @@ export function EventCard({ event, today }: { event: TequisEvent; today: string 
   return (
     <Link href={`/evento/${event.slug}`} data-cursor="Ver" data-reveal="up" className="group -mx-4 flex items-center gap-6 px-4 py-5 transition-colors duration-300 hover:bg-surface">
       <div className="w-20 shrink-0">
-        <p className="font-display text-5xl leading-none tracking-[-0.02em]">{start.getUTCDate()}</p>
+        <p className="font-display text-title leading-none tracking-[-0.02em]">{start.getUTCDate()}</p>
         <p className="meta mt-1 text-muted">{new Intl.DateTimeFormat('es-MX', { month: 'long', timeZone: 'UTC' }).format(start)}</p>
       </div>
       <div className="min-w-0 flex-1">
@@ -116,7 +116,7 @@ export function EventTile({ event, today, reveal = true, large = false }: { even
             {' · '}
             {formatDateRange(event.startDate, event.endDate)}
           </p>
-          <h3 className={`mt-2 font-display leading-[1.02] tracking-[-0.015em] group-hover:underline ${large ? 'text-[clamp(2rem,3.4vw,3rem)]' : 'text-[1.75rem]'}`}>{event.title}</h3>
+          <h3 className={`mt-2 font-display leading-[1.02] tracking-[-0.015em] group-hover:underline ${large ? 'text-title' : 'text-lead'}`}>{event.title}</h3>
           {event.shortDescription && <p className="mt-2 line-clamp-2 max-w-[48ch] text-muted">{event.shortDescription}</p>}
         </div>
       </Link>

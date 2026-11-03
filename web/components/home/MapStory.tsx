@@ -17,6 +17,13 @@ const [VB_W, VB_H] = MX_VIEWBOX.split(' ').slice(2).map(Number);
 // Encuadre final: el centro del pueblo, ~2.5 km de lado alrededor de la plaza.
 const TOWN = { lat: 20.5218, lng: -99.8917, dLat: 0.011, dLng: 0.016 };
 
+// Las dos ciudades de referencia del texto, con su distancia por carretera. Aparecen antes del
+// zoom y se abren hacia los lados hasta salir del encuadre mientras se acerca al pueblo.
+const CITIES = [
+  { key: 'cdmx', name: 'Ciudad de México', km: 'unos 180 km', at: projectLatLng(19.4326, -99.1332), dx: 14, anchor: 'start' },
+  { key: 'qro', name: 'Querétaro', km: 'unos 60 km', at: projectLatLng(20.5888, -100.3899), dx: -14, anchor: 'end' },
+] as const;
+
 function unproject(x: number, y: number): [number, number] {
   const lng = ((x - MX_PROJ.tx) / MX_PROJ.k) * (180 / Math.PI);
   const lat = (2 * Math.atan(Math.exp((MX_PROJ.ty - y) / MX_PROJ.k)) - Math.PI / 2) * (180 / Math.PI);
@@ -153,13 +160,16 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
         const cy = VB_H / 2 + (target.y + target.h / 2 - VB_H / 2) * k;
         s.setAttribute('viewBox', `${cx - w / 2} ${cy - h / 2} ${w} ${h}`);
         el.querySelector('[data-tequis]')?.setAttribute('transform', `translate(${TEQUIS_POINT[0]} ${TEQUIS_POINT[1]}) scale(${w / VB_W})`);
+        el.querySelectorAll<SVGGElement>('[data-city-mark]').forEach((g, i) => {
+          g.setAttribute('transform', `translate(${CITIES[i].at[0]} ${CITIES[i].at[1]}) scale(${w / VB_W})`);
+        });
       };
 
       if (prefersReducedMotion()) {
         view.t = 1;
         apply();
         gsap.set('[data-town], [data-map-final]', { autoAlpha: 1 });
-        gsap.set('[data-map-title], [data-tequis], [data-mx], [data-neighbors]', { autoAlpha: 0 });
+        gsap.set('[data-map-title], [data-tequis], [data-mx], [data-mx-fill], [data-neighbors], [data-city]', { autoAlpha: 0 });
         return;
       }
       apply();
@@ -173,7 +183,11 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
         .fromTo('[data-mx]', { drawSVG: '0% 35%' }, { drawSVG: '0% 100%', duration: 3 })
         .fromTo('[data-neighbors]', { autoAlpha: 0.4 }, { autoAlpha: 1, duration: 2 }, 0.5)
         .fromTo('[data-tequis-inner]', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.8, ease: 'back.out(2)' }, 2.6)
+        .fromTo('[data-city]', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, stagger: 0.3 }, 3)
+        .to('[data-city]', { autoAlpha: 0, duration: 0.6 }, 5.6)
         .to('[data-map-title]', { autoAlpha: 0, y: -40, duration: 1 }, 3.6)
+        // El relleno se va antes de que el zoom lo agrande más allá del recuadro del <svg> (si no, se ve su borde).
+        .to('[data-mx-fill]', { autoAlpha: 0, duration: 0.6 }, 3.4)
         .to(view, { t: 1, duration: 4, ease: 'power1.inOut', onUpdate: apply }, 3.6)
         .to('[data-tequis-label]', { autoAlpha: 0, duration: 0.6 }, 5.6)
         // El dibujo se funde con el mapa real del pueblo.
@@ -209,7 +223,26 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
         aria-label={`Mapa de México que se acerca a Tequisquiapan y sus ${count} lugares`}
       >
         <path data-neighbors d={NEIGHBORS_PATH} fill="none" stroke="currentColor" strokeOpacity="0.22" strokeWidth="0.8" vectorEffect="non-scaling-stroke" />
+        {/* El relleno está desde el principio: el contorno se dibuja encima de una forma que ya se ve. */}
+        <path data-mx-fill d={MX_PATH} className="fill-surface" />
         <path data-mx d={MX_PATH} fill="none" stroke="currentColor" strokeWidth="1.1" vectorEffect="non-scaling-stroke" />
+        {CITIES.map((c) => (
+          <g key={c.key} data-city className="invisible">
+            <path
+              d={`M${c.at[0]},${c.at[1]}L${TEQUIS_POINT[0]},${TEQUIS_POINT[1]}`}
+              fill="none"
+              stroke="currentColor"
+              strokeOpacity="0.6"
+              strokeDasharray="2 5"
+              vectorEffect="non-scaling-stroke"
+            />
+            <g data-city-mark transform={`translate(${c.at[0]} ${c.at[1]})`}>
+              <circle r="4" fill="currentColor" />
+              <text x={c.dx} y="6" textAnchor={c.anchor} fontSize="18" className="fill-current font-display">{c.name}</text>
+              <text x={c.dx} y="26" textAnchor={c.anchor} fontSize="14" className="fill-muted">{c.km}</text>
+            </g>
+          </g>
+        ))}
         <g data-tequis transform={`translate(${TEQUIS_POINT[0]} ${TEQUIS_POINT[1]})`}>
           <g data-tequis-inner>
             <circle r="9" fill="none" stroke="currentColor" strokeOpacity="0.4" />
@@ -220,7 +253,7 @@ export default function MapStory({ places, count }: { places: MapPlace[]; count:
       </svg>
 
       <div data-map-final className="invisible absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-4 px-5 text-center sm:bottom-12">
-        <p className="font-display text-[clamp(1.75rem,3vw,2.5rem)] leading-none">{count} lugares para descubrir</p>
+        <p className="font-display text-title leading-none">{count} lugares para descubrir</p>
         <div className="flex flex-wrap justify-center gap-3">
           <Link href="/mapa" className="btn">Explorar el mapa</Link>
           <Link href="/guia-practica#como-llegar" className="btn bg-bg! text-ink!">Cómo llegar</Link>

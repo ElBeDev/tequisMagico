@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { BedDouble, Landmark, List, Map as MapIcon, ShoppingBag, UtensilsCrossed, type LucideIcon } from 'lucide-react';
-import { CATEGORIES, type PlaceCategory, type PlaceSummary } from '@/lib/data';
+import { CATEGORIES, PRICE_RANGES, placeKey, type PlaceCategory, type PlaceSummary } from '@/lib/data';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/motion';
-import { PlaceCard } from '@/components/Cards';
+import { Photo } from '@/components/Cards';
+import SaveButton from '@/components/SaveButton';
 import { MoreLink } from '@/components/Section';
 import PlacesMap from '@/components/PlacesMap';
 
@@ -15,7 +16,7 @@ const TABS: { key: string; label: string; icon: LucideIcon; categories: PlaceCat
   { key: 'dormir', label: 'Dónde dormir', icon: BedDouble, categories: ['hospedaje'], href: '/lugares/hospedaje' },
   { key: 'compras', label: 'Compras', icon: ShoppingBag, categories: ['compras'], href: '/lugares/compras' },
 ];
-const PAGE = 6;
+const PAGE = 8;
 
 const DESKTOP = '(min-width: 1024px)';
 const subscribeDesktop = (cb: () => void) => {
@@ -26,8 +27,9 @@ const subscribeDesktop = (cb: () => void) => {
 
 /**
  * "Explora Tequis", como el "Explore Shropshire" de la referencia: pestañas por tipo de
- * lugar, tarjetas a la izquierda y el mapa real fijo a la derecha. Pasar el cursor por una
- * tarjeta agranda su pin. En el celular se cambia entre lista y mapa.
+ * lugar, la lista a la izquierda y el mapa real fijo a la derecha. La lista es un índice de
+ * guía impresa (nombre grande, miniatura en arco, tipo y precio), no una cuadrícula de
+ * tarjetas. Pasar el cursor por un renglón agranda su pin. En el celular se cambia entre lista y mapa.
  */
 export default function ExploreTequis({ places }: { places: PlaceSummary[] }) {
   const tabs = useMemo(
@@ -38,7 +40,7 @@ export default function ExploreTequis({ places }: { places: PlaceSummary[] }) {
   const [shown, setShown] = useState(PAGE);
   const [hover, setHover] = useState<string | null>(null);
   const [mobileView, setMobileView] = useState<'lista' | 'mapa'>('lista');
-  const grid = useRef<HTMLDivElement>(null);
+  const grid = useRef<HTMLUListElement>(null);
   const firstFrom = useRef(0);
   const mounted = useRef(false);
   // Un solo mapa a la vez: el fijo de la derecha en escritorio o el de "Mapa" en el celular.
@@ -118,7 +120,7 @@ export default function ExploreTequis({ places }: { places: PlaceSummary[] }) {
                 type="button"
                 aria-pressed={mobileView === v}
                 onClick={() => setMobileView(v)}
-                className={`flex items-center gap-2 rounded-full px-4 py-2 text-[14px] font-semibold transition-colors ${mobileView === v ? 'bg-white/15' : 'text-white/70'}`}
+                className={`flex items-center gap-2 rounded-full px-4 py-2 text-small font-semibold transition-colors ${mobileView === v ? 'bg-white/15' : 'text-white/70'}`}
               >
                 {v === 'lista' ? <List className="size-4" aria-hidden /> : <MapIcon className="size-4" aria-hidden />}
                 {v === 'lista' ? 'Lista' : 'Mapa'}
@@ -133,13 +135,30 @@ export default function ExploreTequis({ places }: { places: PlaceSummary[] }) {
           )}
 
           <div className={mobileView === 'mapa' ? 'hidden lg:block' : ''}>
-            <div ref={grid} role="tabpanel" aria-label={tab.label} className="mt-8 grid gap-5 sm:grid-cols-2">
-              {visible.map((p) => (
-                <div key={p.id} onMouseEnter={() => setHover(p.id)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(p.id)}>
-                  <PlaceCard place={p} variant="boxed" reveal={false} />
-                </div>
-              ))}
-            </div>
+            <ul ref={grid} role="tabpanel" aria-label={tab.label} className="mt-8">
+              {visible.map((p) => {
+                const price = PRICE_RANGES[p.priceRange];
+                return (
+                  <li key={p.id} className="relative" onMouseEnter={() => setHover(p.id)} onMouseLeave={() => setHover(null)} onFocus={() => setHover(p.id)}>
+                    <Link
+                      href={`/lugar/${p.slug}`}
+                      data-cursor="Ver"
+                      className="-mx-4 flex items-center gap-5 py-4 pl-4 pr-16 transition-colors duration-300 hover:bg-white/[0.06] sm:gap-7"
+                    >
+                      <Photo src={p.thumbnailUrl} alt="" label={p.subcategory} sizes="64px" className="h-20 w-16 shrink-0 rounded-t-full" />
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-display text-lead leading-[1.05] tracking-[-0.015em] sm:text-title">{p.name}</span>
+                        <span className="meta mt-2 block text-white/70">
+                          {p.subcategory}
+                          {price && ` · ${price.symbol}`}
+                        </span>
+                      </span>
+                    </Link>
+                    <SaveButton id={placeKey(p.id)} name={p.name} className="absolute right-0 top-1/2 -translate-y-1/2" />
+                  </li>
+                );
+              })}
+            </ul>
             <div className="mt-10 flex flex-wrap items-center gap-6">
               {shown < tab.places.length && (
                 <button

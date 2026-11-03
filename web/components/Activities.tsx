@@ -100,7 +100,7 @@ export default function Activities({ items }: { items: Activity[] }) {
         </div>
 
         <div className="relative flex flex-col justify-center px-[var(--margin)] py-16 pr-20 sm:pr-28 lg:pl-20">
-          <h2 key={item.title} data-act-title className="relative font-display text-[clamp(3rem,6.6vw,7rem)] leading-[0.95] tracking-[-0.03em]">{item.title}</h2>
+          <h2 key={item.title} data-act-title className="relative font-display text-head leading-[0.95] tracking-[-0.03em]">{item.title}</h2>
           <p key={item.detail} data-act-fade className="relative mt-8 max-w-[38ch] text-lead leading-snug">{item.detail}</p>
           <span data-act-fade className="relative mt-10 flex flex-wrap items-center gap-6">
             <Link href={item.href} className="btn">{item.cta}</Link>

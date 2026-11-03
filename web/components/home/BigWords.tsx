@@ -79,7 +79,7 @@ export default function BigWords({ items }: { items: BigWord[] }) {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img {...photoAttrs(w.image, '64px')} alt="" loading="lazy" className="h-20 w-16 shrink-0 rounded-t-full object-cover lg:hidden" />
-              <span className="font-display text-[clamp(2.6rem,8.5vw,8rem)] leading-[0.95] tracking-[-0.03em] transition-transform duration-500 group-hover:translate-x-4">
+              <span className="font-display text-display leading-[0.95] tracking-[-0.03em] transition-transform duration-500 group-hover:translate-x-4">
                 {w.label}
               </span>
               <span className="ml-auto hidden max-w-[22ch] text-right leading-snug lg:block">{w.caption}</span>

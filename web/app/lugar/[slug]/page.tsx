@@ -156,7 +156,7 @@ export default async function LugarPage({ params }: PageProps<'/lugar/[slug]'>) 
 
       <div className="frame mt-20 grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-24">
         <div>
-          {place.shortDescription && <p data-split="lines" className="max-w-[26ch] font-display text-[clamp(1.75rem,2.6vw,2.25rem)] leading-[1.15] tracking-[-0.01em]">{place.shortDescription}</p>}
+          {place.shortDescription && <p data-split="lines" className="max-w-[26ch] font-display text-title leading-[1.15] tracking-[-0.01em]">{place.shortDescription}</p>}
           {place.fullDescription && <p data-reveal="up" className="mt-6 max-w-[62ch]">{place.fullDescription}</p>}
 
           {place.amenities.length > 0 && (

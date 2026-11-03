@@ -32,7 +32,7 @@ export default function PorQueTequisPage() {
       <PageHero photo={PHOTOS.parroquiaTarde} alt="Parroquia de Santa María de la Asunción" title="Por qué Tequis" lead="Un Pueblo Mágico de agua, cantera y mimbre." />
 
       <section className="frame grid grid-cols-1 gap-10 pt-32 lg:grid-cols-2 lg:gap-24">
-        <p data-split="lines" className="max-w-[24ch] font-display text-[clamp(1.75rem,2.6vw,2.25rem)] leading-[1.15] tracking-[-0.01em]">
+        <p data-split="lines" className="max-w-[24ch] font-display text-title leading-[1.15] tracking-[-0.01em]">
           Desde el 17 de octubre de 2012, Tequisquiapan es Pueblo Mágico: el cuarto de Querétaro, después de Bernal, Jalpan y Cadereyta.
         </p>
         <p data-reveal="up" className="max-w-[56ch] self-end">
@@ -51,7 +51,7 @@ export default function PorQueTequisPage() {
             { k: 'Apan', v: 'lugar' },
           ].map((w) => (
             <div key={w.k} className="bg-surface p-8 sm:p-10">
-              <p className="font-display text-[clamp(2.5rem,4vw,3.5rem)] leading-none tracking-[-0.02em]">{w.k}</p>
+              <p className="font-display text-title leading-none tracking-[-0.02em]">{w.k}</p>
               <p className="mt-4">{w.v}</p>
             </div>
           ))}
@@ -67,7 +67,7 @@ export default function PorQueTequisPage() {
         <ol className="mt-14 space-y-10">
           {TIMELINE.map((t) => (
             <li key={t.year} data-reveal="up" className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,1fr)_2fr] sm:gap-12">
-              <p className="font-display text-[clamp(2.5rem,4vw,3.5rem)] leading-none tracking-[-0.02em]">{t.year}</p>
+              <p className="font-display text-title leading-none tracking-[-0.02em]">{t.year}</p>
               <p className="max-w-[60ch]">{t.text}</p>
             </li>
           ))}

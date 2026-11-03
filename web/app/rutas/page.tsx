@@ -29,7 +29,7 @@ export default async function RutasPage() {
             )}
             <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-8">
-              <h2 className="font-display text-[clamp(2rem,3.4vw,3rem)] leading-none tracking-[-0.02em]">{r.title}</h2>
+              <h2 className="font-display text-title leading-none tracking-[-0.02em]">{r.title}</h2>
               <p className="mt-3 text-white/90">{r.subtitle} · {r.stops.length} paradas</p>
             </div>
           </Link>

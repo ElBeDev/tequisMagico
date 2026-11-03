@@ -17,10 +17,13 @@
   --sage: #a3ad94;
   --forest: #1f2a1a;
 
-  /* Cinco tamaños, lejos entre sí. */
+  /* Seis tamaños, lejos entre sí. `title` es para títulos de tarjeta, fechas y citas: entre el
+     texto destacado y los títulos de sección no había nada. Fuera de la escala solo quedan el
+     nombre gigante de la portada (Hero) y el logo. */
   --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
   --step-body: clamp(1.0625rem, 1rem + 0.2vw, 1.1875rem);
   --step-lead: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --step-title: clamp(1.75rem, 1.4rem + 1.2vw, 3rem);
   --step-head: clamp(2.25rem, 1.4rem + 3.4vw, 4.5rem);
   --step-display: clamp(2.75rem, 0.6rem + 9.5vw, 10rem);
 
@@ -46,6 +49,7 @@
   --text-small: var(--step-small);
   --text-body: var(--step-body);
   --text-lead: var(--step-lead);
+  --text-title: var(--step-title);
   --text-head: var(--step-head);
   --text-display: var(--step-display);
 }

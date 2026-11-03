@@ -91,7 +91,7 @@ export default function Surroundings({ center, places }: { center: { lat: number
             {[...RINGS_KM].reverse().map((km) => (
               <g key={km}>
                 <circle cx={home[0]} cy={home[1]} r={km * pxPerKm} className="fill-surface" fillOpacity={km === RINGS_KM[0] ? 1 : 0.55} />
-                <text x={home[0]} y={home[1] - km * pxPerKm + 18} textAnchor="middle" fontSize="13" className="fill-muted">{km} km</text>
+                <text x={home[0]} y={home[1] - km * pxPerKm + 18} textAnchor="middle" fontSize="14" className="fill-muted">{km} km</text>
               </g>
             ))}
             <g data-draw fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -110,7 +110,7 @@ export default function Surroundings({ center, places }: { center: { lat: number
               return (
                 <g key={p.key} onMouseEnter={() => setActive(p.key)} onMouseLeave={() => setActive(null)} className="cursor-default">
                   <circle cx={x} cy={y} r={on ? 11 : 7} className={`transition-all duration-300 ${on ? 'fill-ochre' : 'fill-bg'}`} stroke="currentColor" strokeWidth="1.6" />
-                  <text x={label.x} y={label.y} textAnchor={label.anchor} fontSize="17" className="fill-current font-display">
+                  <text x={label.x} y={label.y} textAnchor={label.anchor} fontSize="18" className="fill-current font-display">
                     {p.name}
                   </text>
                 </g>
@@ -118,7 +118,7 @@ export default function Surroundings({ center, places }: { center: { lat: number
             })}
             <g>
               <circle cx={home[0]} cy={home[1]} r="9" className="fill-forest" />
-              <text x={home[0] + 18} y={home[1] + 26} fontSize="20" className="fill-current font-display">Tequisquiapan</text>
+              <text x={home[0] + 18} y={home[1] + 26} fontSize="18" className="fill-current font-display">Tequisquiapan</text>
             </g>
           </svg>
         </div>
