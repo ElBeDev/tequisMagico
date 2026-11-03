@@ -53,6 +53,7 @@ const FOOTER_LINKS = [
     links: [
       { href: "/por-que-tequis", label: "¿Por qué Tequis?" },
       { href: "/guia-practica", label: "Guía práctica" },
+      { href: "/guias", label: "Guías de viaje" },
       { href: "/mi-viaje", label: "Mi viaje" },
       { href: "/app", label: "La app" },
       { href: "/creditos", label: "Créditos de fotos" },

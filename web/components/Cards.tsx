@@ -55,6 +55,26 @@ export function PlaceCard({ place, variant = 'plain', reveal = true }: { place: 
   );
 }
 
+/** Renglón de índice (guías): miniatura en arco, nombre en Gilda, tipo y precio, y el corazón. */
+export function PlaceRow({ place }: { place: PlaceSummary }) {
+  const price = PRICE_RANGES[place.priceRange];
+  return (
+    <li className="relative">
+      <Link href={`/lugar/${place.slug}`} data-cursor="Ver" className="-mx-4 flex items-center gap-5 py-4 pl-4 pr-16 transition-colors duration-300 hover:bg-surface">
+        <Photo src={place.thumbnailUrl} alt="" label={place.subcategory} sizes="64px" className="h-20 w-16 shrink-0 rounded-t-full" />
+        <span className="min-w-0 flex-1">
+          <span className="block font-display text-lead leading-[1.05] tracking-[-0.01em]">{place.name}</span>
+          <span className="meta mt-2 block text-muted">
+            {place.subcategory}
+            {price && ` · ${price.symbol}`}
+          </span>
+        </span>
+      </Link>
+      <SaveButton id={placeKey(place.id)} name={place.name} className="absolute right-0 top-1/2 -translate-y-1/2" />
+    </li>
+  );
+}
+
 /** Tarjeta vertical con el arco de portal y el título encima de la foto (rutas, ideas de viaje). */
 export function StoryCard({ href, image, title, kicker, cursor = 'Ver' }: { href: string; image: string | null; title: string; kicker?: string; cursor?: string }) {
   return (

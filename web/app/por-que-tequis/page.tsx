@@ -20,7 +20,7 @@ const TIMELINE = [
   { year: '1567', text: 'Se construye la pila de agua que hoy da nombre al Parque La Pila.' },
   { year: '1656', text: 'Una cédula real fija el nombre de Santa María de la Asunción de Tequisquiapan.' },
   { year: '1874', text: 'Se termina la segunda etapa de la parroquia de Santa María de la Asunción; su reloj es de 1897 y la cúpula se levantó en 1921 con trabajo voluntario de los vecinos.' },
-  { year: '1902', text: 'Se inaugura la Estación Bernal del ferrocarril, hoy un mirador con vista a la Peña.' },
+  { year: '1902', text: 'Según el municipio, se inaugura la Estación Bernal del ferrocarril, a las afueras del pueblo; se llama así por su vista a la Peña.' },
   { year: '1916', text: 'Venustiano Carranza, asiduo a sus aguas termales, decreta a Tequisquiapan centro geográfico del país. El monumento del péndulo lo recuerda (el centro geográfico real está en Zacatecas).' },
   { year: 'Años 50', text: 'Auge de los balnearios de aguas termales: Tequis se vuelve destino de descanso para la Ciudad de México y el Bajío.' },
   { year: '2012', text: 'El 17 de octubre recibe el nombramiento de Pueblo Mágico, el cuarto de Querétaro.' },

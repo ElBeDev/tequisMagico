@@ -11,6 +11,7 @@ import {
   type PlaceCategory,
   type TequisEvent,
 } from './data';
+import { GUIDES } from './guides';
 import { PHOTOS } from './photos';
 
 // Menú principal al estilo de visitshropshire.co.uk: una fila de secciones y, al pasar el
@@ -139,6 +140,7 @@ export function buildNav(places: Place[], events: TequisEvent[], today: string):
             { href: '/app', label: 'La app' },
           ],
         },
+        { title: 'Guías', href: '/guias', links: GUIDES.map((g) => ({ href: `/guias/${g.slug}`, label: g.title })) },
       ],
       feature: { image: PHOTOS.pendulo.src, eyebrow: 'Dato', title: 'El centro geográfico de México', href: '/por-que-tequis#historia', cta: 'Leer más' },
       all: { href: '/guia-practica', label: 'Toda la guía práctica' },

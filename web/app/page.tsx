@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { SITE_NAME, SITE_URL, THEMATIC_ROUTES, eventStatus, getEvents, getPlaces, placesForRoute, toSummary, todayInTequis } from '@/lib/data';
+import { GUIDES } from '@/lib/guides';
 import { PHOTOS } from '@/lib/photos';
 import { NEARBY, TEQUIS } from '@/lib/surroundings';
 import { EventCard, EventTile, JsonLd, StoryCard } from '@/components/Cards';
@@ -148,20 +149,22 @@ export default async function Home() {
       <section className="overflow-hidden bg-ochre py-28" aria-labelledby="ideas-title">
         <div className="frame grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.7fr_1.3fr]">
           <div>
-            <h2 id="ideas-title" data-split="lines" className="heading max-w-[12ch]">Rutas por Tequis</h2>
+            <h2 id="ideas-title" data-split="lines" className="heading max-w-[12ch]">Rutas y guías</h2>
             <p data-reveal="up" className="mt-6 max-w-[40ch] text-lead leading-snug">
-              {routeCards.length} rutas con paradas en orden y mapa: vino y queso, artesanías, historia y aventura.
+              {routeCards.length} rutas con paradas en orden y mapa, y {GUIDES.length} guías para planear el viaje.
             </p>
             <div data-reveal="up" className="mt-8 flex flex-wrap gap-3">
               <Link href="/rutas" className="btn">Ver las rutas</Link>
-              <Link href="/mi-viaje" className="btn-outline">Mi viaje</Link>
+              <Link href="/guias" className="btn-outline">Las guías</Link>
             </div>
           </div>
           <DragRow className="-mr-[var(--margin)] gap-5 pr-[var(--margin)]">
             {routeCards.map(({ r, stops }) => (
               <StoryCard key={r.slug} href={`/rutas/${r.slug}`} image={stops[0].thumbnailUrl} title={r.title} kicker={`${stops.length} paradas`} cursor="Arrastra" />
             ))}
-            <StoryCard href="/guia-practica" image={PHOTOS.calleNinosHeroes.src} title="Un fin de semana en Tequis" kicker="Guía práctica" cursor="Arrastra" />
+            {GUIDES.map((g) => (
+              <StoryCard key={g.slug} href={`/guias/${g.slug}`} image={g.photo.src} title={g.title} kicker="Guía" cursor="Arrastra" />
+            ))}
           </DragRow>
         </div>
       </section>

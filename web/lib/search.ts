@@ -1,4 +1,5 @@
 import { CATEGORIES, THEMATIC_ROUTES, foldText, formatDateRange, type Place, type TequisEvent } from './data';
+import { GUIDES } from './guides';
 
 // Índice del buscador del header: lugares, eventos y páginas del sitio. Se arma en el
 // servidor (layout) y la búsqueda corre en el navegador, sin pedir nada al API.
@@ -27,6 +28,8 @@ const PAGES: Omit<SearchItem, 'kind' | 'haystack' | 'image'>[] = [
   { title: 'Mi viaje', subtitle: 'Lo que guardaste con el corazón', href: '/mi-viaje' },
   { title: 'La app', subtitle: 'Tequis en tu bolsillo, sin conexión', href: '/app' },
   ...THEMATIC_ROUTES.map((r) => ({ title: r.title, subtitle: r.subtitle, href: `/rutas/${r.slug}` })),
+  { title: 'Guías de viaje', subtitle: 'Para planear tu visita', href: '/guias' },
+  ...GUIDES.map((g) => ({ title: g.title, subtitle: g.searchSubtitle, href: `/guias/${g.slug}` })),
 ];
 
 export function buildSearchIndex(places: Place[], events: TequisEvent[]): SearchItem[] {

@@ -14,7 +14,8 @@ import SearchDialog from './SearchDialog';
 import { photoAttrs } from '@/lib/images';
 
 // Páginas que abren con una foto a pantalla completa: ahí el header va transparente y en
-// blanco encima de la foto, y se vuelve sólido al bajar (o al abrir un panel del menú).
+// blanco encima de la foto, y se vuelve sólido al bajar (o al abrir un panel del menú). Las
+// guías (`/guias/<slug>`) también abren con foto.
 const OVERLAY_PATHS = ['/', '/por-que-tequis', '/guia-practica'];
 
 function isTyping(target: EventTarget | null) {
@@ -29,7 +30,7 @@ function isTyping(target: EventTarget | null) {
  */
 export default function SiteHeader({ nav, search }: { nav: NavSection[]; search: SearchItem[] }) {
   const pathname = usePathname();
-  const overlay = OVERLAY_PATHS.includes(pathname);
+  const overlay = OVERLAY_PATHS.includes(pathname) || pathname.startsWith('/guias/');
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);

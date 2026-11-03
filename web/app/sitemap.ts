@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { CATEGORIES, SITE_URL, THEMATIC_ROUTES, getEvents, getPlaces } from '@/lib/data';
+import { GUIDES } from '@/lib/guides';
 
 export const revalidate = 3600;
 
@@ -19,6 +20,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     page('/app', 0.5),
     page('/por-que-tequis', 0.8),
     page('/guia-practica', 0.8),
+    page('/guias', 0.8),
+    ...GUIDES.map((g) => page(`/guias/${g.slug}`, 0.8, g.updatedISO)),
     ...Object.values(CATEGORIES).map((c) => page(`/lugares/${c.slug}`, 0.8)),
     ...THEMATIC_ROUTES.map((r) => page(`/rutas/${r.slug}`, 0.6)),
     ...places.map((p) => page(`/lugar/${p.slug}`, 0.7, p.updatedAt)),
