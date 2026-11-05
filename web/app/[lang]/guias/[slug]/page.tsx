@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { SITE_NAME, SITE_URL, getPlaces, toSummary } from '@/lib/data';
+import { SITE_NAME, SITE_LOGO, SITE_URL, getPlaces, toSummary } from '@/lib/data';
 import { GUIDES, getGuide, guidesFor } from '@/lib/guides';
 import { dict } from '@/lib/dict';
 import { LANGS, alternates, href, langOf } from '@/lib/i18n';
@@ -57,7 +57,7 @@ export default async function GuidePage({ params }: PageProps<'/[lang]/guias/[sl
           inLanguage: en ? 'en' : 'es-MX',
           dateModified: guide.updatedISO,
           author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-          publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+          publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL, logo: SITE_LOGO },
           mainEntityOfPage: `${SITE_URL}${href(lang, `/guias/${p.slug}`)}`,
         }}
       />

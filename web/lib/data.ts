@@ -13,6 +13,7 @@ export const REVALIDATE_SECONDS = 300;
 
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tequismagico.com';
 export const SITE_NAME = 'Tequisquiapan Mágico';
+export const SITE_LOGO = `${SITE_URL}/logo/icono-512.png`;
 
 export type PlaceCategory = 'turistico' | 'experiencias' | 'gastronomia' | 'hospedaje' | 'eventos' | 'compras' | 'rutas';
 

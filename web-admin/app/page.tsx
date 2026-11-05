@@ -3,7 +3,8 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-      <h1 className="text-5xl font-bold mb-4">🏛️ Tequisquiapan Mágico</h1>
+      <img src="/logo/globo-sobre-oscuro.svg" alt="" width={356} height={473} className="h-32 w-auto mb-6" />
+      <h1 className="text-5xl font-bold mb-4">Tequisquiapan Mágico</h1>
       <p className="text-xl mb-12">Panel de Administración</p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">

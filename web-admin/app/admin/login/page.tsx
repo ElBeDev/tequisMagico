@@ -36,7 +36,8 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-8 w-full max-w-sm">
-        <h1 className="text-2xl font-bold text-gray-900 mb-1">🏛️ Panel Tequisquiapan Mágico</h1>
+        <img src="/logo/globo-sobre-claro.svg" alt="" width={356} height={473} className="h-24 w-auto mx-auto mb-4" />
+        <h1 className="text-2xl font-bold text-gray-900 mb-1">Panel Tequisquiapan Mágico</h1>
         <p className="text-gray-600 text-sm mb-6">Acceso restringido</p>
         <input
           type="password"

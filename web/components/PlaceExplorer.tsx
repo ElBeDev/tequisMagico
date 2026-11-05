@@ -6,7 +6,7 @@ import { useRef, useState } from 'react';
 import { LayoutGrid, Map as MapIcon } from 'lucide-react';
 import { CATEGORIES, subcategoriesOf, subcategoryPlural, type PlaceSummary } from '@/lib/data';
 import { dict } from '@/lib/dict';
-import { href, type Lang } from '@/lib/i18n';
+import { href, type Lang, visiblePath } from '@/lib/i18n';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/motion';
 import { PlaceCard } from './Cards';
 import PlacesMap from './PlacesMap';
@@ -18,7 +18,7 @@ import PlacesMap from './PlacesMap';
  */
 export default function PlaceExplorer({ places, lang, subfilters = true }: { places: PlaceSummary[]; lang: Lang; subfilters?: boolean }) {
   const params = useSearchParams();
-  const pathname = usePathname();
+  const pathname = visiblePath(usePathname());
   const t = dict(lang);
   const param = lang === 'en' ? 'type' : 'tipo';
   const subs = subfilters ? subcategoriesOf(places) : [];

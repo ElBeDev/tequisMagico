@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
+  SITE_LOGO,
   SITE_NAME,
   SITE_URL,
   THEMATIC_ROUTES,
@@ -195,7 +196,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
 
   return (
     <>
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: `${SITE_URL}${h('/')}`, inLanguage: LOCALE[lang] }} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: `${SITE_URL}${h('/')}`, inLanguage: LOCALE[lang], publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL, logo: SITE_LOGO } }} />
 
       <Hero
         title="Tequisquiapan"

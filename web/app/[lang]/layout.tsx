@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Gilda_Display, Outfit } from "next/font/google";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Logo } from "@/components/Logo";
 import { SITE_NAME, SITE_URL, getEvents, getPlaces, todayInTequis } from "@/lib/data";
 import { dict } from "@/lib/dict";
 import { LANGS, LOCALE, href, isLang, type Lang } from "@/lib/i18n";
@@ -35,6 +36,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     },
     description: t.siteDescription,
     applicationName: SITE_NAME,
+    appleWebApp: { title: "Tequis Mágico" },
     openGraph: { siteName: SITE_NAME, locale: lang === "en" ? "en_US" : "es_MX", alternateLocale: lang === "en" ? "es_MX" : "en_US", type: "website" },
     twitter: { card: "summary_large_image" },
   };
@@ -132,7 +134,12 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
               </div>
             </div>
           </div>
-          <div className="frame mt-24 flex flex-col gap-3 text-white/65 sm:flex-row sm:items-center sm:justify-between">
+          <div className="frame mt-24">
+            <Link href={href(lang, "/")} aria-label={t.home} className="inline-block">
+              <Logo tone="dark" />
+            </Link>
+          </div>
+          <div className="frame mt-8 flex flex-col gap-3 text-white/65 sm:flex-row sm:items-center sm:justify-between">
             <p className="meta">© {new Date().getFullYear()} {SITE_NAME}. {t.footerIndependent}</p>
             <ul className="meta flex gap-6">
               <li>

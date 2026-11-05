@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
   // Las fotos son hotlink (igual que en la app) y se usan como <img> normales con los atributos
   // de lib/images.ts: las de Commons usan los tamaños de Wikimedia y solo las de OPTIMIZED_HOSTS
   // pasan por el optimizador de Next.
+  async headers() {
+    // El logo va en todas las páginas: un día de caché evita pedirlo en cada visita.
+    return [{ source: '/logo/:path*', headers: [{ key: 'Cache-Control', value: 'public, max-age=86400' }] }];
+  },
   images: {
     remotePatterns: OPTIMIZED_HOSTS.map((hostname) => ({ protocol: 'https' as const, hostname })),
   },

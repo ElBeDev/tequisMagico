@@ -6,8 +6,9 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-gray-900">
-            🏛️ Tequisquiapan Mágico - Admin
+          <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
+            <img src="/logo/globo-sobre-claro.svg" alt="" width={356} height={473} className="h-12 w-auto" />
+            Tequisquiapan Mágico - Admin
           </h1>
           <LogoutButton />
         </div>

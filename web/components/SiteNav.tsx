@@ -13,7 +13,7 @@ import { MoreLink } from './Section';
 import SearchDialog from './SearchDialog';
 import { photoAttrs } from '@/lib/images';
 import { dict } from '@/lib/dict';
-import { enToEs, href, otherLangPath, type Lang } from '@/lib/i18n';
+import { enToEs, href, otherLangPath, visiblePath, type Lang } from '@/lib/i18n';
 
 // Páginas que abren con una foto a pantalla completa: ahí el header va transparente y en
 // blanco encima de la foto, y se vuelve sólido al bajar (o al abrir un panel del menú). Las
@@ -54,7 +54,7 @@ function isTyping(target: EventTarget | null) {
  * destacada). En celular, buscador y corazón quedan arriba y el resto va en el menú verde.
  */
 export default function SiteHeader({ nav, search, lang }: { nav: NavSection[]; search: SearchItem[]; lang: Lang }) {
-  const pathname = usePathname();
+  const pathname = visiblePath(usePathname());
   const esPath = esPathOf(pathname);
   const overlay = OVERLAY_PATHS.includes(esPath) || esPath.startsWith('/guias/');
   const t = dict(lang);
@@ -155,9 +155,14 @@ export default function SiteHeader({ nav, search, lang }: { nav: NavSection[]; s
           transparent ? 'text-white' : 'bg-bg text-ink'
         } ${hidden && !menuOpen && panel === null ? 'header-hidden' : ''}`}
       >
+        {/* Sombra arriba de la foto: sin ella, el texto blanco no se lee sobre nubes o cielos claros. */}
+        <span
+          aria-hidden
+          className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-44 bg-gradient-to-b from-black/60 via-black/25 to-transparent transition-opacity duration-500 ${transparent ? '' : 'opacity-0'}`}
+        />
         <div className={`frame flex items-center gap-3 transition-[padding] duration-500 ${transparent ? 'pb-2 pt-6' : 'py-3'}`}>
           <Link href={href(lang, '/')} aria-label={t.logoLabel} data-intro className="shrink-0" onMouseEnter={closePanelSoon}>
-            <Logo />
+            <Logo tone={transparent ? 'dark' : 'light'} />
           </Link>
 
           <button
@@ -257,7 +262,7 @@ export default function SiteHeader({ nav, search, lang }: { nav: NavSection[]; s
         <div ref={menuRef} role="dialog" aria-modal="true" aria-label={t.menu} data-lenis-prevent data-cursor-dark className="fixed inset-0 z-40 overflow-y-auto bg-green text-white">
           <div className="frame flex items-center justify-between py-6">
             <Link href={href(lang, '/')} aria-label={t.home}>
-              <Logo />
+              <Logo tone="dark" />
             </Link>
             <LangSwitch lang={lang} pathname={pathname} className="ml-auto mr-2" />
             <button type="button" onClick={() => setMenuOpen(false)} aria-label={t.closeMenu} className="flex size-11 items-center justify-center rounded-full bg-white/15">

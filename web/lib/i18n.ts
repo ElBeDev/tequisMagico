@@ -71,6 +71,16 @@ export function enToEs(enPath: string): string {
   return `/${[...out, ...tail].join('/')}`;
 }
 
+/**
+ * La URL que ve la persona. Las páginas en español se generan como `/es/...` y `proxy.ts` las
+ * reescribe, así que `usePathname()` devuelve `/es/lugares` en una página que se ve como `/lugares`.
+ * Todo lo que compare la ruta o arme links con ella tiene que pasar por aquí.
+ */
+export function visiblePath(pathname: string): string {
+  if (pathname === '/es') return '/';
+  return pathname.startsWith('/es/') ? pathname.slice(3) : pathname;
+}
+
 /** La misma página en el otro idioma, a partir de la URL visible (para el botón ES/EN). */
 export function otherLangPath(pathname: string): { lang: Lang; path: string } {
   if (pathname === '/en' || pathname.startsWith('/en/')) return { lang: 'es', path: enToEs(pathname.slice(3)) };

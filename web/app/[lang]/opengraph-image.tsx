@@ -15,10 +15,12 @@ export function generateStaticParams() {
 }
 
 const assets = join(process.cwd(), 'assets');
-const [gilda, outfit] = await Promise.all([
+const [gilda, outfit, balloon] = await Promise.all([
   readFile(join(assets, 'GildaDisplay-Regular.ttf')),
   readFile(join(assets, 'Outfit-Regular.ttf')),
+  readFile(join(assets, 'logo-globo.png')),
 ]);
+const balloonSrc = `data:image/png;base64,${balloon.toString('base64')}`;
 
 // Wikimedia pide un User-Agent propio; la foto va embebida para no depender de que el
 // generador la pueda descargar. Si falla, la imagen sale con el arco en salvia y sin foto.
@@ -42,8 +44,14 @@ export default async function Image({ params }: { params: Promise<{ lang: string
       <div style={{ display: 'flex', width: '100%', height: '100%', background: '#eeedea', color: '#141412', padding: '64px 72px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ fontFamily: 'Gilda', fontSize: 104, lineHeight: 1, letterSpacing: '-0.02em' }}>Tequisquiapan</div>
-            <div style={{ fontFamily: 'Outfit', fontSize: 34, marginTop: 28, maxWidth: 560, lineHeight: 1.3, color: '#38492a' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
+              <img src={balloonSrc} alt="" width={158} height={209} />
+              <div style={{ display: 'flex', flexDirection: 'column', fontFamily: 'Gilda', fontSize: 76, lineHeight: 1, letterSpacing: '-0.015em' }}>
+                <div>Tequisquiapan</div>
+                <div>Mágico</div>
+              </div>
+            </div>
+            <div style={{ fontFamily: 'Outfit', fontSize: 32, marginTop: 36, maxWidth: 620, lineHeight: 1.3, color: '#38492a' }}>
               {en ? 'A Pueblo Mágico in Querétaro, two hours from Mexico City' : 'Pueblo Mágico de Querétaro, a dos horas de la Ciudad de México'}
             </div>
           </div>
