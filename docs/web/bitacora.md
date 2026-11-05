@@ -265,10 +265,23 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 
 ---
 
+## 16. Logo nuevo: el Globo (5 nov 2026)
+
+**Qué se hizo:** logo nuevo en toda la web y el panel. Ver [`../marca/README.md`](../marca/README.md).
+
+- **Sitio:** encabezado, menú de celular, pie, páginas de error, favicon, ícono para iPhone, manifest para instalar el sitio, imagen para compartir y logo en los datos para Google.
+- **Panel:** el título seguía siendo "Create Next App", con el ícono de Next y un emoji de templo. Ya lleva el logo, y se le agregó `noindex`.
+- **Bug encontrado:** `usePathname()` devuelve `/es/...` en español. Desde que se agregó el inglés, el botón EN daba 404 en todas las páginas en español, el header nunca iba transparente sobre las fotos y los filtros de los listados arrastraban `/es`. Se corrigió con `visiblePath()`.
+- **Header sobre fotos:** al volver a ser transparente, el texto blanco no se leía sobre fotos claras, y se le agregó una sombra arriba que desaparece al bajar.
+
+---
+
 ## Pendientes
 
 | Pendiente | Quién |
 |---|---|
+| Cambiar el ícono de la app iOS por el Globo nuevo | Código |
+| Búsqueda de marcas antes de registrar el logo en el IMPI | Tú |
 | **Renovar el dominio** antes del 2 nov 2027 (conviene activar la renovación automática en Hostinger) | Tú |
 | Copiar los respaldos fuera del VPS: hoy están en el mismo disco | Tú / proveedor |
 | Cambiar la contraseña de root y del correo, que son la misma, e instalar una llave SSH | Tú |

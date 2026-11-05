@@ -8,6 +8,7 @@ Todo lo del proyecto en un solo lugar. Empieza por "El proyecto hoy" y luego ve 
 |---|---|
 | [`web/plan-sitio-web.md`](web/plan-sitio-web.md) | El sitio público `tequismagico.com` (`web/`): páginas, contenido, datos, animaciones, diseño, dónde está cada cosa en el código, despliegue y dominio |
 | [`web/bitacora.md`](web/bitacora.md) | Registro de cómo se hizo la web: separación de la app, registro y DNS del dominio, despliegues, diseño, problemas y arreglos, pendientes |
+| [`marca/README.md`](marca/README.md) | El logo: qué archivo usar en cada fondo, colores y reglas |
 | [`negocio/propuesta-sitio-web.md`](negocio/propuesta-sitio-web.md) | Propuesta del sitio web público: mercado, competencia, modelo de negocio, arquitectura y plan por fases |
 | [`app-ios/roadmap.md`](app-ios/roadmap.md) | Estado completo y roadmap de la app iOS: qué está hecho, qué falta, bugs, auditoría, legal |
 | [`panel/panel-admin.md`](panel/panel-admin.md) | El panel de administración (`web-admin/`): qué hace, cómo se protege, cómo correrlo |
@@ -62,6 +63,6 @@ Fuera de esta carpeta, a propósito:
    - Contador de vistas y favoritos que nunca se incrementa.
    - Tests.
    - Accesibilidad.
-   - Ícono definitivo de la app.
+   - Ícono de la app iOS: todavía es el globo anterior (ver [`marca/README.md`](marca/README.md)).
 
 El detalle de cada punto está en [`app-ios/roadmap.md`](app-ios/roadmap.md).

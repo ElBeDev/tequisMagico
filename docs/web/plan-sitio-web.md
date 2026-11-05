@@ -241,6 +241,10 @@ Las páginas son Server Components y se animan **por atributos** (`data-reveal`,
 - MapLibre GL 6.16
 - lucide-react
 
+### Logo
+
+El Globo, en [`../marca/README.md`](../marca/README.md). Es lo único del sitio con varios colores, y por eso destaca sobre la paleta de hueso y verde.
+
 ## 7. Contenido editorial y fotos
 
 - Los textos de `/por-que-tequis`, `/guia-practica` y la portada salen de una investigación con fuentes (Wikipedia, tequis.travel, gob.mx/Sectur, INEGI, queretaro.travel, prensa), noviembre 2026. Donde las fuentes no coinciden, el texto se queda con lo que sí coincide:
