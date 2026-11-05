@@ -37,6 +37,7 @@ export default async function MapaPage({ params }: PageProps<'/[lang]/mapa'>) {
         <PlacesMap
           zoom={16}
           wheelZoom
+          fitOnChange
           lang={lang}
           className="h-[75vh]"
           groups={groups}

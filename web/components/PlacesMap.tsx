@@ -44,12 +44,24 @@ export function popupHtml(p: Pick<MapPoint, 'name' | 'subtitle' | 'href' | 'imag
   return `<a class="map-card" href="${escapeHtml(p.href)}">${img}<span class="map-card__body"><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.subtitle)}</span><em>${escapeHtml(cta)}</em></span></a>`;
 }
 
-function fitPoints(map: MLMap, points: MapPoint[], zoom: number, duration: number) {
-  if (points.length === 0) return;
-  if (points.length === 1) {
-    map.easeTo({ center: [points[0].lng, points[0].lat], zoom: Math.max(zoom, 16), duration });
+/**
+ * Con un mapa de muchos lugares, encuadra el pueblo: los viñedos de Ezequiel Montes están a 20 km
+ * y, si entran al encuadre, todo el centro queda amontonado en un punto. Una lista corta (un viaje,
+ * una ruta, la categoría de viñedos) se muestra completa.
+ */
+function townFocus(points: MapPoint[]): MapPoint[] {
+  if (points.length < 12) return points;
+  const near = points.filter((p) => Math.abs(p.lng - TEQUIS_CENTER[0]) < 0.045 && Math.abs(p.lat - TEQUIS_CENTER[1]) < 0.045);
+  return near.length >= points.length * 0.6 ? near : points;
+}
+
+function fitPoints(map: MLMap, allPoints: MapPoint[], zoom: number, duration: number) {
+  if (allPoints.length === 0) return;
+  if (allPoints.length === 1) {
+    map.easeTo({ center: [allPoints[0].lng, allPoints[0].lat], zoom: Math.max(zoom, 16), duration });
     return;
   }
+  const points = townFocus(allPoints);
   const lngs = points.map((p) => p.lng);
   const lats = points.map((p) => p.lat);
   map.fitBounds([[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]], { padding: 70, maxZoom: Math.max(zoom, 16), duration });
