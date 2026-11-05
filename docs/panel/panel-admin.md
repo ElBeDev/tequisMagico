@@ -1,8 +1,8 @@
 # Panel de administración (`web-admin/`)
 
-Panel de administración de Tequisquiapan Mágico. Next.js + Neon (Postgres), desplegado en Vercel como `tequis-magico` (https://tequis-magico.vercel.app). Expone `GET/POST /api/places`, `GET/PUT/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/PUT/DELETE /api/events/[id]`, consumidos por la app iOS en `Tequis Magico/`. El esquema y seeds de la base están en `database/`.
+Panel de administración de Tequisquiapan Mágico. Next.js + PostgreSQL, en nuestro VPS (https://panel.tequismagico.com). Expone `GET/POST /api/places`, `GET/PUT/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/PUT/DELETE /api/events/[id]`, consumidos por la app iOS en `Tequis Magico/`. El esquema y seeds de la base están en `database/`.
 
-`/admin` (login, CRUD de lugares con fotos vía Vercel Blob, analytics) requiere la contraseña en `ADMIN_PASSWORD` — protegido en `proxy.ts` (antes `middleware.ts`; Next.js 16 renombró la convención). Las lecturas del API (`GET`) siguen públicas a propósito, la app las necesita sin login; solo las escrituras y `/api/upload` piden sesión.
+`/admin` (login, CRUD de lugares con fotos en el disco del servidor, analytics) requiere la contraseña en `ADMIN_PASSWORD` — protegido en `proxy.ts` (antes `middleware.ts`; Next.js 16 renombró la convención). Las lecturas del API (`GET`) siguen públicas a propósito, la app las necesita sin login; solo las escrituras y `/api/upload` piden sesión.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
@@ -35,8 +35,6 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Despliegue
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ver [`../../deploy/README.md`](../../deploy/README.md).

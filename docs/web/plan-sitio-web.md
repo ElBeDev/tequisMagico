@@ -17,7 +17,7 @@
 
 ```
                  ┌──────────────┐
-                 │  Neon (BD)   │
+                 │  PostgreSQL  │
                  └──────┬───────┘
                  web-admin/ (panel + API)
           ┌─────────────┴──────────────┐
@@ -30,13 +30,14 @@
 ```
 tequisMagico/
 ├── Tequis Magico/   App iOS
-├── web-admin/       Panel + API  → tequis-magico.vercel.app (privado)
+├── web-admin/       Panel + API  → panel.tequismagico.com (privado)
 ├── web/             Sitio público → tequismagico.com
-├── database/        Esquema de Neon
+├── database/        Esquema, seeds y copia de los datos
+├── deploy/          Configuración del servidor
 └── docs/
 ```
 
-`web/` es otro proyecto de Next.js, independiente del panel. Tiene su propio `package.json` y se despliega como **otro proyecto de Vercel**, con Root Directory = `web`.
+`web/` es otro proyecto de Next.js, independiente del panel. Tiene su propio `package.json` y corre como su propio servicio en el VPS.
 
 ---
 
@@ -76,7 +77,7 @@ Esto es **qué va** en cada página. El **cómo se ve** está en las secciones 6
 - **Mega menú:** al pasar el mouse por una sección se abre un panel con columnas de links y una tarjeta destacada con foto. Se arma con los datos reales en `web/lib/nav.ts`: subcategorías con su conteo (llevan a `/lugares/<categoria>?tipo=<subcategoría>`), próximos eventos y rutas. La tarjeta de Qué hacer / Comer / Dormir es un lugar destacado **con información confirmada**.
 - **Buscador** (`web/components/SearchDialog.tsx`): lugares, eventos y páginas, al instante mientras escribes; se abre con el botón, con `/` o con ⌘K. El índice se arma en el servidor (`web/lib/search.ts`) y la búsqueda corre en el navegador.
 - **En celular:** buscador y corazón arriba; las secciones van en el menú verde a pantalla completa.
-- **Footer** (verde bosque, en `web/app/layout.tsx`): título "¿Tienes un negocio en Tequis?" con botón de correo a `contacto@tequismagico.com`, columnas de links (Explora, Útil), texto de la app, legales, la palabra gigante "Tequisquiapan" en salvia y la nota "Guía independiente; no es un sitio oficial del municipio".
+- **Footer** (verde bosque, en `web/app/layout.tsx`): título "¿Tienes un negocio en Tequis?" con botón de correo a `hola@tequismagico.com`, columnas de links (Explora, Útil), texto de la app, legales, la palabra gigante "Tequisquiapan" en salvia y la nota "Guía independiente; no es un sitio oficial del municipio".
 - **Datos del header:** el layout pide lugares y eventos al API para armar el menú y el índice del buscador. Si el API falla, el header sale sin datos en vez de romper la página.
 
 ### Portada `/`
@@ -151,7 +152,7 @@ Lo que se puede mostrar sin tocar la base. Útil para que el diseño no pida cam
 
 **Evento:** título, descripción corta y completa, fecha de inicio y fin, se repite (sí/no), lugar y dirección, coordenadas, categoría, etiquetas, fotos, gratis o precio, link de boletos, requiere reservación, organizador.
 
-**No existen todavía** (requerirían cambios en Neon y el panel): textos en inglés, slug guardado en la base (hoy se deriva del nombre), estadísticas de vistas o clics, reseñas reales.
+**No existen todavía** (requerirían cambios en la base y el panel): textos en inglés, slug guardado en la base (hoy se deriva del nombre), estadísticas de vistas o clics, reseñas reales.
 
 **Decidido no mostrar:** `rating` y `reviews_count`. Son datos de la carga inicial, no reseñas reales, y publicarlos en una web indexada sería presentar reseñas inventadas como reales. La app sí los muestra hoy; conviene quitarlos ahí también o reemplazarlos con reseñas reales.
 
@@ -170,8 +171,8 @@ Lo que se puede mostrar sin tocar la base. Útil para que el diseño no pida cam
   - Migas de pan, `sitemap.xml` y URL canónica.
   - **Imagen para compartir** (`web/app/opengraph-image.tsx`): 1200×630 con "Tequisquiapan" en Gilda y la parroquia en arco, generada en el build. Las fichas de lugar y evento usan su propia foto.
   - Teléfono y horario solo van a los datos estructurados cuando `content_verified = true`.
-- **Fotos:** hotlink, igual que en la app (Wikimedia Commons y algunos sitios de negocios). Cada `<img>` toma sus atributos de `photoAttrs` (`web/lib/images.ts`): las de Commons llevan `srcset` con los anchos estándar de Wikimedia (500/960/1280/1920) y `crossOrigin="anonymous"` (sin la cookie de Wikimedia); las de los hosts de `OPTIMIZED_HOSTS` (sitios de negocios y Vercel Blob) pasan por el optimizador de Vercel. En celular, la portada bajó de 7.2 MB a 2.7 MB.
-- **Analítica:** Vercel Web Analytics y Speed Insights (`<Analytics />` y `<SpeedInsights />` en el layout). Sin cookies; el aviso de privacidad lo menciona.
+- **Fotos:** hotlink a Wikimedia Commons, igual que en la app, y fotos reales de negocios en nuestro servidor. Cada `<img>` toma sus atributos de `photoAttrs` (`web/lib/images.ts`): las de Commons llevan `srcset` con los anchos estándar de Wikimedia (500/960/1280/1920) y `crossOrigin="anonymous"` (sin la cookie de Wikimedia); las de los hosts de `OPTIMIZED_HOSTS` (sitios de negocios y Vercel Blob) pasan por el optimizador de Vercel. En celular, la portada bajó de 7.2 MB a 2.7 MB.
+- **Analítica:** ninguna desde el 5 nov 2026. La de Vercel solo funcionaba en Vercel y se quitó, junto con su mención en el aviso de privacidad. Search Console sigue activo.
 - **Mapas:** MapLibre GL con teselas vectoriales de OpenFreeMap, sin API key ni costo, recoloreadas con la paleta del sitio (`web/lib/mapStyle.ts`). Muestran el crédito de OpenFreeMap/OpenStreetMap. En los mapas chicos la rueda del mouse sigue bajando la página; para acercar se usa ctrl/⌘ + rueda o dos dedos. En `/mapa` la rueda sí acerca.
 
 ---
@@ -252,21 +253,19 @@ Las páginas son Server Components y se animan **por atributos** (`data-reveal`,
 
 ## 8. Despliegue y dominio
 
-- **Vercel:** proyecto `tequis-magico-web`, Root Directory = `web`, conectado a `ElBeDev/tequisMagico` (rama `main`). Cada push a `main` lo redespliega. Variable `NEXT_PUBLIC_SITE_URL=https://tequismagico.com`.
-- **Dominios:** `tequismagico.com` y `www.tequismagico.com` (redirige con 308 al dominio sin www).
+- **Servidor:** VPS `72.60.173.175`; ver [`../../deploy/README.md`](../../deploy/README.md). Se despliega con `deploy/deploy.sh web`, y `NEXT_PUBLIC_SITE_URL=https://tequismagico.com` está en `/etc/tequis/web.env`.
+- **Dominios:** `tequismagico.com` y `www.tequismagico.com` (redirige con 301 al dominio sin www) y `panel.tequismagico.com`.
 - **Registro:** comprado en Hostinger el 1 nov 2026; **vence el 2 nov 2027**.
-- **DNS en Hostinger:** `A @ → 216.198.79.1, 64.29.17.1` y `CNAME www → 5aacadb8be777d2d.vercel-dns-017.com.`. Son los valores que recomienda Vercel. Además hay un `TXT @` con `google-site-verification=…` (2 nov 2026) para Google Search Console: no lo borres o se pierde la verificación. Se reemplazaron los registros de la página de estacionamiento de Hostinger; el dominio no tenía correo ni otros registros.
-- **Pendiente:** cambiar el Root Directory del proyecto del panel (`tequis-magico`) a `web-admin` para poder borrar los restos del scaffold en la raíz (ver CLAUDE.md).
+- **DNS en Hostinger:** `A @ → 72.60.173.175`, `A panel → 72.60.173.175` y `CNAME www → tequismagico.com.`. Además hay un `TXT @` con `google-site-verification=…` (2 nov 2026) para Google Search Console: no lo borres o se pierde la verificación. Se reemplazaron los registros de la página de estacionamiento de Hostinger.
+- **Correo (Hostinger, 5 nov 2026):** buzón `hola@tequismagico.com`, que usan los legales, el footer y la app. Registros: `MX` (`mx1`/`mx2.hostinger.com`), `TXT @` con SPF, `CNAME` de DKIM (`hostingermail-a/b/c._domainkey`), `TXT _dmarc` (`p=none`) y `CNAME` de `autodiscover`/`autoconfig`. **Activar el correo borró el TXT de Google**; se repuso desde el snapshot de DNS. Revisa ese TXT después de cualquier cambio de correo en Hostinger.
 
 ## 9. Pendientes
 
 La lista completa, con quién hace cada cosa, está en [`bitacora.md`](bitacora.md#pendientes).
 
 - **Renovar el dominio** antes del 2 nov 2027.
-- **Correo de contacto:** los legales usan `contacto@tequismagico.com`, que hay que crear (Hostinger ofrece correo con el dominio).
-- **Verificar horarios y teléfonos** de los ~36 lugares sin confirmar.
+- **Verificar direcciones, horarios y teléfonos** de los 28 lugares sin confirmar.
 - **Permisos** de las fotos tomadas de sitios de negocios. La web ya las publica.
 - **Revisión legal** del aviso de privacidad y los términos.
 - **Link real del App Store** cuando se publique la app.
-- **Corregir la base** con `database/databasefix_research_2026-11.sql` (propuesta, no aplicada): direcciones de viñedos, La Redonda fuera de destacados y 11 lugares que no existen.
 - **Inglés:** traducir los lugares y eventos nuevos en `web/lib/i18n/data-en.ts` (mientras tanto salen en español en `/en`).

@@ -238,7 +238,30 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 - **Traducción:** dos agentes tradujeron los datos del API (47 lugares, 17 eventos, 26 subcategorías y 241 términos, en `lib/i18n/data-en.ts`) y las 4 guías (`lib/i18n/guides-en.ts`). La interfaz (`lib/dict.ts`) y las páginas editoriales se tradujeron a mano. Los legales en inglés aclaran que, en caso de diferencia, vale la versión en español.
 - **Verificado en local:** las 40 rutas en los dos idiomas responden 200 y las inexistentes 404. No quedó texto en español en las páginas en inglés, salvo nombres propios. Viewport de 390 px en celular. Lighthouse de `/en` en celular: rendimiento 96, accesibilidad 96 (corregido después: el `role="tabpanel"` de Explora estaba en el `<ul>`), buenas prácticas 96 y SEO 100.
 
-**SQL de la base:** se pidió aplicar `database/databasefix_research_2026-11.sql`, pero el entorno bloqueó el acceso a la base de producción desde aquí. **Sigue sin aplicarse**: hay que correrlo en el editor SQL de Neon.
+**SQL de la base:** se pidió aplicar `database/databasefix_research_2026-11.sql`, pero el entorno bloqueó el acceso a la base de producción desde aquí. Se aplicó el 5 nov 2026 en la base del VPS (ver sección 15).
+
+---
+
+## 14. Correo del dominio (5 nov 2026)
+
+- Se creó el buzón `hola@tequismagico.com` en Hostinger; entrada (IMAP) y salida (SMTP) probadas con inicio de sesión. Reemplaza a `contacto@`, que nunca se creó, en los legales, el footer y la app.
+- **Activar el correo borró el `TXT @` de Google Search Console.** Se detectó comparando la zona con el snapshot "Hostinger mail activated" y se repuso el mismo valor junto al SPF.
+
+---
+
+## 15. Migración a servidor propio (5 nov 2026)
+
+**Qué cambió:** el sitio, el panel, el API, la base y las fotos pasaron de Vercel y Neon a un VPS propio (`72.60.173.175`). Detalle en [`../../deploy/README.md`](../../deploy/README.md).
+
+- **Código:** `pg` en lugar del driver de Neon, subida de fotos a disco en lugar de Vercel Blob, sin analítica de Vercel, y la app y la web apuntan a `panel.tequismagico.com`.
+- **Incidente:** Vercel se dio de baja antes del cambio de DNS y el sitio dio `DEPLOYMENT_NOT_FOUND` durante unos minutos. No había respaldo de Neon. Los datos se recuperaron de la caché de compilación de la web, que guardaba la respuesta completa del API, y la restauración dio 0 diferencias contra esa copia en 64 filas. Lo que el API no devolvía se perdió (ver `docs/datos/base-de-datos.md`).
+- **Error de la migración:** detrás de Caddy, la web daba 500 en casi todas las rutas por `X-Forwarded-Proto` (ver `deploy/Caddyfile` y `CLAUDE.md`).
+- **Fotos reales:** 25 fotos de 7 negocios, sacadas de su propia web (ver `docs/datos/creditos-imagenes.md`). Se probó Yandex y se descartó porque la llave no tenía permisos; los sitios se buscaron con un buscador general. Dos resultados que parecían oficiales eran dominios secuestrados por sitios de apuestas.
+- **Datos:** se aplicó `database/databasefix_research_2026-11.sql` (11 lugares desactivados, La Redonda fuera de destacados) y `database/databasefix_direcciones_2026-11-05.sql` (direcciones y pines de los lugares con fuente). Antes se guardó `/srv/tequis/backups/antes-de-sql-2026-11-05.dump`.
+- **Altas:** al desactivar esos lugares, el sitio se quedó sin queserías, balnearios ni mercados. Se dieron de alta 9 reales con `database/databaseseed_lugares_reales_2026-11.sql`, con su traducción. Quedaron fuera La Biquette y Quesos Néole (sus webs ya no resuelven) y Balneario La Vega ("Paseo de la Vega" no aparece en ningún mapa).
+- **Fichas nuevas:** `dynamicParams = false` en el layout `[lang]` hacía que un lugar nuevo diera 404 hasta volver a compilar. Se quitó; ahora la ficha se genera sola. `deploy.sh` también limpia la caché de datos antes de compilar.
+- **Pruebas:** la app iOS compila con la nueva dirección del API, y subir una foto desde el panel funciona en un navegador real.
+- **Mapas:** con los viñedos en su lugar real (20 km al norte), el mapa general amontonaba el pueblo. `PlacesMap` ahora encuadra el pueblo en listas largas, y `/mapa` se reencuadra al filtrar.
 
 ---
 
@@ -247,14 +270,16 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 | Pendiente | Quién |
 |---|---|
 | **Renovar el dominio** antes del 2 nov 2027 (conviene activar la renovación automática en Hostinger) | Tú |
-| Crear el buzón `contacto@tequismagico.com`, que usan los avisos legales | Tú (Hostinger) |
-| Cambiar el Root Directory del proyecto del panel (`tequis-magico`) a `web-admin` en Vercel. Después se pueden borrar los restos del scaffold en la raíz (ver `CLAUDE.md`) | Tú en Vercel, luego el código |
-| Verificar horarios, teléfonos y coordenadas de los ~36 lugares sin confirmar. Varios pines del centro están amontonados porque tienen coordenadas aproximadas | Llamar o visitar |
-| Pedir permiso escrito para las fotos tomadas de sitios de negocios (Freixenet, globos), que la web ya publica | Tú |
+| Copiar los respaldos fuera del VPS: hoy están en el mismo disco | Tú / proveedor |
+| Cambiar la contraseña de root y del correo, que son la misma, e instalar una llave SSH | Tú |
+| Pin exacto de Vuela en Globo, Parque Acuático El Oasis y Termas del Rey: OSM no los tiene, así que son aproximados | Datos |
+| Decidir si se pone otra analítica (Umami, Plausible) | Tú |
+| Borrar los restos del scaffold y de Vercel en la raíz (ver `CLAUDE.md`) | Código |
+| Verificar direcciones, horarios, teléfonos y coordenadas de los 28 lugares sin confirmar. Varios pines del centro están amontonados porque tienen coordenadas aproximadas | Llamar o visitar |
+| Pedir permiso escrito para las 25 fotos de K'puchinos, Viñedos Azteca, Sala Vivé, Vuela en Globo, Cava Bocanegra, Finca VAI y De Cote, que la web ya publica | Tú |
 | Confirmar la fecha de la "Fiesta de la Fundación" en la base (las fuentes dicen 24 jun, 24 jul o 25 jul) | Datos |
 | Revisión legal del aviso de privacidad y los términos | Abogado |
 | Link real del App Store en `/app` cuando se publique la app | Código |
 | Fotos reales para los lugares: hoy 17 restaurantes comparten la misma foto genérica | Tú / negocios |
-| Revisar y correr `database/databasefix_research_2026-11.sql` en Neon (viñedos, La Redonda, 11 lugares que no existen) | Tú |
-| Dar de alta lugares reales que encontró la investigación (De Cote, Cava Bocanegra, Finca VAI, mercados, balnearios; lista en `docs/datos/investigacion-guias-2026-11.md`) | Tú en el panel |
+| Dar de alta otros lugares reales de la investigación, si se confirman (Balneario La Vega, Quesos Quiroz, Granja Lavyn; lista en `docs/datos/investigacion-guias-2026-11.md`) | Tú en el panel |
 | Traducir en `web/lib/i18n/data-en.ts` cada lugar o evento nuevo (si no, sale en español en `/en`) | Código |

@@ -239,7 +239,10 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 - Cache offline de `Place` y `Event`
 - Favoritos y datos del usuario
 
-### Neon + Vercel (Backend real, no CloudKit):
+### Backend propio (no CloudKit)
+
+> Desde el 5 nov 2026 todo esto vive en nuestro VPS (`deploy/README.md`): PostgreSQL en lugar de Neon, disco en lugar de Vercel Blob, y el API en `https://panel.tequismagico.com/api`. Las menciones a Neon y Vercel en este documento son históricas.
+
 - Postgres en Neon es la base de datos principal (ver `database/databaseschema.sql`)
 - `web-admin/app/api/` (Next.js en Vercel) expone `GET/POST /api/places`, `GET/PUT/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/PUT/DELETE /api/events/[id]` (el `DELETE` es soft-delete: pone `is_active = false`)
 - La app sincroniza `Place` y `Event` desde ahí en cada arranque (`ServicesPlaceAPIService.swift`, `ServicesEventAPIService.swift` + `ContentView.swift`)
@@ -279,7 +282,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 3. **App Store Connect setup**
 4. **Privacy Policy y Terms of Service** — hay borrador (ver Legal), falta que las revise un abogado y llenar los `[placeholders]`
 5. **App Review guidelines compliance**
-6. Revisar que `web-admin`/Neon estén en un plan que aguante el tráfico real (hoy es la única fuente de datos de la app)
+6. Revisar que el VPS aguante el tráfico real (hoy es la única fuente de datos de la app)
 7. [x] Ícono de app real — hecho, es un placeholder simple; vale la pena encargar uno profesional antes del lanzamiento público
 8. Sin tests ni accesibilidad (VoiceOver/Dynamic Type) — no bloquea un MVP/TestFlight con pocos usuarios, pero sí conviene antes de un lanzamiento público más grande
 

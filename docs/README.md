@@ -11,7 +11,7 @@ Todo lo del proyecto en un solo lugar. Empieza por "El proyecto hoy" y luego ve 
 | [`negocio/propuesta-sitio-web.md`](negocio/propuesta-sitio-web.md) | Propuesta del sitio web público: mercado, competencia, modelo de negocio, arquitectura y plan por fases |
 | [`app-ios/roadmap.md`](app-ios/roadmap.md) | Estado completo y roadmap de la app iOS: qué está hecho, qué falta, bugs, auditoría, legal |
 | [`panel/panel-admin.md`](panel/panel-admin.md) | El panel de administración (`web-admin/`): qué hace, cómo se protege, cómo correrlo |
-| [`datos/base-de-datos.md`](datos/base-de-datos.md) | La base en Neon: archivos SQL, qué datos están verificados y cuáles no |
+| [`datos/base-de-datos.md`](datos/base-de-datos.md) | La base PostgreSQL: archivos SQL, qué datos están verificados y cuáles no |
 | [`datos/creditos-imagenes.md`](datos/creditos-imagenes.md) | Origen y licencia de cada foto (atribución obligatoria) |
 | [`datos/investigacion-guias-2026-11.md`](datos/investigacion-guias-2026-11.md) | Investigación con fuentes de las guías de la web: viñedos, queserías, familia, Bernal; lugares de la base que no existen |
 | [`historico/`](historico/) | Documentos viejos (catálogo original de los 50 lugares y setup inicial). **No reflejan el estado actual** |
@@ -29,30 +29,26 @@ Fuera de esta carpeta, a propósito:
 | Pieza | Dónde | Estado |
 |---|---|---|
 | App iOS | `Tequis Magico/` (Xcode, SwiftUI + SwiftData) | Funcional: mapa, explorar, eventos, favoritos, "cerca de mí", compartir con foto, Spotlight, Siri. Sin publicar en App Store |
-| Panel de admin | `web-admin/`, https://tequis-magico.vercel.app/admin | En producción. Contraseña única; CRUD de lugares y eventos, fotos, analytics, etiqueta "Sin verificar" |
+| Panel de admin | `web-admin/`, https://panel.tequismagico.com/admin | En producción. Contraseña única; CRUD de lugares y eventos, fotos, analytics, etiqueta "Sin verificar" |
 | API | `web-admin/app/api/` | En producción. Lectura pública (la usa la app), escritura con contraseña |
-| Base de datos | Neon (Postgres) | 47 lugares activos (11 verificados) y 17 eventos |
-| Fotos | Vercel Blob (`tequis-magico-photos`) + Wikimedia Commons | Genéricas por categoría con crédito, más algunas reales de negocios |
+| Base de datos | PostgreSQL 18 en nuestro VPS | 45 lugares activos (17 confirmados) y 17 eventos |
+| Fotos | Disco del VPS (`/srv/tequis/uploads`) + Wikimedia Commons | Genéricas por categoría con crédito; 7 negocios con fotos reales de su propia web |
 | Sitio web público | `web/` → https://tequismagico.com | **En línea** desde el 1 nov 2026. Mismos datos que la app (lee el mismo API). Estética y animaciones de turismo.gov.st; desde el 2 nov, información presentada como visitshropshire.co.uk (buscador, mega menú, "Explora" con lista + mapa, "Mi viaje" con ruta, pueblos cercanos) y diseño con las reglas anti-IA de tasteskill (ver [`web/plan-sitio-web.md`](web/plan-sitio-web.md) y [`web/bitacora.md`](web/bitacora.md)) |
 | App Android | — | **No existe** |
 
 ### Cuentas y servicios en uso
 - **GitHub**: `ElBeDev/tequisMagico` (un solo repo para todo).
-- **Vercel**, dos proyectos que se despliegan en cada push a `main`:
-  - `tequis-magico`: el panel (`web-admin/`).
-  - `tequis-magico-web`: el sitio público (`web/`, dominio `tequismagico.com`).
-- **Hostinger**: registro y DNS de `tequismagico.com` (vence el **2 nov 2027**).
+- **VPS** `72.60.173.175`: sitio, panel, API, base y fotos. Se despliega con `deploy/deploy.sh`; ver [`../deploy/README.md`](../deploy/README.md). **Vercel y Neon se dieron de baja el 5 nov 2026.**
+- **Hostinger**: registro y DNS de `tequismagico.com` (vence el **2 nov 2027**) y correo `hola@tequismagico.com`.
 - **OpenFreeMap**: teselas de los mapas de la web (gratis, sin cuenta).
-- **Neon**: base Postgres de producción.
-- **Vercel Blob**: store `tequis-magico-photos`.
 
 ### Lo más importante pendiente
 
-1. **Verificar ~36 lugares** que no tienen ninguna presencia en internet (llamar o visitar; usar el filtro del panel). La web ya está publicada, así que esos datos ya están a la vista de Google: es lo que más pesa.
+1. **Verificar 28 lugares** que no tienen ninguna presencia en internet (llamar o visitar; usar el filtro del panel). La web ya está publicada, así que esos datos ya están a la vista de Google: es lo que más pesa.
 2. **Permisos de las fotos reales de negocios**: se tomaron de sus sitios sin autorización escrita, y la web ya las publica.
 3. **Pendientes de la web** (detalle en [`web/bitacora.md`](web/bitacora.md#pendientes)):
-   - Crear el correo `contacto@tequismagico.com` (ya lo usan los legales y el botón para negocios del footer).
-   - Cambiar el Root Directory del panel a `web-admin` en Vercel.
+   - Copiar los respaldos fuera del VPS: hoy están en el mismo disco.
+   - Forma de desplegar sin llave manual, y borrar los restos de Vercel en la raíz del repo.
    - Renovar el dominio antes del 2 nov 2027.
 4. **Lo que depende de tus cuentas o decisiones**:
    - Apple Developer (publicar la app, universal links, push).
