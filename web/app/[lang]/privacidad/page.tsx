@@ -24,14 +24,13 @@ export default async function PrivacidadPage({ params }: PageProps<'/[lang]/priv
         <LegalSection title="Data we collect">
           <p>You can use this site without creating an account or giving us personal data. We don’t use advertising or tracking cookies.</p>
           <p>If you write to us, or if a business signs up with us, we receive the data you share: name, email and phone number.</p>
-          <p>Our hosting provider (Vercel) logs technical data about each visit, such as IP address and browser, to run and protect the site.</p>
-          <p>We also measure how many people visit each page and how fast it loads, with Vercel Web Analytics and Speed Insights. Those statistics are anonymous and aggregated: they don’t use cookies or let us know who you are.</p>
+          <p>Our server logs technical data about each visit, such as IP address and browser, to run and protect the site.</p>
         </LegalSection>
         <LegalSection title="What we use your data for">
           <p>To run and improve the site and the app, reply to your messages and manage the information businesses publish.</p>
         </LegalSection>
         <LegalSection title="Who we share data with">
-          <p>We don’t sell personal data. We use infrastructure providers (Vercel and Neon) to run the service, each with its own privacy policy.</p>
+          <p>We don’t sell personal data. We use a hosting provider to run the service, under its own privacy policy.</p>
         </LegalSection>
         <LegalSection title="Your ARCO rights">
           <p>
@@ -56,14 +55,13 @@ export default async function PrivacidadPage({ params }: PageProps<'/[lang]/priv
       <LegalSection title="Datos que recopilamos">
         <p>Este sitio se puede usar sin crear una cuenta ni darnos datos personales. No usamos cookies de publicidad ni de seguimiento.</p>
         <p>Si nos escribes, o si un negocio se registra con nosotros, recibimos los datos que nos compartas: nombre, correo y teléfono.</p>
-        <p>Nuestro proveedor de hospedaje (Vercel) registra datos técnicos de cada visita, como la dirección IP y el navegador, para operar y proteger el sitio.</p>
-        <p>También medimos cuántas personas visitan cada página y qué tan rápido carga, con Vercel Web Analytics y Speed Insights. Esas estadísticas son anónimas y agregadas: no usan cookies ni nos permiten saber quién eres.</p>
+        <p>Nuestro servidor registra datos técnicos de cada visita, como la dirección IP y el navegador, para operar y proteger el sitio.</p>
       </LegalSection>
       <LegalSection title="Para qué usamos tus datos">
         <p>Para operar y mejorar el sitio y la app, responder tus mensajes y gestionar la información que publican los negocios.</p>
       </LegalSection>
       <LegalSection title="Con quién compartimos datos">
-        <p>No vendemos datos personales. Usamos proveedores de infraestructura (Vercel y Neon) para operar el servicio, cada uno con sus propias políticas de privacidad.</p>
+        <p>No vendemos datos personales. Usamos un proveedor de hospedaje para operar el servicio, bajo sus propias políticas de privacidad.</p>
       </LegalSection>
       <LegalSection title="Derechos ARCO">
         <p>

@@ -134,7 +134,7 @@ enum PlaceAPIError: Error {
 
 enum PlaceAPIService {
     /// Panel de administración en Vercel (ver web-admin/ en la raíz del repo).
-    static let baseURL = URL(string: "https://tequis-magico.vercel.app/api")!
+    static let baseURL = URL(string: "https://panel.tequismagico.com/api")!
 
     static func fetchPlaces() async throws -> [PlaceDTO] {
         let url = baseURL.appendingPathComponent("places")

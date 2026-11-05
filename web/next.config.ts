@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
   experimental: { globalNotFound: true },
   // Las fotos son hotlink (igual que en la app) y se usan como <img> normales con los atributos
   // de lib/images.ts: las de Commons usan los tamaños de Wikimedia y solo las de OPTIMIZED_HOSTS
-  // pasan por el optimizador de Vercel.
+  // pasan por el optimizador de Next.
   images: {
     remotePatterns: OPTIMIZED_HOSTS.map((hostname) => ({ protocol: 'https' as const, hostname })),
   },

@@ -53,7 +53,7 @@ struct LegalTermsView: View {
                 }
 
                 LegalSection(title: "9. Contacto") {
-                    Text("Dudas sobre estos términos: [correo de contacto]")
+                    Text("Dudas sobre estos términos: hola@tequismagico.com")
                 }
             }
             .padding()
@@ -85,11 +85,11 @@ struct LegalPrivacyView: View {
                 }
 
                 LegalSection(title: "Con quién compartimos datos") {
-                    Text("No vendemos datos personales. Usamos proveedores de infraestructura (Vercel, Neon) para operar el backend, y Apple para distribución de la App y pagos — cada uno bajo sus propias políticas de privacidad.")
+                    Text("No vendemos datos personales. Usamos un proveedor de hospedaje para operar el backend, y Apple para distribución de la App y pagos — cada uno bajo sus propias políticas de privacidad.")
                 }
 
                 LegalSection(title: "Derechos ARCO") {
-                    Text("Tienes derecho a Acceder, Rectificar, Cancelar u Oponerte al tratamiento de tus datos personales. Para ejercerlos, escribe a [correo de contacto] indicando tu solicitud; responderemos en los plazos que marca la LFPDPPP.")
+                    Text("Tienes derecho a Acceder, Rectificar, Cancelar u Oponerte al tratamiento de tus datos personales. Para ejercerlos, escribe a hola@tequismagico.com indicando tu solicitud; responderemos en los plazos que marca la LFPDPPP.")
                 }
 
                 LegalSection(title: "Menores de edad") {
@@ -111,10 +111,10 @@ struct ContactView: View {
     var body: some View {
         List {
             Section {
-                Label("[correo@tequismagico.mx]", systemImage: "envelope")
+                Label("hola@tequismagico.com", systemImage: "envelope")
                 Label("[teléfono de contacto]", systemImage: "phone")
             } footer: {
-                Text("Reemplaza estos datos con tu correo/teléfono real antes de publicar — por ahora son marcadores de posición.")
+                Text("Reemplaza el teléfono con el real antes de publicar — por ahora es un marcador de posición.")
             }
         }
         .navigationTitle("Contacto")

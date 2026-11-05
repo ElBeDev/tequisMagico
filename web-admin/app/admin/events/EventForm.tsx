@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { upload } from '@vercel/blob/client';
+import { uploadImage } from '@/lib/uploadImage';
 
 export type EventFormValues = {
   id?: string;
@@ -67,11 +67,8 @@ export function EventForm({ initial }: { initial?: Partial<EventFormValues> }) {
     setError('');
     try {
       for (const file of files) {
-        const blob = await upload(file.name, file, {
-          access: 'public',
-          handleUploadUrl: '/api/upload',
-        });
-        setValues((v) => ({ ...v, images: [...v.images, blob.url] }));
+        const url = await uploadImage(file);
+        setValues((v) => ({ ...v, images: [...v.images, url] }));
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error al subir una imagen');

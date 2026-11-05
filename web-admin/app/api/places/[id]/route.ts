@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-import { Pool } from '@neondatabase/serverless';
+import { pool } from '@/lib/db';
 import { validatePlaceFields } from '@/lib/validation';
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 export async function GET(
   request: Request,

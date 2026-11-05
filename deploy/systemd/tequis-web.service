@@ -1,0 +1,18 @@
+[Unit]
+Description=Tequis Magico - sitio publico
+After=network.target tequis-panel.service
+
+[Service]
+User=tequis
+WorkingDirectory=/srv/tequis/web
+EnvironmentFile=/etc/tequis/web.env
+ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -H 127.0.0.1 -p 3000
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

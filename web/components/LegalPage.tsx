@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-export const CONTACT_EMAIL = 'contacto@tequismagico.com';
+export const CONTACT_EMAIL = 'hola@tequismagico.com';
 
 export function LegalPage({ title, subtitle, children }: { title: string; subtitle: string; children: ReactNode }) {
   return (

@@ -1,0 +1,7 @@
+[Unit]
+Description=Respaldo diario de Tequis Magico
+[Timer]
+OnCalendar=*-*-* 09:30:00 UTC
+Persistent=true
+[Install]
+WantedBy=timers.target

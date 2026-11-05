@@ -2,12 +2,12 @@
 // - Wikimedia Commons: srcset con los anchos estándar de Wikimedia, para que un celular no baje
 //   la versión de 1920 px. Con crossOrigin="anonymous" el navegador no guarda la cookie de
 //   seguimiento de Wikimedia (WMF-Uniq); Commons responde con Access-Control-Allow-Origin: *.
-// - Sitios de negocios y Vercel Blob (fotos subidas desde el panel): pasan por el optimizador de
-//   imágenes de Vercel, que sí las reduce. Solo los hosts de OPTIMIZED_HOSTS; cualquier otro se
+// - Sitios de negocios y fotos subidas desde el panel: pasan por el optimizador de imágenes de
+//   Next, que sí las reduce. Solo los hosts de OPTIMIZED_HOSTS; cualquier otro se
 //   pide tal cual, porque el optimizador rechaza hosts que no estén en next.config.
 
 /** Hosts que pasan por `/_next/image`. next.config.ts arma `images.remotePatterns` con esta lista. */
-export const OPTIMIZED_HOSTS = ['vuelaenglobo.com', 'salavive.mx', '*.public.blob.vercel-storage.com'];
+export const OPTIMIZED_HOSTS = ['vuelaenglobo.com', 'salavive.mx', 'panel.tequismagico.com'];
 
 const COMMONS = /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/(?:thumb\/)?([0-9a-f]\/[0-9a-f]{2})\/([^/]+?\.(?:jpe?g|png|webp))(?:\/\d+px-[^/]+)?$/i;
 const COMMONS_WIDTHS = [500, 960, 1280, 1920];

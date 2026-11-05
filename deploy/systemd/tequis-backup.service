@@ -1,0 +1,6 @@
+[Unit]
+Description=Respaldo de Tequis Magico (base y fotos)
+[Service]
+Type=oneshot
+User=tequis
+ExecStart=/usr/local/bin/tequis-backup

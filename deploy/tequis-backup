@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+D=/srv/tequis/backups; S=$(date -u +%F)
+pg_dump -d tequis -Fc -f "$D/db-$S.dump"
+tar -C /srv/tequis -czf "$D/uploads-$S.tgz" uploads
+find "$D" -maxdepth 1 -type f \( -name 'db-*.dump' -o -name 'uploads-*.tgz' \) -mtime +14 -delete

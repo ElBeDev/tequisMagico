@@ -5,7 +5,7 @@
 import type { Lang } from './i18n';
 import { EVENTS_EN, PLACES_EN, SUBCATEGORIES_EN, TERMS_EN } from './i18n/data-en';
 
-const API_BASE = process.env.TEQUIS_API_URL ?? 'https://tequis-magico.vercel.app';
+const API_BASE = process.env.TEQUIS_API_URL ?? 'https://panel.tequismagico.com';
 
 // Cada cuántos segundos se vuelve a pedir al API (ISR). Lo que se edite en el panel tarda
 // como máximo esto en verse en la web.

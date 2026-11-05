@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Gilda_Display, Outfit } from "next/font/google";
 import Link from "next/link";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { notFound } from "next/navigation";
 import { SITE_NAME, SITE_URL, getEvents, getPlaces, todayInTequis } from "@/lib/data";
 import { dict } from "@/lib/dict";
@@ -18,11 +16,12 @@ import "../globals.css";
 const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"] });
 const gilda = Gilda_Display({ variable: "--font-gilda", subsets: ["latin"], weight: "400" });
 
-// Los dos idiomas se generan en el build; cualquier otro primer segmento es 404.
+// Los dos idiomas se generan en el build; cualquier otro primer segmento es 404 por el notFound()
+// del layout. No uses `dynamicParams = false` aquí: Next lo aplica a todas las rutas hijas, y un
+// lugar nuevo del panel daría 404 hasta volver a compilar.
 export function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }));
 }
-export const dynamicParams = false;
 
 export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
   const { lang } = await params;
@@ -109,7 +108,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
               <p className="mt-6 max-w-[40ch] text-lead leading-snug text-white/85">
                 {t.footerBusinessText}
               </p>
-              <a href={`mailto:contacto@tequismagico.com?subject=${encodeURIComponent(t.footerBusinessSubject)}`} className="btn mt-10">
+              <a href={`mailto:hola@tequismagico.com?subject=${encodeURIComponent(t.footerBusinessSubject)}`} className="btn mt-10">
                 {t.footerBusinessCta}
               </a>
             </div>
@@ -153,8 +152,6 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
             Tequisquiapan
           </p>
         </footer>
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );
