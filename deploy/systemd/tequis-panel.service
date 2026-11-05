@@ -8,6 +8,8 @@ User=tequis
 WorkingDirectory=/srv/tequis/web-admin
 EnvironmentFile=/etc/tequis/panel.env
 ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -H 127.0.0.1 -p 3100
+# Node sale con 143 al recibir SIGTERM: es un apagado normal, no un fallo.
+SuccessExitStatus=143
 Restart=always
 RestartSec=3
 NoNewPrivileges=true
