@@ -1,4 +1,4 @@
--- PROPUESTA (2026-11-02), NO APLICADA. Revisar antes de correr en Neon.
+-- APLICADA el 2026-11-05 en la base del VPS (los dos bloques).
 -- Sale de la investigación para las guías de tequismagico.com (fuentes en web/lib/guides.ts y
 -- en el resumen de abajo). Son dos bloques independientes: se puede correr uno y no el otro.
 
@@ -28,7 +28,7 @@ WHERE id = '3f47bf08-7a3d-4a3e-9aba-dc30785a0570';
 -- Viñedos La Redonda: operación suspendida desde dic-2025 por un conflicto legal (El Financiero,
 -- feb-2026); en nov-2026 su sitio dice "Estamos actualizando". Se quita de destacados y se
 -- marca como no confirmado hasta saber si reabrió. Dirección según queretaro.travel.
--- Las coordenadas (20.535, -99.885) siguen mal (caen en Tequis): falta ubicar el km 33.5.
+-- Las coordenadas (20.535, -99.885) caen en Tequis; se corrigen en databasefix_direcciones_2026-11-05.sql.
 UPDATE places SET
   address = 'Carr. San Juan del Río–Ezequiel Montes km 33.5, Ezequiel Montes',
   is_featured = false,

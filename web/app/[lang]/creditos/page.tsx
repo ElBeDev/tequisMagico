@@ -17,8 +17,8 @@ export default async function CreditosPage({ params }: PageProps<'/[lang]/credit
     <>
       <PageIntro title={en ? 'Photo credits' : 'Créditos de las fotos'}>
         {en
-          ? 'The photos on this site come from Wikimedia Commons under Creative Commons licenses that require crediting the author. Some place photos are representative of their category, and those of a few featured businesses come from their official website.'
-          : 'Las fotos de este sitio vienen de Wikimedia Commons bajo licencias Creative Commons que piden dar crédito a su autor. Algunas fotos de lugares son representativas de su categoría, y las de algunos negocios destacados vienen de su sitio oficial.'}
+          ? 'The photos on this site come from Wikimedia Commons under Creative Commons licenses that require crediting the author. Some place photos are representative of their category, and those of some businesses come from their own website.'
+          : 'Las fotos de este sitio vienen de Wikimedia Commons bajo licencias Creative Commons que piden dar crédito a su autor. Algunas fotos de lugares son representativas de su categoría, y las de algunos negocios vienen de su propia web.'}
       </PageIntro>
       <ul className="frame grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
         {photos.map((c) => (

@@ -42,7 +42,7 @@ export const GUIDES_EN: Guide[] = [
           'Time for basketry. The Telésforo Trejo market, near the plaza, has more than 60 stalls on two floors: willow switch, sabino root, opal and textiles from Bernal. The Tequesquicalli, on Independencia, is the oldest crafts market. And the Parador Artesanal, next to the bus terminal, is open only on Saturdays, Sundays and holidays.',
           'For lunch in the center, try Querétaro food: ayocotadas, enmoladas and mole de olla. If you don’t want to walk any more, the tourist trolley takes an hour to an hour and a half to tour the town; it runs Friday to Sunday, leaving between 11 a.m. and 5 p.m.',
         ],
-        places: ["K'puchinos Restaurant"],
+        places: ["K'puchinos Restaurant", 'Mercado Artesanal Telésforo Trejo'],
         tip: 'Bring cash for the markets and, if you plan to buy cheese on Sunday, a cooler in the car.',
         photo: PHOTOS.mercadoTequesquicalli,
         photoAlt: 'The Tequesquicalli crafts market',
@@ -156,7 +156,7 @@ export const GUIDES_EN: Guide[] = [
           'Los Rosales is the closest to town, about ten minutes away. It has had a vineyard for more than forty years but has made its own wine only since 2011; its oldest vine came from Bordeaux. It doesn’t publish opening hours: call before you go.',
           'Viñedos La Redonda, one of the oldest in the region (1975) and known for its harvest festival with grape stomping, suspended operations in late 2025 because of a legal dispute. Before going, check whether it has reopened.',
         ],
-        places: ['Los Rosales Viñedos'],
+        places: ['Bodegas De Cote', 'Los Rosales Viñedos'],
       },
       {
         id: 'queserias',
@@ -164,8 +164,9 @@ export const GUIDES_EN: Guide[] = [
         paragraphs: [
           'The [Cava de Quesos Bocanegra](https://www.cavabocanegra.com/), on state highway 200, was the first cheese cellar in Tequis. It ages the European-recipe cheeses of the Néole brand. The visit lasts 40 minutes, leaves every hour from 10 a.m. to 4 p.m. and can be done with wine, beer or no drink; children under five are free.',
           '[Finca VAI](https://www.quesosvai.com/) is half an hour away, at kilometer 30 of the toll-free highway to Querétaro (already in the municipality of Colón). It is a family ranch: you see the cows, goats and sheep, the factory and the aging cellar, and there is a tasting at the end. Small groups don’t need to book.',
-          'Without leaving the center, Quesos Quiroz has sold cheese on Andador Morelos since 1972, and in the surrounding area there are French-style goat cheeses, such as those from [La Biquette](https://labiquette.mx).',
+          'Without leaving the center, Quesos Quiroz has sold cheese on Andador Morelos since 1972.',
         ],
+        places: ['Cava de Quesos Bocanegra', 'Finca VAI'],
         photo: PHOTOS.feriaQuesoVino,
         photoAlt: 'Stalls at the Cheese and Wine Fair',
       },

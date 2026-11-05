@@ -1,4 +1,4 @@
-// English translations of the content that comes from the API (Neon), keyed by id.
+// English translations of the content that comes from the API, keyed by id.
 // Generated on 2026-11-02 from the live API. Places/events added later fall back to Spanish.
 
 export type PlaceEn = { shortDescription: string; fullDescription: string; schedule?: Record<string, string> };
@@ -211,6 +211,42 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Budget hotel downtown',
     fullDescription: 'Simple, clean hotel in the heart of the historic center. Ideal for travelers on a tight budget. Basic rooms with private bathroom.',
   },
+  'ae31efd3-81cc-5ac7-92b5-66e8172ea106': { // Cava de Quesos Bocanegra
+    shortDescription: "The first cheese cave in Tequis",
+    fullDescription: "Underground cave where artisan European-style cheeses from the NéOle label are aged. The 40-minute cave tour leaves every hour from 10 am to 4 pm, every day; booking is recommended. There is also a restaurant.",
+  },
+  'eba5f710-5769-5afa-b66c-80006c114be2': { // Finca VAI
+    shortDescription: "Family cheese ranch with tours",
+    fullDescription: "Cheese ranch with a family history dating back to the 1920s. The cheese tour includes the livestock, the factory, the aging cellar and a guided tasting. Small groups don’t need to book; groups of more than 10 do. It is half an hour from Tequis, in the municipality of Colón.",
+  },
+  'd020202d-8a87-58a6-b976-1d667512b13a': { // Bodegas De Cote
+    shortDescription: "Winery in the Bernal Valley",
+    fullDescription: "Winery with more than 50 hectares and 21 grape varieties. It offers tours on foot, by bike and by train, tastings, a Gran Reserva option and grape stomping. Prices aren’t published, so ask when you book.",
+  },
+  '03169b97-2087-5a89-a88c-0072c7763de5': { // Mercado Artesanal Telésforo Trejo
+    shortDescription: "More than 60 craft stalls",
+    fullDescription: "Two-story craft market near the main square, with more than 60 stalls: willow, sabino root, opals and textiles from Bernal. Bring cash.",
+  },
+  '00741d5f-5250-54de-b19c-d99f65468f6a': { // Mercado Tequesquicalli
+    shortDescription: "The oldest craft market",
+    fullDescription: "The oldest craft market in Tequis, and also the smallest. Bring cash.",
+  },
+  '20fafbc6-b72f-5792-9ac2-4daff496c70c': { // Mercado Guadalupano Municipal
+    shortDescription: "Fruit, vegetables and regional food",
+    fullDescription: "Municipal market with fruit, vegetables and regional food, a good place for breakfast. Bring cash.",
+  },
+  '8cf3c98a-c27c-53f8-84f2-b0873b69ab34': { // Parador Artesanal Luis Donaldo Colosio
+    shortDescription: "About 600 stalls and a food corridor",
+    fullDescription: "Market with about 600 craft stalls and a street food corridor, next to the bus station. It only opens on Saturdays, Sundays, long weekends and holidays.",
+  },
+  '04332bc5-6b65-5067-80bb-bd6d1562e941': { // Parque Acuático El Oasis
+    shortDescription: "Thermal pools at 36 °C",
+    fullDescription: "Water park with thermal pools at 36 °C. In the fall it opens Friday to Sunday; check days and prices before you go.",
+  },
+  'edf8fd31-93ef-5673-8ad5-7341d6fae02d': { // Termas del Rey
+    shortDescription: "Water park with 13 pools",
+    fullDescription: "Water park with 13 pools, waterslides and a children’s area. Opening days change with the season; check before you go.",
+  },
 };
 
 export const EVENTS_EN: Record<string, EventEn> = {
@@ -362,6 +398,7 @@ export const SUBCATEGORIES_EN: Record<string, { singular: string; plural: string
 
 /** Any other short Spanish string shown in the UI: every amenity, every tag, every event category. Key = exact Spanish text. */
 export const TERMS_EN: Record<string, string> = {
+  'Restaurante': 'Restaurant',
   'Accesible': 'Accessible',
   'Aguachile': 'Aguachile',
   'Aguas termales': 'Hot springs',

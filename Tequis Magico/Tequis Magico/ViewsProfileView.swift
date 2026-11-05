@@ -195,6 +195,7 @@ private let photoCredits: [PhotoCredit] = [
     PhotoCredit(title: "Tequis Hotel Pool", author: "Carl Campbell", license: "CC BY 2.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Tequis_Hotel_Pool_(4)_-_Flickr_-_Carl_Campbell.jpg")!),
     PhotoCredit(title: "Gastronomía mexicana", author: "Enrique Damián", license: "CC BY-SA 4.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Gastronom%C3%ADa_mexicana.jpg")!),
     PhotoCredit(title: "Artesanías en Tequisquiapan", author: "WikiMZC", license: "CC BY-SA 4.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Artesan%C3%ADas_en_Tequisquiapan.jpg")!),
+    PhotoCredit(title: "Mercado de Artesanías Tequesquicalli", author: "Thelmadatter", license: "CC BY-SA 4.0", fileURL: URL(string: "https://commons.wikimedia.org/wiki/File:Tequis009.jpg")!),
 ]
 
 struct PhotoCreditsView: View {

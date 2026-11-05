@@ -76,7 +76,7 @@ export const GUIDES: Guide[] = [
           'Es la hora de la cestería. El Telésforo Trejo, cerca de la plaza, tiene más de 60 locales en dos pisos: vara de sauz, raíz de sabino, ópalo y textiles de Bernal. El Tequesquicalli, en Independencia, es el mercado de artesanías más antiguo. Y el Parador Artesanal, junto a la terminal de autobuses, solo abre sábados, domingos y festivos.',
           'Para comer en el centro, comida queretana: ayocotadas, enmoladas y mole de olla. Si no quieres caminar más, el tranvía turístico hace un recorrido de una hora a hora y media por el pueblo; sale de viernes a domingo entre las 11 y las 17 h.',
         ],
-        places: ["K'puchinos Restaurant"],
+        places: ["K'puchinos Restaurant", 'Mercado Artesanal Telésforo Trejo'],
         tip: 'Lleva efectivo para los mercados y, si vas a comprar queso el domingo, una hielera en el auto.',
         photo: PHOTOS.mercadoTequesquicalli,
         photoAlt: 'Mercado de Artesanías Tequesquicalli',
@@ -190,7 +190,7 @@ export const GUIDES: Guide[] = [
           'Los Rosales es el más cercano al pueblo, a unos diez minutos. Lleva más de cuarenta años con viñedo pero hace vino propio solo desde 2011; su vid más vieja vino de Burdeos. No publica horarios: llama antes de ir.',
           'Viñedos La Redonda, de los más antiguos de la región (1975) y famoso por su vendimia con pisado de uva, suspendió su operación a fines de 2025 por un conflicto legal. Antes de ir, confirma si ya reabrió.',
         ],
-        places: ['Los Rosales Viñedos'],
+        places: ['Bodegas De Cote', 'Los Rosales Viñedos'],
       },
       {
         id: 'queserias',
@@ -198,8 +198,9 @@ export const GUIDES: Guide[] = [
         paragraphs: [
           'La [Cava de Quesos Bocanegra](https://www.cavabocanegra.com/), sobre la carretera estatal 200, fue la primera cava de quesos de Tequis. Ahí maduran los quesos de receta europea de la marca Néole. La visita dura 40 minutos, sale cada hora de 10 a 16 h y se puede hacer con vino, cerveza o sin bebida; los menores de cinco años no pagan.',
           '[Finca VAI](https://www.quesosvai.com/) queda a media hora, en el kilómetro 30 de la carretera libre a Querétaro (ya en el municipio de Colón). Es un rancho familiar: se ven las vacas, cabras y borregas, la fábrica y el sótano de maduración, y al final hay degustación. Los grupos pequeños no necesitan reservar.',
-          'Sin salir del centro, Quesos Quiroz vende queso en el Andador Morelos desde 1972, y en los alrededores hay quesos de cabra al estilo francés, como los de [La Biquette](https://labiquette.mx).',
+          'Sin salir del centro, Quesos Quiroz vende queso en el Andador Morelos desde 1972.',
         ],
+        places: ['Cava de Quesos Bocanegra', 'Finca VAI'],
         photo: PHOTOS.feriaQuesoVino,
         photoAlt: 'Puestos de la Feria del Queso y el Vino',
       },
