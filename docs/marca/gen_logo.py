@@ -2,7 +2,7 @@
 """Genera los SVG del logo de Tequisquiapan Mágico (el Globo). Ver docs/marca/README.md.
 
 Requiere: pip install fonttools uharfbuzz
-Uso, desde la raíz del repo: python3 docs/marca/gen_logo.py web/public/logo
+Uso, desde la raíz del repo: python3 docs/marca/gen_logo.py web/public/logo [carpeta para la app iOS]
 """
 import math
 import os
@@ -245,4 +245,14 @@ save('icono-verde', 1024, 1024, square, tile(FOREST, True, .84))
 save('icono-hueso', 1024, 1024, square, tile(BONE, False, .84))
 save('icono-maskable', 1024, 1024, square, tile(FOREST, True, .62))
 save('favicon-verde', 1024, 1024, square, tile(FOREST, True, .9, detail=False, rx=200))
+# Ícono de la app iOS: las tres apariencias, sin transparencia. Si se pasa una segunda carpeta.
+if len(sys.argv) > 2:
+    IOS = sys.argv[2]
+    os.makedirs(IOS, exist_ok=True)
+    gris = '<filter id="gris"><feColorMatrix type="saturate" values="0"/></filter>'
+    for name, body in (('icon-light', tile(FOREST, True, .84)),
+                       ('icon-dark', tile('#0d120b', True, .84)),
+                       ('icon-tinted', f'{gris}<g filter="url(#gris)">{tile("#000000", True, .84)}</g>')):
+        with open(os.path.join(IOS, f'{name}.svg'), 'w') as f:
+            f.write(f'<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="{square}">{body}</svg>\n')
 print('listo:', sorted(os.listdir(OUT)))
