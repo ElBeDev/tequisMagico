@@ -29,7 +29,7 @@ Fuera de esta carpeta, a propósito:
 
 | Pieza | Dónde | Estado |
 |---|---|---|
-| App iOS | `Tequis Magico/` (Xcode, SwiftUI + SwiftData) | Funcional: mapa, explorar, eventos, favoritos, "cerca de mí", compartir con foto, Spotlight, Siri. Sin publicar en App Store |
+| App iOS | `Tequis Magico/` (Xcode, SwiftUI + SwiftData) | Funcional: mapa, explorar, eventos, favoritos, "cerca de mí", compartir con foto, Spotlight, Siri. En el iPhone se llama "Tequis Mágico", pide iOS 18 o mayor y lleva el Globo de ícono. Sin publicar en App Store |
 | Panel de admin | `web-admin/`, https://panel.tequismagico.com/admin | En producción. Contraseña única; CRUD de lugares y eventos, fotos, analytics, etiqueta "Sin verificar" |
 | API | `web-admin/app/api/` | En producción. Lectura pública (la usa la app), escritura con contraseña |
 | Base de datos | PostgreSQL 18 en nuestro VPS | 45 lugares activos (17 confirmados) y 17 eventos |
@@ -45,7 +45,7 @@ Fuera de esta carpeta, a propósito:
 
 ### Lo más importante pendiente
 
-1. **Verificar 28 lugares** que no tienen ninguna presencia en internet (llamar o visitar; usar el filtro del panel). La web ya está publicada, así que esos datos ya están a la vista de Google: es lo que más pesa.
+1. **Verificar 28 lugares** sin confirmar: 26 sin web propia y 2 balnearios que solo salen en prensa (llamar o visitar; usar el filtro del panel). La web ya está publicada, así que esos datos ya están a la vista de Google: es lo que más pesa.
 2. **Permisos de las fotos reales de negocios**: se tomaron de sus sitios sin autorización escrita, y la web ya las publica.
 3. **Pendientes de la web** (detalle en [`web/bitacora.md`](web/bitacora.md#pendientes)):
    - Copiar los respaldos fuera del VPS: hoy están en el mismo disco.
@@ -59,10 +59,10 @@ Fuera de esta carpeta, a propósito:
    - Registro de marca en el IMPI.
    - Revisión legal de Términos y Privacidad.
 5. **Técnico menor**:
+   - Probar la app en un iPhone o simulador con iOS 18 antes de publicarla: en esa versión solo se ha comprobado compilando.
    - Vista para reactivar lugares desactivados en el panel.
    - Contador de vistas y favoritos que nunca se incrementa.
    - Tests.
    - Accesibilidad.
-   - Ícono de la app iOS: todavía es el globo anterior (ver [`marca/README.md`](marca/README.md)).
 
 El detalle de cada punto está en [`app-ios/roadmap.md`](app-ios/roadmap.md).

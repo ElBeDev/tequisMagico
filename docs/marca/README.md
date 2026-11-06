@@ -14,6 +14,10 @@ El logo de Tequisquiapan Mágico es un globo redondo con un gajo por cada cosa q
 
 No es el logo oficial de Pueblos Mágicos, que es un rehilete de SECTUR con su propio manual de uso, ni la marca "Tequis te quiere" del Patronato de Turismo. No uses ni imites esas marcas.
 
+## Nombre
+
+El nombre completo es **Tequisquiapan Mágico**. Donde no cabe, como en el iPhone o al instalar el sitio, es **Tequis Mágico**, siempre con acento.
+
 ## Qué archivo usar
 
 Todo está en [`web/public/logo/`](../../web/public/logo/). El nombre va en trazos, así que los SVG no dependen de ninguna fuente.
@@ -63,7 +67,18 @@ Los PNG y `favicon.ico` se exportan después desde esos SVG, y hay que copiar a 
 - `web/assets/logo-globo.png`, para la imagen que se comparte en redes
 - `web-admin/public/logo/`, `web-admin/app/favicon.ico` y `web-admin/app/icon.svg`
 
+Para el ícono de la app iOS, pasa una segunda carpeta al generador. Salen tres SVG, que hay que exportar a PNG de 1024 × 1024 **sin transparencia** (el App Store rechaza el ícono principal si la tiene) y copiar a `Tequis Magico/Tequis Magico/Assets.xcassets/AppIcon.appiconset/`:
+
+```
+python3 docs/marca/gen_logo.py web/public/logo carpeta-ios
+```
+
+| Archivo | Cuándo lo usa iOS | Fondo |
+|---|---|---|
+| `icon-light.png` | Modo claro | Verde bosque |
+| `icon-dark.png` | Modo oscuro | Verde casi negro |
+| `icon-tinted.png` | Modo teñido: iOS lo pinta del color que elija el usuario | Negro, globo en grises |
+
 ## Pendiente
 
-- El ícono de la app iOS todavía es el globo anterior.
 - Antes de registrar la marca en el IMPI, hay que hacer una búsqueda de marcas y revisar que no choque con "Tequis te quiere" ni con el programa Pueblos Mágicos.

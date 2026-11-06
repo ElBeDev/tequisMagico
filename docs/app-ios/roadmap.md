@@ -38,10 +38,11 @@
    - ✅ Fotos con reintento automático y caché en memoria (`RetryableAsyncImage` + `ImageCache`)
    - ✅ Pull to refresh, loading state inicial y aviso de "sin conexión" en Explorar/Eventos/mapa
    - ✅ Rutas temáticas (Vino y Queso, Artesanal, Histórica, Aventura) en Explorar
-   - ✅ Siri/App Shortcuts: "busca lugares en Tequis Magico", "qué eventos hay hoy en Tequis Magico"
+   - ✅ Siri/App Shortcuts: "busca lugares en Tequis Mágico", "qué eventos hay hoy en Tequis Mágico"
    - ✅ Términos, Privacidad y Contacto con contenido real (borrador, ver sección Legal)
-   - ✅ Ícono de app real (antes vacío — bloqueaba archivar para App Store)
-   - ✅ Horarios (`schedule_json`) sincronizados y mostrados en `PlaceDetailView` — 7 de 50 lugares ya tienen horario real investigado y verificado, el resto sigue pendiente (ver sección "Datos Reales")
+   - ✅ Ícono de app: el Globo, en claro, oscuro y teñido (antes vacío — bloqueaba archivar para App Store)
+   - ✅ Nombre en el iPhone: "Tequis Mágico", con acento (`INFOPLIST_KEY_CFBundleDisplayName`)
+   - ✅ Horarios (`schedule_json`) sincronizados y mostrados en `PlaceDetailView` — 14 de 45 lugares activos ya tienen horario (13 de ellos confirmados), el resto sigue pendiente (ver sección "Datos Reales")
    - ✅ "Cerca de mí" (mapa + Explorar), activo solo si de verdad estás cerca de Tequisquiapan
 
 ---
@@ -49,15 +50,15 @@
 ## 🚀 Cómo Ejecutar la App
 
 ### Requisitos:
-- Xcode 16.0+
-- iOS 18.0+
+- Xcode 16.0+ (hoy se compila con Xcode 27.1)
+- iOS 18.0 o mayor. Es el mínimo real desde el 5 nov 2026 (antes pedía 26.5). Compila sin avisos, pero solo se ha probado corriendo en simuladores con iOS 26.3 y 26.5: esta Mac no tiene uno de iOS 18
 - Mac con macOS Sonoma o superior
 
 ### Pasos:
 1. Abre el proyecto en Xcode
-2. Selecciona un simulador (iPhone 16 recomendado)
+2. Selecciona un simulador de iPhone
 3. Presiona Cmd + R para ejecutar
-4. La app se abrirá mostrando el mapa de Tequisquiapan con lugares de ejemplo
+4. La app se abrirá y sincronizará los lugares y eventos desde `https://panel.tequismagico.com/api`
 
 ---
 
@@ -95,11 +96,11 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 2. **Imágenes Reales**
    - [x] Foto representativa por categoría/subcategoría en los 50 lugares y 17 eventos (Wikimedia Commons, con crédito — ver `docs/datos/creditos-imagenes.md` y Perfil → Créditos de fotos)
    - [x] Foto real del negocio (no genérica) para 4 de los 6 lugares destacados — revisado a mano en el sitio oficial de cada uno, nunca de Google Maps (viola sus términos de servicio) ni de redes sociales (no es escrapeable de forma confiable)
-   - [x] Vercel Blob conectado (`tequis-magico-photos`) — el panel ya sube fotos reales desde el formulario de editar lugar. Sigue faltando que cada negocio pueda subir la suya (necesita login por negocio, ver Fase 2)
+   - [x] Subida de fotos desde el formulario de editar lugar del panel, al disco del VPS desde el 5 nov 2026. Sigue faltando que cada negocio pueda subir la suya (necesita login por negocio, ver Fase 2)
 
 3. **Datos Reales**
-   - [x] 50 lugares reales de Tequisquiapan cargados en Neon (ver `database/databaseseed_part*.sql`)
-   - [x] 17 eventos reales cargados en Neon (ver `database/databaseseed_events*.sql`, incluye info tomada de tequis.travel)
+   - [x] 50 lugares en la carga inicial (`database/databaseseed_part*.sql`); hoy son 45 activos y 17 confirmados (ver `docs/datos/base-de-datos.md`)
+   - [x] 17 eventos reales cargados en la base (ver `database/databaseseed_events*.sql`, incluye info tomada de tequis.travel)
    - [x] Fotos representativas por categoría en los 50 lugares y 17 eventos (Wikimedia Commons, ver `docs/datos/creditos-imagenes.md`)
    - [x] `schedule_json` (horarios) ya se sincroniza y se muestra en la app; el panel ya tiene el campo para capturarlo
    - [x] Investigación en internet (teléfono/sitio web/horario) para los 50 lugares — workflow de agentes con research + validación cruzada por lugar. Resultado: 7 lugares con datos nuevos confirmados y ya aplicados en Neon (Viñedos La Redonda, Freixenet México, Templo de Santa María de la Asunción, Viñedos Azteca, La Pila, Parque La Pila, K'puchinos — este último con teléfono corregido, el que había en la BD no era el del sitio oficial)
@@ -113,7 +114,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
    - [ ] **Hotel Posada Tequisquiapan**: existe una "Posada Tequisquiapan" indexada pero en Moctezuma 6 (no 8) y con teléfono 414-273-0010 (no 414-273-0021). No se tocó porque no es seguro que sea el mismo negocio — confirmar llamando
 
 4. **Backend Básico**
-   - [x] API REST en `web-admin/app/api/places` y `web-admin/app/api/events` (Next.js + Neon), consumida por la app
+   - [x] API REST en `web-admin/app/api/places` y `web-admin/app/api/events` (Next.js + PostgreSQL), consumida por la app
    - [x] Sincronización de `Place` y `Event` al abrir la app (`ContentView.swift`), con upsert por `id`
    - [x] Manejo de lugares/eventos eliminados: si el API deja de devolverlos (soft-delete con `is_active`), la app borra su copia local
    - [x] Validación server-side en `POST`/`PUT` de `places`/`events` (`web-admin/lib/validation.ts`) — antes solo se checaba que existieran unos cuantos campos, no que fueran válidos (categoría real, lat/lng en rango, fechas coherentes)
@@ -155,7 +156,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 - [x] Portal web (`web-admin`, Next.js) — hoy es panel de admin único, no self-service por negocio
 - [x] Autenticación: `/admin` y las escrituras del API (`POST`/`PUT`/`DELETE`) están protegidas con contraseña compartida (`ADMIN_PASSWORD`, ver `web-admin/proxy.ts`). **No** hay todavía login por negocio individual — es un solo admin operando todo.
 - [x] CRUD real de lugares **y eventos**: crear y editar con formulario para ambos (antes eventos solo tenía API, había que usar curl)
-- [x] Upload de **varias** imágenes por lugar/evento vía Vercel Blob (`tequis-magico-photos`, store público) — galería con opción de elegir portada; la dependencia llevaba sin usarse desde que se creó el proyecto
+- [x] Upload de **varias** imágenes por lugar/evento al disco del VPS (`POST /api/upload`) — galería con opción de elegir portada
 - [x] Bug fix: `POST /api/places` nunca guardaba `thumbnail_url` (solo `image_urls`) — los lugares creados desde el panel salían sin foto en el mapa/lista de la app aunque sí tuvieran `image_urls`
 - [x] Dashboard de analytics básico: por categoría, por nivel de negocio, mejor calificados
 - [x] Validación server-side + delay fijo en login contra fuerza bruta (ver Bugs Conocidos)
@@ -185,8 +186,8 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
   - [ ] Widget de ruta del día
 
 - [x] **App Intents & Siri**
-  - [x] "Busca lugares/restaurantes en Tequis Magico" (`SearchPlacesIntent`, con parámetro de categoría opcional)
-  - [x] "Qué eventos hay hoy en Tequis Magico" (`TodayEventsIntent`)
+  - [x] "Busca lugares/restaurantes en Tequis Mágico" (`SearchPlacesIntent`, con parámetro de categoría opcional)
+  - [x] "Qué eventos hay hoy en Tequis Mágico" (`TodayEventsIntent`)
   - [x] Registrados como `AppShortcut` (`TequisMagicoShortcuts`) — verificado con un build limpio que Xcode extrae y entrena las frases (`ExtractAppIntentsMetadata`/`AppIntentsSSUTraining`)
   - [x] Integración con Spotlight — `SpotlightIndexer` reindexa los lugares activos (título, descripción, tags, dirección, miniatura) tras cada sync exitoso; tocar un resultado de búsqueda del sistema abre la hoja de detalle vía `CSSearchableItemActionType` en `ContentView`, misma ruta que el deep link
 
@@ -221,7 +222,7 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 - **Sin tests**: no hay target de Unit/UI Tests en Xcode ni `jest`/`vitest` en `web-admin/package.json`. Cero cobertura automatizada en todo el proyecto.
 - **Sin accesibilidad**: 0 usos de `accessibilityLabel`/`accessibilityHint` en toda la app, no se ha considerado Dynamic Type ni VoiceOver.
 - **`views_count`/`favorites_count` nunca se incrementan** (ni la app ni el panel) — confirmado, ya señalado con un aviso visible en `/admin/analytics`.
-- **Rate limiting real pendiente**: el delay fijo en el login (Fase 2) sube el costo de fuerza bruta pero no es rate-limiting de verdad (necesitaría Redis/Upstash o Vercel Firewall — infraestructura nueva, no solo código).
+- **Rate limiting real pendiente**: el delay fijo en el login (Fase 2) sube el costo de fuerza bruta pero no es rate-limiting de verdad (en el VPS se puede con `fail2ban` leyendo el log de Caddy; falta configurarlo).
 
 ### TODOs en el Código:
 ```swift
@@ -241,15 +242,15 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 
 ### Backend propio (no CloudKit)
 
-> Desde el 5 nov 2026 todo esto vive en nuestro VPS (`deploy/README.md`): PostgreSQL en lugar de Neon, disco en lugar de Vercel Blob, y el API en `https://panel.tequismagico.com/api`. Las menciones a Neon y Vercel en este documento son históricas.
+> Desde el 5 nov 2026 todo esto vive en nuestro VPS (`deploy/README.md`), con el API en `https://panel.tequismagico.com/api`. Antes estaba en Vercel y Neon.
 
-- Postgres en Neon es la base de datos principal (ver `database/databaseschema.sql`)
-- `web-admin/app/api/` (Next.js en Vercel) expone `GET/POST /api/places`, `GET/PUT/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/PUT/DELETE /api/events/[id]` (el `DELETE` es soft-delete: pone `is_active = false`)
+- PostgreSQL en el VPS es la base de datos principal (ver `database/databaseschema.sql`)
+- `web-admin/app/api/` (Next.js en el VPS) expone `GET/POST /api/places`, `GET/PUT/DELETE /api/places/[id]`, `GET/POST /api/events` y `GET/PUT/DELETE /api/events/[id]` (el `DELETE` es soft-delete: pone `is_active = false`)
 - La app sincroniza `Place` y `Event` desde ahí en cada arranque (`ServicesPlaceAPIService.swift`, `ServicesEventAPIService.swift` + `ContentView.swift`)
 - Los códigos de `category`/`price_range`/`business_tier` que da el API son cortos (`"turistico"`, `"moderate"`, `"premium"`) y no el `rawValue` de despliegue de los enums — por eso existen los `init?(dbValue:)` en `ModelsPlaceCategory.swift`, `ModelsPriceRange.swift` y `ModelsBusinessTier.swift`
 
 ### Storage de imágenes:
-- Vercel Blob (`tequis-magico-photos`, store público) conectado y en uso desde `web-admin/app/admin/places/PlaceForm.tsx` vía `@vercel/blob/client` (`/api/upload`)
+- Disco del VPS (`/srv/tequis/uploads`): `POST /api/upload` guarda lo que se sube desde `web-admin/app/admin/places/PlaceForm.tsx`, y Caddy lo sirve en `panel.tequismagico.com/uploads/`
 
 ---
 
@@ -272,9 +273,9 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 ## 📝 Notas Importantes
 
 ### Para el Portal Web:
-- Vive en `web-admin/` (Next.js), en el mismo repo que esta app pero es un deploy aparte en Vercel
-- Comparte el backend real (Neon) con esta app a través de `/api/places`
-- Convención de trabajo: los cambios de la app iOS se hacen directo en estos archivos de Xcode; los del panel/Vercel/Neon se manejan como cualquier proyecto Next.js normal en `web-admin/`
+- Vive en `web-admin/` (Next.js), en el mismo repo que esta app, y se despliega aparte con `deploy/deploy.sh panel`
+- Comparte el backend real (PostgreSQL en el VPS) con esta app a través de `/api/places`
+- Convención de trabajo: los cambios de la app iOS se hacen directo en estos archivos de Xcode; los del panel se manejan como cualquier proyecto Next.js normal en `web-admin/`
 
 ### Para Producción:
 1. **Cuenta de Apple Developer** ($99/año)
@@ -283,8 +284,9 @@ Tequis Magico/                        # raíz del repo interno (junto al .xcodep
 4. **Privacy Policy y Terms of Service** — hay borrador (ver Legal), falta que las revise un abogado y llenar los `[placeholders]`
 5. **App Review guidelines compliance**
 6. Revisar que el VPS aguante el tráfico real (hoy es la única fuente de datos de la app)
-7. [x] Ícono de app real — hecho, es un placeholder simple; vale la pena encargar uno profesional antes del lanzamiento público
-8. Sin tests ni accesibilidad (VoiceOver/Dynamic Type) — no bloquea un MVP/TestFlight con pocos usuarios, pero sí conviene antes de un lanzamiento público más grande
+7. [x] Ícono de app: el Globo, en sus tres apariencias (ver [`../marca/README.md`](../marca/README.md))
+8. Probar en un iPhone o simulador con iOS 18: el mínimo bajó a 18.0 y en esa versión solo se ha comprobado compilando
+9. Sin tests ni accesibilidad (VoiceOver/Dynamic Type) — no bloquea un MVP/TestFlight con pocos usuarios, pero sí conviene antes de un lanzamiento público más grande
 
 ### Legal:
 - [x] Términos y condiciones — **borrador** en `ViewsLegalViews.swift` (`LegalTermsView`), visible en Perfil. ⚠️ No es asesoría legal, tiene `[placeholders]` por llenar (nombre del responsable, contacto) y falta que un abogado lo revise antes de publicar.

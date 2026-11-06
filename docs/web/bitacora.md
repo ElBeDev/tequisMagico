@@ -4,17 +4,18 @@ Registro en orden de lo que se hizo para separar la web de la app, registrar y c
 
 ---
 
-## Resumen: qué tenemos (2 nov 2026)
+## Resumen: qué tenemos (5 nov 2026)
 
 | Pieza | Dónde | Estado |
 |---|---|---|
-| Sitio público | `web/` → https://tequismagico.com | En línea, se redespliega en cada push a `main` |
-| Proyecto de Vercel | `tequis-magico-web` (Root Directory `web`, Node 24) | Conectado a GitHub `ElBeDev/tequisMagico`, rama `main` |
+| Sitio público | `web/` → https://tequismagico.com | En línea. Se publica con `deploy/deploy.sh web`; un push a GitHub no publica nada |
+| Servidor | VPS `72.60.173.175` | Sitio, panel, API, base y fotos. Ver [`../../deploy/README.md`](../../deploy/README.md) |
 | Dominio | `tequismagico.com` en Hostinger | Registrado el 1 nov 2026, **vence el 2 nov 2027** |
-| DNS | Hostinger | `A @` y `CNAME www` apuntando a Vercel; `www` redirige al dominio sin www |
+| DNS | Hostinger | `A @` y `A panel` al VPS, `CNAME www` a `tequismagico.com`; `www` redirige al dominio sin www |
 | Datos | `GET /api/places` y `GET /api/events` del panel | Los mismos que usa la app iOS; la web se regenera cada 5 min |
 | Mapas | MapLibre + OpenFreeMap | Sin API key ni costo |
 | Fotos editoriales | Wikimedia Commons (`web/lib/photos.ts`) | 28 fotos con autor y licencia, listadas en `/creditos` |
+| Logo | El Globo | Ver [`../marca/README.md`](../marca/README.md) |
 | Diseño | Estética de turismo.gov.st, información estilo visitshropshire.co.uk, reglas de tasteskill v2 | Ver secciones 5 a 10 y `plan-sitio-web.md` §6c |
 
 ---
@@ -271,7 +272,9 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 
 - **Sitio:** encabezado, menú de celular, pie, páginas de error, favicon, ícono para iPhone, manifest para instalar el sitio, imagen para compartir y logo en los datos para Google.
 - **Panel:** el título seguía siendo "Create Next App", con el ícono de Next y un emoji de templo. Ya lleva el logo, y se le agregó `noindex`.
+- **App iOS:** ícono nuevo en sus tres apariencias (claro, oscuro y teñido). Se probó en un simulador con iOS 26.5, y la app abrió leyendo los datos del VPS.
 - **Bug encontrado:** `usePathname()` devuelve `/es/...` en español. Desde que se agregó el inglés, el botón EN daba 404 en todas las páginas en español, el header nunca iba transparente sobre las fotos y los filtros de los listados arrastraban `/es`. Se corrigió con `visiblePath()`.
+- **Nombre y versión mínima de la app:** en el iPhone salía "Tequis Magico", sin acento, y el proyecto pedía iOS 26.5, lo que dejaba fuera a cualquier iPhone con iOS 18 o con las primeras versiones de iOS 26. Ahora se llama "Tequis Mágico" y pide iOS 18.0. Compila sin errores ni avisos de disponibilidad y abre en un simulador con iOS 26.3, que antes rechazaba la instalación, con el Globo y los datos del VPS. No se probó corriendo en iOS 18, porque esta Mac no tiene ese simulador.
 - **Header sobre fotos:** al volver a ser transparente, el texto blanco no se leía sobre fotos claras, y se le agregó una sombra arriba que desaparece al bajar.
 
 ---
@@ -280,7 +283,6 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 
 | Pendiente | Quién |
 |---|---|
-| Cambiar el ícono de la app iOS por el Globo nuevo | Código |
 | Búsqueda de marcas antes de registrar el logo en el IMPI | Tú |
 | **Renovar el dominio** antes del 2 nov 2027 (conviene activar la renovación automática en Hostinger) | Tú |
 | Copiar los respaldos fuera del VPS: hoy están en el mismo disco | Tú / proveedor |
@@ -292,6 +294,8 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 | Pedir permiso escrito para las 25 fotos de K'puchinos, Viñedos Azteca, Sala Vivé, Vuela en Globo, Cava Bocanegra, Finca VAI y De Cote, que la web ya publica | Tú |
 | Confirmar la fecha de la "Fiesta de la Fundación" en la base (las fuentes dicen 24 jun, 24 jul o 25 jul) | Datos |
 | Revisión legal del aviso de privacidad y los términos | Abogado |
+| Probar la app en un iPhone o simulador con iOS 18 antes de publicarla, incluida la ficha de un lugar: en esa versión solo se comprobó compilando | Tú / Código |
+| Rehacer `web-admin/.env.local` para correr el panel en local: sigue apuntando a Neon (ver [`../panel/panel-admin.md`](../panel/panel-admin.md)) | Tú |
 | Link real del App Store en `/app` cuando se publique la app | Código |
 | Fotos reales para los lugares: hoy 17 restaurantes comparten la misma foto genérica | Tú / negocios |
 | Dar de alta otros lugares reales de la investigación, si se confirman (Balneario La Vega, Quesos Quiroz, Granja Lavyn; lista en `docs/datos/investigacion-guias-2026-11.md`) | Tú en el panel |

@@ -1,6 +1,6 @@
 # Base de datos (PostgreSQL)
 
-La base es PostgreSQL 18 y vive en nuestro VPS (solo escucha en local; el panel entra por socket). Hasta el 5 nov 2026 estuvo en la base. La usa el panel (`web-admin/`) y la consume la app iOS vía `GET /api/places` y `GET /api/events`. Los archivos SQL están en [`database/`](../../database/).
+La base es PostgreSQL 18 y vive en nuestro VPS (solo escucha en local; el panel entra por socket). Hasta el 5 nov 2026 estuvo en Neon. La usa el panel (`web-admin/`) y la consume la app iOS vía `GET /api/places` y `GET /api/events`. Los archivos SQL están en [`database/`](../../database/).
 
 ## Archivos
 

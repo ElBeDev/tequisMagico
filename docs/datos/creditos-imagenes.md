@@ -1,8 +1,8 @@
 # Créditos de fotos
 
-Todas las fotos de `places`/`events` vienen de Wikimedia Commons bajo licencias libres que exigen atribución. Son fotos **representativas por categoría** (p. ej. una foto genérica de "quesería" para todos los negocios de esa subcategoría), no necesariamente del negocio exacto — excepción hecha de las de la Plaza Miguel Hidalgo, la Iglesia y los globos, que sí son de Tequisquiapan/Querétaro específicamente.
+Las fotos de `places`/`events` son de dos tipos: genéricas de Wikimedia Commons (esta primera tabla) y reales de cada negocio, de su propia web (más abajo). Las de Commons tienen licencias libres que exigen atribución, y son **representativas por categoría** (p. ej. una foto genérica de "quesería" para todos los negocios de esa subcategoría), no necesariamente del negocio exacto — excepción hecha de las de la Plaza Miguel Hidalgo, la Iglesia y los globos, que sí son de Tequisquiapan/Querétaro específicamente.
 
-La app muestra el crédito agregado en Perfil → Créditos de fotos (`ViewsProfileView.swift`). La web (tequismagico.com) usa las mismas fotos de la base y, además, 16 fotos editoriales de Tequis (portada, historia, guía) que viven en `web/lib/photos.ts` con autor y licencia; todas aparecen solas en https://tequismagico.com/creditos. Si se reemplaza cualquiera de estas fotos por una real del negocio, hay que quitar su fila de aquí.
+La app muestra el crédito agregado en Perfil → Créditos de fotos (`ViewsProfileView.swift`). La web (tequismagico.com) usa las mismas fotos de la base y, además, 20 fotos editoriales, 16 de Tequis y 4 de pueblos cercanos (portada, historia, guía), que viven en `web/lib/photos.ts` con autor y licencia; todas aparecen solas en https://tequismagico.com/creditos. Si se reemplaza cualquiera de estas fotos por una real del negocio, hay que quitar su fila de aquí.
 
 | Foto | Autor | Licencia | Uso |
 |---|---|---|---|

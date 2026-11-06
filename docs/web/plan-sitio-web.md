@@ -77,7 +77,7 @@ Esto es **qué va** en cada página. El **cómo se ve** está en las secciones 6
 - **Mega menú:** al pasar el mouse por una sección se abre un panel con columnas de links y una tarjeta destacada con foto. Se arma con los datos reales en `web/lib/nav.ts`: subcategorías con su conteo (llevan a `/lugares/<categoria>?tipo=<subcategoría>`), próximos eventos y rutas. La tarjeta de Qué hacer / Comer / Dormir es un lugar destacado **con información confirmada**.
 - **Buscador** (`web/components/SearchDialog.tsx`): lugares, eventos y páginas, al instante mientras escribes; se abre con el botón, con `/` o con ⌘K. El índice se arma en el servidor (`web/lib/search.ts`) y la búsqueda corre en el navegador.
 - **En celular:** buscador y corazón arriba; las secciones van en el menú verde a pantalla completa.
-- **Footer** (verde bosque, en `web/app/layout.tsx`): título "¿Tienes un negocio en Tequis?" con botón de correo a `hola@tequismagico.com`, columnas de links (Explora, Útil), texto de la app, legales, la palabra gigante "Tequisquiapan" en salvia y la nota "Guía independiente; no es un sitio oficial del municipio".
+- **Footer** (verde bosque, en `web/app/[lang]/layout.tsx`): título "¿Tienes un negocio en Tequis?" con botón de correo a `hola@tequismagico.com`, columnas de links (Explora, Útil), texto de la app, legales, la palabra gigante "Tequisquiapan" en salvia y la nota "Guía independiente; no es un sitio oficial del municipio".
 - **Datos del header:** el layout pide lugares y eventos al API para armar el menú y el índice del buscador. Si el API falla, el header sale sin datos en vez de romper la página.
 
 ### Portada `/`
@@ -169,7 +169,7 @@ Lo que se puede mostrar sin tocar la base. Útil para que el diseño no pida cam
   - Título y descripción por página.
   - Datos estructurados de schema.org: `Restaurant`, `Hotel`, `Winery`, `Event`, etc.
   - Migas de pan, `sitemap.xml` y URL canónica.
-  - **Imagen para compartir** (`web/app/opengraph-image.tsx`): 1200×630 con "Tequisquiapan" en Gilda y la parroquia en arco, generada en el build. Las fichas de lugar y evento usan su propia foto.
+  - **Imagen para compartir** (`web/app/[lang]/opengraph-image.tsx`): 1200×630 con "Tequisquiapan" en Gilda, el Globo y la parroquia en arco, generada en el build. Las fichas de lugar y evento usan su propia foto.
   - Teléfono y horario solo van a los datos estructurados cuando `content_verified = true`.
 - **Fotos:** hotlink a Wikimedia Commons, igual que en la app, y fotos reales de negocios en nuestro servidor. Cada `<img>` toma sus atributos de `photoAttrs` (`web/lib/images.ts`): las de Commons llevan `srcset` con los anchos estándar de Wikimedia (500/960/1280/1920) y `crossOrigin="anonymous"` (sin la cookie de Wikimedia); las de los hosts de `OPTIMIZED_HOSTS` (sitios de negocios y Vercel Blob) pasan por el optimizador de Vercel. En celular, la portada bajó de 7.2 MB a 2.7 MB.
 - **Analítica:** ninguna desde el 5 nov 2026. La de Vercel solo funcionaba en Vercel y se quitó, junto con su mención en el aviso de privacidad. Search Console sigue activo.
