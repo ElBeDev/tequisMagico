@@ -361,9 +361,9 @@ export const EVENTS_EN: Record<string, EventEn> = {
   '016d54df-d9ee-4e15-9235-c590b1a5daa3': { // Enamórate en Tequisquiapan
     title: 'Fall in Love in Tequisquiapan',
     shortDescription: 'Romance, wine and tradition',
-    fullDescription: "February cultural program with wine tastings, a local artisans' market, workshops and concerts.",
+    fullDescription: "February cultural program with wine tastings, a local artisans' market, workshops and free concerts on Plaza Miguel Hidalgo. The 2027 dates are still to be confirmed; in 2026 it ran February 12–22.",
     locationName: 'Historic center',
-    organizerName: 'Tequisquiapan Municipal Government',
+    organizerName: 'Municipality of Tequisquiapan',
   },
   'bcf77b31-3282-46ce-865b-9898ff9576c2': { // Festival del Vino Joven
     title: 'Young Wine Festival',
@@ -376,8 +376,8 @@ export const EVENTS_EN: Record<string, EventEn> = {
   '8005da75-9255-44a0-8139-66a77d852970': { // Festival del Artesano: El Arte de Nuestras Raíces
     title: 'Artisan Festival: The Art of Our Roots',
     shortDescription: 'Exhibition of handmade pieces',
-    fullDescription: 'Exhibition of traditional handicrafts on Plaza Miguel Hidalgo, with pieces handmade by local artisans.',
-    organizerName: 'Tequisquiapan Municipal Government',
+    fullDescription: 'Exhibition and sale of traditional handicrafts on Plaza Miguel Hidalgo, with plant-fiber pieces handmade by local artisans, music and workshops. The 2027 dates are still to be confirmed; in 2026 it ran March 13–22.',
+    organizerName: 'Municipality of Tequisquiapan',
   },
   'f60345eb-e00a-4838-b375-4a3b528b7d26': { // Festival del Globo
     title: 'Balloon Festival',
@@ -389,9 +389,9 @@ export const EVENTS_EN: Record<string, EventEn> = {
   'a0fd09dd-2186-4f61-9fbf-6fe6e2f167bf': { // Espíritus de Primavera
     title: 'Spirits of Spring',
     shortDescription: 'Art and tradition of the equinox',
-    fullDescription: "Celebration of the spring equinox with cultural events, performances and an artisans' market.",
+    fullDescription: "Spring equinox celebration with a ritual, concerts and an artisans' market downtown. The 2027 dates are still to be confirmed (the equinox falls on Palm Sunday); in 2026 it was held March 21–22.",
     locationName: 'Historic center',
-    organizerName: 'Tequisquiapan Municipal Government',
+    organizerName: 'Municipality of Tequisquiapan',
   },
   'a25e9aa4-9ef1-4894-a9dd-6476a81a3daf': { // Semana Santa
     title: 'Holy Week (Semana Santa)',

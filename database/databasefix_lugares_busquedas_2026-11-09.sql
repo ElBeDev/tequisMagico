@@ -1,3 +1,4 @@
+-- APLICADA el 2026-11-09 en la base del VPS (los tres bloques), con respaldo previo en /root/respaldos/places-events-20261109.sql.
 -- Lugares para las búsquedas de Search Console (nov 2026), con docs/datos/investigacion-negocios-2026-11.md.
 -- Tres bloques independientes. Fotos: solo de la web propia de cada negocio, copiadas a
 -- /srv/tequis/uploads/lugares/ (créditos en docs/datos/creditos-imagenes.md). Los que no tienen web

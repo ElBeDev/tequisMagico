@@ -1,3 +1,4 @@
+-- APLICADA el 2026-11-09 en la base del VPS (los cuatro bloques), con respaldo previo en /root/respaldos/places-events-20261109.sql.
 -- Correcciones al calendario de eventos con docs/datos/investigacion-eventos-2027.md (9 nov 2026).
 -- Varios eventos de la carga inicial tenían fechas y detalles sin fuente. Aquí solo va lo que
 -- tiene fuente en ese documento. Tres bloques independientes. Después de aplicarlo, actualizar
@@ -138,5 +139,29 @@ VALUES ('a5268b28-7a17-4a1a-995e-62741c050395', $v$Temporada de vendimias$v$, $v
   ARRAY[$v$Vino$v$, $v$Vendimia$v$, $v$Gastronomía$v$]::text[],
   ARRAY[$v$https://upload.wikimedia.org/wikipedia/commons/8/8d/De_Cote_-_Casa_Vitivin%C3%ADcola_-_Olivos_y_Vi%C3%B1edos.jpg$v$]::text[],
   $v$https://upload.wikimedia.org/wikipedia/commons/8/8d/De_Cote_-_Casa_Vitivin%C3%ADcola_-_Olivos_y_Vi%C3%B1edos.jpg$v$, false, $v$Precio de cada viñedo$v$, false, NULL);
+
+COMMIT;
+
+-- =====================================================================================
+-- Bloque 4: eventos de 2027 sin anuncio oficial (decisión del 9 nov 2026: quedan con aviso)
+-- =====================================================================================
+-- Las fechas son de la carga inicial, sin fuente. Se quedan en el calendario, pero la descripción
+-- dice que están por confirmar y cuándo fue la edición 2026 (AlertaQro, feb y mar 2026).
+BEGIN;
+
+UPDATE events SET
+  full_description = $v$Programación cultural de febrero con catas de vino, mercado de artesanos locales, talleres y conciertos gratuitos en la Plaza Miguel Hidalgo. Las fechas de 2027 están por confirmar; en 2026 fue del 12 al 22 de febrero.$v$,
+  organizer_name = $v$Municipio de Tequisquiapan$v$, updated_at = NOW()
+WHERE id = '016d54df-d9ee-4e15-9235-c590b1a5daa3'; -- Enamórate en Tequisquiapan
+
+UPDATE events SET
+  full_description = $v$Muestra y venta de artesanías tradicionales en la Plaza Miguel Hidalgo, con piezas de fibras vegetales hechas a mano por artesanos locales, música y talleres. Las fechas de 2027 están por confirmar; en 2026 fue del 13 al 22 de marzo.$v$,
+  organizer_name = $v$Municipio de Tequisquiapan$v$, updated_at = NOW()
+WHERE id = '8005da75-9255-44a0-8139-66a77d852970'; -- Festival del Artesano
+
+UPDATE events SET
+  full_description = $v$Celebración del equinoccio de primavera con ritual, conciertos y mercadito de artesanos en el centro. Las fechas de 2027 están por confirmar (el equinoccio coincide con el Domingo de Ramos); en 2026 fue el 21 y 22 de marzo.$v$,
+  organizer_name = $v$Municipio de Tequisquiapan$v$, updated_at = NOW()
+WHERE id = 'a0fd09dd-2186-4f61-9fbf-6fe6e2f167bf'; -- Espíritus de Primavera
 
 COMMIT;
