@@ -14,7 +14,6 @@ export function proxy(request: NextRequest) {
 
   const url = request.nextUrl.clone();
 
-  // Solo llega aquí /es/opengraph-image (el og:image de las páginas en español).
   if (pathname === '/es' || pathname.startsWith('/es/')) return NextResponse.next();
 
   if (pathname === '/en' || pathname.startsWith('/en/')) {
@@ -33,12 +32,10 @@ function currentPath(pathname: string, search: string): string | null {
   let path = pathname;
   let query = search;
 
-  if (path === '/es' || path.startsWith('/es/')) {
-    // /es/... es la ruta interna del español, pero también respondía por fuera: un duplicado de
-    // cada página (los filtros la arrastraron del 2 al 5 nov 2026). El og:image sí va con /es.
-    if (path.startsWith('/es/opengraph-image')) return null;
-    path = path.slice(3) || '/';
-  } else if (path === '/en/es' || path.startsWith('/en/es/')) {
+  // /es/... NO se redirige: en el servidor, el rewrite de abajo sale como http://localhost:3000/es/...
+  // y Next lo trata como externo (se pide a sí mismo esa URL, que pasa otra vez por aquí). Redirigir
+  // /es → / ahí hace un ciclo infinito en todo el español (pasó el 9 nov 2026). Su canónica basta.
+  if (path === '/en/es' || path.startsWith('/en/es/')) {
     // Del 2 al 5 nov 2026 el botón EN de las páginas en español llevaba a /en/es/... (404).
     path = href('en', path.slice(6) || '/');
     query = query.replace('?tipo=', '?type=');
