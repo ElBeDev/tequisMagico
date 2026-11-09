@@ -40,6 +40,20 @@ export default async function EventoPage({ params }: PageProps<'/[lang]/evento/[
   if (!event) notFound();
   const status = eventStatus(event, todayInTequis());
   const hasLocation = event.latitude != null && event.longitude != null;
+  const pageUrl = `${SITE_URL}${href(lang, `/evento/${event.slug}`)}`;
+  // Precio solo de la base, lo mismo que dice la ficha: gratis → 0 (como lo pide Google) y "Desde
+  // $350" → 350. Sin precio ni boletos, no hay offers. No hay organizer.url, performer ni validFrom
+  // porque la base no los tiene: Search Console los marca como recomendados, pero no se inventan.
+  const price = event.isFree ? 0 : priceFrom(event.ticketPrice);
+  const offers =
+    price != null || event.ticketUrl
+      ? {
+          '@type': 'Offer',
+          url: event.ticketUrl ?? pageUrl,
+          ...(price != null && { price, priceCurrency: 'MXN' }),
+          availability: 'https://schema.org/InStock',
+        }
+      : undefined;
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -50,7 +64,7 @@ export default async function EventoPage({ params }: PageProps<'/[lang]/evento/[
     endDate: event.endDate,
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    url: `${SITE_URL}${href(lang, `/evento/${event.slug}`)}`,
+    url: pageUrl,
     inLanguage: lang === 'en' ? 'en' : 'es-MX',
     image: event.imageUrls.length ? event.imageUrls : undefined,
     isAccessibleForFree: event.isFree,
@@ -67,7 +81,7 @@ export default async function EventoPage({ params }: PageProps<'/[lang]/evento/[
       geo: hasLocation ? { '@type': 'GeoCoordinates', latitude: event.latitude, longitude: event.longitude } : undefined,
     },
     organizer: event.organizerName ? { '@type': 'Organization', name: event.organizerName } : undefined,
-    offers: event.ticketUrl ? { '@type': 'Offer', url: event.ticketUrl, availability: 'https://schema.org/InStock' } : undefined,
+    offers,
   };
 
   return (
@@ -149,4 +163,10 @@ export default async function EventoPage({ params }: PageProps<'/[lang]/evento/[
       </div>
     </article>
   );
+}
+
+/** Primera cifra de un precio escrito a mano ("Desde $350", "$1,200 por persona") o null. */
+function priceFrom(text: string | null): number | null {
+  const m = text?.match(/\d[\d,]*(?:\.\d+)?/);
+  return m ? Number(m[0].replace(/,/g, '')) : null;
 }
