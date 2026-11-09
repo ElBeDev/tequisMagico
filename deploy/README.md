@@ -51,3 +51,14 @@ Ver registros:
 journalctl -u tequis-web -n 50
 journalctl -u tequis-panel -n 50
 ```
+
+## Fotos de Wikimedia Commons
+
+El sitio sirve las fotos de Commons desde una copia en `/srv/tequis/uploads/commons` (Wikimedia limita a quien le pide muchas). Cuando se agrega un lugar o evento con foto de Commons, esa foto se pide directo a Wikimedia hasta copiarla:
+
+```sh
+node deploy/mirror-commons.mjs   # descarga solo las nuevas, despacio, y actualiza web/lib/commons-mirror.json
+rsync -a deploy/.commons-mirror/ root@72.60.173.175:/srv/tequis/uploads/commons/
+ssh root@72.60.173.175 chown -R tequis:tequis /srv/tequis/uploads/commons
+deploy/deploy.sh web
+```

@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Copia local de las fotos de Commons (deploy/mirror-commons.mjs); se sube al VPS, no al repo.
+deploy/.commons-mirror/
