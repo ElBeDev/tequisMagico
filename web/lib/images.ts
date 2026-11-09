@@ -10,9 +10,12 @@
 export const OPTIMIZED_HOSTS = ['vuelaenglobo.com', 'salavive.mx', 'panel.tequismagico.com'];
 
 const COMMONS = /^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/(?:thumb\/)?([0-9a-f]\/[0-9a-f]{2})\/([^/]+?\.(?:jpe?g|png|webp))(?:\/\d+px-[^/]+)?$/i;
-const COMMONS_WIDTHS = [500, 960, 1280, 1920];
-// Deben estar en `images.deviceSizes` de Next (estos son de la lista por defecto).
-const OPTIMIZER_WIDTHS = [640, 828, 1200, 1920];
+// Anchos estándar de las miniaturas de Wikimedia (250 y 330 sirven a las fotos chicas: miniaturas
+// de las listas y del mega menú, que antes bajaban la de 500).
+const COMMONS_WIDTHS = [250, 330, 500, 960, 1280, 1920];
+// Deben estar en `images.imageSizes` o `images.deviceSizes` de Next (estos son de las listas por
+// defecto). Los chicos son para las miniaturas: sin ellos, una foto de 64 px bajaba la de 640.
+const OPTIMIZER_WIDTHS = [128, 256, 384, 640, 828, 1200, 1920];
 
 /** `sizes` de las tarjetas en cuadrícula de 1, 2 o 3 columnas. */
 export const GRID_SIZES = '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw';

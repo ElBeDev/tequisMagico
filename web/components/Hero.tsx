@@ -35,16 +35,26 @@ export default function Hero({
   const [index, setIndex] = useState(0);
   const root = useRef<HTMLElement>(null);
   const reduced = useRef(false);
+  // Las fotos 2 en adelante se piden cuando ya cargó la primera (la segunda se ve a los 6.5 s). Si
+  // van en el HTML, React las precarga todas y en celular compiten con la primera, que es la que se ve.
+  const [restReady, setRestReady] = useState(false);
+  const firstImg = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    if (firstImg.current?.complete) setRestReady(true); // ya había cargado antes de hidratar
+  }, []);
 
   // Intro + parallax de scroll (una sola vez).
   useGSAP(
     () => {
       reduced.current = prefersReducedMotion();
       if (reduced.current) return;
+      // El título y el texto son el LCP de la portada: entran solo con movimiento, sin ocultarse
+      // (ni opacidad 0 ni recorte completo). Si se ocultan, Chrome no cuenta su pintado hasta que
+      // carga y corre este JS, y en celular el LCP pasaba de 5 s.
       gsap.timeline({ delay: 0.15 })
         .from('[data-hero-slide="0"] img', { scale: 1.3, duration: 2.4, ease: 'expo.out' })
-        .from('[data-hero-title] > span', { yPercent: 105, duration: 1.3, ease: 'expo.out' }, 0.3)
-        .from('[data-hero-lead]', { y: 24, autoAlpha: 0, duration: 1, ease: EASE }, 0.7)
+        .from('[data-hero-title] > span', { yPercent: 40, duration: 1.3, ease: 'expo.out' }, 0.3)
+        .from('[data-hero-lead]', { y: 24, duration: 1, ease: EASE }, 0.7)
         .from('[data-hero-ui], [data-hero-action]', { y: 24, autoAlpha: 0, duration: 1, ease: EASE, stagger: 0.08 }, 0.9);
 
       gsap.to('[data-hero-media]', {
@@ -82,10 +92,10 @@ export default function Hero({
 
     const tweens: gsap.core.Animation[] = [];
     if (!first) {
-      tweens.push(
-        gsap.fromTo(slide, { clipPath: 'inset(0% 0% 0% 100%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'expo.inOut' }),
-        gsap.fromTo(slide.querySelector('img'), { scale: 1.25 }, { scale: 1.05, duration: 2.6, ease: 'expo.out' }),
-      );
+      tweens.push(gsap.fromTo(slide, { clipPath: 'inset(0% 0% 0% 100%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'expo.inOut' }));
+      // Puede no estar todavía si tocan una barra antes de que cargue la primera foto.
+      const img = slide.querySelector('img');
+      if (img) tweens.push(gsap.fromTo(img, { scale: 1.25 }, { scale: 1.05, duration: 2.6, ease: 'expo.out' }));
     }
     gsap.set(el.querySelectorAll('[data-hero-progress]'), { scaleX: 0 });
     const split = SplitText.create(el.querySelector('[data-hero-promise]'), {
@@ -112,8 +122,23 @@ export default function Hero({
             style={{ clipPath: i === 0 ? 'inset(0% 0% 0% 0%)' : 'inset(0% 0% 0% 100%)' }}
             aria-hidden={i !== index}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img {...photoAttrs(s.src)} alt={s.alt} fetchPriority={i === 0 ? 'high' : 'low'} className="size-full scale-105 object-cover" />
+            {i === 0 ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                ref={firstImg}
+                {...photoAttrs(s.src)}
+                alt={s.alt}
+                fetchPriority="high"
+                onLoad={() => setRestReady(true)}
+                onError={() => setRestReady(true)}
+                className="size-full scale-105 object-cover"
+              />
+            ) : (
+              restReady && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img {...photoAttrs(s.src)} alt={s.alt} fetchPriority="low" className="size-full scale-105 object-cover" />
+              )
+            )}
           </div>
         ))}
         {/* Velo neutro: arriba para el header, abajo para el texto. */}

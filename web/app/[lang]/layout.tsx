@@ -135,7 +135,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
             </div>
           </div>
           <div className="frame mt-24">
-            <Link href={href(lang, "/")} aria-label={t.home} className="inline-block">
+            <Link href={href(lang, "/")} aria-label={t.logoLabel} className="inline-block">
               <Logo tone="dark" />
             </Link>
           </div>

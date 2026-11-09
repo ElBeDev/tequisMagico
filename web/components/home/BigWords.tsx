@@ -95,8 +95,10 @@ export default function BigWords({ items, cursor = 'Ver' }: { items: BigWord[]; 
         aria-hidden
       >
         {items.map((w, i) => (
+          // lazy: sin eso React las precarga en el <head> y el celular las baja aunque este recuadro
+          // (solo de escritorio) no se muestre.
           // eslint-disable-next-line @next/next/no-img-element
-          <img key={w.label} data-follow-img={i} {...photoAttrs(w.image, '400px')} alt="" className="absolute inset-0 size-full object-cover" />
+          <img key={w.label} data-follow-img={i} {...photoAttrs(w.image, '300px')} alt="" loading="lazy" className="absolute inset-0 size-full object-cover" />
         ))}
       </div>
     </div>

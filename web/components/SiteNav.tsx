@@ -261,7 +261,7 @@ export default function SiteHeader({ nav, search, lang }: { nav: NavSection[]; s
       {menuOpen && (
         <div ref={menuRef} role="dialog" aria-modal="true" aria-label={t.menu} data-lenis-prevent data-cursor-dark className="fixed inset-0 z-40 overflow-y-auto bg-green text-white">
           <div className="frame flex items-center justify-between py-6">
-            <Link href={href(lang, '/')} aria-label={t.home}>
+            <Link href={href(lang, '/')} aria-label={t.logoLabel}>
               <Logo tone="dark" />
             </Link>
             <LangSwitch lang={lang} pathname={pathname} className="ml-auto mr-2" />
