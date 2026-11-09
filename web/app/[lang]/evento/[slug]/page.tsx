@@ -21,10 +21,22 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/evento/[sl
   const lang = langOf(p);
   const event = await getEvent(p.slug, lang);
   if (!event) return {};
-  const where = lang === 'en' ? 'in Tequisquiapan, Querétaro, Mexico.' : 'en Tequisquiapan, Querétaro.';
-  const description = `${event.shortDescription}. ${formatDateRange(event.startDate, event.endDate, lang)} ${where}`;
+  const en = lang === 'en';
+  const year = Number(event.startDate.slice(0, 4));
+  const range = formatDateRange(event.startDate, event.endDate, lang);
+  // Un evento anual que ya pasó no lleva el año en el título: la gente ya busca el siguiente
+  // ("feria del queso y vino 2027") y "… 2026" se ve viejo. La descripción dice cuándo fue la
+  // última edición y que la siguiente fecha no se ha anunciado (lo mismo que dice la ficha).
+  const pastRecurring = event.isRecurring && eventStatus(event, todayInTequis()) === 'past';
+  const town = en ? 'in Tequisquiapan' : 'en Tequisquiapan';
+  const oneDay = event.startDate === event.endDate;
+  const description = pastRecurring
+    ? en
+      ? `${event.shortDescription}. The ${year} edition ${oneDay ? 'was held on' : 'ran'} ${range}; ${year + 1} dates have not been announced yet. Tequisquiapan, Querétaro, Mexico.`
+      : `${event.shortDescription}. La edición ${year} se celebró ${oneDay ? 'el' : 'del'} ${range}; las fechas de ${year + 1} aún no se anuncian. Tequisquiapan, Querétaro.`
+    : `${event.shortDescription}. ${range} ${en ? 'in Tequisquiapan, Querétaro, Mexico.' : 'en Tequisquiapan, Querétaro.'}`;
   return {
-    title: `${event.title} ${event.startDate.slice(0, 4)}`,
+    title: pastRecurring ? `${event.title} ${town}` : `${event.title} ${year} ${town}`,
     description,
     alternates: alternates(lang, `/evento/${event.slug}`),
     openGraph: { title: event.title, description, images: event.thumbnailUrl ? [event.thumbnailUrl] : undefined },

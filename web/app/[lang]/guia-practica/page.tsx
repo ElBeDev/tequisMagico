@@ -9,13 +9,15 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/guia-pract
   const lang = langOf(await params);
   return lang === 'en'
     ? {
-        title: 'Travel tips: getting to Tequisquiapan and when to go',
-        description: 'How to get to Tequisquiapan from Mexico City and Querétaro by car or bus, weather, high seasons and useful tips for your visit.',
+        // Las búsquedas en inglés son "mexico city to tequisquiapan" (Search Console, nov 2026). No se
+        // menciona shuttle: la guía no tiene ninguno con fuente.
+        title: 'Mexico City to Tequisquiapan: bus, car and when to go',
+        description: 'How to get from Mexico City to Tequisquiapan: direct ETN bus from the Central del Norte, driving times, buses from Querétaro, weather and high seasons.',
         alternates: alternates(lang, '/guia-practica'),
       }
     : {
-        title: 'Guía práctica: cómo llegar y cuándo ir a Tequisquiapan',
-        description: 'Cómo llegar a Tequisquiapan desde la Ciudad de México y Querétaro en auto o autobús, clima, temporadas altas y datos útiles para tu visita.',
+        title: 'Cómo llegar a Tequisquiapan desde la CDMX y cuándo ir',
+        description: 'Cómo llegar a Tequisquiapan desde la Ciudad de México y Querétaro: autobús directo ETN desde la Central del Norte, en auto, clima y temporadas altas.',
         alternates: alternates(lang, '/guia-practica'),
       };
 }
