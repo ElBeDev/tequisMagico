@@ -34,7 +34,12 @@ export function pinElement(color: string, label?: string) {
   // __drop lo anima la portada (caída de pines); __body tiene el hover. Separados para que
   // la animación por JS y la transición CSS no se pisen.
   el.innerHTML = `<span class="map-pin__drop"><span class="map-pin__body" style="--pin:${color}"><svg viewBox="0 0 26 34" aria-hidden="true"><path d="M13 33C11 26 1 20.5 1 12.6a12 12 0 0 1 24 0C25 20.5 15 26 13 33Z"/><circle cx="13" cy="12.6" r="4.4"/></svg></span></span>`;
-  if (label) el.setAttribute('aria-label', label);
+  // MapLibre lo hace enfocable y lo abre con Enter/Espacio: es un botón. Sin el role, el aria-label
+  // en un <div> es inválido (Lighthouse lo marca en accesibilidad y en navegación agéntica).
+  if (label) {
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', label);
+  }
   return el;
 }
 
@@ -109,7 +114,19 @@ export default function PlacesMap({
 
   useEffect(() => {
     let cancelled = false;
-    (async () => {
+    // MapLibre (~100 ms de CPU al arrancar) se carga cuando el mapa se acerca a la pantalla, no al
+    // abrir la página: en la portada de escritorio pesaba en el Total Blocking Time. Si el mapa está
+    // dentro de algo oculto (la versión de celular en escritorio), no se carga.
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        init();
+      },
+      { rootMargin: '50% 0px' },
+    );
+    io.observe(containerRef.current!);
+    const init = async () => {
       try {
         const [{ Map, NavigationControl }, style] = await Promise.all([loadMapLibre(), tequisMapStyle()]);
         if (cancelled || !containerRef.current) return;
@@ -136,9 +153,10 @@ export default function PlacesMap({
       } catch {
         if (!cancelled) setFailed(true);
       }
-    })();
+    };
     return () => {
       cancelled = true;
+      io.disconnect();
       mapRef.current?.remove();
       mapRef.current = null;
     };
