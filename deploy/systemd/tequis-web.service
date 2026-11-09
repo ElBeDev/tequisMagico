@@ -6,7 +6,10 @@ After=network.target tequis-panel.service
 User=tequis
 WorkingDirectory=/srv/tequis/web
 EnvironmentFile=/etc/tequis/web.env
-ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -H 127.0.0.1 -p 3000
+# -H localhost (no 127.0.0.1): Next arma la URL que recibe proxy.ts con "localhost". Con otro
+# hostname, el origen de cada rewrite no coincide, Next lo toma como URL externa y se pide la página
+# a sí mismo por HTTP (cada visita se procesaba dos veces). Escucha solo en loopback (::1 aquí).
+ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -H localhost -p 3000
 # Node sale con 143 al recibir SIGTERM: es un apagado normal, no un fallo.
 SuccessExitStatus=143
 Restart=always

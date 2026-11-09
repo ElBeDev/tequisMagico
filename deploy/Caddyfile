@@ -17,7 +17,9 @@ tequismagico.com {
 	import comun
 	# web/proxy.ts hace rewrite con request.nextUrl: con X-Forwarded-Proto https lo arma como
 	# https://localhost:3000/... y Next intenta proxy TLS a su propio puerto (500 en todo).
-	reverse_proxy 127.0.0.1:3000 {
+	# localhost y no 127.0.0.1: el servicio arranca con -H localhost (ver tequis-web.service), que
+	# en este servidor escucha en ::1; Caddy prueba las dos direcciones de localhost.
+	reverse_proxy localhost:3000 {
 		header_up X-Forwarded-Proto http
 	}
 }
