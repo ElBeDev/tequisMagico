@@ -55,13 +55,40 @@ Estas 25 fotos se copiaron a `/srv/tequis/uploads/lugares/` (se sirven desde `pa
 
 **Sin foto real, y por qué:**
 - **Mercado Tequesquicalli**: no tiene web. Usa `Tequis009.jpg` de Wikimedia Commons (Thelmadatter, CC BY-SA 4.0), que es de ese mismo mercado y ya se acreditaba en la web; también está en los créditos de la app.
-- **Telésforo Trejo, Guadalupano, Parador Colosio, El Oasis y Termas del Rey**: no tienen web. Usan las genéricas de categoría ya acreditadas.
+- **Telésforo Trejo, Guadalupano, Parador Colosio, El Oasis y Termas del Rey**: no tenían web el 5 nov (El Oasis y Termas del Rey sí la tienen; ver la sección del 9 nov). Usan las genéricas de categoría ya acreditadas.
 - **Viñedos La Redonda**: su web está en mantenimiento y la tienda pide contraseña. Solo hay una imagen para redes con el logo encima, y su operación está suspendida.
 - **Los Rosales Viñedos**: `vinedoslosrosales.com.mx` hoy es un sitio de apuestas. El dominio fue secuestrado; no se usó nada de ahí.
 - **Hotel Museo La Casona**: `lacasonatequisquiapan.com` redirige a un sitio de tragamonedas, y ese hotel está en otra dirección (Camino al Sauz, no Morelos 11).
 - **La Casa del Atrio** y **Hotel Hidalgo**: los que aparecen con ese nombre están en Querétaro capital.
 - **Templo, Plaza Miguel Hidalgo, La Pila, Parque La Pila y Presa Centenario**: son lugares públicos, sin web propia.
 - **Los otros lugares sin confirmar**: no se les encontró web en un buscador general (5 nov 2026).
+
+## Fotos reales de negocios (9 nov 2026)
+
+Misma regla y mismo destino (`/srv/tequis/uploads/lugares/`), aplicadas con `database/databasefix_lugares_busquedas_2026-11-09.sql`. Investigación en `docs/datos/investigacion-negocios-2026-11.md`. Se convirtieron a JPG y se redujeron a 1920 px como máximo, sin agrandar las chicas (las de ORIGENS miden 500 px en su web). **La Luna Terraza** usa `kpuchinos-terraza-la-luna.jpg`, que ya estaba (de la web de K'puchinos, el mismo negocio).
+
+| Lugar | Archivo | Página de origen | Archivo original |
+|---|---|---|---|
+| El Maravillas | `el-maravillas-terraza.jpg` | [www.elmaravillas.com.mx](https://www.elmaravillas.com.mx) | [original](https://www.elmaravillas.com.mx/images/Restaurante/Terraza%20+%20iglesia.jpg) |
+| El Maravillas | `el-maravillas-tacos.jpg` | [www.elmaravillas.com.mx](https://www.elmaravillas.com.mx) | [original](https://www.elmaravillas.com.mx/images/2026/tacos-olvidados.jpg) |
+| El Maravillas | `el-maravillas-camarones.jpg` | [www.elmaravillas.com.mx](https://www.elmaravillas.com.mx) | [original](https://www.elmaravillas.com.mx/images/2026/camarones-roca.jpg) |
+| ORIGENS | `origens-platillo.jpg` | [origens.mx](https://origens.mx) | [original](https://origens.mx/wp-content/uploads/2024/05/ORIGENS-SW-Principales-Home-500x350px-01.jpg) |
+| ORIGENS | `origens-deli.jpg` | [origens.mx](https://origens.mx) | [original](https://origens.mx/wp-content/uploads/2024/05/ORIGENS-SW-Principales-Home-500x350px-02.jpg) |
+| ORIGENS | `origens-patio.jpg` | [origens.mx](https://origens.mx) | [original](https://origens.mx/wp-content/uploads/2024/05/ORIGENS-SW-Principales-Home-500x456px-01.jpg) |
+| Río 33 | `rio-33-comedor.jpg` | [hotelesriotequisquiapan.com/restaurants.html](https://www.hotelesriotequisquiapan.com/restaurants.html) | [original](https://webbox.imgix.net/images/mfnwobnjdatqgshi/bc67d772-3259-4069-b535-35ece8f42c7a.jpg) |
+| Río 33 | `rio-33-cava.jpg` | [hotelesriotequisquiapan.com/restaurants.html](https://www.hotelesriotequisquiapan.com/restaurants.html) | [original](https://webbox.imgix.net/images/mfnwobnjdatqgshi/4ab3ef9e-1a4a-4c97-a09f-55586162619c.jpg) |
+| Espacio Sense Spa – La Casona | `espacio-sense-cabina.jpg` | [lacasonatequisquiapan.mx/es/espacio-sense](https://lacasonatequisquiapan.mx/es/espacio-sense) | [original](https://lacasonatequisquiapan.mx/images/sliders/gal-sense-slider/image-04.jpg) |
+| Espacio Sense Spa – La Casona | `espacio-sense-jardin.jpg` | [lacasonatequisquiapan.mx/es/espacio-sense](https://lacasonatequisquiapan.mx/es/espacio-sense) | [original](https://lacasonatequisquiapan.mx/images/sliders/gal-sense-slider/image-01.jpg) |
+| Balneario La Vega | `balneario-la-vega-jardin.jpg` | [balneariolavega.mx](https://balneariolavega.mx) | [original](https://balneariolavega.mx/templates/plantilla_balneario/imagenes/fondo-banner.jpg) |
+| Vinícola San Juanito | `san-juanito-terraza.jpg` | [www.sanjuanito.com.mx](https://www.sanjuanito.com.mx) | [original](https://www.sanjuanito.com.mx/wp-content/uploads/2024/09/paisaje-bodega.webp) |
+| Vinícola San Juanito | `san-juanito-cava.jpg` | [www.sanjuanito.com.mx](https://www.sanjuanito.com.mx) | [original](https://www.sanjuanito.com.mx/wp-content/uploads/2024/09/cava-vinos.webp) |
+| Vinícola San Juanito | `san-juanito-cosecha.jpg` | [www.sanjuanito.com.mx](https://www.sanjuanito.com.mx) | [original](https://www.sanjuanito.com.mx/wp-content/uploads/2024/09/Uva-cosecha.webp) |
+| Termas del Rey | `termas-del-rey-campamento.jpg` | [www.termasdelrey.com](https://www.termasdelrey.com) | [original](https://irp.cdn-website.com/32521487/dms3rep/multi/opt/camp-1920w.jpg) |
+| Termas del Rey | `termas-del-rey-isla.jpg` | [www.termasdelrey.com](https://www.termasdelrey.com) | [original](https://irp.cdn-website.com/32521487/dms3rep/multi/opt/La+Isla-1920w.jpg) |
+
+⚠️ **Permisos**: igual que las anteriores, sin autorización escrita del negocio.
+
+**Sin foto real, y por qué:** Spa Studio 7 (su única foto es una tira de 1200×301 px), Pizzas Don Rigo (sin web), El Oasis (su portada solo tiene un cartel) y el jacuzzi de Espacio Sense (360 px, se descartó). Usan las genéricas de categoría ya acreditadas.
 
 ## Historial anterior
 

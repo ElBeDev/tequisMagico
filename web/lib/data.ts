@@ -169,6 +169,7 @@ const SUBCATEGORY_PLURALS: Record<string, string> = {
   'Templo': 'Templos',
   'Mercado': 'Mercados',
   'Dulcería': 'Dulcerías',
+  'Spa': 'Spas',
 };
 
 /** Plural de una subcategoría (clave en español) en el idioma pedido. */

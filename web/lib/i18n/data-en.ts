@@ -233,7 +233,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   '20fafbc6-b72f-5792-9ac2-4daff496c70c': { // Mercado Guadalupano Municipal
     shortDescription: "Fruit, vegetables and regional food",
-    fullDescription: "Municipal market with fruit, vegetables and regional food, a good place for breakfast. Bring cash.",
+    fullDescription: "Municipal market with fruit, vegetables and regional food, a good place for breakfast. It was renovated in 2026, with a new roof and lighting. Bring cash.",
   },
   '8cf3c98a-c27c-53f8-84f2-b0873b69ab34': { // Parador Artesanal Luis Donaldo Colosio
     shortDescription: "About 600 stalls and a food corridor",
@@ -241,11 +241,48 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   '04332bc5-6b65-5067-80bb-bd6d1562e941': { // Parque Acuático El Oasis
     shortDescription: "Thermal pools at 36 °C",
-    fullDescription: "Water park with thermal pools at 36 °C. In the fall it opens Friday to Sunday; check days and prices before you go.",
+    fullDescription: "Water park with 36 °C thermal water, a wave pool, an Olympic pool, waterslides, waterfalls, a zip line and 262 camping spots, plus a restaurant and free parking. Open Friday to Sunday, 9 AM to 6 PM, plus school holidays and public holidays. In 2026 admission was 190 pesos for adults and 150 for children and seniors.",
   },
   'edf8fd31-93ef-5673-8ad5-7341d6fae02d': { // Termas del Rey
-    shortDescription: "Water park with 13 pools",
-    fullDescription: "Water park with 13 pools, waterslides and a children’s area. Opening days change with the season; check before you go.",
+    shortDescription: "Water park with a wave pool and waterslides",
+    fullDescription: "Water park 10 minutes from Tequis, with waterslides, a wave pool, wading pools, a diving pit, lakes and a camping area. Open Friday to Sunday, 9 AM to 6 PM; in 2026 admission was 199 pesos for adults and 125 for children, with a discount when you buy online.",
+  },
+  'cd0b0544-2f71-57d2-b0ca-ecd842577b63': { // El Maravillas
+    shortDescription: 'Creative Mexican food with a terrace facing the parish church',
+    fullDescription: 'Opened in 2014 in downtown Tequis as a tribute to José Manuel Morales, grandfather of the three siblings who founded it, and to his fishing, hunting, charrería and camping adventures. Chef Alejandro Martínez’s menu includes rock shrimp, tuna tostaditas, cedar-plank salmon, lamb barbacoa tacos, pibil-style pork shank and a plate of regional cheeses, with signature cocktails. There are tables on the terrace and in the dining room, and breakfast Thursday to Sunday.',
+  },
+  'a9e731dd-9e4b-58e9-a7da-87fecc31d76b': { // ORIGENS
+    shortDescription: 'Mediterranean food, deli and wine shop next to the Geographic Center',
+    fullDescription: 'Mediterranean restaurant using regional ingredients, opened in 2020 in the town’s first historic granary. It has vegan and vegetarian options, a deli with artisanal cheeses and cured meats, and a wine shop with more than 50 local, Mexican and international labels. You can book a table, and it delivers via WhatsApp. It is on a pedestrian street, a minute from the main square.',
+  },
+  '331a2612-cb19-520a-94f7-bf1c34ddaeaf': { // Río 33
+    shortDescription: 'Grill and international food with a wine cellar, at the Hotel Río',
+    fullDescription: 'The restaurant of the Hotel Río Tequisquiapan, a block from the Geographic Center. It pairs grilled cuts with international dishes and has a list of more than a hundred Mexican and international wines.',
+  },
+  '057102bf-a338-5000-82fe-22626c5d4701': { // La Luna Terraza
+    shortDescription: 'Rooftop bar above K’puchinos, with views over downtown',
+    fullDescription: 'The rooftop of K’puchinos, with cocktails and views over the town center; a good spot for the sunset. It has karaoke some nights and brunch on weekends. Its hours change, so check before you go.',
+  },
+  '6ba8d481-2d1b-51dd-a86e-c3f04cb5191f': { // Pizzas Don Rigo
+    shortDescription: 'Local pizzeria on Juárez Poniente',
+    fullDescription: 'Local Tequisquiapan pizzeria, with its main shop on Juárez Poniente and a second branch. Check hours and phone before you go.',
+  },
+  '4133a23e-60d8-5e22-9d5a-88753a7c5d71': { // Vinícola San Juanito
+    shortDescription: 'Boutique winery with tastings and views of the Peña de Bernal',
+    fullDescription: 'Winery founded in 2007 as a self-sustaining farm in San José de la Laja, within the municipality of Tequisquiapan. The tour goes through the fields, the winery and the cellar, and ends with a tasting of 3 or 6 wines. The terrace looks out to the Peña de Bernal and you can eat there. It offers lodging and hosts weddings and events. Small groups don’t need to book; it opens Friday to Sunday, holidays and school vacations.',
+  },
+  'b8fb8442-db5b-57a6-892f-097d5acb62c6': { // Spa Studio 7
+    shortDescription: 'Spa at the Hotel San Carlos, with sauna, steam and massages',
+    fullDescription: 'The spa of the Hotel San Carlos, downtown, has a sauna or steam room, a hot tub and a shower. It offers Swedish, Hawaiian, relaxing and lymphatic drainage massages, reflexology, coffee wraps, facials and salt scrubs. Monday to Thursday by reservation.',
+    schedule: { lunes: 'By reservation', martes: 'By reservation', 'miércoles': 'By reservation', jueves: 'By reservation' },
+  },
+  '1121c798-c22b-58db-94ab-e0e8313661bd': { // Espacio Sense Spa – La Casona
+    shortDescription: 'Spa at the La Casona hotel, with temazcal, sauna and hot tub',
+    fullDescription: 'The spa is in Espacio Sense, the adults-only area of La Casona Tequisquiapan Hotel & Spa. It has single and couples treatment rooms, a sauna, a temazcal (traditional sweat lodge) and a hot tub, and offers massages, facials and agave-based treatments. Ask about hours and availability when you book.',
+  },
+  'fb30e010-d760-5805-ac5b-e9da4570373d': { // Balneario La Vega
+    shortDescription: 'Family water park with an Olympic pool, open every day',
+    fullDescription: 'Water park a few minutes from the main square, in the Barrio de La Magdalena, with an Olympic pool, a waterslide and a wading pool. Camping is allowed, and it has rooms and palapas for groups. Open every day; in 2026 admission was 100 pesos, and 50 for children under 12.',
   },
 };
 
@@ -253,26 +290,26 @@ export const EVENTS_EN: Record<string, EventEn> = {
   '0d094ed3-5ce4-4d8c-b7c2-7348b8bcc3ec': { // Fiesta de la Santa Cruz
     title: 'Feast of the Holy Cross',
     shortDescription: 'Dance of the Moors and Christians',
-    fullDescription: 'Religious festival in the Barrio de San Juan, with the traditional Dance of the Moors and Christians.',
-    organizerName: 'Parish of Santa María de la Asunción',
+    fullDescription: 'Festival of the Barrio de San Juan, from May 1 to 5; the main day is the 3rd, with the traditional Dance of the Moors and Christians.',
+    organizerName: 'Barrio de San Juan',
   },
   'de96a0ba-d0e4-4094-ad3a-a3974e6f2f95': { // Feria Nacional del Queso y Vino
     title: 'National Cheese and Wine Fair',
-    shortDescription: 'The most important event of the year',
-    fullDescription: "The National Cheese and Wine Fair is Querétaro's most important food event. For 10–15 days, the main square and nearby streets fill with stands from wineries, cheese makers, restaurants and artisanal producers. It includes tastings, pairing workshops, evening concerts, food exhibitions and cultural events. Don't miss it.",
-    locationName: 'Plaza Miguel Hidalgo and the historic center',
-    organizerName: 'Tequisquiapan Municipal Government',
+    shortDescription: "Tequis's cheese and wine festival",
+    fullDescription: "The International Festival of Art, Cheese and Wine (Festival Internacional del Arte, Queso y Vino), Tequisquiapan's cheese and wine fair. Its 50th edition ran May 7–24, 2026, with free admission, at Parque La Pila, the Jardín Principal Miguel Hidalgo, the Jardín del Arte and the Teatro del Pueblo. It is usually held in May and starts on a Thursday; the 2027 dates have not been announced yet.",
+    locationName: 'Parque La Pila and the main square',
+    organizerName: 'Municipality of Tequisquiapan',
   },
   '758cca0d-2c5e-48a8-bddc-6da8b2b87114': { // Fiesta de la Fundación de Tequisquiapan
     title: 'Tequisquiapan Founding Festival',
     shortDescription: "Anniversary of the town's founding",
-    fullDescription: 'Celebration in the Barrio de la Magdalena with traditional fairs, community exhibitions and a parade of floats.',
-    organizerName: 'Tequisquiapan Municipal Government',
+    fullDescription: 'Anniversary of the founding of Tequisquiapan in 1551, during the festivities of Santa María Magdalena in the Barrio de La Magdalena (around July 19–26), with a formal town council session on July 24. tequis.travel mentions a fair, a kermés and a parade of floats.',
+    organizerName: 'Barrio de La Magdalena festival committee',
   },
   '9c3e4505-a859-4ac3-86b9-d3f122b58330': { // La Fiesta del Pueblo
     title: 'The Town Festival',
-    shortDescription: 'The most anticipated season of the year',
-    fullDescription: 'Free-admission event described as the most anticipated season of the year in Tequisquiapan.',
+    shortDescription: 'Free concerts and the Town Race',
+    fullDescription: 'The town festival, in mid-August, around the patron saint feast on the 15th. In 2026 it ran August 12–16 in the historic center, with free concerts at the Teatro del Pueblo (Av. Juárez) and the 5 and 10 km Carrera del Pueblo (Town Race).',
     locationName: 'Historic center',
     organizerName: 'Tequisquiapan Municipal Government',
   },
@@ -288,20 +325,19 @@ export const EVENTS_EN: Record<string, EventEn> = {
     shortDescription: 'Theatrical tour of regional legends',
     fullDescription: 'Actors perform regional legends on a nighttime walking tour that starts near the main parish church. Every Saturday.',
     locationName: 'Parish of Santa María de la Asunción',
-    organizerName: 'Tequisquiapan Municipal Government',
   },
   '0e352881-1326-4cbd-a0ad-4a09eb1c0a23': { // Fiestas Patrias
     title: 'Independence Celebrations (Fiestas Patrias)',
     shortDescription: 'Celebrating the Cry of Independence',
-    fullDescription: 'National celebration with a morning civic parade, cultural events during the day and the traditional Grito de Independencia (Cry of Independence) at 11 PM. Includes mariachi music, Mexican antojitos, fireworks and red, white and green decorations all over the plaza. A very festive, patriotic atmosphere.',
+    fullDescription: 'The Grito de Independencia (Cry of Independence) is given on September 15 at 11 PM on Plaza Miguel Hidalgo. In 2026, the "Ecos de Libertad" program ran September 11–16, with a huapango festival, a food and crafts pavilion on the downtown streets and a flag ceremony on the 16th.',
     organizerName: 'Tequisquiapan Municipal Government',
   },
   '4ea723ab-8589-4d99-9130-00cb8391480a': { // Día de Muertos
     title: 'Day of the Dead',
-    shortDescription: 'Traditional Mexican celebration',
-    fullDescription: 'Day of the Dead (Día de Muertos) celebration in the Mexican tradition. An altar contest in the plaza, community ofrendas (offerings), living catrinas, free traditional face painting, pan de muerto and sugar skulls. Includes a nighttime procession to the cemetery and cultural events.',
+    shortDescription: 'Tejedores de Luz festival',
+    fullDescription: 'In Tequis, the Day of the Dead (Día de Muertos) is celebrated with the Tejedores de Luz (Weavers of Light) festival. In 2026, its third edition, it ran October 28 to November 2: a monumental wicker altar on Plaza Miguel Hidalgo, a route of more than 10 altars around downtown, food pavilions and, in the outlying communities, a Xantolo parade, catrinas and mojigangas (giant puppets).',
     locationName: 'Plaza Miguel Hidalgo and downtown streets',
-    organizerName: 'Municipal Government and Casa de la Cultura',
+    organizerName: 'Municipality of Tequisquiapan',
   },
   '3d7cd2c0-7d2c-4ef0-a685-7df70319a7f1': { // Festival de la Cestería
     title: 'Basketry Festival',
@@ -314,13 +350,13 @@ export const EVENTS_EN: Record<string, EventEn> = {
     shortDescription: 'Processions and Christmas carols',
     fullDescription: 'Traditional procession through the downtown streets with Christmas carols and ponche (warm fruit punch), from December 16 to 23.',
     locationName: 'Historic center',
-    organizerName: 'Tequisquiapan Municipal Government',
   },
   '81d4781f-4b84-4003-885e-2cefbb70390b': { // Año Nuevo en la Plaza
     title: "New Year's on the Plaza",
     shortDescription: "New Year's celebration",
-    fullDescription: 'Year-end celebration on the main square. Live music, dancing, antojitos and drinks. At midnight, a group toast and fireworks. A festive, family-friendly atmosphere to welcome the new year.',
-    organizerName: 'Municipal Government',
+    fullDescription: "New Year's Eve party downtown from 10 PM, with live music and fireworks. In 2025 it was held on the Miguel Hidalgo and Santa Cecilia plazas, which are next to each other.",
+    locationName: 'Miguel Hidalgo and Santa Cecilia plazas',
+    organizerName: 'Municipality of Tequisquiapan',
   },
   '016d54df-d9ee-4e15-9235-c590b1a5daa3': { // Enamórate en Tequisquiapan
     title: 'Fall in Love in Tequisquiapan',
@@ -359,10 +395,28 @@ export const EVENTS_EN: Record<string, EventEn> = {
   },
   'a25e9aa4-9ef1-4894-a9dd-6476a81a3daf': { // Semana Santa
     title: 'Holy Week (Semana Santa)',
-    shortDescription: 'Processions and a living Way of the Cross',
-    fullDescription: 'Traditional religious celebration with daily processions, a living Way of the Cross performed by the community, solemn Masses and cultural events. The downtown streets are decorated with carpets of dyed sawdust. An atmosphere of reflection and tradition.',
-    locationName: 'Churches and streets of the historic center',
-    organizerName: 'Parish of Santa María de la Asunción',
+    shortDescription: 'Way of the Cross and burning of Judas',
+    fullDescription: "Holy Week in Tequis: on Holy Wednesday the arrest of Jesus is reenacted, there is a Way of the Cross on the main square, and on Holy Saturday effigies of Judas and devils are burned and fire and water are blessed. Sunday is the Resurrection feast. In 2027 it runs from Palm Sunday, March 21, to Easter Sunday, March 28.",
+    locationName: 'Plaza Miguel Hidalgo and downtown churches',
+  },
+  'fce52c67-31b7-4cee-9aaa-c46bd904e382': { // Villa Navideña
+    title: 'Christmas Village (Villa Navideña)',
+    shortDescription: 'Wicker figures and a free carousel',
+    fullDescription: "Christmas village with wicker figures made by Tequis artisans, local producers, cultural and music events and a free two-story carousel. From December 13, 2026 to January 6, 2027. In 2025 it was set up on Plaza Santa Cecilia, Plaza Miguel Hidalgo and Parque La Pila.",
+    locationName: 'Downtown Tequisquiapan',
+    organizerName: 'Municipality of Tequisquiapan',
+  },
+  'ceb180a5-4761-4a4d-aaad-b4fc825d69d3': { // Estrellas y Raíces
+    title: 'Estrellas y Raíces (Stars and Roots)',
+    shortDescription: 'Crafts, a wicker workshop and meditation',
+    fullDescription: 'One-day festival on Plaza Miguel Hidalgo, 12 PM to 7 PM: local crafts for sale, workshops such as wicker weaving and a group sound meditation at 5:30 PM. Free admission.',
+  },
+  'a5268b28-7a17-4a1a-995e-62741c050395': { // Temporada de vendimias
+    title: 'Grape harvest season (vendimias)',
+    shortDescription: 'Harvest festivals at the wineries',
+    fullDescription: 'In July and August, the wineries of Tequisquiapan and Ezequiel Montes celebrate the harvest with their vendimias. Each winery sets its own date and price: check with the winery before you go.',
+    locationName: 'Wineries in Tequisquiapan and Ezequiel Montes',
+    ticketPrice: "Each winery's price",
   },
 };
 
@@ -640,4 +694,17 @@ export const TERMS_EN: Record<string, string> = {
   'Wine bar': 'Wine bar',
   'Áreas verdes': 'Green areas',
   'Único': 'Unique',
+  'Coctelería': 'Cocktails',
+  'Mexicana': 'Mexican',
+  'Mediterránea': 'Mediterranean',
+  'Opciones veganas': 'Vegan options',
+  'Parrilla': 'Grill',
+  'Cava': 'Wine cellar',
+  'Internacional': 'International',
+  'Karaoke': 'Karaoke',
+  'Hospedaje': 'Lodging',
+  'Sauna': 'Sauna',
+  'Tirolesa': 'Zip line',
+  'Brunch': 'Brunch',
+  'Sustentable': 'Sustainable',
 };
