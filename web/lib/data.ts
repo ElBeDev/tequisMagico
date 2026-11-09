@@ -78,22 +78,22 @@ export type TequisEvent = {
 
 // Mismo orden, nombres y colores que `PlaceCategory` en ModelsPlaceCategory.swift.
 export const CATEGORIES: Record<PlaceCategory, { label: string; slug: string; color: string; blurb: string }> = {
-  turistico: { label: 'Sitios Turísticos', slug: 'sitios-turisticos', color: '#2563eb', blurb: 'Plazas, templos, museos y monumentos del pueblo.' },
-  experiencias: { label: 'Experiencias', slug: 'experiencias', color: '#7c3aed', blurb: 'Viñedos, queserías, globo aerostático, spas y talleres.' },
+  turistico: { label: 'Sitios Turísticos', slug: 'sitios-turisticos', color: '#2563eb', blurb: 'Plazas, templos, monumentos y parques del pueblo.' },
+  experiencias: { label: 'Experiencias', slug: 'experiencias', color: '#7c3aed', blurb: 'Viñedos, queserías, balnearios, globo aerostático y talleres.' },
   gastronomia: { label: 'Gastronomía', slug: 'gastronomia', color: '#ea580c', blurb: 'Restaurantes, cafés, antojitos y bares.' },
   hospedaje: { label: 'Hospedaje', slug: 'hospedaje', color: '#16a34a', blurb: 'Hoteles, posadas y hoteles boutique.' },
   eventos: { label: 'Eventos', slug: 'eventos', color: '#dc2626', blurb: 'Festivales, ferias y exposiciones.' },
-  compras: { label: 'Compras', slug: 'compras', color: '#db2777', blurb: 'Artesanías, productos locales, vinos y quesos.' },
+  compras: { label: 'Compras', slug: 'compras', color: '#db2777', blurb: 'Mercados, artesanías, cestería y dulces típicos.' },
   rutas: { label: 'Rutas', slug: 'rutas', color: '#0d9488', blurb: 'Recorridos a pie, en bici y por los viñedos.' },
 };
 
 const CATEGORIES_EN: Record<PlaceCategory, { label: string; blurb: string }> = {
-  turistico: { label: 'Sights', blurb: 'Plazas, churches, museums and monuments in town.' },
-  experiencias: { label: 'Experiences', blurb: 'Wineries, cheese makers, hot-air balloons, spas and workshops.' },
+  turistico: { label: 'Sights', blurb: 'Plazas, churches, monuments and parks in town.' },
+  experiencias: { label: 'Experiences', blurb: 'Wineries, cheese makers, hot springs, hot-air balloons and workshops.' },
   gastronomia: { label: 'Food & drink', blurb: 'Restaurants, cafés, street food and bars.' },
   hospedaje: { label: 'Where to stay', blurb: 'Hotels, inns and boutique hotels.' },
   eventos: { label: 'Events', blurb: 'Festivals, fairs and exhibitions.' },
-  compras: { label: 'Shopping', blurb: 'Crafts, local products, wine and cheese.' },
+  compras: { label: 'Shopping', blurb: 'Markets, crafts, basketry and traditional sweets.' },
   rutas: { label: 'Routes', blurb: 'Walking, cycling and winery routes.' },
 };
 

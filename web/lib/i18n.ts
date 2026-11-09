@@ -3,6 +3,8 @@
 // español: proxy.ts traduce la URL visible en inglés a la interna antes de renderizar, y todos
 // los links del sitio pasan por `href()` para salir en el idioma de la página.
 
+import { TYPE_SLUGS_EN } from './tipos';
+
 export type Lang = 'es' | 'en';
 export const LANGS: Lang[] = ['es', 'en'];
 export const isLang = (v: string): v is Lang => v === 'es' || v === 'en';
@@ -39,8 +41,12 @@ const SECOND: Record<string, Record<string, string>> = {
   guias: { 'fin-de-semana': 'weekend', 'vinedos-y-quesos': 'wineries-and-cheese', 'en-familia': 'with-kids', 'pena-de-bernal': 'pena-de-bernal' },
 };
 
+// Tercer segmento de /lugares/<categoría>/<tipo> (páginas por tipo, lib/tipos.ts).
+const THIRD: Record<string, Record<string, string>> = { lugares: TYPE_SLUGS_EN };
+
 const invert = (m: Record<string, string>) => Object.fromEntries(Object.entries(m).map(([k, v]) => [v, k]));
 const FIRST_ES = invert(FIRST);
+const THIRD_ES: Record<string, Record<string, string>> = Object.fromEntries(Object.entries(THIRD).map(([k, m]) => [k, invert(m)]));
 const SECOND_ES: Record<string, Record<string, string>> = Object.fromEntries(Object.entries(SECOND).map(([k, m]) => [k, invert(m)]));
 
 function splitPath(path: string): [string, string] {
@@ -54,9 +60,10 @@ export function href(lang: Lang, esPath: string): string {
   const [path, rest] = splitPath(esPath);
   const segs = path.split('/').filter(Boolean);
   if (segs.length === 0) return `/en${rest}`;
-  const [a, b, ...tail] = segs;
+  const [a, b, c, ...tail] = segs;
   const out = [FIRST[a] ?? a];
   if (b !== undefined) out.push(SECOND[a]?.[b] ?? b);
+  if (c !== undefined) out.push(THIRD[a]?.[c] ?? c);
   return `/en/${[...out, ...tail].join('/')}${rest.replace('?tipo=', '?type=')}`;
 }
 
@@ -64,10 +71,11 @@ export function href(lang: Lang, esPath: string): string {
 export function enToEs(enPath: string): string {
   const segs = enPath.split('/').filter(Boolean);
   if (segs.length === 0) return '/';
-  const [a, b, ...tail] = segs;
+  const [a, b, c, ...tail] = segs;
   const first = FIRST_ES[a] ?? a;
   const out = [first];
   if (b !== undefined) out.push(SECOND_ES[first]?.[b] ?? b);
+  if (c !== undefined) out.push(THIRD_ES[first]?.[c] ?? c);
   return `/${[...out, ...tail].join('/')}`;
 }
 

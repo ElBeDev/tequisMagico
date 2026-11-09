@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
+import { Fragment, Suspense } from 'react';
+import Link from 'next/link';
 import { CATEGORIES, categoryFromSlug, categoryInfo, getPlaces, toSummary, type PlaceCategory } from '@/lib/data';
-import { LANGS, alternates, langOf } from '@/lib/i18n';
+import { LANGS, alternates, href, langOf } from '@/lib/i18n';
+import { activeTypePages } from '@/lib/tipos';
 import { CategoryTabs, PlaceGrid } from '@/components/PlaceGrid';
 import PlaceExplorer from '@/components/PlaceExplorer';
 import { PageIntro } from '@/components/Section';
@@ -97,11 +99,27 @@ export default async function CategoriaPage({ params }: PageProps<'/[lang]/lugar
   const all = (await getPlaces(lang)).map(toSummary);
   const places = all.filter((x) => x.category === category);
   const c = categoryInfo(lang, category);
+  const types = activeTypePages(all).filter((t) => t.category === category);
 
   return (
     <>
       <PageIntro title={lang === 'en' ? `${c.label} in Tequisquiapan` : `${c.label} en Tequisquiapan`}>
         {c.blurb}
+        {types.length > 0 && (
+          // Links a las páginas por tipo (lib/tipos.ts): así Google las encuentra desde la categoría.
+          <span className="mt-4 block text-body text-muted">
+            {lang === 'en' ? 'By type: ' : 'Por tipo: '}
+            {types.map((t, i) => (
+              <Fragment key={t.slug}>
+                {i > 0 && (i === types.length - 1 ? (lang === 'en' ? ' and ' : ' y ') : ', ')}
+                <Link href={href(lang, `/lugares/${c.slug}/${t.slug}`)} className="text-ink underline decoration-1 underline-offset-4 hover:decoration-2">
+                  {t.label[lang].toLowerCase()}
+                </Link>
+              </Fragment>
+            ))}
+            .
+          </span>
+        )}
       </PageIntro>
       <div className="frame">
         <CategoryTabs places={all} active={category} lang={lang} />
