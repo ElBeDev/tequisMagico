@@ -279,6 +279,22 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 
 ---
 
+## 17. Más contenido: hospedaje, comida, guías y páginas por necesidad (10 nov 2026)
+
+**Por qué:** el autocompletado de Google da unas 780 búsquedas sobre Tequis. Las más numerosas son hoteles (~80 variantes: con alberca, jacuzzi, pozas, pet friendly, en el centro…), fechas (~80), viñedos (~67), datos del pueblo (~57) y dónde comer (~45). El sitio tenía 4 hoteles (los 4 con datos falsos) y ~20 restaurantes (13 sin rastro). tequis.travel, el portal municipal, tiene 491 fichas.
+
+**Investigación** (con fuente por dato, en `docs/datos/`): `investigacion-hospedaje-2026-11.md` (~80 hospedajes), `investigacion-gastronomia-2026-11.md` (~115 negocios de comida), `investigacion-balnearios-globo-vinedos-2026-11.md` (precios con fecha), `investigacion-actividades-patrimonio-2026-11.md`, `investigacion-destino-2026-11.md` (clima, historia, seguridad, tren, inundaciones, alrededores) e `investigacion-agenda-2026-11.md` (Navidad 2026 y recurrentes).
+
+**Datos:** de 50 a 114 lugares activos (ver `docs/datos/base-de-datos.md`), 72 fotos nuevas de webs propias (créditos en `creditos-imagenes.md`) y todo traducido en `data-en.ts`. Se desactivaron 19 lugares de la carga inicial sin rastro, entre ellos La Casa del Atrio, que tenía la insignia "Verificado" y es un hotel de Querétaro capital.
+
+**Páginas por necesidad** (`web/lib/tipos.ts`): una `TypePage` con `keys: []` y `features` filtra por amenidad o etiqueta en vez de subcategoría (`Place.featureKeys` guarda las originales en español, porque en `/en` se traducen). La categoría las enlaza en "Lo que más se busca". Se publican solas con 2 lugares o más: hoy salen 24 páginas por tipo, entre ellas hoteles con alberca, en el centro, con jacuzzi, con spa, pet friendly, familiares, románticos, con desayuno y cabañas; desayunos, cortes, pizza, con niños y pet friendly en comida; camping en experiencias.
+
+**Guías:** de 4 a 14. Nuevas: Navidad y Año Nuevo, Tequis en un día, balnearios con precios 2026, cuánto cuesta el globo, en pareja, de noche, gratis o con poco dinero, qué comer, alrededores y clima por mes. El menú muestra solo 7 (`MENU_GUIDES` en `lib/nav.ts`). `GuideText` acepta links en español también en las guías en inglés: los pasa por `href(lang, …)` (antes llevaban a la página en español).
+
+**Correcciones de contenido:** `/por-que-tequis` sin cuatro afirmaciones sin fuente (el "centro real" en Zacatecas, Carranza asiduo a los baños, el auge de los años 50 y el nombre otomí) y con una ficha de datos (altitud, población 2020, Pueblo Mágico 2012). La guía práctica tiene ahora "Preguntas antes de ir": seguridad, moverse sin auto, el tren y las inundaciones. Se quitaron de las guías la Fiesta en el Aire de diciembre (no hay edición desde 2021), las callejoneadas mensuales y el video mapping (sin registro desde 2024) y el Festival del Vino Queretano "en Tequis" (en 2026 fue en Corregidora). La página de balnearios ya no dice que todos son termales: solo El Oasis lo publica.
+
+---
+
 ## Pendientes
 
 | Pendiente | Quién |
@@ -300,3 +316,8 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 | Fotos reales para los lugares: hoy 17 restaurantes comparten la misma foto genérica | Tú / negocios |
 | Dar de alta otros lugares reales de la investigación, si se confirman (Balneario La Vega, Quesos Quiroz, Granja Lavyn; lista en `docs/datos/investigacion-guias-2026-11.md`) | Tú en el panel |
 | Traducir en `web/lib/i18n/data-en.ts` cada lugar o evento nuevo (si no, sale en español en `/en`) | Código |
+| Dar de alta actividades y patrimonio (~19 confirmados: Centro Geográfico, Templo de la Magdalena, Granja Lavyn, Museo ¡México me encanta!, temazcal, minas de ópalo, cabalgatas…) con `docs/datos/investigacion-actividades-patrimonio-2026-11.md`. Las guías ya los nombran: 14 nombres de guías no salen como ficha hasta que existan | Código |
+| Eventos de `docs/datos/investigacion-agenda-2026-11.md`: Desfile Navideño (18 dic), organizador de Estrellas y Raíces y la hora del Año Nuevo en la Plaza (está guardada en UTC) | Código |
+| Pedir permiso escrito para las fotos de webs de negocios: ahora son 43 lugares con foto propia | Tú |
+| Dar acceso a la API de Search Console (cuenta de servicio con permiso Restringido) para revisar búsquedas y posiciones cada semana | Tú |
+

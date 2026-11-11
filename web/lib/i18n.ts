@@ -38,7 +38,22 @@ const SECOND: Record<string, Record<string, string>> = {
     rutas: 'routes',
   },
   rutas: { 'vino-y-queso': 'wine-and-cheese', artesanal: 'crafts', historica: 'history', aventura: 'adventure' },
-  guias: { 'fin-de-semana': 'weekend', 'vinedos-y-quesos': 'wineries-and-cheese', 'en-familia': 'with-kids', 'pena-de-bernal': 'pena-de-bernal' },
+  guias: {
+    'fin-de-semana': 'weekend',
+    'vinedos-y-quesos': 'wineries-and-cheese',
+    'en-familia': 'with-kids',
+    'pena-de-bernal': 'pena-de-bernal',
+    navidad: 'christmas',
+    'que-comer': 'what-to-eat',
+    balnearios: 'hot-springs',
+    'vuelo-en-globo': 'hot-air-balloon',
+    'de-noche': 'at-night',
+    gratis: 'on-a-budget',
+    'en-pareja': 'for-couples',
+    'en-un-dia': 'one-day',
+    clima: 'weather',
+    alrededores: 'nearby',
+  },
 };
 
 // Tercer segmento de /lugares/<categoría>/<tipo> (páginas por tipo, lib/tipos.ts).

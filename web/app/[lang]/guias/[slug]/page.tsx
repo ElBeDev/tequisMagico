@@ -80,7 +80,7 @@ export default async function GuidePage({ params }: PageProps<'/[lang]/guias/[sl
         </nav>
         <div data-reveal="stagger" className="mt-10 max-w-[60ch] space-y-4 text-lead leading-snug">
           {guide.intro.map((p) => (
-            <p key={p}><GuideText text={p} /></p>
+            <p key={p}><GuideText text={p} lang={lang} /></p>
           ))}
         </div>
       </div>
@@ -96,12 +96,12 @@ export default async function GuidePage({ params }: PageProps<'/[lang]/guias/[sl
             <div>
               <div data-reveal="stagger" className="max-w-[60ch] space-y-4">
                 {s.paragraphs.map((p) => (
-                  <p key={p}><GuideText text={p} /></p>
+                  <p key={p}><GuideText text={p} lang={lang} /></p>
                 ))}
               </div>
               {s.tip && (
                 <p data-reveal="up" className="mt-8 max-w-[60ch] bg-surface p-6 sm:p-8">
-                  <GuideText text={s.tip} />
+                  <GuideText text={s.tip} lang={lang} />
                 </p>
               )}
               {rows.length > 0 && (

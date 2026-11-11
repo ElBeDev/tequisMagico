@@ -9,6 +9,7 @@ La base es PostgreSQL 18 y vive en nuestro VPS (solo escucha en local; el panel 
 - `database/databasefix_research_2026-11.sql` — aplicado el 5 nov 2026: viñedos, La Redonda fuera de destacados y 11 lugares sin evidencia desactivados.
 - `database/databasefix_direcciones_2026-11-05.sql` — aplicado el 5 nov 2026: direcciones y pines de los lugares con fuente.
 - `database/databaseseed_lugares_reales_2026-11.sql` — aplicado el 5 nov 2026: 9 lugares reales (2 queserías, 1 viñedo, 4 mercados y 2 balnearios) y el teléfono de Vuela en Globo.
+- `database/databaseseed_hospedaje_2026-11-10.sql`, `databaseseed_gastronomia_2026-11-10.sql`, `databaseseed_balnearios_vinedos_2026-11-10.sql` y `databasefix_ajustes_2026-11-10.sql` — aplicados el 10 nov 2026 (respaldo previo en `/root/respaldos/` del VPS): 83 altas (51 hospedajes, 26 restaurantes, 6 viñedos y tours), 14 correcciones y 19 bajas de la carga inicial sin rastro (3 hoteles, 13 restaurantes y 3 de cestería). Investigación en `docs/datos/investigacion-*-2026-11.md`.
 - `database/databaseschema.sql` — esquema de referencia de las tablas `places` y `events`. Se actualiza a mano cada vez que se corre un `ALTER TABLE` (último cambio: columna `content_verified`).
 - `database/databaseseed_part1.sql`, `databaseseed_part2.sql`, `databaseseed_part3_final.sql` — la carga inicial de 50 lugares. **Ojo**: no todos están verificados como negocios reales (ver abajo).
 - `database/databasefix_research_2026-09.sql` — registro de las correcciones aplicadas tras investigar teléfono/sitio/horario de los 50 lugares: columna `content_verified`, datos nuevos de 7 lugares, 3 lugares desactivados y 1 dirección corregida. Ya está aplicado; solo es referencia.
@@ -23,13 +24,24 @@ Para reconstruir la base desde el repo: `databaseschema.sql`, `snapshot_2026-11-
 
 ## Qué tan confiables son los datos
 
-Tras investigar los lugares de la carga inicial (septiembre y noviembre de 2026):
+Al 10 nov 2026 hay **114 lugares activos**: 52 de hospedaje, 32 de comida, 20 experiencias, 5 sitios turísticos y 5 de compras.
 
 | Estado | Cuántos | Qué significa |
 |---|---|---|
-| `content_verified = true` | 17 | Teléfono/sitio/horario confirmados contra una fuente externa |
-| Desactivados (`is_active = false`) | 11 | Lugares sin evidencia de que existan (lista en `databasefix_research_2026-11.sql`). Quesería Vai y Balneario El Oasis sí existen con otro nombre y otra dirección, y hay que darlos de alta de nuevo |
-| Sin verificar | 28 activos | 26 sin web propia encontrada, con dirección y pin de la carga inicial que no son confiables, y hay que confirmarlos llamando o visitando (incluye La Redonda, con operación suspendida). Los otros 2 son Parque Acuático El Oasis y Termas del Rey: existen según la prensa, pero tienen pin aproximado y horarios que se contradicen |
+| `content_verified = true` | 41 | Web propia, verificada como del negocio, que confirma teléfono y dirección (y horario en restaurantes y actividades) |
+| `content_verified = false` | 73 | Casi todos tienen como única fuente a Turismo municipal (tequis.travel y el Directorio Tequisquiapan 2025 cuentan como una sola): nombre, dirección y teléfono coinciden entre las dos, pero no hay web propia. No llevan amenidades salvo que dos fuentes coincidan, y usan la foto genérica de su categoría |
+| Desactivados | 30 en total | Los 11 de noviembre más 19 del 10 nov 2026: lugares de la carga inicial sin ningún rastro en internet ni en el directorio municipal |
+
+## Vocabulario de amenidades, etiquetas y subcategorías
+
+Las páginas por necesidad de la web (`web/lib/tipos.ts`: "hoteles con alberca", "restaurantes pet friendly"…) filtran por estas palabras exactas en `amenities` o `tags`. Escríbelas igual al dar de alta, y solo si la fuente lo dice (la web del lugar; los íconos de tequis.travel no son fiables, hay fichas copiadas de otro hotel):
+
+- **Hospedaje (amenities):** `Alberca`, `Alberca techada`, `Alberca climatizada`, `Jacuzzi`, `Jacuzzi privado`, `Pozas privadas`, `Spa`, `Temazcal`, `Pet Friendly`, `Desayuno incluido`, `Comidas incluidas`, `Estacionamiento`, `Restaurante`, `Solo adultos`, `Bodas y eventos`, `WiFi`.
+- **Comida (amenities):** `Desayunos`, `Terraza`, `Pet Friendly`, `Área de juegos`, `Música en vivo`, `Reservaciones`, `Para llevar`, `Delivery`, `Bar`, `Vinos locales`, `Opciones veganas`.
+- **Etiquetas:** `Centro` (a pie de la Plaza Miguel Hidalgo, ~1 km), `Familiar`, `Romántico` (solo si el negocio se anuncia así), `Cortes`, `Mariscos`, `Pizza`, `Mexicana`, `Italiana`, `Barbacoa`, `Café`, `Postres`, `Hamburguesas`, `Gratis`, `De noche`. En experiencias, `Camping`.
+- **Subcategorías:** hospedaje `Hotel`, `Hotel Boutique`, `Cabañas`, `Glamping`; comida `Restaurante`, `Cafetería`, `Bar`, `Pizzería`, `Nevería`, `Antojitos`, `Mariscos`, `Parrilla`, `Panadería`, `Cervecería`; experiencias `Viñedo`, `Quesería`, `Balneario`, `Spa`, `Temazcal`, `Globo Aerostático`, `Tour`, `Taller`, `Cabalgata`, `Mina de ópalo`, `Granja`; turístico `Templo`, `Plaza`, `Monumento`, `Parque`, `Naturaleza`, `Museo`, `Hacienda`, `Galería`.
+
+Toda amenidad, etiqueta o subcategoría nueva necesita su traducción en `web/lib/i18n/data-en.ts` (`TERMS_EN`, `SUBCATEGORIES_EN`) y, si es subcategoría, su plural en español en `SUBCATEGORY_PLURALS` de `web/lib/data.ts`. Los ids de lugares nuevos son `uuid5(NAMESPACE_URL, 'https://tequismagico.com/lugar/<slug>')`.
 
 `content_verified` es distinto de `is_verified`: el segundo es la insignia "Verificado" que el usuario ve en la app.
 

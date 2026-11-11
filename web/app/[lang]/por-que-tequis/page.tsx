@@ -11,20 +11,25 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/por-que-te
     ? {
         title: 'Why visit Tequisquiapan, a Pueblo Mágico',
         description:
-          'History of Tequisquiapan since 1551, the origin of its name, why it is a Pueblo Mágico, basket weaving, the Art, Cheese and Wine Route and Peña de Bernal.',
+          'History of Tequisquiapan since 1551, what its name means, population and altitude, why it is a Pueblo Mágico, Cantinflas’s “El Profe” and basket weaving.',
         alternates: alternates(lang, '/por-que-tequis'),
       }
     : {
         title: 'Por qué visitar Tequisquiapan, Pueblo Mágico',
         description:
-          'Historia de Tequisquiapan desde 1551, el origen de su nombre, por qué es Pueblo Mágico, la cestería, la Ruta Arte, Queso y Vino y la Peña de Bernal.',
+          'Historia de Tequisquiapan desde 1551, qué significa su nombre, población y altitud, por qué es Pueblo Mágico, Cantinflas y “El Profe”, y la cestería.',
         alternates: alternates(lang, '/por-que-tequis'),
       };
 }
 
 // Datos tomados de Wikipedia, tequis.travel, gob.mx/Sectur, INEGI y prensa (investigación de
 // noviembre 2026). Donde las fuentes no coinciden (el día exacto de la fundación, la edad de
-// la tradición cestera), el texto se queda con lo que sí coincide.
+// la tradición cestera), el texto se queda con lo que sí coincide. Nombre, datos e historia se
+// revisaron contra docs/datos/investigacion-destino-2026-11.md (10 nov 2026): se quitaron el
+// "centro real en Zacatecas", Carranza "asiduo" a los baños, el "auge de los años 50" y el
+// nombre otomí "Nthe", que no tienen fuente; lo de 1916 se cuenta como lo cuenta el municipio.
+// Población: 72,201 es el municipio y 34,955 la cabecera (Wikipedia da la de la cabecera).
+const ITER_2020 = 'https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_22_cpv2020_csv.zip';
 const COPY = {
   es: {
     heroAlt: 'Parroquia de Santa María de la Asunción',
@@ -35,28 +40,46 @@ const COPY = {
       'Lo que lo hace distinto cabe en un paseo de fin de semana: un centro de portales y cantera, el oficio de la cestería, la tradición termal que lo convirtió en destino turístico, los viñedos y queserías de la Ruta Arte, Queso y Vino, y una agenda de fiestas que casi no se detiene en todo el año.',
     name: 'El nombre',
     words: [
-      { k: 'Tequixquitl', v: 'tequesquite, el salitre mineral' },
+      { k: 'Tequixqui', v: 'tequesquite, el salitre mineral' },
       { k: 'Atl', v: 'agua' },
       { k: 'Apan', v: 'lugar' },
     ],
     nameText: (
       <>
-        El nombre viene del náhuatl y se suele traducir como <em>lugar sobre el río de tequesquite</em>. En otomí, el pueblo se llama
-        <em> Nthe</em>.
+        El nombre viene del náhuatl y, según el portal de turismo del municipio, significa <em>lugar sobre el río de tequesquite</em>,
+        una sal mineral.
       </>
     ),
+    facts: 'Datos de Tequis',
+    factsList: [
+      { k: 'Querétaro', v: 'es el estado. El municipio y su cabecera se llaman Tequisquiapan.' },
+      { k: '1,870 m', v: 'de altitud sobre el nivel del mar, en la cabecera.' },
+      { k: '72,201', v: 'habitantes en todo el municipio, según el Censo 2020 del INEGI.' },
+      { k: '34,955', v: 'habitantes en la cabecera, el pueblo, según el mismo censo.' },
+      { k: '1551', v: 'año de su fundación, según el municipio.' },
+      { k: '2012', v: 'Pueblo Mágico desde el 17 de octubre: el 61.º del país.' },
+    ],
     history: 'Historia',
     historyLead: 'Casi cinco siglos alrededor del agua.',
     timeline: [
-      { year: 'Antes de 1551', text: 'Tierra de pueblos otomíes junto al río San Juan.' },
-      { year: '1551', text: 'Se funda el pueblo en los barrios de San Juan y La Magdalena; la misa de fundación se celebra en el templo de Santa María Magdalena.' },
-      { year: '1567', text: 'Se construye la pila de agua que hoy da nombre al Parque La Pila.' },
-      { year: '1656', text: 'Una cédula real fija el nombre de Santa María de la Asunción de Tequisquiapan.' },
+      { year: '1551', text: 'Se funda el pueblo en los barrios de San Juan y La Magdalena; la misa de fundación se celebra en el templo de Santa María Magdalena, restaurado en 2022.' },
+      { year: '1567', text: 'La pila que hoy da nombre al Parque La Pila ya almacena el agua del pueblo.' },
+      { year: '1656', text: 'Para entonces, el pueblo ya se llama Tequisquiapan.' },
       { year: '1874', text: 'Se termina la segunda etapa de la parroquia de Santa María de la Asunción; su reloj es de 1897 y la cúpula se levantó en 1921 con trabajo voluntario de los vecinos.' },
       { year: '1902', text: 'Según el municipio, se inaugura la Estación Bernal del ferrocarril, a las afueras del pueblo; se llama así por su vista a la Peña.' },
-      { year: '1916', text: 'Venustiano Carranza, asiduo a sus aguas termales, decreta a Tequisquiapan centro geográfico del país. El monumento del péndulo lo recuerda (el centro geográfico real está en Zacatecas).' },
-      { year: 'Años 50', text: 'Auge de los balnearios de aguas termales: Tequis se vuelve destino de descanso para la Ciudad de México y el Bajío.' },
-      { year: '2012', text: 'El 17 de octubre recibe el nombramiento de Pueblo Mágico, el cuarto de Querétaro.' },
+      { year: '1916', text: 'Según el municipio, el presidente Venustiano Carranza decreta a Tequisquiapan centro geográfico del país. Lo recuerda un monumento en forma de péndulo en la calle Niños Héroes, con una placa colocada en 1978.' },
+      { year: '1971', text: 'Cantinflas filma aquí “El Profe”. Según el municipio, la película se grabó toda en Tequis, que en la historia se llama El Romeral, y en ella se ven el Centro Geográfico y la escuela primaria Rafael Zamorano. Desde 2018, una escultura del actor, de tamaño natural, está en el Jardín del Arte.' },
+      { year: '2012', text: 'El 17 de octubre recibe el nombramiento de Pueblo Mágico: el 61.º del país y el cuarto de Querétaro.' },
+    ],
+    sources: 'Fuentes',
+    sourcesList: [
+      { label: 'INEGI: Censo 2020, localidades de Querétaro', url: ITER_2020 },
+      { label: 'tequis.travel: Sitios históricos', url: 'https://tequis.travel/historicos_tequisquiapan/' },
+      { label: 'tequis.travel: Iglesias', url: 'https://tequis.travel/iglesias_tequisquiapan/' },
+      { label: 'tequis.travel: Cantinflas y “El profe”', url: 'https://tequis.travel/cantinflas_el_profe_tequisquiapan/' },
+      { label: 'Expansión: los nuevos Pueblos Mágicos (octubre de 2012)', url: 'https://expansion.mx/salud/2012/10/17/huichapan-y-tequisquiapan-los-dos-nuevos-pueblos-magicos-de-mexico' },
+      { label: 'Wikipedia en español', url: 'https://es.wikipedia.org/wiki/Tequisquiapan' },
+      { label: 'Wikipedia en inglés', url: 'https://en.wikipedia.org/wiki/Tequisquiapan' },
     ],
     heritageAlt: 'Templo de Santa María Magdalena',
     heritage: 'Templos, barrios y capillas',
@@ -102,28 +125,46 @@ const COPY = {
       'What makes it different fits into a weekend: a center of stone arcades, the craft of basket weaving, the hot-spring tradition that made it a getaway, the wineries and cheese makers of the Art, Cheese and Wine Route, and a calendar of festivals that barely stops all year.',
     name: 'The name',
     words: [
-      { k: 'Tequixquitl', v: 'tequesquite, a mineral salt' },
+      { k: 'Tequixqui', v: 'tequesquite, a mineral salt' },
       { k: 'Atl', v: 'water' },
       { k: 'Apan', v: 'place' },
     ],
     nameText: (
       <>
-        The name comes from Nahuatl and is usually translated as <em>place on the river of tequesquite</em>. In Otomí, the town is called
-        <em> Nthe</em>.
+        The name comes from Nahuatl and, according to the municipal tourism portal, means <em>place on the river of tequesquite</em>,
+        a mineral salt.
       </>
     ),
+    facts: 'Tequis at a glance',
+    factsList: [
+      { k: 'Querétaro', v: 'is the state. Both the municipality and its main town are called Tequisquiapan.' },
+      { k: '1,870 m', v: 'above sea level (6,135 ft), in the main town.' },
+      { k: '72,201', v: 'people live in the whole municipality, according to INEGI’s 2020 census.' },
+      { k: '34,955', v: 'people live in the main town itself, according to the same census.' },
+      { k: '1551', v: 'the year it was founded, according to the municipality.' },
+      { k: '2012', v: 'a Pueblo Mágico since October 17: the 61st in Mexico.' },
+    ],
     history: 'History',
     historyLead: 'Nearly five centuries around water.',
     timeline: [
-      { year: 'Before 1551', text: 'Land of Otomí villages along the San Juan River.' },
-      { year: '1551', text: 'The town is founded in the San Juan and La Magdalena neighborhoods; the founding Mass is held in the church of Santa María Magdalena.' },
-      { year: '1567', text: 'The water tank that gives Parque La Pila its name is built.' },
-      { year: '1656', text: 'A royal decree sets the name Santa María de la Asunción de Tequisquiapan.' },
+      { year: '1551', text: 'The town is founded in the San Juan and La Magdalena neighborhoods; the founding Mass is held in the church of Santa María Magdalena, restored in 2022.' },
+      { year: '1567', text: 'The water tank that gives Parque La Pila its name is already storing the town’s water.' },
+      { year: '1656', text: 'By then, the town is already called Tequisquiapan.' },
       { year: '1874', text: 'The second stage of the parish church of Santa María de la Asunción is finished; its clock dates from 1897 and the dome was raised in 1921 by volunteer neighbors.' },
       { year: '1902', text: 'According to the municipality, the Bernal railway station opens on the outskirts of town; it is named for its view of the Peña.' },
-      { year: '1916', text: 'Venustiano Carranza, a regular at its hot springs, declares Tequisquiapan the geographic center of the country. The pendulum monument recalls it (the actual geographic center is in Zacatecas).' },
-      { year: '1950s', text: 'The heyday of the hot-spring resorts: Tequis becomes a getaway for Mexico City and the Bajío.' },
-      { year: '2012', text: 'On October 17 it is named a Pueblo Mágico, the fourth in Querétaro.' },
+      { year: '1916', text: 'According to the municipality, President Venustiano Carranza declares Tequisquiapan the geographic center of the country. A pendulum-shaped monument on Niños Héroes street, with a plaque placed in 1978, recalls it.' },
+      { year: '1971', text: 'Cantinflas films “El Profe” here. According to the municipality, the movie was shot entirely in Tequis, which appears in the story as El Romeral, and it shows the Centro Geográfico and the Rafael Zamorano elementary school. Since 2018, a life-size statue of the actor has stood in the Jardín del Arte.' },
+      { year: '2012', text: 'On October 17 it is named a Pueblo Mágico: the 61st in Mexico and the fourth in Querétaro.' },
+    ],
+    sources: 'Sources',
+    sourcesList: [
+      { label: 'INEGI: 2020 census, Querétaro localities', url: ITER_2020 },
+      { label: 'tequis.travel: Historic sites', url: 'https://tequis.travel/historicos_tequisquiapan/' },
+      { label: 'tequis.travel: Churches', url: 'https://tequis.travel/iglesias_tequisquiapan/' },
+      { label: 'tequis.travel: Cantinflas and “El profe”', url: 'https://tequis.travel/cantinflas_el_profe_tequisquiapan/' },
+      { label: 'Expansión: the new Pueblos Mágicos (October 2012)', url: 'https://expansion.mx/salud/2012/10/17/huichapan-y-tequisquiapan-los-dos-nuevos-pueblos-magicos-de-mexico' },
+      { label: 'Wikipedia (Spanish)', url: 'https://es.wikipedia.org/wiki/Tequisquiapan' },
+      { label: 'Wikipedia (English)', url: 'https://en.wikipedia.org/wiki/Tequisquiapan' },
     ],
     heritageAlt: 'Church of Santa María Magdalena',
     heritage: 'Churches, neighborhoods and chapels',
@@ -193,6 +234,18 @@ export default async function PorQueTequisPage({ params }: PageProps<'/[lang]/po
         </p>
       </section>
 
+      <section id="datos" className="frame scroll-mt-28 pt-40" aria-labelledby="datos-title">
+        <h2 id="datos-title" data-split="lines" className="heading">{c.facts}</h2>
+        <div data-reveal="stagger" className="mt-12 grid grid-cols-1 gap-2 md:grid-cols-3">
+          {c.factsList.map((f) => (
+            <div key={f.k} className="bg-surface p-8 sm:p-10">
+              <p className="font-display text-title leading-none tracking-[-0.02em]">{f.k}</p>
+              <p className="mt-4">{f.v}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section id="historia" className="frame scroll-mt-28 pt-40">
         <SectionTitle title={c.history} lead={c.historyLead} />
         <ol className="mt-14 space-y-10">
@@ -203,6 +256,15 @@ export default async function PorQueTequisPage({ params }: PageProps<'/[lang]/po
             </li>
           ))}
         </ol>
+        <p className="meta mt-14 max-w-[80ch] text-muted">
+          {c.sources}:{' '}
+          {c.sourcesList.map((s, i) => (
+            <span key={s.url}>
+              {i > 0 && ' · '}
+              <a href={s.url} target="_blank" rel="noopener noreferrer" className="hover:text-ink hover:underline">{s.label}</a>
+            </span>
+          ))}
+        </p>
       </section>
 
       <Feature id="patrimonio" photo={PHOTOS.temploMagdalena} alt={c.heritageAlt} title={c.heritage}>

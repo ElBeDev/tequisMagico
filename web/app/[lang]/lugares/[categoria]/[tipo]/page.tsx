@@ -3,11 +3,12 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { CATEGORIES, SITE_URL, categoryFromSlug, categoryInfo, getPlaces, toSummary } from '@/lib/data';
 import { LANGS, alternates, href, langOf } from '@/lib/i18n';
-import { MIN_PLACES, activeTypePages, placesOfType, typePage } from '@/lib/tipos';
+import { MIN_PLACES, activeTypePages, isNeedPage, placesOfType, typePage } from '@/lib/tipos';
 import { JsonLd } from '@/components/Cards';
 import { PlaceGrid, TypeTabs } from '@/components/PlaceGrid';
 import PlaceExplorer from '@/components/PlaceExplorer';
 import { PageIntro } from '@/components/Section';
+import GuideText from '@/components/GuideText';
 
 // Página por tipo de lugar (lib/tipos.ts): /lugares/experiencias/balnearios. Solo existe con
 // MIN_PLACES lugares o más; si un tipo baja de ahí (un lugar desactivado), da 404 y sale del sitemap.
@@ -50,8 +51,16 @@ export default async function TipoPage({ params }: PageProps<'/[lang]/lugares/[c
   const { lang, category, type, all, places } = data;
   const c = categoryInfo(lang, category);
   const path = `/lugares/${c.slug}/${type.slug}`;
-  const siblings = activeTypePages(all).filter((t) => t.category === category);
-  const title = lang === 'en' ? `${type.label.en} in Tequisquiapan` : `${type.label.es} en Tequisquiapan`;
+  // Primero los tipos de lugar y después las páginas por necesidad (con alberca, pet friendly…).
+  const siblings = activeTypePages(all)
+    .filter((t) => t.category === category)
+    .sort((a, b) => Number(isNeedPage(a)) - Number(isNeedPage(b)));
+  // "Con alberca en Tequisquiapan" no se entiende solo: las páginas por necesidad usan su título completo.
+  const title = isNeedPage(type)
+    ? type.title[lang]
+    : lang === 'en'
+      ? `${type.label.en} in Tequisquiapan`
+      : `${type.label.es} en Tequisquiapan`;
 
   // Migas y lista para Google: la página como listado de sus lugares.
   const jsonLd = [
@@ -76,12 +85,14 @@ export default async function TipoPage({ params }: PageProps<'/[lang]/lugares/[c
   return (
     <>
       <JsonLd data={jsonLd} />
-      <PageIntro title={title}>{type.intro[lang]}</PageIntro>
+      <PageIntro title={title}>
+        <GuideText text={type.intro[lang]} lang={lang} />
+      </PageIntro>
       <div className="frame">
         <TypeTabs types={siblings} category={category} active={type.slug} lang={lang} />
         <div className="mt-10">
           <Suspense fallback={<PlaceGrid places={places} lang={lang} reveal={false} className="mt-12" />}>
-            <PlaceExplorer places={places} lang={lang} subfilters={type.keys.length > 1} />
+            <PlaceExplorer places={places} lang={lang} subfilters={type.keys.length !== 1} />
           </Suspense>
         </div>
       </div>

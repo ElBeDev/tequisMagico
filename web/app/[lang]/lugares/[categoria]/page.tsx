@@ -4,7 +4,7 @@ import { Fragment, Suspense } from 'react';
 import Link from 'next/link';
 import { CATEGORIES, categoryFromSlug, categoryInfo, getPlaces, toSummary, type PlaceCategory } from '@/lib/data';
 import { LANGS, alternates, href, langOf } from '@/lib/i18n';
-import { activeTypePages } from '@/lib/tipos';
+import { activeTypePages, isNeedPage } from '@/lib/tipos';
 import { CategoryTabs, PlaceGrid } from '@/components/PlaceGrid';
 import PlaceExplorer from '@/components/PlaceExplorer';
 import { PageIntro } from '@/components/Section';
@@ -99,7 +99,9 @@ export default async function CategoriaPage({ params }: PageProps<'/[lang]/lugar
   const all = (await getPlaces(lang)).map(toSummary);
   const places = all.filter((x) => x.category === category);
   const c = categoryInfo(lang, category);
-  const types = activeTypePages(all).filter((t) => t.category === category);
+  const active = activeTypePages(all).filter((t) => t.category === category);
+  const types = active.filter((t) => !isNeedPage(t));
+  const needs = active.filter(isNeedPage);
 
   return (
     <>
@@ -112,6 +114,21 @@ export default async function CategoriaPage({ params }: PageProps<'/[lang]/lugar
             {types.map((t, i) => (
               <Fragment key={t.slug}>
                 {i > 0 && (i === types.length - 1 ? (lang === 'en' ? ' and ' : ' y ') : ', ')}
+                <Link href={href(lang, `/lugares/${c.slug}/${t.slug}`)} className="text-ink underline decoration-1 underline-offset-4 hover:decoration-2">
+                  {t.label[lang].toLowerCase()}
+                </Link>
+              </Fragment>
+            ))}
+            .
+          </span>
+        )}
+        {needs.length > 0 && (
+          // Páginas por necesidad (hoteles con alberca, pet friendly…), lo que más se busca en Google.
+          <span className="mt-2 block text-body text-muted">
+            {lang === 'en' ? 'Popular searches: ' : 'Lo que más se busca: '}
+            {needs.map((t, i) => (
+              <Fragment key={t.slug}>
+                {i > 0 && (i === needs.length - 1 ? (lang === 'en' ? ' and ' : ' y ') : ', ')}
                 <Link href={href(lang, `/lugares/${c.slug}/${t.slug}`)} className="text-ink underline decoration-1 underline-offset-4 hover:decoration-2">
                   {t.label[lang].toLowerCase()}
                 </Link>

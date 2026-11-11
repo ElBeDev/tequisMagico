@@ -22,6 +22,9 @@ import { activeTypePages } from './tipos';
 // conteo, próximos eventos) y una tarjeta destacada con foto. Los `href` ya salen en el idioma
 // de la página.
 
+/** Guías que salen en el menú (slug en español), en el orden de GUIDES. */
+const MENU_GUIDES = ['fin-de-semana', 'en-un-dia', 'navidad', 'vinedos-y-quesos', 'balnearios', 'vuelo-en-globo', 'en-familia'];
+
 export type NavLink = { href: string; label: string; meta?: string };
 export type NavGroup = { title: string; href?: string; links: NavLink[] };
 export type NavFeature = { image: string; eyebrow: string; title: string; href: string; cta: string };
@@ -200,7 +203,8 @@ export function buildNav(places: Place[], events: TequisEvent[], today: string, 
         {
           title: L('Guías', 'Guides'),
           href: h('/guias'),
-          links: GUIDES.map((g, i) => ({ href: h(`/guias/${g.slug}`), label: guides[i].title })),
+          // El panel no cabe con todas: las más buscadas, y "Ver todas" lleva al índice.
+          links: GUIDES.flatMap((g, i) => (MENU_GUIDES.includes(g.slug) ? [{ href: h(`/guias/${g.slug}`), label: guides[i].title }] : [])),
         },
       ],
       feature: {

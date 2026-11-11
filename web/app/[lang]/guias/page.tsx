@@ -11,13 +11,13 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/guias'>): 
   return lang === 'en'
     ? {
         title: 'Tequisquiapan travel guides',
-        description: 'Guides to plan your visit to Tequisquiapan: a weekend itinerary, wineries and cheese makers, Tequis with kids and Peña de Bernal from Tequis.',
+        description: 'Guides to plan your visit to Tequisquiapan: one day or a weekend, Christmas, hot springs and balloon prices, what to eat, Tequis at night, for couples, with kids, wineries and nearby towns.',
         alternates: alternates(lang, '/guias'),
       }
     : {
         title: 'Guías de viaje de Tequisquiapan',
         description:
-          'Guías para planear tu visita a Tequisquiapan: un fin de semana, viñedos y queserías, Tequis con niños y la Peña de Bernal desde Tequis.',
+          'Guías para planear tu visita a Tequisquiapan: un día o un fin de semana, Navidad, precios de balnearios y globo, qué comer, de noche, en pareja, con niños, viñedos y pueblos cercanos.',
         alternates: alternates(lang, '/guias'),
       };
 }
@@ -31,8 +31,8 @@ export default async function GuiasPage({ params }: PageProps<'/[lang]/guias'>) 
         title={lang === 'en' ? 'Guides' : 'Guías'}
         lead={
           lang === 'en'
-            ? 'To plan your visit: what to do on a weekend, where to taste wine and cheese, what to do with kids and how to get to the Peña.'
-            : 'Para planear la visita: qué hacer en un fin de semana, dónde probar vino y queso, qué hacer con niños y cómo llegar a la Peña.'
+            ? 'To plan your visit: itineraries for a day or a weekend, the season’s events, what hot springs and balloon flights cost, where to eat and what to see nearby.'
+            : 'Para planear la visita: itinerarios de un día o de fin de semana, la temporada, cuánto cuestan los balnearios y el globo, qué comer y qué ver cerca.'
         }
       />
 

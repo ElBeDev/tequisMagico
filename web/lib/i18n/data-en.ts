@@ -6,8 +6,8 @@ export type EventEn = { title: string; shortDescription: string; fullDescription
 
 export const PLACES_EN: Record<string, PlaceEn> = {
   'b3aaa4ec-f45d-47ab-8b96-64c7c39e7633': { // Globos Aerostáticos Tequisquiapan
-    shortDescription: 'Sunrise hot air balloon flights',
-    fullDescription: 'Experience Tequisquiapan from the sky. Sunrise hot air balloon flights with panoramic views of the Pueblo Mágico and the vineyards. Includes transportation, a sparkling wine toast and a flight certificate.',
+    shortDescription: 'Sunrise hot air balloon flights with Vuela en Globo',
+    fullDescription: 'Sunrise hot air balloon flights with Vuela en Globo, from Sepansa Balloons, a balloon maker in Tequisquiapan since 1982. The flight lasts 45 minutes to 1 hour; passengers meet at Jazmín 35 and are driven from there to the balloon port. In November 2026 a shared flight cost MX$2,799 per person and a private flight for two MX$8,499, and there were also a pet-friendly flight and a flight combined with horseback riding. Children from age 4 can fly with an adult; with wind, rain or fog the flight is rescheduled.',
   },
   '8abdbe43-f7a4-4253-a4ca-3606fc35d3a4': { // La Casa del Atrio
     shortDescription: '5-star boutique hotel',
@@ -30,8 +30,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Italian restaurant with a Neapolitan chef. Fresh homemade pasta and wood-fired pizzas with imported ingredients. Cozy atmosphere.',
   },
   'e83905fa-1335-4bc7-b117-a917d5246a53': { // Viñedos La Redonda
-    shortDescription: 'Family-owned boutique winery',
-    fullDescription: 'Family-owned boutique winery. Tastings paired with artisanal products and tours of the vineyards. Private events and weddings available.',
+    shortDescription: 'Winery from 1975 with a grape-stomping harvest festival',
+    fullDescription: 'Winery founded in 1975 by the Italian Vittorio Bortoluz in Ezequiel Montes; it sold grapes for decades and has made its own wine since 2003, under the La Redonda, Orlandi and Sierra Gorda labels. It is known for its harvest festival with grape stomping and has the Trattoria Orlandi, an Italian restaurant. Its operations stopped in late 2025 because of a legal dispute, and in November 2026 its website was still being updated: call to check whether it has reopened before you go.',
   },
   '955ec3b9-eb9e-42e9-a851-5791adf67eaa': { // Plaza Miguel Hidalgo
     shortDescription: 'The heart of the Pueblo Mágico',
@@ -66,17 +66,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Artisanal cheese maker that has won multiple awards. Goat, cow and sheep milk cheeses. Guided tastings and direct sales.',
   },
   'db284afc-c328-4fca-9bec-2bbc453c222f': { // Freixenet México
-    shortDescription: 'The largest wine cellar in Latin America',
-    fullDescription: 'The largest wine cellar in Latin America. Tours of the underground cellars and tastings of sparkling wines made with the traditional method. An experience not to be missed.',
-    schedule: {
-      'lunes': '11:00 am – 6:00 pm',
-      'martes': 'closed (not explicitly confirmed; missing from the official table)',
-      'miércoles': '11:00 am – 6:00 pm',
-      'jueves': '11:00 am – 6:00 pm',
-      'viernes': '11:00 am – 6:00 pm',
-      'sábado': '12:00 pm – 7:00 pm',
-      'domingo': '11:00 am – 6:00 pm',
-    },
+    shortDescription: 'Finca Sala Vivé: sparkling wines and a cellar 25 m underground',
+    fullDescription: 'Freixenet’s Finca Sala Vivé, in Ezequiel Montes, describes itself as Mexico’s largest sparkling wine house, since 1979. The Sala Vivé tour lasts 45 minutes, goes down to a cellar 25 m underground (14 to 18 °C, so bring a sweater) and ends with a tasting; in November 2026 it cost MX$310 for adults, MX$250 for seniors and people with disabilities, and MX$210 for children. On weekdays tours leave at noon, 2 PM and 5 PM, and on weekends every hour from 11 AM to 5 PM, when they tend to sell out: buy online. No ticket is needed to get in, eat at the Food Garden or have wine, and pets are allowed in the open areas but not in the cellar.',
   },
   '81c5c200-1fcb-4943-a4df-8cb6395f3e50': { // Templo de Santa María de la Asunción
     shortDescription: '18th-century neoclassical church',
@@ -116,8 +107,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Artisanal cheese factory with production tours. Includes a shop and a café where you can taste the cheeses with local wines.',
   },
   '3f47bf08-7a3d-4a3e-9aba-dc30785a0570': { // Viñedos Azteca
-    shortDescription: 'Winery with colonial architecture',
-    fullDescription: 'Winery with beautiful Mexican colonial architecture. Educational tours, professional tastings and a gourmet restaurant overlooking the vineyards.',
+    shortDescription: 'Hacienda-style winery that makes wine and vermouth',
+    fullDescription: 'Winery in Ezequiel Montes, across the road from Freixenet, with the feel of a Mexican hacienda, gardens and lakes; besides wine, it makes vermouth. In 2026 its tours, all with an engraved glass, cost from MX$295 (1 hour, one tasting) to MX$750 (VIP, with 5 wines and a sommelier), and the vermouth tour MX$500. The vineyard is open all week, but the winery can only be visited on Saturdays and Sundays; for kids there’s “Pinta tu botella” (paint your own bottle, MX$150). Its restaurant, El Itacate, is open Tuesday to Sunday, noon to 5 PM.',
   },
   '7ac9dd61-1eb9-44f7-aad7-5ed3faa19d12': { // La Pila
     shortDescription: 'Historic pink cantera stone fountain',
@@ -143,17 +134,17 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Horseback rides through the countryside',
     fullDescription: 'Horseback rides through the Querétaro countryside and hills with panoramic views. Experienced guides and gentle horses. 1-, 2- or 4-hour tours available.',
   },
-  'b9a724be-e47e-4faa-9562-4b17d1fc44e8': { // Hotel Posada Tequisquiapan
-    shortDescription: 'Traditional hotel with gardens',
-    fullDescription: 'Traditional family-run hotel with beautiful gardens and a pool. Central location, 3 blocks from the main square. Excellent value for money.',
+  'b9a724be-e47e-4faa-9562-4b17d1fc44e8': { // Posada Tequisquiapan (antes "Hotel Posada Tequisquiapan"; REEMPLAZA la entrada que ya existe con este id)
+    shortDescription: 'Guesthouse on Moctezuma street, 300 m from the main square',
+    fullDescription: 'Guesthouse at Moctezuma 6, Centro, about 300 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 2-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
   },
   '335a1a84-0d8e-415c-8d09-2b1227d67f45': { // Café del Centro
     shortDescription: 'Specialty coffee under the arcades',
     fullDescription: 'Traditional café under the arcades of the plaza. Specialty coffee from Veracruz, artisanal bakery and homemade desserts. Perfect for breakfast or an afternoon snack.',
   },
   'ad124805-fa89-49fa-ab2c-2839d59ee840': { // K'puchinos Restaurant
-    shortDescription: 'Mexican-international fusion',
-    fullDescription: 'Fusion restaurant with an interior garden. Varied menu that includes pasta, pizza, fish and Mexican dishes. Live music on weekends.',
+    shortDescription: 'Traditional Querétaro cooking on the main square',
+    fullDescription: 'A restaurant that has been on the main square in downtown Tequis for more than 35 years. Its traditional Querétaro cooking is made by mayoras, women cooks from the region, with local ingredients: traditional breakfasts, lunches and dinners. On Sundays and holidays there is a breakfast buffet, and on Friday and Saturday nights, live music. It has a terrace on the pedestrian street, with a pet-friendly area.',
   },
   '6df1911b-f765-4873-8151-5ba8d43b0511': { // Quesos San Juanico
     shortDescription: 'More than 30 years of tradition',
@@ -184,8 +175,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Restaurant located under the historic arcades. Specializes in traditional Querétaro cooking: enchiladas queretanas, cecina, nopalitos and gorditas. Family-friendly, authentic atmosphere.',
   },
   'a489a939-80e6-490e-982b-183785468864': { // Los Rosales Viñedos
-    shortDescription: 'Traditional family winery',
-    fullDescription: 'Family winery with a three-generation tradition. Informal tastings in a relaxed setting and direct sales of artisanal wines.',
+    shortDescription: 'Winery over 40 years old, about 10 minutes from Tequis',
+    fullDescription: 'Winery over 40 years old, about 10 minutes from Tequis on the road to Ezequiel Montes, that has made its own wine since 2011. Its oldest vine, the “Salvador”, came from Bordeaux, and it produces 20,000 to 30,000 bottles a year. It offers guided tours with tastings and meals in the garden, but it has no website of its own and doesn’t publish hours or prices.',
   },
   '196ae5dd-edb2-4327-b060-331c51ffc58f': { // Puente Colgante México-Querétaro
     shortDescription: 'Historic bridge from 1910',
@@ -212,16 +203,16 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Simple, clean hotel in the heart of the historic center. Ideal for travelers on a tight budget. Basic rooms with private bathroom.',
   },
   'ae31efd3-81cc-5ac7-92b5-66e8172ea106': { // Cava de Quesos Bocanegra
-    shortDescription: "The first cheese cave in Tequis",
-    fullDescription: "Underground cave where artisan European-style cheeses from the NéOle label are aged. The 40-minute cave tour leaves every hour from 10 am to 4 pm, every day; booking is recommended. There is also a restaurant.",
+    shortDescription: 'The first cheese cave in Tequis',
+    fullDescription: 'The first cheese cave in Tequisquiapan: an underground cellar where artisan European-style cheeses from the NéOle label are aged. The 40-minute cave tour leaves every hour from 10 AM to 4 PM, every day; in November 2026 it cost MX$260, MX$310 with beer and MX$370 with wine, mezcal or tequila, and children under 5 went free. Booking is recommended, pets aren’t allowed, and there is a restaurant, except on Tuesdays.',
   },
   'eba5f710-5769-5afa-b66c-80006c114be2': { // Finca VAI
-    shortDescription: "Family cheese ranch with tours",
-    fullDescription: "Cheese ranch with a family history dating back to the 1920s. The cheese tour includes the livestock, the factory, the aging cellar and a guided tasting. Small groups don’t need to book; groups of more than 10 do. It is half an hour from Tequis, in the municipality of Colón.",
+    shortDescription: 'Family cheese ranch with tours',
+    fullDescription: 'Cheese ranch with a family history dating back to the 1920s, in Purísima de Cubos, in the municipality of Colón, half an hour from Tequis. The cheese tour goes through the livestock (cows, goats and sheep), the old factory and the aging cellar, and ends with a guided tasting; in November 2026 it cost MX$210 per person, and children under 4 went free. Small groups don’t need to book; groups of more than 10 do.',
   },
   'd020202d-8a87-58a6-b976-1d667512b13a': { // Bodegas De Cote
-    shortDescription: "Winery in the Bernal Valley",
-    fullDescription: "Winery with more than 50 hectares and 21 grape varieties. It offers tours on foot, by bike and by train, tastings, a Gran Reserva option and grape stomping. Prices aren’t published, so ask when you book.",
+    shortDescription: 'Winery in the Bernal Valley',
+    fullDescription: 'Winery with more than 50 hectares and 21 grape varieties in Ezequiel Montes, about 22 km from Tequis. It offers tours on foot, by bike and by train, tastings, a Gran Reserva option and grape stomping, every day from 11 AM to 5 PM. Prices aren’t published, so ask when you book.',
   },
   '03169b97-2087-5a89-a88c-0072c7763de5': { // Mercado Artesanal Telésforo Trejo
     shortDescription: "More than 60 craft stalls",
@@ -240,12 +231,12 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: "Market with about 600 craft stalls and a street food corridor, next to the bus station. It only opens on Saturdays, Sundays, long weekends and holidays.",
   },
   '04332bc5-6b65-5067-80bb-bd6d1562e941': { // Parque Acuático El Oasis
-    shortDescription: "Thermal pools at 36 °C",
-    fullDescription: "Water park with 36 °C thermal water, a wave pool, an Olympic pool, waterslides, waterfalls, a zip line and 262 camping spots, plus a restaurant and free parking. Open Friday to Sunday, 9 AM to 6 PM, plus school holidays and public holidays. In 2026 admission was 190 pesos for adults and 150 for children and seniors.",
+    shortDescription: 'Thermal pools at 36 °C',
+    fullDescription: 'Water park at km 10 of the road to Ezequiel Montes, with 36 °C thermal water, a wave pool, an Olympic pool, waterslides, a zip line, a kids’ area and palapas. It has a restaurant, free parking and 262 camping spots with a grill area. In November 2026 it was open Saturdays and Sundays, 9 AM to 6 PM, plus school and public holidays, and admission was MX$190 for adults and MX$150 for children 1.00 to 1.40 m tall and seniors (MX$250 and MX$220 with camping). In the low season it often runs promotions.',
   },
   'edf8fd31-93ef-5673-8ad5-7341d6fae02d': { // Termas del Rey
-    shortDescription: "Water park with a wave pool and waterslides",
-    fullDescription: "Water park 10 minutes from Tequis, with waterslides, a wave pool, wading pools, a diving pit, lakes and a camping area. Open Friday to Sunday, 9 AM to 6 PM; in 2026 admission was 199 pesos for adults and 125 for children, with a discount when you buy online.",
+    shortDescription: 'Water park with a wave pool and waterslides',
+    fullDescription: 'Water park 10 minutes from Tequis, at km 10 of the road to Ezequiel Montes, with waterslides, a wave pool, wading pools, a diving pit, lakes and palapas. It has a camping area with tent and grill rental, and a VIP area at an extra cost that you book ahead. In November 2026 it was open Friday to Sunday, 9 AM to 6 PM, and admission was MX$199 for adults and MX$125 for children (MX$340 and MX$290 with camping). It advertises discounts for seniors, students, teachers, groups, birthdays and people with disabilities.',
   },
   'cd0b0544-2f71-57d2-b0ca-ecd842577b63': { // El Maravillas
     shortDescription: 'Creative Mexican food with a terrace facing the parish church',
@@ -269,7 +260,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   '4133a23e-60d8-5e22-9d5a-88753a7c5d71': { // Vinícola San Juanito
     shortDescription: 'Boutique winery with tastings and views of the Peña de Bernal',
-    fullDescription: 'Winery founded in 2007 as a self-sustaining farm in San José de la Laja, within the municipality of Tequisquiapan. The tour goes through the fields, the winery and the cellar, and ends with a tasting of 3 or 6 wines. The terrace looks out to the Peña de Bernal and you can eat there. It offers lodging and hosts weddings and events. Small groups don’t need to book; it opens Friday to Sunday, holidays and school vacations.',
+    fullDescription: 'Winery founded in 2007 as a self-sustaining farm in San José de la Laja, within the municipality of Tequisquiapan. The tour goes through the fields, the winery and the cellar; in November 2026 it cost MX$190 (free for children under 12), and tastings of 3 or 6 wines, with or without pizza, cost MX$380 to MX$760. The terrace looks out to the Peña de Bernal; there’s food, a small children’s play area and La Casona, a boutique hotel with just a few rooms. It opens Friday to Sunday, holidays and school vacations, and small groups don’t need to book.',
   },
   'b8fb8442-db5b-57a6-892f-097d5acb62c6': { // Spa Studio 7
     shortDescription: 'Spa at the Hotel San Carlos, with sauna, steam and massages',
@@ -282,7 +273,339 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   'fb30e010-d760-5805-ac5b-e9da4570373d': { // Balneario La Vega
     shortDescription: 'Family water park with an Olympic pool, open every day',
-    fullDescription: 'Water park a few minutes from the main square, in the Barrio de La Magdalena, with an Olympic pool, a waterslide and a wading pool. Camping is allowed, and it has rooms and palapas for groups. Open every day; in 2026 admission was 100 pesos, and 50 for children under 12.',
+    fullDescription: 'Water park in the Barrio de La Magdalena, a few minutes from the main square, with an Olympic pool, waterslides and a wading pool; it’s open every day, 8 AM to 6 PM. Camping is allowed, and its website offers rooms and palapa or cabin rentals, without prices: ask by phone. In August 2026 admission was MX$100, and MX$50 for children under 12.',
+  },
+  '66903af1-5db3-55fd-a72a-570eed274001': { // Hotel Río Tequisquiapan
+    shortDescription: 'Hotel with pools and gardens, 400 m from the main square',
+    fullDescription: 'Hotel on Niños Héroes street, about 400 meters from Plaza Miguel Hidalgo, with pools and gardens. Rooms include king, double, studio and a family Junior room with one king and two single beds. Its restaurant, Río 33, serves breakfast, lunch and dinner, with a kids’ menu; the hotel also offers massages and spaces for events.',
+  },
+  'b8af5274-eaa2-51a2-95c7-f36bd866e8eb': { // Hotel San Carlos
+    shortDescription: 'Downtown hotel with a pool, a gym and Spa Studio 7',
+    fullDescription: 'Downtown hotel, about 500 meters from Plaza Miguel Hidalgo, with single and double rooms, junior suites and master suites. It has a pool, a gym, La Spezia restaurant and Spa Studio 7, with a sauna or steam room, a hot tub and massages. There is also a meeting room and an event hall. Its website has not been updated since 2020, so confirm services when you book.',
+  },
+  '56d20bea-e58d-5269-8a84-bcf606a6c716': { // Matian Hotel Boutique
+    shortDescription: '14-room boutique hotel with a pool, garden and spa',
+    fullDescription: 'A 14-room boutique hotel on Avenida Centenario Norte, three blocks from the town center. It has a pool and garden, the Oliva Spa with massages and a hot tub, a restaurant and bar serving breakfast, lunch and dinner, and parking. Rooms sleep 2 to 4 people, plus a family suite for 5; the hotel arranges romantic dinners, birthdays, corporate events and weddings. In November 2026 its website showed rates from about 1,870 pesos per night.',
+  },
+  'cec87023-bc36-557a-ace4-ce6bc8c99525': { // Hotel La Plaza de Tequisquiapan
+    shortDescription: 'Colonial hotel on the main square, with a garden and pool',
+    fullDescription: 'Colonial hotel on the main square, next to the parish church, with 17 rooms, a garden and a pool. There are rooms for two, some with a king bed and jacuzzi, and rooms for four, some with a jacuzzi and kitchenette. It has two restaurants, La Valentina, serving Mexican food, and Las Brasas, a steakhouse overlooking the square, plus La Cantina bar. 24-hour front desk and parking on 20 de Noviembre street.',
+  },
+  '5abee0eb-9ae6-5412-9b1b-25877f6fda1c': { // Hotel Quinta Tequisquiapan
+    shortDescription: '21-suite hotel with a pool and a suite with a private jacuzzi',
+    fullDescription: 'A hotel with 21 suite-style rooms, open since 1997, about 400 meters from Plaza Miguel Hidalgo. It has an outdoor pool with a bar, a garden, a restaurant, private parking, a 24-hour front desk and an event hall, and its packages include breakfast. The Jacuzzi Suite has a private jacuzzi by the window. In November 2026 rates ranged from 1,850 pesos (standard) to 4,850 (master suite) per night.',
+  },
+  'bfddee5f-f296-5680-a837-8f6513759870': { // Suites Poza Real
+    shortDescription: 'Colonial-style suites with private spring-water pools, by the square',
+    fullDescription: 'A hotel with 15 colonial-style suites, 50 steps from the main square according to its website. Some suites have a private poza, a small pool filled with spring water. There is a pool with a wading area for kids and free covered parking, one car per room. In 2026 a night for two cost from 1,434 pesos (standard) to 2,868 (master suite with private pool).',
+  },
+  '47a75d2a-c508-58eb-9200-5d34a46b7288': { // Quinta Los Vela
+    shortDescription: 'Pet-friendly cabins with a garden and indoor spring-water pools',
+    fullDescription: 'Cabins set in a garden by the river, three blocks from the main square according to its website; it used to be called Cabañas Quinta Patricia. Cabins sleep from a couple up to 11 people, each with a grill, and those for 8, 9 and 11 people have an indoor pool filled with spring water, which costs extra to fill. It bills itself as 100% pet friendly, with a pet fee and rules, and rents its gardens for weddings and events of 10 to 400 guests.',
+  },
+  '25929153-27a1-526e-85d5-49d0720aea2e': { // Hotel Boutique La Granja
+    shortDescription: '14-suite boutique hotel in an old house, with a pool and jacuzzi',
+    fullDescription: 'A boutique hotel with 14 suites in a house about a hundred years old, 200 meters from Plaza Miguel Hidalgo, next to Callejón del Piojo. It has a pool, a jacuzzi, a massage room, a bar, a restaurant, parking and the Los Olivos patio; suites sleep two adults, or two adults and two children under 12. According to its history, the family’s grandfather opened the first Hotel Baños La Granja here, fed by the town’s springs, and the hotel reopened in 2010.',
+  },
+  '3588b5ff-a1c6-5ac6-9ebc-df24853a012a': { // Arantia Hotel Boutique
+    shortDescription: 'Boutique hotel with a waterfall pool, tennis and an event garden',
+    fullDescription: 'Boutique hotel and event garden in the La Magdalena neighborhood, one kilometer from Plaza Miguel Hidalgo. It has a pool with a waterfall, a tennis court, 2,500 m² of green areas, three terraces and parking for 150 cars. Its website lists a spa and a restaurant-bar as upcoming facilities.',
+  },
+  'fbfe15e1-7c2e-5d2b-a5b0-0b17c476c36b': { // Hotel Sol y Fiesta
+    shortDescription: '23-room hotel with a temazcal, steam room and massages',
+    fullDescription: 'A 23-room hotel on Avenida Heroico Colegio Militar, a five-minute walk from the town center according to its website. It has a restaurant, a bar and a pool bar, a temazcal, a steam room and massages, and offers group packages. Its website dates from 2016, so confirm services when you book.',
+  },
+  'dd13ffbd-dd3e-5e11-964a-229b43f59c34': { // La Casona Tequisquiapan Hotel & Spa
+    shortDescription: '30-room hotel with a heated pool, spa and temazcal',
+    fullDescription: 'A 30-room hotel in Hacienda Grande, 1.5 km from the main square, with a heated pool and a kids’ pool, gardens, a restaurant with a breakfast buffet on weekends, a sports bar, a terrace and a wine cellar. Its Espacio Sense area, for adults only, has six suites and a spa with a sauna, temazcal and jacuzzi. The Deluxe Suite has a terrace and a bathroom with a jacuzzi; the hotel offers a romantic package with dinner in the cellar, bike loans and an event hall.',
+  },
+  'e73d6ed4-1d97-5557-b289-d5eb37c2cd69': { // Hotel St. George Spa & Temazcal
+    shortDescription: 'Suite hotel with a pool, spa and temazcal in Barrio de San Juan',
+    fullDescription: 'A suite hotel in Barrio de San Juan, 1.3 km from the main square, with a pool and a terrace overlooking it. Its spa offers massages, body wraps, manicures and a massage with a hot tub, and there is a temazcal by prior reservation. Suites come in standard, superior and Master Family types, and the hotel restaurant is called Mimbre.',
+  },
+  '7e47a447-116f-54f4-b1e2-f94a7ecbff92': { // Hotel Real de TX
+    shortDescription: 'Hotel with rooms for 2 to 7 people and two family villas',
+    fullDescription: 'A hotel in the Fundadores de Hacienda Grande neighborhood, about 700 meters from Plaza Miguel Hidalgo. Its website offers rooms for 2, 4, 5 or 7 people and two family villas. Confirm services and rates on WhatsApp before booking.',
+  },
+  '31b8af78-e2fa-5924-9a55-2f6db72ae7f7': { // La Toscana de Tequisquiapan
+    shortDescription: '8-room hotel across from Vinícola Tequisquiapan',
+    fullDescription: 'A small hotel in La Charretera, across the street from Vinícola Tequisquiapan and a seven-minute drive from the town center, with single, double and triple rooms with a terrace. It has a garden, a campfire with marshmallows is included with your booking, and in-room massages are available. It puts together group packages with stone-oven pizzas, breakfasts and tastings at the winery across the street, and hosts birthdays, anniversaries and weddings.',
+  },
+  '8c64b035-ca41-5a57-abe2-effdbcfb2f8b': { // Villa Bugambilia
+    shortDescription: 'Private villa for 10 with a pool that can be heated; dogs welcome',
+    fullDescription: 'A villa rented as a whole, for up to 10 people, in the Las Corraletas neighborhood, 12 minutes from the town center according to its website. It has a pool that can be heated (the boiler is charged per day), a grill, a fire pit, a palapa, a camping area, WiFi, parking for six cars and accessibility for people with disabilities. Only dogs are allowed: one at no charge and a fee for each extra dog. Massages and couples packages are available separately; bookings are made through Airbnb.',
+  },
+  '3bf54533-2d98-57f9-ad69-b5edcdf12329': { // Salterra Glamping
+    shortDescription: 'Glamping in safari tents, with private jacuzzis; pet friendly',
+    fullDescription: 'Glamping in safari-style tents in Ejido La Trinidad, near Highway 200, about 10 minutes from the town center. There are Standard tents with a king bed, private bathroom and WiFi, Deluxe tents with a private jacuzzi on the terrace, and a tipi for couples. It has a year-round pool, a sauna at extra cost, a restaurant and bar, free parking, private dinners by the pond, massages and bikes; pets are welcome for a fee per stay, and it hosts civil weddings and events for up to 150 people. In 2026 its packages with experiences and breakfasts started at 5,775 pesos.',
+  },
+  '6c961a9d-8b84-5ee1-86b2-68419dedb3e8': { // Hotel Villa Antigua
+    shortDescription: '61-room hotel with three warm-water pools and a spa',
+    fullDescription: 'A 61-room hotel and convention center on the San Juan del Río–Tequisquiapan highway, 8 km from the town center. It has three warm-water pools, one of them semi-Olympic, an outdoor jacuzzi, a spa and beauty salon, a gym, a tennis court, a café and a restaurant-bar. Rooms include standard rooms, two-story superior rooms and suites with a jacuzzi, and its halls host weddings and events for up to 500 people. Pets are not allowed.',
+  },
+  'd037eb70-9408-54a8-bba2-07542234cd8d': { // Hotel & Spa Hacienda Tres Vidas
+    shortDescription: 'Hacienda hotel with a spa, pool and suites with hot tubs',
+    fullDescription: 'A hacienda hotel in San José de la Laja, within the municipality of Tequisquiapan, about 14 km from the town center. It has a spa with hydrotherapy and massages, an outdoor pool, a kids’ play area, a restaurant, and a hall and terrace for weddings, quinceañeras and conferences. The Junior Suites have a hot tub, and the Master Suite also has a private sauna. In November 2026 its website listed rates from 1,999 to 2,949 pesos depending on the room.',
+  },
+  '911f7247-5fee-5e4a-93fb-7c572dbf6c76': { // La Casona de San Juanito
+    shortDescription: '5-room house in a vineyard, with meals and a tasting included',
+    fullDescription: 'Lodging inside Vinícola San Juanito, in San José de la Laja (municipality of Tequisquiapan), in the house that once belonged to one of the vineyard’s partners. It has five rooms, and the stay includes breakfast, lunch and dinner for each night, a guided tour and a tasting of three wines. In 2026 a night for two cost 3,900 pesos, or 4,500 in the main bedroom, with a 50% deposit.',
+  },
+  'acc203d5-46bd-5928-8a1c-bb0977c5496c': { // Rancho Los Venados
+    shortDescription: 'Cabins in a wildlife reserve, with meals included',
+    fullDescription: 'Cabins inside a game reserve with bison, deer, antelope and zebras, on state highway 200 between Querétaro and Tequisquiapan, about 13 km from the town center. The cabins look out to the Peña de Bernal and have a gas fireplace and a private terrace, and buffet meals (breakfast, lunch and dinner) are included. Spa services are available; the safari, horseback rides and hikes are booked separately.',
+  },
+  '54175091-a7cc-575c-984f-d2051dcdb41d': { // Hotel Las Delicias
+    shortDescription: 'Hotel in 5 de Mayo street, 200 m from the main square',
+    fullDescription: 'Hotel at 5 de Mayo 1, Centro, about 200 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 4-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '28336ab8-cfd3-5463-89b3-07bc16c46a14': { // Hotel Real de San José
+    shortDescription: 'Hotel in the La Magdalena neighborhood, 1.4 km from the main square',
+    fullDescription: 'Hotel at Av. Juárez Oriente 113, Barrio de la Magdalena, 1.4 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 5-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '180cf741-c189-5561-946f-0b05d6792ee2': { // Hotel del Parque
+    shortDescription: 'Hotel in Cerrada de Camelinas, 400 m from the main square',
+    fullDescription: 'Hotel at Cerrada de Camelinas 1, Centro, about 400 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 4-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '2d75097d-6da3-57a5-bb10-13a3e7a179cd': { // Hotel La Rinconada
+    shortDescription: 'Hotel in Avenida Juárez Oriente, 500 m from the main square',
+    fullDescription: 'Hotel at Av. Juárez Oriente 19, Centro, about 500 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '69d3c36a-2770-560e-b894-daf5e19999a2': { // Posada del Virrey
+    shortDescription: 'Guesthouse in Guillermo Prieto street, 100 m from the main square',
+    fullDescription: 'Guesthouse at Guillermo Prieto 9-N, Centro, about 100 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'cb296b5a-def1-5475-b6c8-f795d656cea6': { // Hotel Boutique Bello Atardecer
+    shortDescription: 'Boutique hotel in Guillermo Prieto street, 100 m from the main square',
+    fullDescription: 'Boutique hotel at Guillermo Prieto 4, Centro, about 100 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 4-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '5c063219-a2d3-52b7-a33a-3d82ad0009b6': { // Hotel La Baronesa
+    shortDescription: 'Hotel in Avenida Centenario Sur, 200 m from the main square',
+    fullDescription: 'Hotel at Av. Centenario Sur 6, Centro, about 200 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '5ddf88f6-24db-5d70-9020-8a2d4babef19': { // Posada Mezquites
+    shortDescription: 'Guesthouse in Avenida Centenario Sur, 200 m from the main square',
+    fullDescription: 'Guesthouse at Av. Centenario Sur 12, Centro, about 200 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '05327264-455e-5fbb-96e6-9492f7cf0c4b': { // Posada San Francisco
+    shortDescription: 'Guesthouse in Moctezuma street, 200 m from the main square',
+    fullDescription: 'Guesthouse at Moctezuma 2, Centro, about 200 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 2-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '21ee43b5-b4de-5724-a5f3-e734645751b9': { // Posada de Don Juan
+    shortDescription: 'Guesthouse in Avenida Centenario Norte, 300 m from the main square',
+    fullDescription: 'Guesthouse at Av. Centenario Norte 20, Centro, about 300 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 2-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'a4ab2745-6bca-5f97-8a7d-65a12beba213': { // Posada San Javier
+    shortDescription: 'Guesthouse in Morelos Norte street, 300 m from the main square',
+    fullDescription: 'Guesthouse at Morelos Norte 63, Centro, about 300 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 2-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'e5d5a3dc-4c48-5973-b949-1aad29b8e01f': { // Casa Geranios
+    shortDescription: 'Hotel in Moctezuma street, 300 m from the main square',
+    fullDescription: 'Hotel at Moctezuma 29, Centro, about 300 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '52ebc80f-5e8b-5bab-8846-f70df879d17e': { // Los Sauces
+    shortDescription: 'Hotel in De los Sauces street, 300 m from the main square',
+    fullDescription: 'Hotel at De los Sauces 1, Centro, about 300 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'b2cd923b-8be6-5bed-ad5c-1ee6ed0fd3d5': { // Hotel El Mirador
+    shortDescription: 'Hotel in the El Pedregal neighborhood, 500 m from the main square',
+    fullDescription: 'Hotel at Potrero Gavillero 4, El Pedregal, about 500 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'c90388df-515a-5e1a-afa6-48b6ec6ba05c': { // Suites Paraíso
+    shortDescription: 'Suite hotel in Privada de Camelinas, 500 m from the main square',
+    fullDescription: 'Suite hotel at Privada de Camelinas 12, Centro, about 500 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 4-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '8d6de3f5-bb4f-554f-ad09-01e1a4946123': { // Quinta Cobos TX
+    shortDescription: 'Hotel in Mariano Matamoros street, 500 m from the main square',
+    fullDescription: 'Hotel at Mariano Matamoros 10, Centro, about 500 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '1f6a9890-b7d6-51c2-a948-a44262d6b891': { // Hotel del Pedregal
+    shortDescription: 'Hotel in the El Pedregal neighborhood, 600 m from the main square',
+    fullDescription: 'Hotel at Hacienda Grande de la Asunción 1, El Pedregal, about 600 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '0b38abb1-a765-5f4b-9249-5f1a9867702b': { // Cabañas Gil
+    shortDescription: 'Cabins in the La Magdalena neighborhood, 800 m from the main square',
+    fullDescription: 'Cabins at Miguel Hidalgo 19, Los Sabinos, La Magdalena, about 800 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '52a01acf-4e1e-509a-9f9a-443900dbe952': { // Hotel Villas Tequisquiapan
+    shortDescription: 'Villas in the Hacienda Grande neighborhood, 1.0 km from the main square',
+    fullDescription: 'Villas at Francisco I. Madero 71, Hacienda Grande, 1.0 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 4-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '88604a35-6895-5c5d-89df-f2011009d60d': { // Elohim
+    shortDescription: 'Hotel in the Adolfo López Mateos neighborhood, 1.1 km from the main square',
+    fullDescription: 'Hotel at Lucio Blanco 49, Adolfo López Mateos, 1.1 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '561f2a98-aadc-5154-a3f8-f884246be40a': { // Chalets Media Luna
+    shortDescription: 'Chalets in the La Magdalena neighborhood, 1.1 km from the main square',
+    fullDescription: 'Chalets at Abasolo s/n, La Magdalena, 1.1 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '875c0753-c911-5e22-800d-236c98b6ad6d': { // Hotel Bugambilias Rooms
+    shortDescription: 'Hotel in the La Magdalena neighborhood, 1.1 km from the main square',
+    fullDescription: 'Hotel at Gral. José María Arteaga 34B, La Magdalena, 1.1 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'eedad335-01c3-52e3-a74d-a333ac42817f': { // Hotel Jardín del Edén
+    shortDescription: 'Hotel in the Adolfo López Mateos neighborhood, 1.4 km from the main square',
+    fullDescription: 'Hotel at Plan de Ayala 72, Adolfo López Mateos, 1.4 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'dbec32a9-3c52-54e9-8a68-dfe25d892219': { // Posada El Arrullo
+    shortDescription: 'Guesthouse in the Adolfo López Mateos neighborhood, 1.4 km from the main square',
+    fullDescription: 'Guesthouse at Av. Venustiano Carranza 130, Adolfo López Mateos, 1.4 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 2-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '215572ec-3cf7-5235-bab8-9dee7cf81267': { // Hostal Pahpaqui
+    shortDescription: 'Hostel in Barrio de San Juan, 1.5 km from the main square',
+    fullDescription: 'Hostel at Paseo del Tepozán Norte 70, Barrio de San Juan, 1.5 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '582272a9-fa5a-5e60-a55f-0101a74f9de7': { // Hotel Boutique Casa Grande
+    shortDescription: 'Boutique hotel in the La Magdalena neighborhood, 1.5 km from the main square',
+    fullDescription: 'Boutique hotel at Miguel Hidalgo 122, Villas del Sol, La Magdalena, 1.5 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '9d817ec8-598c-5dd2-ae41-a019800efd3f': { // Villas Amalu
+    shortDescription: 'Villas in the La Magdalena neighborhood, 1.8 km from the main square',
+    fullDescription: 'Villas at Vicente Suárez 28, La Magdalena, 1.8 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'f9676129-286f-52bf-93a1-86bd1493d54e': { // 7 Soles
+    shortDescription: 'Guesthouse in La Tortuga, 4.1 km from the main square',
+    fullDescription: 'Guesthouse at Carretera 120 Tequisquiapan–Ezequiel Montes, La Tortuga, 4.1 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '95f464c1-9f81-580c-bcfc-e2e88726048c': { // Hotel Villa Campestre
+    shortDescription: 'Hotel in Santa María del Camino, 5.6 km from the main square',
+    fullDescription: 'Hotel at Margarita 20, Santa María del Camino, 5.6 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'fe244dcb-eb77-5fe8-9c34-e94a72f45a02': { // Bungalows Tequisquiapan
+    shortDescription: 'Bungalows in La Ermita, 5.7 km from the main square',
+    fullDescription: 'Bungalows at Alcatraz 5, La Ermita (carretera 120 km 15), 5.7 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '15274b9f-5c1a-56ca-965c-d98931953fdc': { // Hotel Neptuno
+    shortDescription: 'Hotel in Avenida Juárez Oriente, 300 m from the main square',
+    fullDescription: 'Hotel at Av. Juárez Oriente 5, Centro, about 300 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '5039f5f3-5040-549f-834e-9293413bbf6d': { // Rincón Mexicano
+    shortDescription: 'Mexican food and strawberries and cream, next to the square',
+    fullDescription: 'A Mexican restaurant and bar that has been in downtown Tequis for more than 30 years. The menu has antojitos, soups, meat, poultry and pasta, a kids’ menu, and its best-known dessert is strawberries and cream. It has a terrace and welcomes dogs.',
+  },
+  '3a038b28-8401-5fc4-85db-e99b3936b7e9': { // La Valentina
+    shortDescription: 'Mexican food with tables under the arcade facing the square',
+    fullDescription: 'The Mexican restaurant of Hotel La Plaza de Tequisquiapan, on the main square. It serves breakfast, lunch and dinner every day, and on Sundays there is a breakfast buffet with live piano music. Its tables under the arcade look right onto the square.',
+  },
+  '76dc5010-db6f-50e0-bbd0-6fa4d7f4abe8': { // Las Brasas
+    shortDescription: 'Charcoal-grilled meats with a view of the square, at Hotel La Plaza',
+    fullDescription: 'The steak restaurant of Hotel La Plaza de Tequisquiapan, specializing in charcoal-grilled meats. It is on the hotel’s second floor, with a view of the square and the hills around town. Open for lunch and dinner every day.',
+  },
+  '68efb9fd-d998-5fe2-b4d1-3a82dead31c3': { // La Cantina (Hotel La Plaza)
+    shortDescription: 'The Hotel La Plaza bar, open late on weekends',
+    fullDescription: 'The bar of Hotel La Plaza de Tequisquiapan, on the main square. It has drinks and bar snacks, you can order from the hotel restaurants’ menu, and it shows live sports. Monday to Thursday it is open until 11 p.m., and Friday and Saturday until 2 a.m.',
+  },
+  'c7087927-0ce3-5e73-ba3c-11810f87aa05': { // El Atorón
+    shortDescription: 'Lamb barbacoa and Mexican food, with a play area',
+    fullDescription: 'A family Mexican restaurant with more than 20 years, known for its lamb barbacoa and consommé. It also serves chilaquiles, eggs any style, mixiote, tampiqueña, arrachera, pancita and parrillada, as well as steaks, cocktails, wines from the region and house desserts. It has a play area for kids and is five minutes from downtown.',
+  },
+  'aa2d6bd0-5a75-5c87-8bc6-cd0dc2e32843': { // Capricho's
+    shortDescription: 'French-Mexican cooking downtown, since 1991',
+    fullDescription: 'A French-Mexican restaurant and bar that opened in 1991, a few steps from the square. The menu includes breakfast, Mexican antojitos, pasta, chicken, fish and meat, desserts and a kids’ menu, and it also hosts events. The opening hours on its website don’t match each other: check before you go.',
+  },
+  'e66b34d7-deb5-5311-a85b-8bda92b195ba': { // Rincón Austriaco
+    shortDescription: 'European pastry shop and café, with breakfast and lunch',
+    fullDescription: 'A European pastry shop and café that opened on November 13, 1998 in downtown Tequis, with coffee from Chiapas. It later added restaurant service with breakfast and lunch: omelettes, chilaquiles, eggs any style, tortilla queretana and homemade bagels. Open every day, from morning to afternoon.',
+  },
+  '793e71e8-82a3-5e04-8767-231bbea49167': { // Alux Resto Café
+    shortDescription: 'Breakfast and coffee next to the Capilla de los Albañiles',
+    fullDescription: 'A resto-café opened in 2022 in Fundadores de Hacienda Grande, next to the Capilla de los Albañiles. In the morning it serves breakfast, and in the afternoon, the Carta de la Aldea. According to its website it is closed on Wednesdays; seating is limited and booking is a good idea.',
+  },
+  '2946494c-0f0b-5b97-a5b4-01436a3df0ee': { // La Casa del Horno
+    shortDescription: 'Charcoal grill and stone oven, five minutes from downtown',
+    fullDescription: 'A charcoal grill and stone-oven restaurant on the road to San Juan del Río, five minutes from the historic center. It describes itself as a family place and offers order-ahead pickup. Open every day from 1 to 9 p.m.',
+  },
+  '5eab6b57-8046-503b-ac10-35af8d166550': { // La Palapa Sensorial
+    shortDescription: 'Burgers and grilled meat, across from Parque La Pila',
+    fullDescription: 'A grill restaurant across from Parque La Pila. Its specialty is burgers (arrachera, chicken and vegetarian), and it also serves grilled meat with fries and house cheladas. It shows sports games. It opens at 1 p.m.; the hours on its website don’t match each other.',
+  },
+  '448fb2aa-7d9a-505d-88c6-6b05bf31d9ac': { // La Charamusca
+    shortDescription: 'The La Charamusca branch, half a block from the square',
+    fullDescription: 'The Tequisquiapan branch of La Charamusca, which also has four locations in the city of Querétaro. It is on Ezequiel Montes, half a block from the main square. Check the hours before you go.',
+  },
+  '1f7952e7-9184-5a67-a98c-a564150a6a53': { // Il Sapore Italiano
+    shortDescription: 'Homestyle Italian cooking, with a garden and play area',
+    fullDescription: 'It describes itself as the first Italian restaurant in Tequisquiapan, with 25 years of traditional, homestyle Italian cooking. It has a garden and open space, a play area for kids, a large parking lot and access for people with reduced mobility, and it welcomes pets. It serves dine-in and takeout, and hosts private events.',
+  },
+  '3ad6c1e6-3c85-5936-809d-a5047e3143e4': { // Los Vitrales
+    shortDescription: 'Homestyle breakfasts at Hotel Posada del Virrey',
+    fullDescription: 'The restaurant of Hotel Posada del Virrey, a block from the square. It only serves breakfast, with homestyle cooking.',
+  },
+  '553902ff-88c4-59b7-b1eb-9c0eccfd044e': { // El Cortijo
+    shortDescription: 'Mexican food at Hotel La Querencia, from breakfast on',
+    fullDescription: 'The restaurant of Hotel La Querencia, in the Barrio de San Juan. It calls itself "Tradición mexicana" and serves à la carte breakfast, lunch and dinner every day.',
+  },
+  'a9bf8d58-771e-530d-8d08-961f729e0354': { // La Troje
+    shortDescription: 'Traditional Mexican food at Hotel Boutique La Granja',
+    fullDescription: 'The restaurant of Hotel Boutique La Granja, downtown. It serves traditional Mexican food to hotel guests and the general public.',
+  },
+  '7c0e8fd6-6315-57a0-a669-b174f4cca683': { // Restaurante Gourmet La Doña
+    shortDescription: 'Mexican food with gourmet touches, in Bordo Blanco',
+    fullDescription: 'A family-run restaurant on the road to San Juan del Río, in Bordo Blanco, about 10 minutes from downtown. Its cooking starts from Mexican dishes and combines them with international gourmet cuisine.',
+  },
+  '924d66c1-63b6-5095-9b8d-28989603ae7a': { // Quilombo Grill
+    shortDescription: 'Argentine asado, empanadas and wine downtown',
+    fullDescription: 'An Argentine asado grill downtown, a block from the square, with grilled cuts, empanadas and Argentine wine. It describes itself as relaxed and family-friendly.',
+  },
+  '848836e9-16b7-5d73-ba25-94221ad59621': { // Restaurante Argentino La Tuba
+    shortDescription: 'Argentine restaurant with meats, pizza and a kids’ play area',
+    fullDescription: 'An Argentine restaurant in the El Pedregal neighborhood, also listed as Villa Romántica La Tuba. The menu includes meats, empanadas, pizza, pasta, burgers, chicken, surf and turf, salads, soups, wine, desserts and coffee. It has parking, wifi and a play area for kids.',
+  },
+  '5b07e8a9-8fba-5c46-8459-76336345eb8a': { // K-18 Grill
+    shortDescription: 'Steaks, bar and terrace, with a kids’ area, toward San Juan del Río',
+    fullDescription: 'A steakhouse and bar on the road to San Juan del Río, five minutes from downtown. It has mixology, a terrace bar and a kids’ area; on Saturdays there is a DJ, and on Sunday afternoons, live saxophone.',
+  },
+  '05b8540e-e5c6-5b03-83ef-5d7a770fac7d': { // Asadero Ajúa
+    shortDescription: 'Mixed grills, steaks and burgers in Bordo Blanco',
+    fullDescription: 'A grill on the road to San Juan del Río, in Bordo Blanco: charcoal-grilled food, mixed grills, steaks, burgers and cocktails. It describes itself as family-friendly.',
+  },
+  '414caac2-cf00-5165-8417-26cd3e4c8063': { // Madre Selva Pizza
+    shortDescription: 'Artisan stone-oven pizza, next to the square',
+    fullDescription: 'Artisan pizza with a rustic crust, baked in a stone oven and made with fresh ingredients from the region. It is on Morelos Norte, a few steps from the main square.',
+  },
+  'f0eafec4-b696-5f8f-a480-a8a8d46b9250': { // Caterin Pizzería Ristorante
+    shortDescription: 'Italian food and pizza, pet friendly, on the way to Ezequiel Montes',
+    fullDescription: 'An Italian restaurant and pizzeria about 10 minutes from downtown, on the road to Ezequiel Montes. Every dish is made to order, pets are welcome and there is parking.',
+  },
+  '056270a8-94c2-529f-ac0d-917cf21cc15b': { // La Chevicheria
+    shortDescription: 'Ceviche spot in Fundadores de Hacienda Grande',
+    fullDescription: 'A ceviche spot in the Fundadores de Hacienda Grande neighborhood, about 500 meters from the square. Check the hours and menu before you go.',
+  },
+  'b9c19f7d-e2aa-5772-85b6-e73ca0db6006': { // Pozolería Kauil
+    shortDescription: 'Pozole restaurant a block from the square',
+    fullDescription: 'A pozole restaurant on Guillermo Prieto street, a block from the main square. Check the hours before you go.',
+  },
+  'a4bfbdc1-4e54-5544-aac9-8492ec73fc4d': { // Wings Bar
+    shortDescription: 'Chicken wings bar at the junction of the Querétaro road',
+    fullDescription: 'A chicken wings bar at the junction of the roads to Querétaro and Ezequiel Montes, a little over a kilometer from the square. Check the hours before you go.',
+  },
+  'e2b736b6-d82c-5de9-b825-4a12bf787bf6': { // Jäpi
+    shortDescription: 'Café and restaurant, from breakfast to lunch',
+    fullDescription: 'A café and restaurant in the Hacienda Grande neighborhood, open from breakfast to lunch, with specialty coffee drinks. Check the hours before you go.',
+  },
+  '1d7fc20f-6fe1-55a2-b9d9-2acb315dcfef': { // Norte B
+    shortDescription: 'Winery and brewery with tastings paired with cheese',
+    fullDescription: 'Winery and brewery at km 50 of state highway 200, in Fuentezuelas, the same kilometer as Cava Bocanegra. Its three experiences include a visit and a tasting with Bocanegra cheeses: in November 2026 the wine one (3 wines, 45 min) cost MX$450; the beer one (3 beers, 45 min), MX$390; and the combined one (2 wines and 2 beers, 75 min), MX$490. It doesn’t publish opening hours, so check before you go.',
+  },
+  'c40d2783-4b09-50ae-bb48-76cbfbf8f507': { // CR Vinos MX
+    shortDescription: 'Winery with tours, picnics and the Cartinto House restaurant',
+    fullDescription: 'Winery on the road from Tejocote to San José La Laja, with the Cartinto House restaurant, serving Mexican country cooking. In November 2026 it was open Wednesday to Sunday, noon to 7 PM, and its tours cost from MX$300 (Tour CR, 45 min, with a tasting) to MX$2,000 (Tour VIP, with tastings straight from the tank and the barrel); the Tour CR + Cata de Vinos, with 3 wines, a sommelier and cheese, cost MX$500. It also offers a picnic in a tipi facing the vineyard (MX$1,100) and private events.',
+  },
+  'db521ef0-c335-5e8b-b174-74c1ad10289f': { // Viñedo La Revuelta
+    shortDescription: 'Winery with the Gran Reserva restaurant and tasting menus',
+    fullDescription: 'Winery in the Fuentezuelas ejido, entered from km 50 of state highway 200, behind Cava Bocanegra; it has a cellar, a shop and the Gran Reserva restaurant. The restaurant serves 5-, 7- and 10-course tasting menus of Mexican, Spanish and Veracruz cooking, with wine pairings; its main wine, La Resistencia, is a Merlot and Cabernet Sauvignon aged 18 months in barrels. Bookings are by WhatsApp, for tables of 4 to 6 people, paid in advance. It doesn’t publish hours or prices.',
+  },
+  'fe390085-9e2e-5ebc-a209-2738cc83206e': { // Viajes y Enoturismo
+    shortDescription: 'Winery and cheese tours with transportation from downtown',
+    fullDescription: 'Downtown Tequis agency that runs tours of the Art, Cheese and Wine Route, with round-trip transportation from its office at Juárez 16 Poniente. Tours leave every day for groups of 2 or more and, depending on the tour, visit places such as Cava Bocanegra, Bodegas De Cote, Freixenet, Viñedos Azteca and the La Biquette cheese maker. In November 2026 its website still showed 2025 prices: MX$1,300 to MX$1,980 per adult. Book by WhatsApp with a 30% deposit.',
+  },
+  'b7a72d9a-a81a-56ac-80bc-c0626f290ab1': { // Viña Magal
+    shortDescription: 'Family winery with artisanal wine and an events terrace',
+    fullDescription: 'Family winery of just over 4 hectares at km 53 of state highway 200, making 100% artisanal wine; its main label is Parsionero. It has a terrace overlooking the vineyard for events, tastings with cheese and cold cuts, and a grill with room for 15 people. It has no website and doesn’t publish hours or prices: call before you go.',
+  },
+  '690c1a76-1e6e-5124-88f4-902488c9195c': { // Vinícola San Patricio
+    shortDescription: 'Winery with a guided tour and tasting of its wines',
+    fullDescription: 'Winery founded in 1999 in Ezequiel Montes, now on the road to Huichapan, in the Tierra Blanca neighborhood of Tequisquiapan. It offers a guided tour of its facilities to see how the wine is made and to taste its Santiago Apóstol labels, and it sells its products. It doesn’t publish hours or prices and its website doesn’t respond: call before you go.',
   },
 };
 
@@ -448,6 +771,9 @@ export const SUBCATEGORIES_EN: Record<string, { singular: string; plural: string
   'Tour': { singular: 'Tour', plural: 'Tours' },
   'Viñedo': { singular: 'Winery', plural: 'Wineries' },
   'Wine Bar': { singular: 'Wine bar', plural: 'Wine bars' },
+  'Cabañas': { singular: 'Cabin', plural: 'Cabins' }, // plural en español: Cabañas,
+  'Glamping': { singular: 'Glamping', plural: 'Glamping sites' }, // plural en español: Glamping,
+  'Parrilla': { singular: 'Grill', plural: 'Grills' },
 };
 
 /** Any other short Spanish string shown in the UI: every amenity, every tag, every event category. Key = exact Spanish text. */
@@ -707,4 +1033,28 @@ export const TERMS_EN: Record<string, string> = {
   'Tirolesa': 'Zip line',
   'Brunch': 'Brunch',
   'Sustentable': 'Sustainable',
+  'Alberca climatizada': 'Heated pool',
+  'Alberca techada': 'Indoor pool',
+  'Bodas y eventos': 'Weddings and events',
+  'Cancha de tenis': 'Tennis court',
+  'Centro': 'Downtown',
+  'Chimenea': 'Fireplace',
+  'Comidas incluidas': 'Meals included',
+  'Fogata': 'Campfire',
+  'Gimnasio': 'Gym',
+  'Jacuzzi privado': 'Private jacuzzi',
+  'Pozas privadas': 'Private spring-water pools',
+  'Área solo adultos': 'Adults-only area',
+  'Alitas': 'Chicken wings',
+  'Argentina': 'Argentine',
+  'Área de juegos': 'Play area',
+  'Cortes': 'Steaks',
+  'De noche': 'Nightlife',
+  'Francesa': 'French',
+  'Hamburguesas': 'Burgers',
+  'Pizza': 'Pizza',
+  'Zona VIP': 'VIP area',
+  'Habitaciones': 'Rooms',
+  'Vermut': 'Vermouth',
+  'Cabañas': 'Cabins', // (*),
 };

@@ -6,4 +6,6 @@ export const PLACE_REDIRECTS: Record<string, string> = {
   // 5 nov 2026: dados de alta de nuevo con su nombre y datos reales (databasefix_research_2026-11.sql).
   'queseria-vai': 'finca-vai',
   'balneario-el-oasis': 'parque-acuatico-el-oasis',
+  // 10 nov 2026: mismo hotel con su nombre real (databaseseed_hospedaje_2026-11-10.sql).
+  'hotel-posada-tequisquiapan': 'posada-tequisquiapan',
 };

@@ -26,6 +26,9 @@ export type Place = {
   subcategory: string;
   /** Subcategoría en español, tal cual viene del API: es la clave para rutas y filtros. */
   subcategoryKey: string;
+  /** Amenidades y etiquetas en español, tal cual vienen del API (las de la página se traducen):
+   *  son la clave de las páginas por necesidad de lib/tipos.ts ("hoteles con alberca"). */
+  featureKeys: string[];
   latitude: number;
   longitude: number;
   address: string;
@@ -126,7 +129,7 @@ export function priceInfo(lang: Lang, range: string): { symbol: string; label: s
 /** Lo mínimo de un lugar para tarjetas, mapas y buscador (lo que viaja al navegador). */
 export type PlaceSummary = Pick<
   Place,
-  'id' | 'slug' | 'name' | 'category' | 'subcategory' | 'subcategoryKey' | 'shortDescription' | 'priceRange' | 'thumbnailUrl' | 'latitude' | 'longitude'
+  'id' | 'slug' | 'name' | 'category' | 'subcategory' | 'subcategoryKey' | 'featureKeys' | 'shortDescription' | 'priceRange' | 'thumbnailUrl' | 'latitude' | 'longitude'
 >;
 
 export function toSummary(p: Place): PlaceSummary {
@@ -137,6 +140,7 @@ export function toSummary(p: Place): PlaceSummary {
     category: p.category,
     subcategory: p.subcategory,
     subcategoryKey: p.subcategoryKey,
+    featureKeys: p.featureKeys,
     shortDescription: p.shortDescription,
     priceRange: p.priceRange,
     thumbnailUrl: p.thumbnailUrl,
@@ -170,6 +174,22 @@ const SUBCATEGORY_PLURALS: Record<string, string> = {
   'Mercado': 'Mercados',
   'Dulcería': 'Dulcerías',
   'Spa': 'Spas',
+  'Cabañas': 'Cabañas',
+  'Glamping': 'Glamping',
+  'Antojitos': 'Antojitos',
+  'Mariscos': 'Mariscos',
+  'Parrilla': 'Cortes y parrilla',
+  'Panadería': 'Panaderías',
+  'Cervecería': 'Cervecerías',
+  'Temazcal': 'Temazcales',
+  'Cabalgata': 'Cabalgatas',
+  'Mina de ópalo': 'Minas de ópalo',
+  'Granja': 'Granjas',
+  'Hacienda': 'Haciendas',
+  'Galería': 'Galerías',
+  'Tienda': 'Tiendas',
+  'Artesanías': 'Artesanías',
+  'Naturaleza': 'Naturaleza',
 };
 
 /** Plural de una subcategoría (clave en español) en el idioma pedido. */
@@ -296,6 +316,7 @@ export async function getPlaces(lang: Lang = 'es'): Promise<Place[]> {
       category: p.category,
       subcategory: p.subcategory ?? '',
       subcategoryKey: p.subcategory ?? '',
+      featureKeys: [...(p.amenities ?? []), ...(p.tags ?? [])],
       latitude: toNumber(p.latitude) ?? 0,
       longitude: toNumber(p.longitude) ?? 0,
       address: p.address ?? '',
