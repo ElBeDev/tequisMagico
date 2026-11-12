@@ -607,6 +607,343 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Winery with a guided tour and tasting of its wines',
     fullDescription: 'Winery founded in 1999 in Ezequiel Montes, now on the road to Huichapan, in the Tierra Blanca neighborhood of Tequisquiapan. It offers a guided tour of its facilities to see how the wine is made and to taste its Santiago Apóstol labels, and it sells its products. It doesn’t publish hours or prices and its website doesn’t respond: call before you go.',
   },
+  // Altas con el DENUE (database/databaseseed_denue_2026-11-11.sql)
+  'f10c9ab2-81e2-5ce0-b3c6-8df6517b1fcc': { // MD Turismo y Experiencias
+    shortDescription: 'Tram 43 trolley rides and cheese and wine tours from Tequis',
+    fullDescription: 'Tour operator at the Andador Comercial Vista Hermosa, 1.1 km from the main square, that runs the Tram 43 trolley. The trolley ride goes through the oldest neighborhoods in town and stops at a winery, for a tasting of two house wines, at a cheese shop and at a tasting room with products from the Querétaro semi-desert. In November 2026 its website listed departures Friday to Sunday at 12, 2, 4 and 6 p.m., by reservation. It also sells tours of the Cheese and Wine Route, trips to the Sierra Gorda, night tours and hot air balloon flights. It doesn’t publish prices.',
+  },
+  '1fa39682-f9b0-5f3e-9923-b26aa40c338f': { // TX Ecotours
+    shortDescription: '4x4 tours with a guide to wineries, cheese makers and opal mines',
+    fullDescription: 'Off-road tour operator at Carrizal 23, about 200 meters from the main square. Its routes, with a guide at the wheel, go to the highest point in Tequis, the Centenario dam and the old Bernal train station; to a cheese maker and the Santiago Apóstol winery; to look for opals with miners in La Trinidad; and across the semi-desert to the old El Pedernal mine, a 3.5 to 4 hour trip. If you want to drive yourself, in November 2026 there was an extra charge of MX$1,200. It also rents cabins. It doesn’t publish route prices.',
+  },
+  'd7e0af85-b8b5-5009-af37-d9c6ade2d8ea': { // Vino Tours
+    shortDescription: 'Tour agency for the Cheese and Wine Route',
+    fullDescription: 'Tour agency at Niños Héroes 42, about 300 meters from the main square. According to the town tourism directory, it specializes in the Cheese and Wine Route through Querétaro’s wineries, and it also goes to the Sierra Gorda, the opal mines and hot air balloon flights. It is listed in INEGI’s DENUE business census. Its website couldn’t be opened and it doesn’t publish schedules or prices: ask when you book.',
+  },
+  'c4061a09-3138-5fce-897d-668bc2d1d791': { // Temazcal Tonatiu Iquzayampa
+    shortDescription: 'Traditional temazcal sweat lodge in Fuentezuelas, by reservation',
+    fullDescription: 'Temazcal in the community of Fuentezuelas, about 10 km from downtown. According to the state tourism board, the session starts with a talk by the guide, José Antonio “Don Toño”, continues with a welcome meal and the steam bath, with hill and river stones heated without gas and herbal infusions, and ends with tea and a guided meditation. Bring a towel, sandals and a swimsuit, and book ahead. It doesn’t publish hours or prices.',
+  },
+  'f7ca279f-386e-51a8-96eb-db5c93407f5f': { // Temazcal Tres Marías
+    shortDescription: 'Temazcal with massage and exfoliation, near Bordo Blanco',
+    fullDescription: 'Temazcal in the Santa María del Camino neighborhood, near Bordo Blanco, about 5.6 km from downtown. According to the town tourism directory, the temazcal session comes with a relaxing massage and an aloe and mineral salt scrub. It is also listed in INEGI’s DENUE business census. It has no website and doesn’t publish hours or prices: call to book.',
+  },
+  '6663fe98-2d68-549b-968c-e48f9b4f15e9': { // Casa Gayatri
+    shortDescription: 'Holistic house with temazcal, massages and yoga',
+    fullDescription: 'Holistic house in the Santa Fe neighborhood, about 1.4 km from the main square. According to the town tourism directory, it offers temazcal, massages, yoga and meditation classes, and also lodging. INEGI’s DENUE business census lists it as a massage business. It has no working website and doesn’t publish hours or prices: ask when you book.',
+  },
+  'bd03c95d-85f2-512b-9b53-7e96af294b72': { // Yoot Masajes y Bienestar
+    shortDescription: 'Massages, facials and therapies steps from the main square',
+    fullDescription: 'Massage center about 100 meters from the main square. According to the town tourism directory, it offers massages (holistic, Ayurvedic, Swedish and hot stone), reflexology, lymphatic drainage, facials, reiki and a holistic shop, with single and double rooms and home service. INEGI’s DENUE business census lists it at Salvador Michaus 4 and Morelos Norte 5. It has no website and doesn’t publish prices.',
+  },
+  'fa22b682-d63a-5f1d-a9bd-7630eedb718a': { // Xantico Spa
+    shortDescription: 'Spa in downtown Tequis',
+    fullDescription: 'Spa at Camelinas 142, about 400 meters from the main square. It is listed in the town tourism directory and in INEGI’s DENUE business census. It has no website and doesn’t publish its services, hours or prices: call before you go.',
+  },
+  '5ac169d9-1f02-5784-a097-8de7024cb625': { // Hecho en Babu
+    shortDescription: 'Recycled glass workshop and shop, with classes',
+    fullDescription: 'Workshop and shop in the Barrio de San Juan, 1.1 km from the main square, that turns glass bottles into useful objects. According to the town tourism directory, it offers guided tours of the glass studio and workshops for all ages, by reservation only. INEGI’s DENUE business census lists it as an art glass workshop. It has no website and doesn’t publish hours or prices.',
+  },
+  '16820788-258a-5f1b-b601-f4026f6938b8': { // Museo ¡México me encanta!
+    shortDescription: 'Museum of Mexican everyday life in miniature',
+    fullDescription: 'Miniature museum about 170 meters from the main square, with more than 200 scenes of Mexican life (a market, a circus, a wedding, a quinceañera, a stationery shop, a funeral) made by its director, Teresa Cisneros, over some 35 years. It has a shop with miniature crafts. It has no website and doesn’t publish hours or prices.',
+  },
+  '384630c1-4f90-522e-b5a9-86878ace4aca': { // Centro Cultural Gloria Michaus Fernández
+    shortDescription: 'Cultural center with films, theater, exhibitions and workshops',
+    fullDescription: 'Town cultural center about 300 meters from the main square. According to the town tourism office, it hosts talks, films, theater, art exhibitions and book presentations, and offers workshops. It doesn’t publish its program or hours: ask by phone.',
+  },
+  '61673c59-62e1-5547-b14f-2e6915311f76': { // La Biquette
+    shortDescription: 'Artisanal French-style goat cheeses',
+    fullDescription: 'Goat cheese maker in La Lagunita, at km 2 of the road to Ezequiel Montes, 1.6 km from the main square. According to the town tourism office, it makes its cheeses by hand following the French tradition, from raising the goats to making the cheese, without preservatives or coloring. Viajes y Enoturismo includes it on some of its tours. Its website doesn’t respond and it doesn’t publish hours or prices: call before you go.',
+  },
+  '0cf02114-c165-5d87-b904-b608cbcc1ad5': { // Vinícola Tequisquiapan
+    shortDescription: 'Family winery with Navarrese roots in La Charretera',
+    fullDescription: 'Family winery in the La Charretera neighborhood, 1.6 km from the main square. According to the state tourism board, it was founded by Emilio Ochoa, who brought a winemaking tradition of more than 100 years from Navarre; his sons carried it on from the 1970s and the family formally set up in Tequis in 2010. The town tourism directory also lists it as an events venue, with outdoor tastings and a tasting room. It has no website and doesn’t publish hours or prices: call to check whether it takes visitors.',
+  },
+  '0e287eb9-5479-5c03-9cbb-b1e362097397': { // Vinícola Terra Salvador
+    shortDescription: 'Winery with a shop in La Lagunita',
+    fullDescription: 'Winery with a shop in La Lagunita, 1.5 km from the main square, near the La Biquette cheese maker. It is listed in the town tourism directory and in INEGI’s DENUE business census, which records it as a wine shop. It has no website and doesn’t say what it offers, its hours or prices: call before you go.',
+  },
+  'c8f85075-f7c1-5053-88c3-258d25f6e532': { // Quesos Quiroz
+    shortDescription: 'Cheese maker since 1972, with its own restaurant, La Carreta',
+    fullDescription: 'Downtown cheese maker about 50 meters from the main square that, according to the town tourism office, has made artisanal cheese in Tequis since 1972. Its restaurant, La Carreta, is in the same place, with dishes made with its cheeses and regional, Mexican and international wines. INEGI’s DENUE business census also lists its cheese shop at Niños Héroes 34. It has no website and doesn’t publish hours or prices.',
+  },
+  '619ce2e0-c03f-5467-a1e4-18500a9952de': { // Quesería La Vaca Feliz
+    shortDescription: 'Five downtown cheese shops with more than 120 cheeses',
+    fullDescription: 'Cheese shop with five stores in downtown Tequis; the one at Ezequiel Montes 13 is across from the market, about 120 meters from the main square. It doesn’t make cheese: it selects more than 120 regional and imported cow, goat, sheep and buffalo cheeses, plus fresh cheeses and cold cuts, and you can taste them in its stores. The others are at Heroico Colegio Militar 5 (with parking), Morelos 4 (behind the parish church), Juárez 1 and Niños Héroes at the corner of Guillermo Prieto.',
+  },
+  '07891ab8-57e9-51dd-8835-d83715910fb2': { // Queserías La Mexicana Olé
+    shortDescription: 'Cheese shop with a wine cellar and three locations',
+    fullDescription: 'Cheese shop at Niños Héroes 42, about 600 meters from the main square, with cow, goat and sheep cheeses, dairy products, cold cuts, salsas, jams and a wine shop with regional and international wines. In November 2026 its page said it was open every day from 10 a.m. to 8 p.m. According to the town tourism office, it has two more locations: Carrizal 4, unit D, downtown, and Francisco Martínez Elías at the corner of Hidalgo, in the Barrio de la Magdalena.',
+  },
+  'af7165e4-5660-5be0-a6d3-8a173fe288c1': { // Casa del Artesano
+    shortDescription: 'Town-run shop and gallery for Tequis crafts',
+    fullDescription: 'Town-run shop and gallery about 90 meters from the main square that displays and sells, wholesale and retail, work by the town’s artisans, mostly in willow, wicker, wood and other plant fibers: baskets, tortilla warmers, hampers and ornaments. It opened in 1999 and also organizes fairs and workshops for artisans. It doesn’t publish its hours.',
+  },
+  '1fc6ed2e-b5aa-5b8f-80c9-19d89a485ddc': { // Querencia Media Luna
+    shortDescription: 'Family willow and wicker basketry workshop',
+    fullDescription: 'Willow and wicker basketry workshop at Margarita Maza de Juárez 5, in the Barrio de la Magdalena, 1.3 km from the main square. It is one of the 14 craft workshops listed by the town tourism office, where artisans explain how they work, from gathering the willow to the finished piece, and sell their work. According to that directory, it’s open Monday to Saturday from 10 a.m. to 5 p.m. It is also listed in INEGI’s DENUE business census. It has no website: call before you go.',
+  },
+  '6b95be31-9a41-58c9-867e-50cd777ea364': { // Taller Artesanal Clarita
+    shortDescription: 'Family willow and wicker basketry workshop',
+    fullDescription: 'Willow and wicker basketry workshop at Privada Zaragoza 9, in the Barrio de la Magdalena, 1.2 km from the main square. It is one of the 14 craft workshops listed by the town tourism office, where artisans explain how they work, from gathering the willow to the finished piece, and sell their work. According to that directory, it’s open Monday to Saturday from 10 a.m. to 6 p.m. It is also listed in INEGI’s DENUE business census. It has no website: call before you go.',
+  },
+  '98f7a580-682b-5907-ba02-da49f837e572': { // Taller Nuevo Diseño
+    shortDescription: 'Family willow and wicker basketry workshop',
+    fullDescription: 'Willow and wicker basketry workshop at Ignacio Zaragoza 20 B, in the Barrio de la Magdalena, 1.2 km from the main square. It is one of the 14 craft workshops listed by the town tourism office, where artisans explain how they work, from gathering the willow to the finished piece, and sell their work. According to that directory, it’s open Monday to Saturday from 10 a.m. to 6 p.m. It is also listed in INEGI’s DENUE business census. It has no website: call before you go.',
+  },
+  'c2033f68-3aa0-576e-a2b0-c888d42b29a1': { // Taller Artesanal Margarita
+    shortDescription: 'Family willow and wicker basketry workshop',
+    fullDescription: 'Willow and wicker basketry workshop at Escobedo 34, in the Barrio de la Magdalena, 1.3 km from the main square. It is one of the 14 craft workshops listed by the town tourism office, where artisans explain how they work, from gathering the willow to the finished piece, and sell their work. According to that directory, it’s open by appointment. It is also listed in INEGI’s DENUE business census. It has no website: call before you go.',
+  },
+  '8357cece-02ff-53bb-9d72-a389cacabc95': { // Artesanías Peques
+    shortDescription: 'Family willow and wicker basketry workshop',
+    fullDescription: 'Willow and wicker basketry workshop at Francisco Márquez 34, in the Barrio de la Magdalena, 830 meters from the main square. It is one of the 14 craft workshops listed by the town tourism office, where artisans explain how they work, from gathering the willow to the finished piece, and sell their work. According to that directory, it’s open every day from noon to 7 p.m. It is also listed in INEGI’s DENUE business census. It has no website: call before you go.',
+  },
+  '1ab0773a-9bb3-5154-8c62-ee31c3e2b150': { // Artesanías La Línea
+    shortDescription: 'Family willow and wicker basketry workshop',
+    fullDescription: 'Willow and wicker basketry workshop at Fernando Montes de Oca 45, at the corner of Juan de la Barrera, in the Barrio de la Magdalena, 1.5 km from the main square. It is one of the 14 craft workshops listed by the town tourism office, where artisans explain how they work, from gathering the willow to the finished piece, and sell their work. According to that directory, it’s open Monday to Saturday from 10 a.m. to 6 p.m. It is also listed in INEGI’s DENUE business census. It has no website: call before you go.',
+  },
+  'e0494707-e05f-59c2-be0f-cd6726e19c3c': { // Xayu
+    shortDescription: 'Hidalgo-style pit barbecue and carne asada, 300 meters from the square',
+    fullDescription: 'A restaurant, bar and grill about 300 meters from Plaza Miguel Hidalgo. Its specialty is Hidalgo-style barbacoa cooked in an earth pit, and in the afternoons it serves carne asada. It is listed in INEGI’s national business directory (DENUE).',
+  },
+  '12f8dd77-d78f-513a-9033-58a14a6d4865': { // El Regocijo
+    shortDescription: 'Mexican cuisine on Andador Independencia, next to the square',
+    fullDescription: 'A restaurant on Andador Independencia, about 60 meters from Plaza Miguel Hidalgo. INEGI’s national business directory lists it as "El Regocijo Alta Cocina Mexicana", and it also appears in the town’s tourism office directory. Check the hours before you go.',
+  },
+  '8f1db728-d1ad-518d-9fb7-bdd1af0deb06': { // Sabor a Mí
+    shortDescription: 'Mexican food in a family setting, steps from the square',
+    fullDescription: 'A Mexican restaurant on Juárez Poniente, about 40 meters from Plaza Miguel Hidalgo. It describes itself as family-friendly. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'fb8a71ab-3f14-5897-b37e-70e2db586dd2': { // Casa Rafaela
+    shortDescription: 'Mexican food with a garden and a play area, near the square',
+    fullDescription: 'A Mexican restaurant with a garden, about 170 meters from Plaza Miguel Hidalgo. Its tourism office listing mentions a children’s play area, wine and cocktails, and on weekends pancita with handmade tortillas, quesadillas and bread with organic coffee. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '4d853372-3004-5594-948d-9ede7923ca4c': { // Casa Suelem
+    shortDescription: 'Contemporary Mexican food with a Mediterranean touch, downtown',
+    fullDescription: 'A contemporary Mexican restaurant with Mediterranean influences, run by chef Adán Flores, on Andador Morelos about 120 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '630a4b3d-4b9a-51b8-bcce-8b9b0f34c078': { // Vika Gastrobar
+    shortDescription: 'Contemporary Mexican food for adults, with a terrace',
+    fullDescription: 'A gastrobar serving Mexican food with a contemporary touch, about 60 meters from Plaza Miguel Hidalgo. Its tourism office listing says it is meant for adults and has a terrace and cocktails. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '3916bf0d-1cb0-540c-90af-9744c61dcda0': { // Cilantro y Perejil
+    shortDescription: 'Restaurant and bar a block from the square',
+    fullDescription: 'A restaurant and bar on Niños Héroes street, about 60 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '6a55e6e8-3157-5406-8be6-966da5449be2': { // El Rincón de Tequis
+    shortDescription: 'Restaurant on Andador Morelos, a block from the square',
+    fullDescription: 'A restaurant at the corner of Andador Morelos and 5 de Mayo, about 130 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '6fc34abf-c13a-52e3-8ff2-adbcaf897ac8': { // Santo Tomate
+    shortDescription: 'Restaurant on Juárez Poniente, 300 meters from the square',
+    fullDescription: 'A restaurant on Avenida Juárez Poniente, about 280 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '33592d4d-57f6-5c63-a471-e733acd632ea': { // La Quercia Ristorante
+    shortDescription: 'Italian restaurant a block from the square',
+    fullDescription: 'A restaurant on Niños Héroes street, about 70 meters from Plaza Miguel Hidalgo; going by its name, it serves Italian food. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'c14f7db9-0727-51c2-b58f-89c39f7b571d': { // Mágico Tequis
+    shortDescription: 'Restaurant, café and bar on Juárez Poniente, next to the square',
+    fullDescription: 'A restaurant, café and bar about 100 meters from Plaza Miguel Hidalgo. Its online menu has breakfast, baguettes, pizzas, lunch and dinner dishes, and cocktails. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'a523851f-5b74-5f79-bde5-bc11a60d8e58': { // Piadina Beer & Kitchen
+    shortDescription: 'Food and beer on Juárez Poniente, next to the square',
+    fullDescription: 'A restaurant on Juárez Poniente, about 80 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '60c6ebb2-1ff9-5f74-97e8-aa3899815dbf': { // Museo del Queso y el Vino
+    shortDescription: 'Cheese and wine museum and restaurant, a block from the square',
+    fullDescription: 'On Salvador Michaus street, about 120 meters from Plaza Miguel Hidalgo. INEGI’s national business directory lists it as a cheese and wine museum and restaurant, and the town’s tourism office restaurant directory links it to Quesos VAI. Check the hours before you go.',
+  },
+  '518a2985-d59e-58fe-85ef-168bc9bded15': { // La Taberna Alemana
+    shortDescription: 'Tavern on Ezequiel Montes, a block from the square',
+    fullDescription: 'A tavern on Ezequiel Montes street, about 120 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'afd3bca6-5d48-58f7-938a-e25e4629d9f9': { // Tres Cuartos Cocina de Brasa
+    shortDescription: 'Wood-fire cooking with an Asian touch, and DJs on weekends',
+    fullDescription: 'A restaurant cooking over an open fire, with Asian-inspired dishes, about 50 meters from Plaza Miguel Hidalgo. According to its tourism office listing, it serves breakfast on weekends and has DJs on Friday and Saturday nights from 9 pm. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'a7e10cf4-d15a-50b2-9b37-d5dfbd3034b6': { // Bacha & Co
+    shortDescription: 'Arabic-dough pizza and craft beer, next to the square',
+    fullDescription: 'A pizzeria about 70 meters from Plaza Miguel Hidalgo. It makes pizza on Arabic-style dough and, according to its tourism office listing, pairs it with more than 40 Mexican craft beers. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '61e21d55-a3fa-5d35-befa-01700d635fb4': { // Gerardo's Video Pizza
+    shortDescription: 'Pizzeria on Andador Independencia, next to the square',
+    fullDescription: 'A pizzeria on Andador Independencia, about 100 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '7cc36f3b-e137-54f4-885b-670be2c9749d': { // Lula's Pizza, Pasta & Salad
+    shortDescription: 'Pizza and pasta in Barrio de la Magdalena',
+    fullDescription: 'A pizzeria in Barrio de la Magdalena, a little over a kilometer from Plaza Miguel Hidalgo, serving pizza, pasta and salads. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '5e8db98d-5729-5621-ac04-7d865e959220': { // Idearte Café
+    shortDescription: 'Specialty coffee and roaster, a block from the square',
+    fullDescription: 'A specialty coffee shop that roasts its own beans and sells them to take home, on Guillermo Prieto street about 120 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '8cb4cb03-a520-519a-a8ca-ce88ef17f3a5': { // La Puerta
+    shortDescription: 'Restaurant and café on Juárez Poniente, next to the square',
+    fullDescription: 'A restaurant and café on Juárez Poniente, about 90 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'd3b92989-1395-5f47-aa5d-e3e8e4449bd5': { // Chocolate Molinillo
+    shortDescription: 'Chocolate shop on Andador Independencia, next to the square',
+    fullDescription: 'A chocolate shop on Andador Independencia, about 110 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '4be92cb3-12aa-5618-b4f0-fdd3c3a279bc': { // La Crepe
+    shortDescription: 'Crêpes, milkshakes and breakfast across from Parque La Pila',
+    fullDescription: 'A crêpe shop in Plaza Los Arcos, across from Parque La Pila, about 400 meters from Plaza Miguel Hidalgo. According to its tourism office listing, it makes sweet and savory crêpes, milkshakes, frappés, smoothies, baguettes, coffee and breakfast, and keeps books to read on site. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'd20a1e1a-d174-51cf-8552-29e2a7c240b3': { // Dudi Coffee House
+    shortDescription: 'Coffee shop in Plaza Los Arcos, across from Parque La Pila',
+    fullDescription: 'A coffee shop in Plaza Los Arcos, across from Parque La Pila, about 400 meters from Plaza Miguel Hidalgo. According to its tourism office listing, the shopping arcade is pet friendly. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'e8f75a71-26f5-5e60-9e5c-cd8ffd9323a3': { // Cafetería Laysu
+    shortDescription: 'Café and pastry shop on Avenida Niños Héroes',
+    fullDescription: 'A café on Avenida Niños Héroes, about 600 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '68c0d213-7bc8-500c-b392-26b1dfed53aa': { // Buenos Días, desayunos y café
+    shortDescription: 'All-day breakfast and set lunches in Hacienda Grande',
+    fullDescription: 'Breakfast and à la carte dishes in the Hacienda Grande area, a kilometer and a half from Plaza Miguel Hidalgo. According to its tourism office listing, the breakfast menu is served all day and there is a three-course set lunch that changes daily. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '155011ad-8777-59c9-a123-3881bc720414': { // Helados Rollato
+    shortDescription: 'Ice cream shop on Juárez Oriente, 150 meters from the square',
+    fullDescription: 'An ice cream shop on Avenida Juárez Oriente, about 150 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '540aef3a-0b45-5bb2-87f3-2e97fb434424': { // Wine Bar Freixenet
+    shortDescription: 'Wine bar on Juárez Poniente, next to the square',
+    fullDescription: 'A wine bar on Juárez Poniente, about 70 meters from Plaza Miguel Hidalgo. INEGI’s national business directory lists it under Freixenet de México, and it also appears in the town’s tourism office directory. Check the hours before you go.',
+  },
+  'a708db5a-909c-5bd5-9508-2541076268fe': { // La Jauría
+    shortDescription: 'Neo-pulquería with curados and board games, across from Parque La Pila',
+    fullDescription: 'A modern pulque bar in Plaza Los Arcos, across from Parque La Pila, about 400 meters from Plaza Miguel Hidalgo. It serves pulque from the Querétaro region, curados (flavored pulque) and pulque cocktails. According to its tourism office listing, it has board games, welcomes pets and hosts cultural events. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '37597543-1d00-5b62-a2c7-908992e46718': { // Alita Mía
+    shortDescription: 'Chicken wings on the road to San Juan del Río',
+    fullDescription: 'A chicken wings bar on federal highway 120, in the El Pedregal neighborhood, about 900 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '7e382f7c-268d-540b-8889-74a1ced705aa': { // El Carbonero
+    shortDescription: 'Land, sea and wood-fire cooking, with a garden and fire pit',
+    fullDescription: 'A restaurant cooking meat, seafood and dishes over a wood fire, on Ezequiel Montes street about 380 meters from Plaza Miguel Hidalgo. According to its tourism office listing, it has a garden, an indoor room, a fire pit, screens for sports and live music on special dates, and describes itself as family- and pet-friendly. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'f0b00918-f14b-54b4-b73b-bfab4434e882': { // Cuatro Barrios Bistró Kitchen
+    shortDescription: 'Home-style bistro for breakfast and lunch, across from Parque La Pila',
+    fullDescription: 'A home-style bistro in Plaza Los Arcos, across from Parque La Pila, about 400 meters from Plaza Miguel Hidalgo. It serves breakfast and lunch, with a terrace and an indoor dining room. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'f7411445-4450-5f35-acd8-98e2e5cd9e79': { // Gorditas Las Crucitas
+    shortDescription: 'Gorditas and traditional Querétaro food on Juárez Poniente',
+    fullDescription: 'Gorditas and traditional Querétaro food on Juárez Poniente, about 600 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '9f7c6f4b-7ba2-5e57-8dd5-bd2240660c95': { // La Antigua
+    shortDescription: 'Restaurant on the road to San Juan del Río',
+    fullDescription: 'A restaurant on federal highway 120, in the Adolfo López Mateos neighborhood, about 770 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '64b594be-b6af-5aa3-b2a3-705e35c223fc': { // Las Vegas Welcome Fast Food
+    shortDescription: 'Fast food on Juárez Poniente',
+    fullDescription: 'A fast food place on Juárez Poniente, about 570 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'f45cea0b-b303-5a75-9090-975e85c3a0b6': { // Estación 31
+    shortDescription: 'Restaurant on Ezequiel Montes, toward Parque La Pila',
+    fullDescription: 'A restaurant on Ezequiel Montes street, about 300 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '3383db50-565a-51b9-a480-00c4b4a1279c': { // Camino a Bremen
+    shortDescription: 'Delicatessen on Guillermo Prieto, two blocks from the square',
+    fullDescription: 'A delicatessen on Guillermo Prieto street, about 180 meters from Plaza Miguel Hidalgo; INEGI’s national business directory lists it as a restaurant. It also appears in the town’s tourism office directory. Check the hours before you go.',
+  },
+  '4af01ed2-d8a7-529d-a8c5-fbb7c9038a34': { // Mi Cabaña
+    shortDescription: 'Restaurant on the way out toward Querétaro',
+    fullDescription: 'A restaurant on the way out of town toward Querétaro, a little over a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'dc350bda-4909-5289-86c2-0b0f4147306a': { // Suvlaki
+    shortDescription: 'Restaurant and bar on highway 120, in Hacienda Grande',
+    fullDescription: 'A restaurant and bar on federal highway 120, in Hacienda Grande, a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '8d3e175a-5c6a-566a-a207-e368fc3fa0de': { // Quekas TX
+    shortDescription: 'Mexican snacks on 5 de Mayo street, two blocks from the square',
+    fullDescription: 'Mexican antojitos on 5 de Mayo street, about 210 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'a955962a-80e0-539e-b886-0572b0db9263': { // Sr. Sol
+    shortDescription: 'Tacos and tortas in the Vista Hermosa neighborhood',
+    fullDescription: 'A taco and torta restaurant in the Vista Hermosa neighborhood, about 900 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'f94d63d0-10d8-5b6c-9c56-c12134f4fa56': { // Bucaneros Mariscos
+    shortDescription: 'Seafood in the Vista Hermosa neighborhood',
+    fullDescription: 'A seafood restaurant in the Vista Hermosa neighborhood, by the road to San Juan del Río, a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'efa3b053-6449-54c6-831a-1dc786b70baa': { // Chiltepín
+    shortDescription: 'Seafood and micheladas in the Adolfo López Mateos neighborhood',
+    fullDescription: 'A seafood restaurant in the Adolfo López Mateos neighborhood, a little over a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'f7f8da15-410d-580e-a479-b5f096b49f49': { // Delicias del Mar
+    shortDescription: 'Seafood restaurant on highway 120, in Hacienda Grande',
+    fullDescription: 'A seafood restaurant on federal highway 120, in the Hacienda Grande area, a little over a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '2c08206b-ba9b-5f84-930e-01b3455c74e2': { // Manaly
+    shortDescription: 'Seafood in the Adolfo López Mateos neighborhood',
+    fullDescription: 'A seafood restaurant in the Adolfo López Mateos neighborhood, about two kilometers from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '40baa5fe-ff76-5701-8ba2-c1cc5bc6f825': { // Birria Los Compadres
+    shortDescription: 'Birria on the road to San Juan del Río, in Bordo Blanco',
+    fullDescription: 'A birria restaurant on the road to San Juan del Río, in Bordo Blanco, about four kilometers from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'e3d8fa86-2533-50d9-951c-1774a75d05d2': { // La Ranchería
+    shortDescription: 'Restaurant on the road to San Juan del Río, in La Ermita',
+    fullDescription: 'A restaurant on the road to San Juan del Río, in La Ermita, about five and a half kilometers from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'addc0100-c44c-522b-9473-9ae0b7050418': { // Portal del Cabrito
+    shortDescription: 'Restaurant on the road to San Juan del Río, in La Ermita',
+    fullDescription: 'A restaurant on the road to San Juan del Río, in La Ermita, about five and a half kilometers from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  'c07274f5-3e9a-5156-bd5d-edc58c71f618': { // La Gallera
+    shortDescription: 'Restaurant and bar on the way out toward Querétaro',
+    fullDescription: 'A restaurant and bar on the way out of town toward Querétaro, in the Adolfo López Mateos neighborhood, about two kilometers from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+  },
+  '1dd7eb21-a7d6-51a2-a1aa-7cd88b3b2c6b': { // La Fromelier
+    shortDescription: 'Artisan Querétaro cheeses and local wines, with group tastings',
+    fullDescription: 'A cheese shop selling artisan cheeses from Querétaro, with a selection of local wines for pairing, on Matamoros street about 600 meters from Plaza Miguel Hidalgo. It offers guided cheese and wine pairings for tour groups. INEGI’s national business directory lists it as a restaurant and cheese shop. Check the hours before you go.',
+  },
+  '3711e4c6-4ec7-515e-8620-d2c9de83e7dd': { // Hotel Casa de Vino
+    shortDescription: 'Wine-themed hotel with a wine-therapy spa and a sauna',
+    fullDescription: 'A wine-themed hotel on Moctezuma street, about 250 meters from Plaza Miguel Hidalgo, with 11 rooms each named after a grape variety: single, double, superior and superior king rooms for 2 to 4 guests, with WiFi and cable TV. It has a wine-therapy spa with a sauna, a jacuzzi area that can be booked privately for evenings with a cheese board and wine, and a pool table. It puts together packages for couples and groups with wine therapy, vineyard tours, tastings and hot air balloon flights. In an August 2026 promotion, with a 10% discount, a night cost 1,485 to 1,935 pesos depending on the room and whether breakfast was included.',
+  },
+  '70c6ecf0-77ee-52ee-af28-8be3d00b2fea': { // Hotel Villa Florencia
+    shortDescription: 'Hotel on Nautha street, 500 m from the main square',
+    fullDescription: 'Hotel at Nautha 6, Centro, about 500 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 5-star rating in 2025, and in INEGI’s national business directory (DENUE). It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'e88b6910-db50-5185-ac80-f685d7874eca': { // Hotel Boutique Regalo del Alma
+    shortDescription: 'Boutique hotel in Hacienda Grande, 1.4 km from the main square',
+    fullDescription: 'Boutique hotel at Privada Molino de la Paloma 11, Hacienda Grande, 1.4 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 5-star rating in 2025, and in INEGI’s national business directory (DENUE). It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '94d1081f-d203-5acc-95b2-828d057a7dcf': { // La Casa Roja
+    shortDescription: 'Hotel on Camino al Sauz, 1.6 km from the main square',
+    fullDescription: 'Hotel at Camino al Sauz 65, Hacienda Grande, 1.6 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 4.3-star rating in 2025, and in INEGI’s national business directory (DENUE). It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'ecf921b6-b379-5d72-8364-9837f4d95648': { // Hotel La Querencia
+    shortDescription: 'Hotel on Avenida Juárez Oriente, 1.3 km from the main square',
+    fullDescription: 'Hotel on Avenida Juárez Oriente, Barrio de los Tepetates, about 1.3 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 4-star rating in 2025, in the state tourism directory and in INEGI’s national business directory (DENUE). It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '6e68052e-c976-56d0-83aa-268c86ffd514': { // Hotel Casa Jasave
+    shortDescription: 'Hotel on Avenida Juárez Oriente, 130 m from the main square',
+    fullDescription: 'Hotel at Av. Juárez Oriente 5, Centro, about 130 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 4-star rating in 2025, and in INEGI’s national business directory (DENUE). It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'df76488d-a5f9-5b52-b25c-eb15d1d279db': { // Hotel Boutique M&F
+    shortDescription: 'Boutique hotel on Heroico Colegio Militar, 500 m from the main square',
+    fullDescription: 'Boutique hotel on Avenida Heroico Colegio Militar, Centro, about 500 meters from Plaza Miguel Hidalgo. It is listed in INEGI’s national business directory (DENUE) and in the municipal tourism office’s lodging directory, which in 2025 listed it as Hotel Boutique Crown with a 5-star rating. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '291f1294-fc5c-5e25-a182-0025db876cfa': { // Hotel Asunción Hacienda del Carmen
+    shortDescription: 'Hotel on Olivo street, 1 km from the main square',
+    fullDescription: 'Hotel at Olivo 12, Fundadores de Hacienda Grande, 1 km from Plaza Miguel Hidalgo as the crow flies. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025, and in INEGI’s national business directory (DENUE), which records it as Hotel La Asunción. It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  'b94dcf1a-a598-5805-bc8c-2127c5a0ae85': { // Cabañas Quinta Rancho Viejo
+    shortDescription: 'Cabins in the La Magdalena neighborhood, 1.9 km from the main square',
+    fullDescription: 'Cabins on Prof. Francisco Martínez Elías street, Barrio de la Magdalena, 1.9 km from Plaza Miguel Hidalgo as the crow flies. They are listed in the municipal tourism office’s lodging directory, which gave them a 3-star rating in 2025, and INEGI’s national business directory (DENUE) lists their events venue on the same street. They have no website of their own, so confirm services and rates by phone before booking.',
+  },
+  '18962096-51ee-5d88-8f20-e663684b2440': { // Hotel Casa Frida
+    shortDescription: 'Hotel on Morelos Norte street, 130 m from the main square',
+    fullDescription: 'Hotel at Morelos Norte 4, Centro, about 130 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s lodging directory, which gave it a 3-star rating in 2025, and in INEGI’s national business directory (DENUE). It has no website of its own, so confirm services and rates by phone before booking.',
+  },
+  '5b02edf5-2c4c-5220-80ae-9da4ad103d45': { // Hotel Villa 12
+    shortDescription: 'Hotel on Avenida Niños Héroes, 750 m from the main square',
+    fullDescription: 'Hotel at Niños Héroes 63, Vergel del Acueducto, about 750 meters from Plaza Miguel Hidalgo. It is listed in the municipal tourism office’s directory and in INEGI’s national business directory (DENUE). It has no website of its own, so confirm services and rates by phone before booking.',
+  },
 };
 
 export const EVENTS_EN: Record<string, EventEn> = {
@@ -774,6 +1111,8 @@ export const SUBCATEGORIES_EN: Record<string, { singular: string; plural: string
   'Cabañas': { singular: 'Cabin', plural: 'Cabins' }, // plural en español: Cabañas,
   'Glamping': { singular: 'Glamping', plural: 'Glamping sites' }, // plural en español: Glamping,
   'Parrilla': { singular: 'Grill', plural: 'Grills' },
+  'Temazcal': { singular: 'Temazcal', plural: 'Temazcales' },
+  'Centro Cultural': { singular: 'Cultural center', plural: 'Cultural centers' },
 };
 
 /** Any other short Spanish string shown in the UI: every amenity, every tag, every event category. Key = exact Spanish text. */

@@ -18,6 +18,8 @@ La base es PostgreSQL 18 y vive en nuestro VPS (solo escucha en local; el panel 
 - `database/databaseseed_images.sql` — asigna fotos de Wikimedia Commons a los lugares/eventos que no tenían. La atribución obligatoria de cada foto (licencias CC) está en [`creditos-imagenes.md`](creditos-imagenes.md).
 - `database/databaseseed_business_photos.sql` — fotos reales de negocios destacados, revisadas a mano en su sitio oficial.
 
+- `database/databaseseed_denue_2026-11-11.sql` — 84 altas con el DENUE del INEGI como segunda fuente (ver [`denue-2026-11.md`](denue-2026-11.md)).
+
 Estos archivos son de referencia: correrlos otra vez reinsertaría los mismos lugares (no hay `ON CONFLICT`/upsert), así que no son idempotentes.
 
 Para reconstruir la base desde el repo: `databaseschema.sql`, `snapshot_2026-11-05/` y luego, en este orden, `databaseseed_business_photos_2026-11.sql`, `databasefix_research_2026-11.sql`, `databasefix_direcciones_2026-11-05.sql` y `databaseseed_lugares_reales_2026-11.sql`. Lo normal es restaurar el respaldo diario del servidor; esto es para cuando se perdió también el servidor. Las fotos propias no están en el repo.

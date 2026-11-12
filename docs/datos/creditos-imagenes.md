@@ -183,6 +183,28 @@ Misma regla y mismo destino (`/srv/tequis/uploads/lugares/`), aplicadas con `dat
 | Viñedo La Revuelta | `vinedo-la-revuelta-comedor.jpg` | [larevuelta.com.mx](https://larevuelta.com.mx) | [original](https://img1.wsimg.com/isteam/ip/235efc7c-73f3-4650-85cd-ce9ee72e249b/WhatsApp%20Image%202021-10-27%20at%2018.46.34.jpeg) |
 | Viñedo La Revuelta | `vinedo-la-revuelta-platillo.jpg` | [larevuelta.com.mx/gran-reserva](https://larevuelta.com.mx/gran-reserva) | [original](https://img1.wsimg.com/isteam/ip/235efc7c-73f3-4650-85cd-ce9ee72e249b/WhatsApp%20Image%202021-10-27%20at%2018.47.12.jpeg) |
 
+## Fotos reales de negocios: altas con el DENUE (11 nov 2026)
+
+Misma regla y mismo destino (`/srv/tequis/uploads/lugares/`), para `database/databaseseed_denue_2026-11-11.sql`. Todas salen de la web propia de cada negocio (confirmada con el teléfono o la dirección del DENUE y de Turismo) y se revisaron a ojo. Se convirtieron a JPG y se redujeron a 1920 px como máximo, sin agrandar las chicas. Los otros 79 negocios de esa alta no tienen web propia que funcione y se quedan con la genérica de su categoría.
+
+| Lugar | Archivo | Página de origen | Archivo original |
+|---|---|---|---|
+| MD Turismo y Experiencias | `md-turismo-y-experiencias-tranvia-vinedo.jpg` | [mdturismoyexperiencias.com/productos/tranvia-tequisquiapan](https://www.mdturismoyexperiencias.com/productos/tranvia-tequisquiapan/) | [original](https://dcdn-us.mitiendanube.com/stores/004/612/648/products/img_20191223_143841-5d80635bf68a3a3ed217278931765170-1024-1024.webp) |
+| MD Turismo y Experiencias | `md-turismo-y-experiencias-tram-43.jpg` | [mdturismoyexperiencias.com/productos/tranvia-tequisquiapan](https://www.mdturismoyexperiencias.com/productos/tranvia-tequisquiapan/) | [original](https://dcdn-us.mitiendanube.com/stores/004/612/648/products/_ago7223-99895ac6ac4309df6117257385263563-1024-1024.webp) |
+| TX Ecotours | `tx-ecotours-ruta-4x4.jpg` | [txecotours.com/rutas](https://txecotours.com/rutas) | [original](https://img1.wsimg.com/isteam/ip/35ea4618-6a4e-4e88-9f5b-ce672b680c30/Magia%20tres%20rzrs%20(2).jpg) |
+| TX Ecotours | `tx-ecotours-mina-de-opalo.jpg` | [txecotours.com/rutas](https://txecotours.com/rutas) | [original](https://img1.wsimg.com/isteam/ip/35ea4618-6a4e-4e88-9f5b-ce672b680c30/79fb964d-678c-4b65-94d3-c7e5ccefeb47.jpg) |
+| TX Ecotours | `tx-ecotours-presa-atardecer.jpg` | [txecotours.com/rutas](https://txecotours.com/rutas) | [original](https://img1.wsimg.com/isteam/ip/35ea4618-6a4e-4e88-9f5b-ce672b680c30/txe2.jpg) |
+| Quesería La Vaca Feliz | `queseria-la-vaca-feliz-fachada-auditorio.jpg` | [lavacafeliz.com.mx/sucursales.html](https://lavacafeliz.com.mx/sucursales.html) | [original](https://lavacafeliz.com.mx/imgque/Heroes2.jpg) |
+| Quesería La Vaca Feliz | `queseria-la-vaca-feliz-fachada-juarez.jpg` | [lavacafeliz.com.mx/sucursales.html](https://lavacafeliz.com.mx/sucursales.html) | [original](https://lavacafeliz.com.mx/imgque/Maridelfi2.jpg) |
+| Quesería La Vaca Feliz | `queseria-la-vaca-feliz-quesos.jpg` | [lavacafeliz.com.mx](https://lavacafeliz.com.mx/) | [original](https://lavacafeliz.com.mx/img/IMG-20240811-WA0004.jpg) |
+| Quesería La Vaca Feliz | `queseria-la-vaca-feliz-tabla.jpg` | [lavacafeliz.com.mx](https://lavacafeliz.com.mx/) | [original](https://lavacafeliz.com.mx/img/IMG-20240811-WA0011.jpg) |
+| Xayu | `xayu-comedor.jpg` | [xayurestaurante.com](https://www.xayurestaurante.com/) | [original](https://static.wixstatic.com/media/5cc8ec_5370d735fad1493daa39f0441481f708~mv2.jpg) |
+| Hotel Casa de Vino | `hotel-casa-de-vino-patio.jpg` | [hotelcasadevino.com](https://www.hotelcasadevino.com/) | [original](https://irp.cdn-website.com/f8909327/dms3rep/multi/opt/Hotel-casa-de-vino-tequisquiapan-queretaro+%281%29-1920w.webp) |
+| Hotel Casa de Vino | `hotel-casa-de-vino-habitacion-superior-king.jpg` | [hotelcasadevino.com/habitaciones](https://www.hotelcasadevino.com/habitaciones) | [original](https://irp.cdn-website.com/f8909327/dms3rep/multi/opt/hotel-casa-de-vino-habitacion-superior-King-tequisquiapan+%2811%29-1920w.webp) |
+| Hotel Casa de Vino | `hotel-casa-de-vino-jacuzzi.jpg` | [hotelcasadevino.com/restaurant](https://www.hotelcasadevino.com/restaurant) | [original](https://irp.cdn-website.com/f8909327/dms3rep/multi/opt/Casa+del+vino+Rose+y+brindis+%287%29-1920w.webp) |
+| Hotel Casa de Vino | `hotel-casa-de-vino-habitacion-superior.jpg` | [hotelcasadevino.com/habitacion-superior](https://www.hotelcasadevino.com/habitacion-superior) | [original](https://irp.cdn-website.com/f8909327/dms3rep/multi/opt/HOTEL+CASA+DE+VINO-cb8a0814-1920w.webp) |
+| Hotel Casa de Vino | `hotel-casa-de-vino-entrada.jpg` | [hotelcasadevino.com](https://www.hotelcasadevino.com/) | [original](https://irp.cdn-website.com/f8909327/dms3rep/multi/opt/Hotel-casa-de-vino-tequisquiapan-queretaro+%285%29-1920w.webp) |
+
 ## Historial anterior
 
 ### Fotos reales de negocios específicos (hasta oct 2026; ya no aplica a Freixenet ni Globos)

@@ -187,6 +187,7 @@ const SUBCATEGORY_PLURALS: Record<string, string> = {
   'Granja': 'Granjas',
   'Hacienda': 'Haciendas',
   'Galería': 'Galerías',
+  'Centro Cultural': 'Centros culturales',
   'Tienda': 'Tiendas',
   'Artesanías': 'Artesanías',
   'Naturaleza': 'Naturaleza',
