@@ -258,11 +258,6 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Boutique winery with tastings and views of the Peña de Bernal',
     fullDescription: 'Winery founded in 2007 as a self-sustaining farm in San José de la Laja, within the municipality of Tequisquiapan. The tour goes through the fields, the winery and the cellar; in November 2026 it cost MX$190 (free for children under 12), and tastings of 3 or 6 wines, with or without pizza, cost MX$380 to MX$760. The terrace looks out to the Peña de Bernal; there’s food, a small children’s play area and La Casona, a boutique hotel with just a few rooms. It opens Friday to Sunday, holidays and school vacations, and small groups don’t need to book.',
   },
-  'b8fb8442-db5b-57a6-892f-097d5acb62c6': { // Spa Studio 7
-    shortDescription: 'Spa at the Hotel San Carlos, with sauna, steam and massages',
-    fullDescription: 'The spa of the Hotel San Carlos, downtown, has a sauna or steam room, a hot tub and a shower. It offers Swedish, Hawaiian, relaxing and lymphatic drainage massages, reflexology, coffee wraps, facials and salt scrubs. Monday to Thursday by reservation.',
-    schedule: { lunes: 'By reservation', martes: 'By reservation', 'miércoles': 'By reservation', jueves: 'By reservation' },
-  },
   '1121c798-c22b-58db-94ab-e0e8313661bd': { // Espacio Sense Spa – La Casona
     shortDescription: 'Spa open to the public, with temazcal, sauna and hot tub',
     fullDescription: 'The spa of La Casona Tequisquiapan Hotel & Spa, in its Espacio Sense area, also open to people who aren’t staying at the hotel. It has single and couples treatment rooms, a sauna, a traditional temazcal (sweat lodge), a hot tub, showers and a garden to relax in. Its menu has more than 20 treatments, for one person or couples: massages, facials and rituals made with agave products, such as obsidian stone massages, body scrubs and artisanal steam sessions, often ending in the temazcal. It doesn’t publish hours or current prices: ask about availability when you book by phone or WhatsApp.',
