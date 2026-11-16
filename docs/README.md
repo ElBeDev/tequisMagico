@@ -10,6 +10,7 @@ Todo lo del proyecto en un solo lugar. Empieza por "El proyecto hoy" y luego ve 
 | [`web/bitacora.md`](web/bitacora.md) | Registro de cómo se hizo la web: separación de la app, registro y DNS del dominio, despliegues, diseño, problemas y arreglos, pendientes |
 | [`web/plan-seo-2026-11.md`](web/plan-seo-2026-11.md) | Diagnóstico con datos de Search Console (API), plan SEO por fases con su estado, y línea base para medir |
 | [`marca/README.md`](marca/README.md) | El logo: qué archivo usar en cada fondo, colores y reglas |
+| [`negocio/prospectos-presencia-digital.md`](negocio/prospectos-presencia-digital.md) | Negocios sin web, con la web caída o con poca presencia en línea, para ofrecerles servicios. Se agrega cada negocio al revisarlo |
 | [`negocio/propuesta-sitio-web.md`](negocio/propuesta-sitio-web.md) | Propuesta del sitio web público: mercado, competencia, modelo de negocio, arquitectura y plan por fases |
 | [`app-ios/roadmap.md`](app-ios/roadmap.md) | Estado completo y roadmap de la app iOS: qué está hecho, qué falta, bugs, auditoría, legal |
 | [`panel/panel-admin.md`](panel/panel-admin.md) | El panel de administración (`web-admin/`): qué hace, cómo se protege, cómo correrlo |

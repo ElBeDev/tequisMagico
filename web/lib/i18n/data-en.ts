@@ -649,8 +649,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Town cultural center about 300 meters from the main square. According to the town tourism office, it hosts talks, films, theater, art exhibitions and book presentations, and offers workshops. It doesn’t publish its program or hours: ask by phone.',
   },
   '61673c59-62e1-5547-b14f-2e6915311f76': { // La Biquette
-    shortDescription: 'Artisanal French-style goat cheeses',
-    fullDescription: 'Goat cheese maker in La Lagunita, at km 2 of the road to Ezequiel Montes, 1.6 km from the main square. According to the town tourism office, it makes its cheeses by hand following the French tradition, from raising the goats to making the cheese, without preservatives or coloring. Viajes y Enoturismo includes it on some of its tours. Its website doesn’t respond and it doesn’t publish hours or prices: call before you go.',
+    shortDescription: 'Artisanal French-style goat cheeses, with a visit and tasting',
+    fullDescription: 'A goat cheese maker in La Lagunita, on the road to Ezequiel Montes, between the vehicle-inspection center and the plant nursery, 1.6 km from the main square. It makes its cheeses by hand following the French tradition, from raising the goats to making the cheese, without preservatives or coloring: fresh and aged, white- or blue-mold, soft or pressed, such as its crottin and pyramid. It has a cheese cellar and offers visits to the dairy, with an explanation of how the cheeses are made and aged and a tasting of five cheeses (one fresh, one spreadable and three aged). It is open every day from 9:30 AM to 5:30 PM; book the visit by phone or WhatsApp.',
   },
   '0cf02114-c165-5d87-b904-b608cbcc1ad5': { // Vinícola Tequisquiapan
     shortDescription: 'Boutique winery founded in 2010, with tastings and Salvador-grape wines',

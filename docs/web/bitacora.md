@@ -359,6 +359,10 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
   - Dos fotos reales de sus tablas de queso y `content_verified`.
   - Su horario de Facebook es viejo y choca con el de un directorio, así que va con aviso.
   - bodegasdemexico.com es un directorio de terceros y no se usa. lafromelier.com, el enlace de su Facebook, no está registrado.
+- **La Biquette** (`database/databasefix_la_biquette_2026-11-16.sql`):
+  - Datos de su Facebook e Instagram: visitas con degustación de 5 quesos, horario diario de 9:30 a 17:30, WhatsApp y correo nuevo (el de labiquette.mx ya no sirve).
+  - Tres fotos reales (cava, quesos y cabras) y `content_verified`.
+- Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
 ---
