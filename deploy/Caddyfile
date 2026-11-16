@@ -24,7 +24,9 @@ tequismagico.com {
 	}
 }
 
-www.tequismagico.com {
+# Con http:// también aquí, http://www va directo a https://tequismagico.com en un salto (sin esto,
+# Caddy primero pasaba a https://www y luego quitaba el www).
+www.tequismagico.com, http://www.tequismagico.com {
 	redir https://tequismagico.com{uri} permanent
 }
 

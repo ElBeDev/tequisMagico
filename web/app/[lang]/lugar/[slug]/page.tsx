@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BadgeCheck, Globe, Info, Mail, MapPin, MessageCircle, Navigation, Phone } from 'lucide-react';
-import { SITE_URL, categoryInfo, getPlace, getPlaces, mapsDirectionsUrl, placeKey, priceInfo, type Place } from '@/lib/data';
+import { SITE_URL, categoryInfo, getPlace, getPlaces, isIndexable, mapsDirectionsUrl, placeKey, priceInfo, type Place } from '@/lib/data';
 import { dict } from '@/lib/dict';
 import { LANGS, alternates, href, langOf } from '@/lib/i18n';
 import { openingHoursSpec, scheduleEntries } from '@/lib/schedule';
@@ -30,6 +30,8 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/lugar/[slu
     title: `${place.name} · ${place.subcategory} ${lang === 'en' ? 'in' : 'en'} Tequisquiapan`,
     description,
     alternates: alternates(lang, `/lugar/${place.slug}`),
+    // Ficha delgada (lib/data.ts): visible en el sitio, pero no en Google. `follow` para que siga los links.
+    robots: isIndexable(place) ? undefined : { index: false, follow: true },
     openGraph: { title: place.name, description, images: place.thumbnailUrl ? [place.thumbnailUrl] : undefined, type: 'website' },
   };
 }

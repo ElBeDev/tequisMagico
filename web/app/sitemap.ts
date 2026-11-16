@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { CATEGORIES, SITE_URL, THEMATIC_ROUTES, getEvents, getPlaces } from '@/lib/data';
+import { CATEGORIES, SITE_URL, THEMATIC_ROUTES, getEvents, getPlaces, isIndexable } from '@/lib/data';
 import { GUIDES } from '@/lib/guides';
 import { LANGS, href } from '@/lib/i18n';
 import { activeTypePages } from '@/lib/tipos';
@@ -33,7 +33,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...Object.values(CATEGORIES).flatMap((c) => page(`/lugares/${c.slug}`, 0.8)),
     ...activeTypePages(places).flatMap((t) => page(`/lugares/${CATEGORIES[t.category].slug}/${t.slug}`, 0.8)),
     ...THEMATIC_ROUTES.flatMap((r) => page(`/rutas/${r.slug}`, 0.6)),
-    ...places.flatMap((p) => page(`/lugar/${p.slug}`, 0.7, p.updatedAt)),
+    // Las fichas delgadas llevan noindex (isIndexable): no van en el sitemap.
+    ...places.filter(isIndexable).flatMap((p) => page(`/lugar/${p.slug}`, 0.7, p.updatedAt)),
     ...events.flatMap((e) => page(`/evento/${e.slug}`, 0.7)),
   ];
 }

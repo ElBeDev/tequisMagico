@@ -132,6 +132,17 @@ export type PlaceSummary = Pick<
   'id' | 'slug' | 'name' | 'category' | 'subcategory' | 'subcategoryKey' | 'featureKeys' | 'shortDescription' | 'priceRange' | 'thumbnailUrl' | 'latitude' | 'longitude'
 >;
 
+/**
+ * ¿La ficha va a Google? Las que no tienen datos confirmados (`content_verified`) ni web propia son
+ * fichas delgadas (casi todas del DENUE o del directorio de Turismo, con foto genérica): Search
+ * Console las marcaba "rastreada: actualmente sin indexar" y bajan la calidad del sitio entero. Siguen
+ * en la web y en la app, pero con `noindex` y fuera del sitemap; salen solas en cuanto se confirman
+ * o se les agrega su web en el panel.
+ */
+export function isIndexable(p: Pick<Place, 'contentVerified' | 'website'>): boolean {
+  return p.contentVerified || !!p.website;
+}
+
 export function toSummary(p: Place): PlaceSummary {
   return {
     id: p.id,
