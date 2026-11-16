@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Fragment, Suspense } from 'react';
 import Link from 'next/link';
-import { CATEGORIES, categoryFromSlug, categoryInfo, getPlaces, toSummary, type PlaceCategory } from '@/lib/data';
+import { CATEGORIES, categoryFromSlug, categoryInfo, getPlaces, subcategoriesOf, toSummary, type PlaceCategory } from '@/lib/data';
 import { LANGS, alternates, href, langOf } from '@/lib/i18n';
-import { activeTypePages, isNeedPage } from '@/lib/tipos';
+import { activeTypePages, isNeedPage, typePageByKey } from '@/lib/tipos';
 import { CategoryTabs, PlaceGrid } from '@/components/PlaceGrid';
 import PlaceExplorer from '@/components/PlaceExplorer';
 import { PageIntro } from '@/components/Section';
@@ -102,6 +102,14 @@ export default async function CategoriaPage({ params }: PageProps<'/[lang]/lugar
   const active = activeTypePages(all).filter((t) => t.category === category);
   const types = active.filter((t) => !isNeedPage(t));
   const needs = active.filter(isNeedPage);
+  // Filtros con página propia → a esa página (las que Google indexa), no a ?tipo=.
+  const byKey = typePageByKey(category, places);
+  const typeLinks = Object.fromEntries(
+    subcategoriesOf(places).flatMap((s) => {
+      const t = byKey.get(s.key);
+      return t ? [[s.slug, href(lang, `/lugares/${CATEGORIES[category].slug}/${t.slug}`)]] : [];
+    }),
+  );
 
   return (
     <>
@@ -143,7 +151,7 @@ export default async function CategoriaPage({ params }: PageProps<'/[lang]/lugar
         <div className="mt-10">
           {places.length > 0 ? (
             <Suspense fallback={<PlaceGrid places={places} lang={lang} reveal={false} className="mt-12" />}>
-              <PlaceExplorer places={places} lang={lang} />
+              <PlaceExplorer places={places} lang={lang} typeLinks={typeLinks} />
             </Suspense>
           ) : (
             <p className="text-center text-muted">{lang === 'en' ? 'No places in this category yet.' : 'Todavía no hay lugares en esta categoría.'}</p>

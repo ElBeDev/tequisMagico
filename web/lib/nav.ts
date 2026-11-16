@@ -15,7 +15,7 @@ import {
 import { GUIDES, guidesFor } from './guides';
 import { href, pick, type Lang } from './i18n';
 import { PHOTOS } from './photos';
-import { activeTypePages } from './tipos';
+import { typePageByKey } from './tipos';
 
 // Menú principal al estilo de visitshropshire.co.uk: una fila de secciones y, al pasar el
 // mouse, un panel con columnas de links (armadas con los datos reales: subcategorías con su
@@ -30,19 +30,19 @@ export type NavGroup = { title: string; href?: string; links: NavLink[] };
 export type NavFeature = { image: string; eyebrow: string; title: string; href: string; cta: string };
 export type NavSection = { label: string; href: string; groups: NavGroup[]; feature?: NavFeature; all: NavLink };
 
-function typeHref(category: PlaceCategory, key: string, places: Place[]): string | undefined {
-  const t = activeTypePages(places).find((x) => x.category === category && x.keys[0] === key);
-  return t && `/lugares/${categoryInfo('es', category).slug}/${t.slug}`;
-}
-
 function categoryGroup(lang: Lang, places: Place[], category: PlaceCategory, title = categoryInfo(lang, category).label): NavGroup {
   const inCategory = places.filter((p) => p.category === category);
+  const types = typePageByKey(category, inCategory);
+  const typeHref = (key: string) => {
+    const t = types.get(key);
+    return t && `/lugares/${categoryInfo('es', category).slug}/${t.slug}`;
+  };
   return {
     title,
     href: href(lang, `/lugares/${categoryInfo(lang, category).slug}`),
     links: subcategoriesOf(inCategory).map((s) => ({
       // A la página por tipo si existe (lib/tipos.ts) y esta es su subcategoría principal; si no, al filtro.
-      href: href(lang, typeHref(category, s.key, inCategory) ?? subcategoryHref(category, s.key)),
+      href: href(lang, typeHref(s.key) ?? subcategoryHref(category, s.key)),
       label: subcategoryPlural(s.key, lang),
       meta: String(s.count),
     })),

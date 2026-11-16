@@ -542,5 +542,11 @@ export function activeTypePages<T extends Matchable>(places: T[]): TypePage[] {
   return TYPE_PAGES.filter((t) => placesOfType(t, places).length >= MIN_PLACES);
 }
 
+/** Subcategoría (clave en español) → página por tipo publicada que la tiene como principal (`keys[0]`).
+ *  Lo usan el menú y los filtros de los listados para enlazar a la página indexable y no a `?tipo=`. */
+export function typePageByKey<T extends Matchable>(category: PlaceCategory, places: T[]): Map<string, TypePage> {
+  return new Map(activeTypePages(places).filter((t) => t.category === category && t.keys.length > 0).map((t) => [t.keys[0], t]));
+}
+
 /** Segmentos español → inglés, para lib/i18n.ts. */
 export const TYPE_SLUGS_EN: Record<string, string> = Object.fromEntries(TYPE_PAGES.map((t) => [t.slug, t.slugEn]));

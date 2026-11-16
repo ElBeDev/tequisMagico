@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
-import { CATEGORIES, SITE_URL, categoryFromSlug, categoryInfo, getPlaces, toSummary } from '@/lib/data';
+import { CATEGORIES, SITE_URL, categoryFromSlug, categoryInfo, getPlaces, subcategoriesOf, toSummary } from '@/lib/data';
 import { LANGS, alternates, href, langOf } from '@/lib/i18n';
-import { MIN_PLACES, activeTypePages, isNeedPage, placesOfType, typePage } from '@/lib/tipos';
+import { MIN_PLACES, activeTypePages, isNeedPage, placesOfType, typePage, typePageByKey } from '@/lib/tipos';
 import { JsonLd } from '@/components/Cards';
 import { PlaceGrid, TypeTabs } from '@/components/PlaceGrid';
 import PlaceExplorer from '@/components/PlaceExplorer';
@@ -55,6 +55,15 @@ export default async function TipoPage({ params }: PageProps<'/[lang]/lugares/[c
   const siblings = activeTypePages(all)
     .filter((t) => t.category === category)
     .sort((a, b) => Number(isNeedPage(a)) - Number(isNeedPage(b)));
+  // Filtros con página propia (restaurantes → pizzerías) llevan a ella, no a ?tipo=. En las páginas por
+  // necesidad no: "pet friendly + pizzería" no es lo mismo que la página de pizzerías.
+  const byKey = isNeedPage(type) ? new Map() : typePageByKey(category, all);
+  const typeLinks = Object.fromEntries(
+    subcategoriesOf(places).flatMap((s) => {
+      const t = byKey.get(s.key);
+      return t && t.slug !== type.slug ? [[s.slug, href(lang, `/lugares/${c.slug}/${t.slug}`)]] : [];
+    }),
+  );
   // "Con alberca en Tequisquiapan" no se entiende solo: las páginas por necesidad usan su título completo.
   const title = isNeedPage(type)
     ? type.title[lang]
@@ -92,7 +101,7 @@ export default async function TipoPage({ params }: PageProps<'/[lang]/lugares/[c
         <TypeTabs types={siblings} category={category} active={type.slug} lang={lang} />
         <div className="mt-10">
           <Suspense fallback={<PlaceGrid places={places} lang={lang} reveal={false} className="mt-12" />}>
-            <PlaceExplorer places={places} lang={lang} subfilters={type.keys.length !== 1} />
+            <PlaceExplorer places={places} lang={lang} subfilters={type.keys.length !== 1} typeLinks={typeLinks} />
           </Suspense>
         </div>
       </div>
