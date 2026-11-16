@@ -228,7 +228,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   '04332bc5-6b65-5067-80bb-bd6d1562e941': { // Parque Acuático El Oasis
     shortDescription: 'Thermal pools at 36 °C',
-    fullDescription: 'Water park at km 10 of the road to Ezequiel Montes, with 36 °C thermal water, a wave pool, an Olympic pool, waterslides, a zip line, a kids’ area and palapas. It has a restaurant, free parking and 262 camping spots with a grill area. In November 2026 it was open Saturdays and Sundays, 9 AM to 6 PM, plus school and public holidays, and admission was MX$190 for adults and MX$150 for children 1.00 to 1.40 m tall and seniors (MX$250 and MX$220 with camping). In the low season it often runs promotions.',
+    fullDescription: 'Water park open for more than 46 years, at km 10 of the road to Ezequiel Montes, with 36 °C thermal water, a wave pool, an Olympic pool, two 120 m speed slides, a zip line and the Tierra de la Fantasía, an area with waterfalls, five slides, a grotto and a cenote. It has palapas and grills, soccer fields, a restaurant, a mini-market and free parking, plus 262 camping spots with restrooms, changing rooms and a campfire area. In November 2026 it was open Saturdays and Sundays, 9 AM to 6 PM, plus school and public holidays, and admission was MX$190 for adults and MX$150 for children 1.00 to 1.40 m tall and seniors (MX$290 and MX$250 with camping). Tickets can be bought on its website. In the low season it often runs promotions.',
   },
   'edf8fd31-93ef-5673-8ad5-7341d6fae02d': { // Termas del Rey
     shortDescription: 'Water park with a wave pool and waterslides',

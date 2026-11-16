@@ -377,6 +377,11 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
   - Su web es una plantilla a medias: "Galería", "Habitaciones" y "Campamento" dan 404, y el WhatsApp y los botones de redes son de relleno. Los datos nuevos salen de su Facebook oficial.
   - Precios de sus carteles: entrada general $100 ($50 niños y adultos mayores con credencial), campamento $100, y habitaciones con entrada incluida desde $1,000 (2 personas), $1,400 (4) y $1,800 (6). No se permiten envases de vidrio ni mascotas.
   - Una foto nueva (alberca, toboganes y jardín) de su Facebook, porque la web no tiene galería. No se agregó el correo (el dominio no recibe) ni el Instagram @balneariolavega (vacío, sin nada que lo ligue al negocio).
+- **Parque Acuático El Oasis** (`database/databasefix_el_oasis_2026-11-16.sql`):
+  - Su web está al día: el campamento subió a $290 adultos y $250 niños (su Facebook todavía da los precios viejos). Se agregaron la Tierra de la Fantasía, los toboganes de 120 m, los campos de futbol, el minisúper y la venta de boletos en línea.
+  - Pin real, de su enlace de Google Maps: el anterior era aproximado e idéntico al de Termas del Rey.
+  - Facebook ElOasisTx e Instagram @eloasistequisquiapan. Su Instagram enlaza a eloasistequisquiapan.com.mx, que no está registrado.
+  - Dos fotos más de la galería de su web (Tierra de la Fantasía y campamento).
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
@@ -387,6 +392,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 | Pendiente | Quién |
 |---|---|
 | quesosvai.com (Finca VAI) muestra una página de estacionamiento desde el 14 nov 2026: si vuelve, reponer el `website` en la ficha | Datos |
+| Pin de Termas del Rey: sigue aproximado (km 10), el mismo que tenía El Oasis antes de corregirlo | Datos |
 | Revisar las webs que no respondieron el 16 nov 2026: El Atorón, hotelplazatequis.com (4 lugares), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Si siguen caídas, quitar el `website` o la ficha | Datos |
 | Búsqueda de marcas antes de registrar el logo en el IMPI | Tú |
 | **Renovar el dominio** antes del 2 nov 2027 (conviene activar la renovación automática en Hostinger) | Tú |
