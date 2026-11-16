@@ -893,8 +893,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A restaurant and bar on the way out of town toward Querétaro, in the Adolfo López Mateos neighborhood, about two kilometers from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   '1dd7eb21-a7d6-51a2-a1aa-7cd88b3b2c6b': { // La Fromelier
-    shortDescription: 'Artisan Querétaro cheeses and local wines, with group tastings',
-    fullDescription: 'A cheese shop selling artisan cheeses from Querétaro, with a selection of local wines for pairing, on Matamoros street about 600 meters from Plaza Miguel Hidalgo. It offers guided cheese and wine pairings for tour groups. INEGI’s national business directory lists it as a restaurant and cheese shop. Check the hours before you go.',
+    shortDescription: 'The “house of good cheese”: cheese boards, pairings and Querétaro cheeses',
+    fullDescription: 'A cheese shop and restaurant on Matamoros street, about 600 meters from Plaza Miguel Hidalgo, that calls itself “the house of good cheese”. It sells Querétaro cheeses and artisanal products (jams, honey and sauces), and serves cheese boards and tapas, wood-fired Camembert and pizzas made with its cheeses. It runs guided cheese and wine pairings; in September and October 2026 they were two-for-one. On Fridays and Sundays from 2 to 6 PM there is an all-you-can-eat wood-fired pizza buffet, which in September 2026 cost MX$250 for adults and MX$150 for children aged 3 to 10. It has outdoor tables. Its Facebook page lists 10 AM to 8 PM, but those hours haven’t been updated in years: check by WhatsApp.',
   },
   '3711e4c6-4ec7-515e-8620-d2c9de83e7dd': { // Hotel Casa de Vino
     shortDescription: 'Wine-themed hotel with a wine-therapy spa and a sauna',

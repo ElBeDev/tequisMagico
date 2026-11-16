@@ -259,6 +259,8 @@ Para negocios sin web propia. Una cuenta cuenta como oficial si su teléfono, di
 | Lugar | Archivo | Página de origen | Cómo se confirmó la cuenta |
 |---|---|---|---|
 | Vinícola Terra Salvador | `terra-salvador-terraza.jpg` | [Facebook, foto de portada del 13 nov 2026](https://www.facebook.com/photo.php?fbid=1188738567060232) | Teléfono 414 140 9038 y correo iguales al DENUE y a tequis.travel; su Instagram @terrasalvador.vinicola enlaza a esa página |
+| La Fromelier | `la-fromelier-tabla-plaza.jpg` | [Facebook, 8 jun 2026](https://www.facebook.com/photo.php?fbid=1016373204112678) | Dirección de Matamoros 17, igual que el DENUE; teléfono 427 212 0326 también en los carteles de su Instagram @lafromeliertx |
+| La Fromelier | `la-fromelier-tabla-larga.jpg` | [Facebook, 25 mar 2026](https://www.facebook.com/photo.php?fbid=956409153442417) | Misma cuenta |
 | Viña Magal | `vina-magal-terraza.jpg` | [Facebook, 2 jul 2026](https://www.facebook.com/photo.php?fbid=1426564742612600) | Teléfono 427 229 0487, correo y dirección iguales a tequis.travel y queretaro.travel; su Instagram @vinamagal da el mismo número |
 | Viña Magal | `vina-magal-tabla.jpg` | [Instagram @vinamagal, 19 oct 2026](https://www.instagram.com/p/DeribAyxTQx/) | Misma cuenta |
 

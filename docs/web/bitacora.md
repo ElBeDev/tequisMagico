@@ -354,6 +354,11 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
   - La Revuelta pasa a `content_verified`, con su horario reciente de Facebook.
   - Los Rosales: correo, y su horario de Facebook con aviso porque es viejo.
   - Norte B: pin oficial.
+- **La Fromelier** (`database/databasefix_la_fromelier_2026-11-16.sql`), primera de las queserías:
+  - Datos de su Facebook e Instagram: teléfono y WhatsApp 427 212 0326, correo, catas maridaje y buffet de pizzas con precio.
+  - Dos fotos reales de sus tablas de queso y `content_verified`.
+  - Su horario de Facebook es viejo y choca con el de un directorio, así que va con aviso.
+  - bodegasdemexico.com es un directorio de terceros y no se usa. lafromelier.com, el enlace de su Facebook, no está registrado.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
 ---
