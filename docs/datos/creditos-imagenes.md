@@ -264,6 +264,8 @@ Para negocios sin web propia. Una cuenta cuenta como oficial si su teléfono, di
 | La Biquette | `la-biquette-cava.jpg` | [Facebook, 16 abr 2025](https://www.facebook.com/photo.php?fbid=1229900732474619) | Teléfono 414 112 3575, el de tequis.travel; su Instagram @quesoslabiquette enlaza a su dominio |
 | La Biquette | `la-biquette-quesos.jpg` | [Facebook, 4 may 2025](https://www.facebook.com/photo.php?fbid=1246190324178993) | Misma cuenta |
 | La Biquette | `la-biquette-cabras.jpg` | [Facebook, 20 sep 2025](https://www.facebook.com/photo.php?fbid=1372870268177664) | Misma cuenta |
+| Quesos Quiroz | `quesos-quiroz-quesos.jpg` | [Facebook, 1 ene 2026](https://www.facebook.com/photo.php?fbid=1365280678731695) | Andador Morelos 5 y 414 273 2315, iguales a Turismo y el DENUE; su Instagram @quesosquiroz repite el lema "pioneros del queso… desde 1972" |
+| Quesos Quiroz | `quesos-quiroz-piocolo.jpg` | [Facebook, 20 nov 2025](https://www.facebook.com/photo.php?fbid=1334299061829857) | Misma cuenta |
 | Viña Magal | `vina-magal-terraza.jpg` | [Facebook, 2 jul 2026](https://www.facebook.com/photo.php?fbid=1426564742612600) | Teléfono 427 229 0487, correo y dirección iguales a tequis.travel y queretaro.travel; su Instagram @vinamagal da el mismo número |
 | Viña Magal | `vina-magal-tabla.jpg` | [Instagram @vinamagal, 19 oct 2026](https://www.instagram.com/p/DeribAyxTQx/) | Misma cuenta |
 

@@ -362,6 +362,10 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **La Biquette** (`database/databasefix_la_biquette_2026-11-16.sql`):
   - Datos de su Facebook e Instagram: visitas con degustación de 5 quesos, horario diario de 9:30 a 17:30, WhatsApp y correo nuevo (el de labiquette.mx ya no sirve).
   - Tres fotos reales (cava, quesos y cabras) y `content_verified`.
+- **Quesos Quiroz** (`database/databasefix_quesos_quiroz_2026-11-16.sql`):
+  - Datos de sus cuentas: sus 3 tiendas en Tequis, sus quesos, y La Carreta, reabierta en dic 2025 como bar de quesos, vino y piano con música en vivo.
+  - Dos fotos de producto, sin fotos del local porque no publica ninguna.
+  - Redes y `content_verified`.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
