@@ -34,6 +34,10 @@ Al 10 nov 2026 hay **114 lugares activos**: 52 de hospedaje, 32 de comida, 20 ex
 | `content_verified = false` | 73 | Casi todos tienen como única fuente a Turismo municipal (tequis.travel y el Directorio Tequisquiapan 2025 cuentan como una sola): nombre, dirección y teléfono coinciden entre las dos, pero no hay web propia. No llevan amenidades salvo que dos fuentes coincidan, y usan la foto genérica de su categoría |
 | Desactivados | 30 en total | Los 11 de noviembre más 19 del 10 nov 2026: lugares de la carga inicial sin ningún rastro en internet ni en el directorio municipal |
 
+## Redes sociales
+
+`instagram_url` y `facebook_url` (columnas nuevas del 16 nov 2026, `database/databasefix_redes_2026-11-16.sql`) guardan la URL completa de la cuenta oficial del negocio. Es oficial si su teléfono, dirección o web coinciden con los del negocio. El panel las edita y rechaza cualquier URL que no sea de instagram.com o facebook.com. El 16 nov 2026 se llenaron 43: los cuatro viñedos revisados ese día, y 39 lugares con web propia, tomadas de los enlaces de su web (`database/databasefix_redes_webs_2026-11-16.sql`, con los descartes explicados). Al dar de alta o revisar un lugar, cópialas de su web o confirma la cuenta como en los viñedos.
+
 ## Vocabulario de amenidades, etiquetas y subcategorías
 
 Las páginas por necesidad de la web (`web/lib/tipos.ts`: "hoteles con alberca", "restaurantes pet friendly"…) filtran por estas palabras exactas en `amenities` o `tags`. Escríbelas igual al dar de alta, y solo si la fuente lo dice (la web del lugar; los íconos de tequis.travel no son fiables, hay fichas copiadas de otro hotel):

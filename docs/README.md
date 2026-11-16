@@ -8,6 +8,7 @@ Todo lo del proyecto en un solo lugar. Empieza por "El proyecto hoy" y luego ve 
 |---|---|
 | [`web/plan-sitio-web.md`](web/plan-sitio-web.md) | El sitio público `tequismagico.com` (`web/`): páginas, contenido, datos, animaciones, diseño, dónde está cada cosa en el código, despliegue y dominio |
 | [`web/bitacora.md`](web/bitacora.md) | Registro de cómo se hizo la web: separación de la app, registro y DNS del dominio, despliegues, diseño, problemas y arreglos, pendientes |
+| [`web/plan-seo-2026-11.md`](web/plan-seo-2026-11.md) | Diagnóstico con datos de Search Console (API), plan SEO por fases con su estado, y línea base para medir |
 | [`marca/README.md`](marca/README.md) | El logo: qué archivo usar en cada fondo, colores y reglas |
 | [`negocio/propuesta-sitio-web.md`](negocio/propuesta-sitio-web.md) | Propuesta del sitio web público: mercado, competencia, modelo de negocio, arquitectura y plan por fases |
 | [`app-ios/roadmap.md`](app-ios/roadmap.md) | Estado completo y roadmap de la app iOS: qué está hecho, qué falta, bugs, auditoría, legal |

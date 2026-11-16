@@ -37,7 +37,7 @@ export async function GET(
 const EDITABLE_FIELDS = [
   'name', 'category', 'subcategory', 'latitude', 'longitude', 'address',
   'short_description', 'full_description', 'price_range',
-  'phone_number', 'email', 'website', 'whatsapp_number',
+  'phone_number', 'email', 'website', 'whatsapp_number', 'instagram_url', 'facebook_url',
   'amenities', 'tags', 'is_featured', 'is_verified',
   'thumbnail_url', 'image_urls', 'schedule_json', 'content_verified',
 ];

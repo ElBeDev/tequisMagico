@@ -34,8 +34,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Winery founded in 1975 by the Italian Vittorio Bortoluz in Ezequiel Montes; it sold grapes for decades and has made its own wine since 2003, under the La Redonda, Orlandi and Sierra Gorda labels. It is known for its harvest festival with grape stomping and has the Trattoria Orlandi, an Italian restaurant. Its operations stopped in late 2025 because of a legal dispute, and in November 2026 its website was still being updated: call to check whether it has reopened before you go.',
   },
   '955ec3b9-eb9e-42e9-a851-5791adf67eaa': { // Plaza Miguel Hidalgo
-    shortDescription: 'The heart of the Pueblo Mágico',
-    fullDescription: 'Main square surrounded by colonial arcades and centuries-old ash trees. Central bandstand, cantera stone benches and an ornamental fountain. A perfect spot to enjoy the colonial architecture and local life.',
+    shortDescription: 'The main square, with arcades and a bandstand',
+    fullDescription: 'The main square of Tequis, facing the Parish of Santa María de la Asunción: cantera stone arcades, a bandstand from the early 20th century, Montezuma cypresses and ash trees, and stalls selling handmade sweets and ice cream. It is open 24 hours and free. This is where the Grito is held on September 15 and the New Year’s Eve party, and in December part of the Christmas Village is set up here.',
   },
   '9357aad0-9a72-48fc-ab83-e82b5b4a7503': { // La Viña Wine Bar
     shortDescription: 'Specialty wine bar',
@@ -110,10 +110,6 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Hacienda-style winery that makes wine and vermouth',
     fullDescription: 'Winery in Ezequiel Montes, across the road from Freixenet, with the feel of a Mexican hacienda, gardens and lakes; besides wine, it makes vermouth. In 2026 its tours, all with an engraved glass, cost from MX$295 (1 hour, one tasting) to MX$750 (VIP, with 5 wines and a sommelier), and the vermouth tour MX$500. The vineyard is open all week, but the winery can only be visited on Saturdays and Sundays; for kids there’s “Pinta tu botella” (paint your own bottle, MX$150). Its restaurant, El Itacate, is open Tuesday to Sunday, noon to 5 PM.',
   },
-  '7ac9dd61-1eb9-44f7-aad7-5ed3faa19d12': { // La Pila
-    shortDescription: 'Historic pink cantera stone fountain',
-    fullDescription: "Tequisquiapan's emblematic monument. A pink cantera stone fountain that has been a symbol of the municipality for generations. A perfect spot for photos.",
-  },
   '385996c2-0e6b-475c-8401-23ec14cf7bfc': { // Pizzería Don Giovanni
     shortDescription: 'Handmade wood-fired pizzas',
     fullDescription: 'Family pizzeria with a traditional wood-fired oven. Dough fermented for 24 hours, fresh ingredients and authentic Italian recipes. Casual atmosphere.',
@@ -183,8 +179,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Historic bridge built in 1910, with panoramic views of the river and the surrounding vegetation. Excellent for walks and photography.',
   },
   '2937462c-70fa-4aff-bf91-031146e071d0': { // Parque La Pila
-    shortDescription: 'Public park for families',
-    fullDescription: 'Public park with green areas, a playground, sports courts and a picnic area. Ideal for families and outdoor activities. Clean and well kept.',
+    shortDescription: 'Downtown park with the town’s 1567 water tank',
+    fullDescription: 'A free, tree-lined park downtown, on the site of the town’s old mill. It keeps the stone water tank (pila) that stored the town’s water in 1567 and gives the park its name. It is the traditional home of the Cheese and Wine Fair (it was again in May 2026), and it has hosted the Christmas Village and the Cactus Expo. It sits by the river: it flooded when the Centenario dam overflowed in 2021 and 2025.',
   },
   'cf761f14-9f56-4abd-8bd0-63cd3aa9b1e8': { // Sushi Roll Tequisquiapan
     shortDescription: 'Sushi and Japanese food',
@@ -600,12 +596,12 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Downtown Tequis agency that runs tours of the Art, Cheese and Wine Route, with round-trip transportation from its office at Juárez 16 Poniente. Tours leave every day for groups of 2 or more and, depending on the tour, visit places such as Cava Bocanegra, Bodegas De Cote, Freixenet, Viñedos Azteca and the La Biquette cheese maker. In November 2026 its website still showed 2025 prices: MX$1,300 to MX$1,980 per adult. Book by WhatsApp with a 30% deposit.',
   },
   'b7a72d9a-a81a-56ac-80bc-c0626f290ab1': { // Viña Magal
-    shortDescription: 'Family winery with artisanal wine and an events terrace',
-    fullDescription: 'Family winery of just over 4 hectares at km 53 of state highway 200, making 100% artisanal wine; its main label is Parsionero. It has a terrace overlooking the vineyard for events, tastings with cheese and cold cuts, and a grill with room for 15 people. It has no website and doesn’t publish hours or prices: call before you go.',
+    shortDescription: 'Family vineyard with a terrace facing the vines and small-batch wine',
+    fullDescription: 'A family vineyard of just over 4 hectares at km 53 of state highway 200, making 100% artisanal wine; its main label is Parsionero. It has a terrace overlooking the vines where it hosts tastings with a cheese and charcuterie board, and it is rented out for weddings, meals and events. Its 2026 harvest festival was on Saturday, August 1, with tickets at MX$900. Bookings are by phone or WhatsApp only, at 427 229 0487. Its Facebook page lists Wednesday to Sunday, noon to 6 PM, closed Monday and Tuesday, but those hours haven’t been updated in years: check before you go.',
   },
   '690c1a76-1e6e-5124-88f4-902488c9195c': { // Vinícola San Patricio
-    shortDescription: 'Winery with a guided tour and tasting of its wines',
-    fullDescription: 'Winery founded in 1999 in Ezequiel Montes, now on the road to Huichapan, in the Tierra Blanca neighborhood of Tequisquiapan. It offers a guided tour of its facilities to see how the wine is made and to taste its Santiago Apóstol labels, and it sells its products. It doesn’t publish hours or prices and its website doesn’t respond: call before you go.',
+    shortDescription: 'Tequis’s first winery, with tours every hour',
+    fullDescription: 'The Rodríguez family winery, which started in 1999 in Ezequiel Montes and has been Tequisquiapan’s first winery since 2001. It makes the Santiago Apóstol wines (white, rosé, and dry and semi-sweet reds), plus sherry, damiana liqueur and frizzante wines. Its guided tours of the vineyard and cellar leave every hour from 11 AM to 4:30 PM, every day. In November 2026 its website listed three options: the classic tour with a tasting (MX$299), with a pairing of local cheeses (MX$399) and a blind tasting (MX$599, best without children). Children pay MX$90 and get grape juice, a notebook and crayons. Book at least three days ahead. The shop is open from 11 AM to 6 PM every day, including long weekends and holidays. Phones 414 273 0038 and 414 232 2340.',
   },
   // Altas con el DENUE (database/databaseseed_denue_2026-11-11.sql)
   'f10c9ab2-81e2-5ce0-b3c6-8df6517b1fcc': { // MD Turismo y Experiencias
@@ -657,12 +653,12 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Goat cheese maker in La Lagunita, at km 2 of the road to Ezequiel Montes, 1.6 km from the main square. According to the town tourism office, it makes its cheeses by hand following the French tradition, from raising the goats to making the cheese, without preservatives or coloring. Viajes y Enoturismo includes it on some of its tours. Its website doesn’t respond and it doesn’t publish hours or prices: call before you go.',
   },
   '0cf02114-c165-5d87-b904-b608cbcc1ad5': { // Vinícola Tequisquiapan
-    shortDescription: 'Family winery with Navarrese roots in La Charretera',
-    fullDescription: 'Family winery in the La Charretera neighborhood, 1.6 km from the main square. According to the state tourism board, it was founded by Emilio Ochoa, who brought a winemaking tradition of more than 100 years from Navarre; his sons carried it on from the 1970s and the family formally set up in Tequis in 2010. The town tourism directory also lists it as an events venue, with outdoor tastings and a tasting room. It has no website and doesn’t publish hours or prices: call to check whether it takes visitors.',
+    shortDescription: 'Boutique winery founded in 2010, with tastings and Salvador-grape wines',
+    fullDescription: 'A boutique winery in La Charretera, 1.6 km from the main square, founded in 2010 by the Ochoa family, who brought a winemaking tradition of more than a hundred years from Navarre. It makes small-batch wines it describes as natural and sulfite-free: reds from the Salvador grape (Mussa, Desliz, Delice Salvador Seco, a sparkling red and Sinffonia, a port-style wine), Cabernet Sauvignon, Malbec, Syrah and Sangiovese, plus a rosé, a white and a sparkling white. It has a tasting room and a patio with umbrellas. In November 2026, the three-glass tasting with a cheese and charcuterie board cost MX$650 per person and the tasting with a full pairing meal MX$1,300, for groups of 10 or more, according to the website of La Toscana, the hotel across the street. Its website advertises breakfast on Saturdays and Sundays from 10 AM to noon. It opens from noon to 5 PM; its Facebook page says it is closed on Mondays: check before you go.',
   },
   '0e287eb9-5479-5c03-9cbb-b1e362097397': { // Vinícola Terra Salvador
-    shortDescription: 'Winery with a shop in La Lagunita',
-    fullDescription: 'Winery with a shop in La Lagunita, 1.5 km from the main square, near the La Biquette cheese maker. It is listed in the town tourism directory and in INEGI’s DENUE business census, which records it as a wine shop. It has no website and doesn’t say what it offers, its hours or prices: call before you go.',
+    shortDescription: 'Small-batch winery using the Salvador grape, with tastings and tours',
+    fullDescription: 'A small-batch winery in La Lagunita, 1.5 km from the main square, open since 2020. It makes its wines from the Salvador grape (Mía, Mimbre, Ópalo, a port-style Oporto and two rosés, one of them sparkling) and offers guided tours from the vineyard to the bottling line, guided tastings with food pairings and cheese boards, on a terrace with umbrellas. Book by WhatsApp or on Instagram, @terrasalvador.vinicola. Its Facebook page lists 10 AM to 6 PM every day, but those hours haven’t been updated in years: check before you go.',
   },
   'c8f85075-f7c1-5053-88c3-258d25f6e532': { // Quesos Quiroz
     shortDescription: 'Cheese maker since 1972, with its own restaurant, La Carreta',

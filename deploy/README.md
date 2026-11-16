@@ -62,3 +62,15 @@ rsync -a deploy/.commons-mirror/ root@72.60.173.175:/srv/tequis/uploads/commons/
 ssh root@72.60.173.175 chown -R tequis:tequis /srv/tequis/uploads/commons
 deploy/deploy.sh web
 ```
+
+## Reporte de Google Search Console
+
+`deploy/gsc-report.mjs` saca un reporte en Markdown del rendimiento en Google: apariciones, clics, CTR y posición contra el periodo anterior; búsquedas top; las que casi llegan (posición 4–20); páginas en la primera página sin clics; sitemaps; y, con `--inspect`, el estado de indexación de las URLs clave.
+
+```sh
+node deploy/gsc-report.mjs              # últimos 28 días con datos
+node deploy/gsc-report.mjs --days 7     # última semana
+node deploy/gsc-report.mjs --inspect    # además, indexación de las URLs clave (tarda ~1 min)
+```
+
+Usa la cuenta de servicio `tequismagico@tequis-magico.iam.gserviceaccount.com`, propietaria de `sc-domain:tequismagico.com`. La llave JSON **no va en el repo**: por omisión se lee de `~/.config/tequis/gsc-key.json`, o de la ruta en `GSC_KEY`. El plan SEO y la línea base con que se compara están en [`../docs/web/plan-seo-2026-11.md`](../docs/web/plan-seo-2026-11.md).

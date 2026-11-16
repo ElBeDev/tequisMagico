@@ -282,7 +282,7 @@ Ninguna vinícola ha anunciado fecha 2027: todas son **"fecha 2027 por confirmar
 | **CR Vinos MX / Cartinto House**, 2.ª vendimia | **Tequisquiapan** (camino Tejocote–San José La Laja km 3.2) | sáb 8 ago | 11:00–20:00 | $1,800 | [crvinosmx.com](https://crvinosmx.com/enotourism/events) (oficial) |
 | De Cote | Ezequiel Montes | [CONFLICTO]: 7 ago (decote.mx, citado en el archivo anterior) o sáb 15 ago (de-paseo) | 12:00–19:00 | $1,950; Gran Reserva $3,950 | de-paseo (s/f) |
 | **Viña TX** | **Tequisquiapan** (Fray Junípero Serra 33) | 8–9 ago [SIN CONFIRMAR] | — | — | Visión Empresarial Qro (nota sin año) |
-| **Viña Magal** | **Tequisquiapan** (Carr. 200 km 53) | [CONFLICTO]: 12 sep dentro de Fiestas Patrias (AlertaQro, 2 sep 2026, citado en el archivo anterior), o "1 ago" en una nota sin año de Visión Empresarial | — | — | ver fuentes |
+| **Viña Magal** | **Tequisquiapan** (Carr. 200 km 53) | **Sábado 1 ago 2026, $900**, según su propio cartel en Facebook (revisado el 16 nov 2026). Antes era [CONFLICTO]: 12 sep dentro de Fiestas Patrias (AlertaQro, 2 sep 2026) o "1 ago" en una nota sin año de Visión Empresarial | — | — | ver fuentes |
 | Cava 57 | San Juan del Río | vendimia 29 ago; minivendimias los fines de semana de agosto | mini a las 11:30 y 15:00 | mini: $950 adulto y $650 niño | de-paseo (s/f) |
 | Viñedos Azteca | Ezequiel Montes (km 40.4) | sáb 12 sep | 12:00–19:00 | $1,380 (preventa $950) | [operadoraturistica.mx](https://operadoraturistica.mx/event-details/vendimia-2026) (venta oficial) |
 | **San Juanito**, "Fiesta San Juan" | **Tequisquiapan** (San José de la Laja) | no encontré la de 2026; la de 2025 fue el sáb 28 jun | 2025: 13:30–19:00 | 2025: $650 / $250 | de-paseo (s/f); Grupo Animal, 23 jun 2025 |

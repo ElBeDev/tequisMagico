@@ -8,4 +8,7 @@ export const PLACE_REDIRECTS: Record<string, string> = {
   'balneario-el-oasis': 'parque-acuatico-el-oasis',
   // 10 nov 2026: mismo hotel con su nombre real (databaseseed_hospedaje_2026-11-10.sql).
   'hotel-posada-tequisquiapan': 'posada-tequisquiapan',
+  // 16 nov 2026: "La Pila" era una ficha aparte de la pila de 1567, que está dentro del parque y le da
+  // su nombre (misma dirección y coordenadas). Se unió al parque (databasefix_seo_2026-11-16.sql).
+  'la-pila': 'parque-la-pila',
 };

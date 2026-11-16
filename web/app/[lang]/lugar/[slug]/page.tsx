@@ -4,11 +4,12 @@ import { notFound } from 'next/navigation';
 import { BadgeCheck, Globe, Info, Mail, MapPin, MessageCircle, Navigation, Phone } from 'lucide-react';
 import { SITE_URL, categoryInfo, getPlace, getPlaces, isIndexable, mapsDirectionsUrl, placeKey, priceInfo, type Place } from '@/lib/data';
 import { dict } from '@/lib/dict';
-import { LANGS, alternates, href, langOf } from '@/lib/i18n';
+import { LANGS, alternates, href, langOf, type Lang } from '@/lib/i18n';
 import { openingHoursSpec, scheduleEntries } from '@/lib/schedule';
 import { JsonLd, Photo, PlaceCard } from '@/components/Cards';
 import { SectionTitle } from '@/components/Section';
 import OpenNow from '@/components/OpenNow';
+import { FacebookIcon, InstagramIcon, instagramHandle } from '@/components/SocialIcons';
 import SaveButton from '@/components/SaveButton';
 import PlacesMap from '@/components/PlacesMap';
 
@@ -24,8 +25,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/lugar/[slu
   const lang = langOf(p);
   const place = await getPlace(p.slug, lang);
   if (!place) return {};
-  const where = lang === 'en' ? 'in Tequisquiapan, Querétaro, Mexico.' : 'en Tequisquiapan, Querétaro.';
-  const description = place.shortDescription ? `${place.shortDescription}. ${place.subcategory} ${where}` : `${place.subcategory} ${where}`;
+  const description = metaDescription(place, lang);
   return {
     title: `${place.name} · ${place.subcategory} ${lang === 'en' ? 'in' : 'en'} Tequisquiapan`,
     description,
@@ -34,6 +34,62 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/lugar/[slu
     robots: isIndexable(place) ? undefined : { index: false, follow: true },
     openGraph: { title: place.name, description, images: place.thumbnailUrl ? [place.thumbnailUrl] : undefined, type: 'website' },
   };
+}
+
+// Galería de la ficha. Las fotos de los negocios vienen en cualquier proporción (horizontales,
+// cuadradas, verticales), así que el bloque tiene alto fijo y cada foto se recorta a su celda: si
+// cada una toma su alto natural, la columna derecha no cuadra con la principal. En pantalla ancha:
+// la principal a la izquierda y hasta tres a la derecha (una arriba y dos abajo). En celular: la
+// principal y las demás como miniaturas cuadradas debajo.
+const SIDE_COLS = ['', 'grid-cols-1', 'grid-cols-2', 'grid-cols-3'];
+// Lugar de cada foto de la derecha según cuántas hay (1, 2 o 3) en la rejilla de 2 × 2.
+const SIDE_CELLS = [[], ['sm:col-span-2 sm:row-span-2'], ['sm:col-span-2', 'sm:col-span-2'], ['sm:col-span-2', '', '']];
+
+function Gallery({ photos, name, label }: { photos: string[]; name: string; label: string }) {
+  const [main = null, ...rest] = photos;
+  const side = rest.slice(0, 3);
+  if (side.length === 0) {
+    return (
+      <div className="frame">
+        <div data-reveal="image" className="overflow-hidden">
+          <Photo src={main} alt={name} label={label} sizes="100vw" className="aspect-[16/9] w-full" />
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="frame grid grid-cols-1 gap-2 sm:aspect-[16/7] sm:grid-cols-[2fr_1fr]">
+      <div data-reveal="image" className="min-h-0 overflow-hidden">
+        <Photo src={main} alt={name} label={label} sizes="(min-width: 640px) 66vw, 100vw" className="aspect-[4/3] w-full sm:aspect-auto sm:h-full" />
+      </div>
+      <div className={`grid min-h-0 gap-2 ${SIDE_COLS[side.length]} sm:grid-cols-2 sm:grid-rows-2`}>
+        {side.map((src, i) => (
+          <div key={src} data-reveal="image" className={`aspect-square min-h-0 overflow-hidden sm:aspect-auto ${SIDE_CELLS[side.length][i]}`}>
+            <Photo src={src} alt={name} sizes="(min-width: 640px) 33vw, 33vw" className="size-full" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Lo que sale en Google bajo el título. Search Console (nov 2026) mostraba fichas en la posición 5–8
+// sin un solo clic con "Corazón del pueblo mágico. Plaza en Tequisquiapan, Querétaro.": no decía qué
+// trae la ficha. Ahora lo dice, pero solo lo que de verdad muestra: precios (si la descripción los da),
+// teléfono, horario, fotos del propio negocio (no la genérica de Commons), mapa y cómo llegar.
+function metaDescription(place: Place, lang: Lang): string {
+  const en = lang === 'en';
+  const has = [
+    /\$\s?\d/.test(place.fullDescription) && (en ? 'prices' : 'precios'),
+    place.phoneNumber && (en ? 'phone' : 'teléfono'),
+    place.scheduleText && Object.keys(place.scheduleText).length > 0 && (en ? 'opening hours' : 'horario'),
+    place.imageUrls.some((u) => !u.includes('wikimedia.org') && !u.includes('/uploads/commons/')) && (en ? 'photos' : 'fotos'),
+  ].filter(Boolean) as string[];
+  const list = [...has, en ? 'map and directions' : 'mapa y cómo llegar'].join(', ');
+  const lead = place.shortDescription ? `${place.shortDescription}. ` : '';
+  return en
+    ? `${lead}${place.subcategory} in Tequisquiapan, Querétaro, Mexico: ${list}.`
+    : `${lead}${place.subcategory} en Tequisquiapan, Querétaro: ${list}.`;
 }
 
 function schemaType(place: Place): string {
@@ -109,7 +165,8 @@ export default async function LugarPage({ params }: PageProps<'/[lang]/lugar/[sl
     },
     geo: { '@type': 'GeoCoordinates', latitude: place.latitude, longitude: place.longitude },
     telephone: place.contentVerified && place.phoneNumber ? place.phoneNumber : undefined,
-    sameAs: place.website ?? undefined,
+    // Web y cuentas oficiales: Google las usa para unir la ficha con el perfil del negocio.
+    sameAs: [place.website, place.instagramUrl, place.facebookUrl].some(Boolean) ? [place.website, place.instagramUrl, place.facebookUrl].filter(Boolean) : undefined,
     priceRange: place.priceRange !== 'free' ? price?.symbol : undefined,
     isAccessibleForFree: place.priceRange === 'free' ? true : undefined,
     openingHours: hours ?? undefined,
@@ -152,18 +209,7 @@ export default async function LugarPage({ params }: PageProps<'/[lang]/lugar/[sl
         <SaveButton id={placeKey(place.id)} name={place.name} lang={lang} variant="full" className="mt-6" />
       </header>
 
-      <div className={`frame grid grid-cols-1 gap-2 ${photos.length > 1 ? 'sm:grid-cols-[2fr_1fr]' : ''}`}>
-        <div data-reveal="image" className="overflow-hidden">
-          <Photo src={photos[0] ?? null} alt={place.name} label={place.subcategory} sizes={photos.length > 1 ? '(min-width: 640px) 66vw, 100vw' : '100vw'} className="aspect-[16/9] w-full" />
-        </div>
-        {photos.length > 1 && (
-          <div className={`hidden gap-2 sm:grid ${photos.length > 2 ? 'grid-rows-2' : ''}`}>
-            {photos.slice(1, 3).map((src) => (
-              <Photo key={src} src={src} alt={place.name} sizes="33vw" className="size-full" />
-            ))}
-          </div>
-        )}
-      </div>
+      <Gallery photos={photos} name={place.name} label={place.subcategory} />
 
       <div className="frame mt-20 grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-24">
         <div>
@@ -226,6 +272,16 @@ export default async function LugarPage({ params }: PageProps<'/[lang]/lugar/[sl
             {place.website && (
               <a href={place.website} target="_blank" rel="noopener" className="flex gap-3 break-all hover:underline">
                 <Globe className="mt-0.5 size-4 shrink-0" aria-hidden /> {place.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+              </a>
+            )}
+            {place.instagramUrl && (
+              <a href={place.instagramUrl} target="_blank" rel="noopener" className="flex gap-3 break-all hover:underline">
+                <InstagramIcon className="mt-0.5 size-4 shrink-0" /> {instagramHandle(place.instagramUrl)}
+              </a>
+            )}
+            {place.facebookUrl && (
+              <a href={place.facebookUrl} target="_blank" rel="noopener" className="flex gap-3 hover:underline">
+                <FacebookIcon className="mt-0.5 size-4 shrink-0" /> Facebook
               </a>
             )}
             {place.email && (

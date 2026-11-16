@@ -33,6 +33,8 @@ export default function EditPlacePage({ params }: { params: Promise<{ id: string
           email: p.email ?? '',
           website: p.website ?? '',
           whatsapp_number: p.whatsapp_number ?? '',
+          instagram_url: p.instagram_url ?? '',
+          facebook_url: p.facebook_url ?? '',
           amenities: (p.amenities ?? []).join(', '),
           tags: (p.tags ?? []).join(', '),
           is_featured: !!p.is_featured,

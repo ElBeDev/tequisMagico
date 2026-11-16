@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS places (
   email VARCHAR(100),
   website TEXT,
   whatsapp_number VARCHAR(20),
+  instagram_url TEXT,  -- cuenta oficial del negocio (16 nov 2026)
+  facebook_url TEXT,   -- cuenta oficial del negocio (16 nov 2026)
   schedule_json JSONB,
   amenities TEXT[],
   tags TEXT[],

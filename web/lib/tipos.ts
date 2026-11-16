@@ -69,9 +69,11 @@ export const TYPE_PAGES: TypePage[] = [
     category: 'experiencias',
     keys: ['Balneario'],
     label: { es: 'Balnearios', en: 'Hot springs and water parks' },
-    title: { es: 'Balnearios en Tequisquiapan', en: 'Hot springs and water parks in Tequisquiapan' },
+    // "y aguas termales": así lo busca la gente ("aguas termales tequisquiapan", Search Console nov 2026)
+    // y es cierto: El Oasis tiene agua termal a 36 °C (su web).
+    title: { es: 'Balnearios y aguas termales en Tequisquiapan', en: 'Hot springs and water parks in Tequisquiapan' },
     description: {
-      es: (n) => `${n} balnearios y parques acuáticos en Tequisquiapan, Querétaro: precios, días de apertura, camping y cómo llegar.`,
+      es: (n) => `${n} balnearios y parques acuáticos en Tequisquiapan, Querétaro, uno con agua termal a 36 °C: precios, días de apertura, camping y cómo llegar.`,
       en: (n) => `${n} water parks and hot springs in Tequisquiapan, Querétaro: prices, opening days, camping and directions.`,
     },
     intro: {

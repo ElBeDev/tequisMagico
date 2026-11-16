@@ -33,6 +33,16 @@ export function validatePlaceFields(body: any, { requireAll }: { requireAll: boo
   if (requireAll || 'longitude' in body) {
     if (!isValidLongitude(body.longitude)) return 'longitude debe ser un número entre -180 y 180';
   }
+  // Redes: solo la URL de la cuenta oficial del negocio, de su propio dominio (no un enlace acortado ni de terceros).
+  const SOCIAL_HOSTS: Record<string, RegExp> = {
+    instagram_url: /^https:\/\/(www\.)?instagram\.com\/[^\s]+$/,
+    facebook_url: /^https:\/\/(www\.|m\.)?facebook\.com\/[^\s]+$/,
+  };
+  for (const [field, re] of Object.entries(SOCIAL_HOSTS)) {
+    if (field in body && body[field] != null && body[field] !== '' && (typeof body[field] !== 'string' || !re.test(body[field]))) {
+      return `${field} debe ser una URL de ${field === 'instagram_url' ? 'instagram.com' : 'facebook.com'} que empiece con https://`;
+    }
+  }
   if ('schedule_json' in body && body.schedule_json != null && body.schedule_json !== '') {
     if (typeof body.schedule_json !== 'string') return 'schedule_json debe ser un string con JSON';
     try {

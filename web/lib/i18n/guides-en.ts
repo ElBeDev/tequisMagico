@@ -31,7 +31,7 @@ export const GUIDES_EN: Guide[] = [
           'The parish church of Santa María de la Asunción presides over the plaza. It is built of cantera stone, went up in stages between the 16th and 19th centuries, and its clock dates from 1897. A few streets away, at Niños Héroes 17, the pendulum commemorates the 1916 decree that made Tequis the geographic center of the country.',
           'Then head down to La Pila, the town’s water reservoir since 1567, and to the Callejón del Piojo, where the public washhouses used to be.',
         ],
-        places: ['Plaza Miguel Hidalgo', 'Templo de Santa María de la Asunción', 'La Pila'],
+        places: ['Plaza Miguel Hidalgo', 'Templo de Santa María de la Asunción', 'Parque La Pila'],
         photo: PHOTOS.callejonPiojo,
         photoAlt: 'The Callejón del Piojo',
       },
@@ -339,6 +339,7 @@ export const GUIDES_EN: Guide[] = [
     updatedISO: '2026-11-02',
     intro: [
       'Tequis is a stop on Querétaro’s Ruta Arte, Queso y Vino (Art, Cheese and Wine Route). The best-known vineyards are not in town but in Ezequiel Montes, half an hour away, on the highway that continues to the Peña de Bernal. The cheesemakers are closer, some just a few minutes from the center.',
+      'The full list of [wineries in Tequisquiapan and Ezequiel Montes](/lugares/experiencias/vinedos), with a map, opening hours and directions, is in the experiences section.',
     ],
     sections: [
       {
@@ -372,11 +373,10 @@ export const GUIDES_EN: Guide[] = [
       },
       {
         id: 'otros-vinedos',
-        title: 'De Cote, Los Rosales and others',
+        title: 'De Cote and Los Rosales',
         paragraphs: [
           '[De Cote](https://decote.mx), also in Ezequiel Montes, covers more than 50 hectares and tours the vineyard on foot, by bike or by train, every day from 11 a.m. to 5 p.m.',
           'Los Rosales is the closest to town, about ten minutes away. It has had a vineyard for more than forty years but has made its own wine only since 2011; its oldest vine came from Bordeaux. It doesn’t publish opening hours: call before you go.',
-          'Viñedos La Redonda, one of the oldest in the region (1975) and known for its harvest festival with grape stomping, suspended operations in late 2025 because of a legal dispute. Before going, check whether it has reopened.',
         ],
         places: ['Bodegas De Cote', 'Los Rosales Viñedos'],
       },
@@ -410,7 +410,6 @@ export const GUIDES_EN: Guide[] = [
       { label: 'De Cote', url: 'https://decote.mx' },
       { label: 'queretaro.travel: Los Rosales', url: 'https://queretaro.travel/fichas/los-rosales-tx/' },
       { label: 'Uno TV: Los Rosales (June 2024)', url: 'https://www.unotv.com/turismo/que-vinedos-visitar-en-queretaro-los-rosales/' },
-      { label: 'El Financiero: La Redonda (February 2026)', url: 'https://www.elfinanciero.com.mx/food-and-drink/2026/02/12/la-historia-de-la-redonda-vinedo-cateado-en-queretaro/' },
       { label: 'Cava de Quesos Bocanegra: experiences', url: 'https://www.cavabocanegra.com/experiencias' },
       { label: 'Finca VAI: cheese tour', url: 'https://www.quesosvai.com/tourvai.html' },
       { label: 'El Universal Querétaro: 2026 harvest festivals', url: 'https://www.eluniversalqueretaro.mx/municipios/vendimias-2026-conoce-el-calendario-de-eventos-en-los-vinedos-de-queretaro/' },
@@ -989,6 +988,7 @@ export const GUIDES_EN: Guide[] = [
     updatedISO: '2026-11-10',
     intro: [
       'The municipal tourism office’s food page recommends lamb barbacoa, cracked-corn gorditas, mole, pulque and traditional sweets. Most of it can be found in the markets in the center and at a handful of restaurants that have it on the menu.',
+      'To choose where to eat, all the [restaurants in Tequisquiapan](/lugares/gastronomia/restaurantes) are on one map.',
     ],
     sections: [
       {

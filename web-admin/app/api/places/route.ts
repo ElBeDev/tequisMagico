@@ -72,9 +72,9 @@ export async function POST(request: Request) {
         address, short_description, full_description, price_range,
         image_urls, thumbnail_url, amenities, tags, phone_number, email,
         website, whatsapp_number, rating, reviews_count,
-        is_verified, is_featured, schedule_json
+        is_verified, is_featured, schedule_json, instagram_url, facebook_url
       ) VALUES (
-        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24
       )
       RETURNING *
     `;
@@ -101,7 +101,9 @@ export async function POST(request: Request) {
       body.reviews_count || 0,
       body.is_verified || false,
       body.is_featured || false,
-      body.schedule_json || null
+      body.schedule_json || null,
+      body.instagram_url || null,
+      body.facebook_url || null
     ];
     
     const result = await pool.query(query, values);

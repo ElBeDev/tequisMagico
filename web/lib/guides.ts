@@ -65,7 +65,7 @@ export const GUIDES: Guide[] = [
           'La parroquia de Santa María de la Asunción preside la plaza. Es de cantera, se construyó por etapas entre los siglos XVI y XIX y su reloj es de 1897. A unas calles, en Niños Héroes 17, el péndulo recuerda el decreto de 1916 que hizo de Tequis el centro geográfico del país.',
           'Baja después hacia La Pila, el depósito de agua del pueblo desde 1567, y al Callejón del Piojo, donde estaban los lavaderos públicos.',
         ],
-        places: ['Plaza Miguel Hidalgo', 'Templo de Santa María de la Asunción', 'La Pila'],
+        places: ['Plaza Miguel Hidalgo', 'Templo de Santa María de la Asunción', 'Parque La Pila'],
         photo: PHOTOS.callejonPiojo,
         photoAlt: 'El Callejón del Piojo',
       },
@@ -373,6 +373,7 @@ export const GUIDES: Guide[] = [
     updatedISO: '2026-11-02',
     intro: [
       'Tequis es parada de la Ruta Arte, Queso y Vino de Querétaro. Los viñedos más conocidos no están en el pueblo sino en Ezequiel Montes, a media hora, sobre la carretera que sigue hacia la Peña de Bernal. Las queserías quedan más cerca, algunas a pocos minutos del centro.',
+      'La lista completa de [viñedos en Tequisquiapan y Ezequiel Montes](/lugares/experiencias/vinedos), con mapa, horarios y cómo llegar, está en la sección de experiencias.',
     ],
     sections: [
       {
@@ -406,11 +407,10 @@ export const GUIDES: Guide[] = [
       },
       {
         id: 'otros-vinedos',
-        title: 'De Cote, Los Rosales y otros',
+        title: 'De Cote y Los Rosales',
         paragraphs: [
           '[De Cote](https://decote.mx), también en Ezequiel Montes, tiene más de 50 hectáreas y recorre el viñedo a pie, en bicicleta o en tren, todos los días de 11 a 17 h.',
           'Los Rosales es el más cercano al pueblo, a unos diez minutos. Lleva más de cuarenta años con viñedo pero hace vino propio solo desde 2011; su vid más vieja vino de Burdeos. No publica horarios: llama antes de ir.',
-          'Viñedos La Redonda, de los más antiguos de la región (1975) y famoso por su vendimia con pisado de uva, suspendió su operación a fines de 2025 por un conflicto legal. Antes de ir, confirma si ya reabrió.',
         ],
         places: ['Bodegas De Cote', 'Los Rosales Viñedos'],
       },
@@ -444,7 +444,6 @@ export const GUIDES: Guide[] = [
       { label: 'De Cote', url: 'https://decote.mx' },
       { label: 'queretaro.travel: Los Rosales', url: 'https://queretaro.travel/fichas/los-rosales-tx/' },
       { label: 'Uno TV: Los Rosales (junio 2024)', url: 'https://www.unotv.com/turismo/que-vinedos-visitar-en-queretaro-los-rosales/' },
-      { label: 'El Financiero: La Redonda (febrero 2026)', url: 'https://www.elfinanciero.com.mx/food-and-drink/2026/02/12/la-historia-de-la-redonda-vinedo-cateado-en-queretaro/' },
       { label: 'Cava de Quesos Bocanegra: experiencias', url: 'https://www.cavabocanegra.com/experiencias' },
       { label: 'Finca VAI: recorrido del queso', url: 'https://www.quesosvai.com/tourvai.html' },
       { label: 'El Universal Querétaro: vendimias 2026', url: 'https://www.eluniversalqueretaro.mx/municipios/vendimias-2026-conoce-el-calendario-de-eventos-en-los-vinedos-de-queretaro/' },
@@ -1023,6 +1022,7 @@ export const GUIDES: Guide[] = [
     updatedISO: '2026-11-10',
     intro: [
       'La página de gastronomía de Turismo municipal recomienda la barbacoa de borrego, las gorditas de maíz quebrado, el mole, el pulque y los dulces típicos. Casi todo se encuentra en los mercados del centro y en unos cuantos restaurantes que lo tienen en su carta.',
+      'Para elegir dónde comer, están todos los [restaurantes en Tequisquiapan](/lugares/gastronomia/restaurantes) en un mapa.',
     ],
     sections: [
       {

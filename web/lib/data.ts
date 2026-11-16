@@ -41,6 +41,9 @@ export type Place = {
   email: string | null;
   website: string | null;
   whatsappNumber: string | null;
+  // Cuentas oficiales del negocio (columnas instagram_url / facebook_url, desde el 16 nov 2026).
+  instagramUrl: string | null;
+  facebookUrl: string | null;
   /** Horario tal cual viene del API (claves y texto en español): para calcular "abierto ahora". */
   schedule: Record<string, string> | null;
   /** El mismo horario con el texto en el idioma de la página: para mostrarlo. */
@@ -340,6 +343,8 @@ export async function getPlaces(lang: Lang = 'es'): Promise<Place[]> {
       email: p.email || null,
       website: p.website || null,
       whatsappNumber: p.whatsapp_number || null,
+      instagramUrl: p.instagram_url || null,
+      facebookUrl: p.facebook_url || null,
       schedule: toSchedule(p.schedule_json),
       scheduleText: toSchedule(p.schedule_json),
       amenities: p.amenities ?? [],
@@ -435,6 +440,16 @@ const TZ = 'America/Mexico_City';
 /** Hoy en Tequisquiapan, como YYYY-MM-DD. */
 export function todayInTequis(now = new Date()): string {
   return new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
+}
+
+// El fin de semana de "este fin de semana" (viernes a domingo, YYYY-MM-DD): el que está corriendo si hoy
+// es viernes, sábado o domingo, y el que viene si es de lunes a jueves.
+export function weekendRange(today = todayInTequis()): { start: string; end: string } {
+  const d = new Date(`${today}T00:00:00Z`);
+  const dow = d.getUTCDay(); // 0 domingo … 6 sábado
+  const toFriday = dow === 0 ? -2 : 5 - dow; // sábado → -1, domingo → -2
+  const iso = (offset: number) => new Date(d.getTime() + offset * 86_400_000).toISOString().slice(0, 10);
+  return { start: iso(toFriday), end: iso(toFriday + 2) };
 }
 
 export type EventStatus = 'upcoming' | 'happening' | 'past';

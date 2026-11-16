@@ -19,7 +19,7 @@ Asignación aplicada con `database/databaseseed_images.sql`.
 
 ## Fotos reales de negocios (5 nov 2026)
 
-Regla: la foto real de un lugar sale **solo de su propia web**, revisada a mano. Si no tiene web, se queda con la genérica de categoría.
+Regla: la foto real de un lugar sale **solo de su propia web**, revisada a mano. Desde el 16 nov 2026, si no tiene web, también valen **sus cuentas oficiales** de Facebook o Instagram (ver la sección de esa fecha). Si no tiene ninguna, se queda con la genérica de categoría.
 
 Estas 25 fotos se copiaron a `/srv/tequis/uploads/lugares/` (se sirven desde `panel.tequismagico.com`, ya no son hotlink) y se aplicaron con `database/databaseseed_business_photos_2026-11.sql` y `database/databaseseed_lugares_reales_2026-11.sql`.
 
@@ -56,7 +56,7 @@ Estas 25 fotos se copiaron a `/srv/tequis/uploads/lugares/` (se sirven desde `pa
 **Sin foto real, y por qué:**
 - **Mercado Tequesquicalli**: no tiene web. Usa `Tequis009.jpg` de Wikimedia Commons (Thelmadatter, CC BY-SA 4.0), que es de ese mismo mercado y ya se acreditaba en la web; también está en los créditos de la app.
 - **Telésforo Trejo, Guadalupano, Parador Colosio, El Oasis y Termas del Rey**: no tenían web el 5 nov (El Oasis y Termas del Rey sí la tienen; ver la sección del 9 nov). Usan las genéricas de categoría ya acreditadas.
-- **Viñedos La Redonda**: su web está en mantenimiento y la tienda pide contraseña. Solo hay una imagen para redes con el logo encima, y su operación está suspendida.
+- **Viñedos La Redonda**: su web está en mantenimiento y la tienda pide contraseña. Se desactivó el 11 nov 2026 (`database/databasefix_vinedos_2026-11-11.sql`).
 - **Los Rosales Viñedos**: `vinedoslosrosales.com.mx` hoy es un sitio de apuestas. El dominio fue secuestrado; no se usó nada de ahí.
 - **Hotel Museo La Casona**: `lacasonatequisquiapan.com` redirige a un sitio de tragamonedas, y ese hotel está en otra dirección (Camino al Sauz, no Morelos 11).
 - **La Casa del Atrio** y **Hotel Hidalgo**: los que aparecen con ese nombre están en Querétaro capital.
@@ -205,6 +205,50 @@ Misma regla y mismo destino (`/srv/tequis/uploads/lugares/`), para `database/dat
 | Hotel Casa de Vino | `hotel-casa-de-vino-habitacion-superior.jpg` | [hotelcasadevino.com/habitacion-superior](https://www.hotelcasadevino.com/habitacion-superior) | [original](https://irp.cdn-website.com/f8909327/dms3rep/multi/opt/HOTEL+CASA+DE+VINO-cb8a0814-1920w.webp) |
 | Hotel Casa de Vino | `hotel-casa-de-vino-entrada.jpg` | [hotelcasadevino.com](https://www.hotelcasadevino.com/) | [original](https://irp.cdn-website.com/f8909327/dms3rep/multi/opt/Hotel-casa-de-vino-tequisquiapan-queretaro+%285%29-1920w.webp) |
 
+## Viñedos: acomodo (11 nov 2026)
+
+Misma regla y mismo destino (`/srv/tequis/uploads/lugares/`), aplicadas con `database/databasefix_vinedos_2026-11-11.sql`. Cuando la web propia está caída, en mantenimiento o el dominio ya no es del negocio, se vale su copia en el [Internet Archive](https://web.archive.org/) de cuando sí era suya (sigue siendo la web del negocio). No se usan agregadores (viñedosqueretaro.com, queretaro.travel), TripAdvisor ni Instagram.
+
+| Lugar | Archivo | Página de origen | Archivo original |
+|---|---|---|---|
+| Los Rosales Viñedos | `los-rosales-vinedos-uvas.jpg` | [vinedoslosrosales.com.mx (archivo, 2018-12-08)](http://web.archive.org/web/20181208042339/http://vinedoslosrosales.com.mx/) | [original](http://web.archive.org/web/20181208042339im_/http://vinedoslosrosales.com.mx/images/slide_vinedo.jpg) |
+| Los Rosales Viñedos | `los-rosales-vinedos-barricas.jpg` | [vinedoslosrosales.com.mx (archivo, 2018-07-28)](http://web.archive.org/web/20180728065556/http://vinedoslosrosales.com.mx/) | [original](http://web.archive.org/web/20180728065556im_/http://www.vinedoslosrosales.com.mx/images/slide_home_2.jpg) |
+| Los Rosales Viñedos | `los-rosales-vinedos-botellas.jpg` | [vinedoslosrosales.com.mx (archivo, 2018-07-28)](http://web.archive.org/web/20180728070702/http://vinedoslosrosales.com.mx/) | [original](http://web.archive.org/web/20180728070702im_/http://www.vinedoslosrosales.com.mx/images/slide_home_3.jpg) |
+| Los Rosales Viñedos | `los-rosales-vinedos-jardin.jpg` | [vinedoslosrosales.com.mx (archivo, 2018-12-08)](http://web.archive.org/web/20181208034443/http://vinedoslosrosales.com.mx/) | [original](http://web.archive.org/web/20181208034443im_/http://vinedoslosrosales.com.mx/images/slide_vinos.jpg) |
+| Los Rosales Viñedos | `los-rosales-vinedos-barrica.jpg` | [vinedoslosrosales.com.mx (archivo, 2018-12-08)](http://web.archive.org/web/20181208033804/http://vinedoslosrosales.com.mx/) | [original](http://web.archive.org/web/20181208033804im_/http://vinedoslosrosales.com.mx/images/slide_nosotros.jpg) |
+
+## Vinícola Tequisquiapan (16 nov 2026)
+
+La ficha decía que no tenía web, pero sí la tiene. Tres fotos son de [vinicolatequisquiapanboutique.com](https://www.vinicolatequisquiapanboutique.com/) y la del patio es de su Instagram oficial, que da la misma dirección. Se descartaron las fotos donde el protagonista es un cliente, el render de una botella, la de la plaza del pueblo y la del patio durante un evento.
+
+| Lugar | Archivo | Página de origen | Archivo original |
+|---|---|---|---|
+| Vinícola Tequisquiapan | `vinicola-tequisquiapan-salon.jpg` | [vinicolatequisquiapanboutique.com](https://www.vinicolatequisquiapanboutique.com/) | [original](https://www.vinicolatequisquiapanboutique.com/images/imagen-20de-20whatsapp-202024-06-05-20a-20las-2012.23.57_7119116c.jpg) |
+| Vinícola Tequisquiapan | `vinicola-tequisquiapan-cata.jpg` | [vinicolatequisquiapanboutique.com/cataVinos](https://www.vinicolatequisquiapanboutique.com/cataVinos/index.html) | [original](https://www.vinicolatequisquiapanboutique.com/cataVinos/images/fotos5.png) (convertida a JPG) |
+| Vinícola Tequisquiapan | `vinicola-tequisquiapan-desayuno.jpg` | [vinicolatequisquiapanboutique.com/desayunos](https://www.vinicolatequisquiapanboutique.com/desayunos/index.html) | [original](https://www.vinicolatequisquiapanboutique.com/images/img_6438-202-20-1-.jpg) (reducida a 1600 px) |
+| Vinícola Tequisquiapan | `vinicola-tequisquiapan-patio.jpg` | [Instagram @vinicola_tequisquiapan_, 26 jul 2022](https://www.instagram.com/p/Cge-ts8JR5j/) | — |
+
+## Vinícola San Patricio (16 nov 2026)
+
+La ficha decía que su web no respondía; el 16 nov 2026 [vinicolasp.com.mx](https://www.vinicolasp.com.mx/) ya cargaba, con el mismo teléfono de queretaro.travel. Se descartaron las fotos de grupos y personas, los diseños gráficos y los logotipos.
+
+| Lugar | Archivo | Página de origen | Archivo original |
+|---|---|---|---|
+| Vinícola San Patricio | `vinicola-san-patricio-barricas.jpg` | [vinicolasp.com.mx](https://www.vinicolasp.com.mx/) | [original](https://www.vinicolasp.com.mx/wp-content/uploads/2025/02/barricas.png) (convertida a JPG) |
+| Vinícola San Patricio | `vinicola-san-patricio-fachada.jpg` | [vinicolasp.com.mx](https://www.vinicolasp.com.mx/) | [original](https://www.vinicolasp.com.mx/wp-content/uploads/2025/02/378388692_613815600961942_2015451979119934768_n-2.jpg) |
+| Vinícola San Patricio | `vinicola-san-patricio-vinedo.jpg` | [vinicolasp.com.mx](https://www.vinicolasp.com.mx/) | [original](https://www.vinicolasp.com.mx/wp-content/uploads/2025/02/414106465_671552885188213_6995592898515857457_n.jpg) |
+| Vinícola San Patricio | `vinicola-san-patricio-botellas.jpg` | [vinicolasp.com.mx](https://www.vinicolasp.com.mx/) | [original](https://www.vinicolasp.com.mx/wp-content/uploads/2025/07/IMG_6809-1.jpg) (reducida a 1920 px) |
+
+## Fotos de cuentas oficiales en redes (16 nov 2026)
+
+Para negocios sin web propia. Una cuenta cuenta como oficial si su teléfono, dirección o web coinciden con los del negocio. Se descartan las imágenes que Facebook o Instagram marcan como "Contenido generado con IA", los carteles, las de banco y aquellas donde el protagonista es un cliente. Sin permiso escrito todavía, igual que las de webs propias.
+
+| Lugar | Archivo | Página de origen | Cómo se confirmó la cuenta |
+|---|---|---|---|
+| Vinícola Terra Salvador | `terra-salvador-terraza.jpg` | [Facebook, foto de portada del 13 nov 2026](https://www.facebook.com/photo.php?fbid=1188738567060232) | Teléfono 414 140 9038 y correo iguales al DENUE y a tequis.travel; su Instagram @terrasalvador.vinicola enlaza a esa página |
+| Viña Magal | `vina-magal-terraza.jpg` | [Facebook, 2 jul 2026](https://www.facebook.com/photo.php?fbid=1426564742612600) | Teléfono 427 229 0487, correo y dirección iguales a tequis.travel y queretaro.travel; su Instagram @vinamagal da el mismo número |
+| Viña Magal | `vina-magal-tabla.jpg` | [Instagram @vinamagal, 19 oct 2026](https://www.instagram.com/p/DeribAyxTQx/) | Misma cuenta |
+
 ## Historial anterior
 
 ### Fotos reales de negocios específicos (hasta oct 2026; ya no aplica a Freixenet ni Globos)
@@ -223,6 +267,6 @@ Para un puñado de lugares destacados (`is_featured = true`) sí conseguimos la 
 
 ⚠️ **Permisos**: estas fotos se usan sin permiso escrito de los negocios, y desde el 1 nov 2026 la web pública (tequismagico.com) ya las muestra. Hay que pedirles autorización por escrito o reemplazarlas por fotos propias (ver `docs/negocio/propuesta-sitio-web.md`).
 
-**No se pudo conseguir** (se quedan con la foto genérica de categoría): Viñedos La Redonda (su sitio, laredondavinos.com, está en mantenimiento) y La Estancia Tequisquiapan (no se le encontró sitio ni redes sociales).
+**No se pudo conseguir** (se quedan con la foto genérica de categoría): La Estancia Tequisquiapan (no se le encontró sitio ni redes sociales).
 
 Estas fotos son hotlink directo a los sitios de los negocios (no se re-subieron a nuestra infraestructura). Si algún negocio pide que se quiten, hay que actualizar `thumbnail_url`/`image_urls` en `places` y borrar su fila de esta tabla.

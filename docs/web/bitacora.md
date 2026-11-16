@@ -293,12 +293,68 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 
 **Correcciones de contenido:** `/por-que-tequis` sin cuatro afirmaciones sin fuente (el "centro real" en Zacatecas, Carranza asiduo a los baños, el auge de los años 50 y el nombre otomí) y con una ficha de datos (altitud, población 2020, Pueblo Mágico 2012). La guía práctica tiene ahora "Preguntas antes de ir": seguridad, moverse sin auto, el tren y las inundaciones. Se quitaron de las guías la Fiesta en el Aire de diciembre (no hay edición desde 2021), las callejoneadas mensuales y el video mapping (sin registro desde 2024) y el Festival del Vino Queretano "en Tequis" (en 2026 fue en Corregidora). La página de balnearios ya no dice que todos son termales: solo El Oasis lo publica.
 
+## 18. Search Console por API y primer plan SEO (16 nov 2026)
+
+**Acceso:** la cuenta de servicio `tequismagico@tequis-magico.iam.gserviceaccount.com` es propietaria de `sc-domain:tequismagico.com`. La llave vive en `~/.config/tequis/gsc-key.json`, fuera del repo. `node deploy/gsc-report.mjs` saca el reporte en Markdown, y con `--inspect` agrega la indexación de las URLs clave (ver `deploy/README.md`).
+
+**Diagnóstico** (3 al 15 nov): 3,112 apariciones, 32 clics y posición 13.8, con las apariciones diarias de 18 a 706. Las 26 URLs clave están indexadas con nuestra canónica. El detalle, el plan por fases y la línea base para medir están en [`plan-seo-2026-11.md`](plan-seo-2026-11.md).
+
+**Cambios publicados:**
+- Las fichas dicen en Google qué traen (precios, teléfono, horario, fotos propias, mapa) en vez de solo "Plaza en Tequisquiapan".
+- "La Pila" se unió a "Parque La Pila", con redirección 308. Eran el mismo sitio y Google repartía la búsqueda entre las dos fichas.
+- La Plaza Miguel Hidalgo y el Parque La Pila tienen descripción con fuente. Se quitaron "WiFi gratuito", "juegos infantiles" y otros datos de la carga inicial.
+- La página de balnearios se titula "Balnearios y aguas termales".
+- `/eventos` abre con "Este fin de semana" y ya no anuncia el Festival del Globo.
+- Las guías de viñedos y de qué comer enlazan a sus listados.
+
+SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El despliegue también publicó la guía de viñedos sin La Redonda y los créditos de Los Rosales, que estaban pendientes desde el 11 nov.
+
+**Qué no se persigue:** las búsquedas de traslados CDMX ↔ Tequis en inglés (buscan quien venda el viaje), "festival del globo 2027" (es el de León) y las búsquedas por nombre de negocio, donde gana su ficha de Google Maps. Los cambios de título y descripción tardan de 2 a 4 semanas en verse: la primera revisión es el 7 dic 2026.
+
+
+## 19. Fotos y datos de redes oficiales: Vinícola Terra Salvador (16 nov 2026)
+
+**Regla nueva:** si un negocio no tiene web, sus cuentas oficiales de Facebook o Instagram también sirven para fotos y datos. Una cuenta es oficial si su teléfono, dirección o web coinciden con los del negocio (CLAUDE.md y `docs/datos/creditos-imagenes.md`). Se leen con Claude in Chrome usando la sesión del dueño. Muchas imágenes de estas cuentas están marcadas como "Contenido generado con IA" o son carteles: se descartan.
+
+**Terra Salvador** (`database/databasefix_terra_salvador_2026-11-16.sql`, aplicado):
+- Descripción con sus vinos de uva Salvador, recorridos, catas y tablas de queso.
+- Dirección de su Facebook y WhatsApp.
+- Una foto real de su terraza.
+- Paso a `content_verified`, así que ya entra a Google y al sitemap.
+- El horario de Facebook (10 a 18 h diario) lleva años sin actualizarse: solo se menciona con aviso.
+
+**Vinícola Tequisquiapan** (`database/databasefix_vinicola_tequisquiapan_2026-11-16.sql`, aplicado):
+- La ficha decía "no tiene web", pero sí tiene: vinicolatequisquiapanboutique.com. También tiene Facebook "Vinicola Tequisquiapan" (DeliceCatembe) e Instagram @vinicola_tequisquiapan_.
+- Ahora trae su historia (familia Ochoa, 2010), sus 12 vinos y los precios de las catas: $650 y $1,300 por persona, mínimo 10 personas, según la web del hotel La Toscana, que está enfrente.
+- También los desayunos de fin de semana y el horario de 12 a 17 h. Su Facebook dice que los lunes cierra.
+- Cuatro fotos reales y `content_verified`.
+
+**Viña Magal** (`database/databasefix_vina_magal_2026-11-16.sql`, aplicado):
+- Datos de su Instagram y su Facebook: reservas solo al 427 229 0487, terraza para catas y bodas, y su vendimia 2026 (1 de agosto, $900).
+- Horario de Facebook con aviso.
+- Dos fotos reales: la terraza frente al viñedo y una tabla de quesos.
+- Pasó a `content_verified`.
+
+**Vinícola San Patricio** (`database/databasefix_vinicola_san_patricio_2026-11-16.sql`, aplicado):
+- Su web vinicolasp.com.mx ya responde. De ahí salen la historia (1999, la primera vinícola de Tequis desde 2001) y los tres recorridos con precio: $299, $399 y $599, niños $90.
+- Su Facebook (activo) da el horario oficial: recorridos cada hora de 11:00 a 16:30 y tienda de 11 a 18 h, todos los días. Por ser reciente y oficial, ese sí va a `schedule_json`.
+- Cuatro fotos de su web y `content_verified`.
+
+**Redes sociales en su propio campo:**
+- Columnas nuevas `instagram_url` y `facebook_url` en la base (`database/databasefix_redes_2026-11-16.sql`).
+- El panel las captura y las valida.
+- La web las muestra en la ficha (con íconos propios en `web/components/SocialIcons.tsx`, porque lucide 1.x quitó los de marcas) y en el `sameAs` del JSON-LD.
+- Ya están cargadas las de Terra Salvador, Vinícola Tequisquiapan, Viña Magal y San Patricio.
+- Se cargaron 39 más, de los lugares con web propia: se tomaron de los enlaces de su propia web y se revisaron a mano (`database/databasefix_redes_webs_2026-11-16.sql`). En total, 43.
+- Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
+
 ---
 
 ## Pendientes
 
 | Pendiente | Quién |
 |---|---|
+| Revisar las webs que no respondieron el 16 nov 2026: El Atorón, hotelplazatequis.com (4 lugares), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Si siguen caídas, quitar el `website` o la ficha | Datos |
 | Búsqueda de marcas antes de registrar el logo en el IMPI | Tú |
 | **Renovar el dominio** antes del 2 nov 2027 (conviene activar la renovación automática en Hostinger) | Tú |
 | Copiar los respaldos fuera del VPS: hoy están en el mismo disco | Tú / proveedor |
@@ -319,5 +375,4 @@ Las secciones 8 y 9 se subieron juntas en el commit `0cf3e1b` ("estructura estil
 | Dar de alta actividades y patrimonio (~19 confirmados: Centro Geográfico, Templo de la Magdalena, Granja Lavyn, Museo ¡México me encanta!, temazcal, minas de ópalo, cabalgatas…) con `docs/datos/investigacion-actividades-patrimonio-2026-11.md`. Las guías ya los nombran: 14 nombres de guías no salen como ficha hasta que existan | Código |
 | Eventos de `docs/datos/investigacion-agenda-2026-11.md`: Desfile Navideño (18 dic), organizador de Estrellas y Raíces y la hora del Año Nuevo en la Plaza (está guardada en UTC) | Código |
 | Pedir permiso escrito para las fotos de webs de negocios: ahora son 43 lugares con foto propia | Tú |
-| Dar acceso a la API de Search Console (cuenta de servicio con permiso Restringido) para revisar búsquedas y posiciones cada semana | Tú |
 

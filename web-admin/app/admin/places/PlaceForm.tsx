@@ -22,6 +22,8 @@ export type PlaceFormValues = {
   email: string;
   website: string;
   whatsapp_number: string;
+  instagram_url: string;
+  facebook_url: string;
   amenities: string; // comma-separated in the form
   tags: string; // comma-separated in the form
   is_featured: boolean;
@@ -34,7 +36,7 @@ export type PlaceFormValues = {
 const emptyValues: PlaceFormValues = {
   name: '', category: 'turistico', subcategory: '', latitude: '', longitude: '',
   address: '', short_description: '', full_description: '', price_range: 'moderate',
-  phone_number: '', email: '', website: '', whatsapp_number: '',
+  phone_number: '', email: '', website: '', whatsapp_number: '', instagram_url: '', facebook_url: '',
   amenities: '', tags: '', is_featured: false, is_verified: false, content_verified: false, images: [],
   schedule_json: '',
 };
@@ -112,6 +114,8 @@ export function PlaceForm({ initial }: { initial?: Partial<PlaceFormValues> }) {
       email: values.email || null,
       website: values.website || null,
       whatsapp_number: values.whatsapp_number || null,
+      instagram_url: values.instagram_url.trim() || null,
+      facebook_url: values.facebook_url.trim() || null,
       amenities: values.amenities.split(',').map((s) => s.trim()).filter(Boolean),
       tags: values.tags.split(',').map((s) => s.trim()).filter(Boolean),
       is_featured: values.is_featured,
@@ -186,6 +190,8 @@ export function PlaceForm({ initial }: { initial?: Partial<PlaceFormValues> }) {
         <Field label="WhatsApp"><input value={values.whatsapp_number} onChange={(e) => set('whatsapp_number', e.target.value)} className="input" /></Field>
         <Field label="Email"><input type="email" value={values.email} onChange={(e) => set('email', e.target.value)} className="input" /></Field>
         <Field label="Sitio web"><input value={values.website} onChange={(e) => set('website', e.target.value)} className="input" /></Field>
+        <Field label="Instagram (URL)"><input type="url" value={values.instagram_url} onChange={(e) => set('instagram_url', e.target.value)} className="input" placeholder="https://www.instagram.com/…" /></Field>
+        <Field label="Facebook (URL)"><input type="url" value={values.facebook_url} onChange={(e) => set('facebook_url', e.target.value)} className="input" placeholder="https://www.facebook.com/…" /></Field>
       </div>
 
       <Field label="Amenidades (separadas por coma)">
