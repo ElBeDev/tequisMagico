@@ -394,6 +394,9 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Xantico Spa** (`database/databasefix_xantico_2026-11-16.sql`):
   - La ficha era mínima (solo DENUE y Turismo). Su Facebook e Instagram confirman el teléfono y dan la dirección real: Ezequiel Montes 142, interior 13 (el DENUE decía Camelinas 142). Pin de Google Maps.
   - Servicios de sus cuentas, masaje en su jardín, dos fotos reales (jardín y piedras calientes), redes y `content_verified`. No publica horario ni precios vigentes.
+- **Espacio Sense Spa – La Casona** (`database/databasefix_espacio_sense_2026-11-16.sql`):
+  - Su página del spa dice "abierto a todo público": la ficha ya no da a entender que es solo para huéspedes. Tratamientos de agave, rituales y temazcal; la lista de precios de su web es de 2018-19 y no se usa.
+  - Dos fotos más de su web (temazcal y sauna) y `content_verified`.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 

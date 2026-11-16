@@ -264,8 +264,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     schedule: { lunes: 'By reservation', martes: 'By reservation', 'miércoles': 'By reservation', jueves: 'By reservation' },
   },
   '1121c798-c22b-58db-94ab-e0e8313661bd': { // Espacio Sense Spa – La Casona
-    shortDescription: 'Spa at the La Casona hotel, with temazcal, sauna and hot tub',
-    fullDescription: 'The spa is in Espacio Sense, the adults-only area of La Casona Tequisquiapan Hotel & Spa. It has single and couples treatment rooms, a sauna, a temazcal (traditional sweat lodge) and a hot tub, and offers massages, facials and agave-based treatments. Ask about hours and availability when you book.',
+    shortDescription: 'Spa open to the public, with temazcal, sauna and hot tub',
+    fullDescription: 'The spa of La Casona Tequisquiapan Hotel & Spa, in its Espacio Sense area, also open to people who aren’t staying at the hotel. It has single and couples treatment rooms, a sauna, a traditional temazcal (sweat lodge), a hot tub, showers and a garden to relax in. Its menu has more than 20 treatments, for one person or couples: massages, facials and rituals made with agave products, such as obsidian stone massages, body scrubs and artisanal steam sessions, often ending in the temazcal. It doesn’t publish hours or current prices: ask about availability when you book by phone or WhatsApp.',
   },
   'fb30e010-d760-5805-ac5b-e9da4570373d': { // Balneario La Vega
     shortDescription: 'Family water park with an Olympic pool, open every day',
