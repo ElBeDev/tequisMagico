@@ -580,8 +580,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A café and restaurant in the Hacienda Grande neighborhood, open from breakfast to lunch, with specialty coffee drinks. Check the hours before you go.',
   },
   '1d7fc20f-6fe1-55a2-b9d9-2acb315dcfef': { // Norte B
-    shortDescription: 'Winery and brewery with tastings paired with cheese',
-    fullDescription: 'Winery and brewery at km 50 of state highway 200, in Fuentezuelas, the same kilometer as Cava Bocanegra. Its three experiences include a visit and a tasting with Bocanegra cheeses: in November 2026 the wine one (3 wines, 45 min) cost MX$450; the beer one (3 beers, 45 min), MX$390; and the combined one (2 wines and 2 beers, 75 min), MX$490. It opens Monday, Thursday and Sunday from 11 AM to 6 PM, and Friday and Saturday from 11 AM to 9 PM; it is closed Tuesday and Wednesday. Book at 427 224 6790.',
+    shortDescription: 'Winery and brewery with wine and beer tastings paired with cheese',
+    fullDescription: 'A winery and brewery at km 50 of state highway 200, in Fuentezuelas (the same kilometer as Cava Bocanegra), with open-air terraces. It makes two families of wine: Bicharraco (Cometa, a Merlot-Malbec; Grillo, a Cinsault rosé; Mantis, a Xarel·lo white; and Libélula, a brut sparkling wine) and Corre Que Te Pillo (dry Malbec, sweet Malbec and a sparkling rosé). It also brews five beers named in Hñähñu (Otomí): Hähä (lager), Tuthe (blonde ale), Xene (pale ale), Thuhu (red ale) and Kinde (espresso stout). Its experiences include a visit and a tasting with Bocanegra cheeses. In November 2026 the beer one (Japi: 3 beers, 45 min) cost MX$390; the wine one (Binu: 3 wines, 45 min), MX$450; and the combined one (Zote: 2 wines and 2 beers, 75 min), MX$490. It opens Monday, Thursday and Sunday from 11 AM to 6 PM, and Friday and Saturday from 11 AM to 9 PM; it is closed Tuesday and Wednesday. Book at 427 224 6790.',
   },
   'c40d2783-4b09-50ae-bb48-76cbfbf8f507': { // CR Vinos MX
     shortDescription: 'Winery with tours, picnics and the Cartinto House restaurant',

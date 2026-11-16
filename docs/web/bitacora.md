@@ -347,6 +347,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - Ya están cargadas las de Terra Salvador, Vinícola Tequisquiapan, Viña Magal y San Patricio.
 - Se cargaron 39 más, de los lugares con web propia: se tomaron de los enlaces de su propia web y se revisaron a mano (`database/databasefix_redes_webs_2026-11-16.sql`). En total, 43.
 - Viñedos que faltaban (`database/databasefix_redes_vinedos_2026-11-16.sql`): el Facebook de La Revuelta, Norte B (con su horario actual, de sus bios) y Los Rosales, cuyas cuentas dan el teléfono 414 280 4939 y el km 27. Eso resuelve la dirección en conflicto, y la ficha pasó a `content_verified`. Ya todos los viñedos tienen Instagram y Facebook.
+- **Norte B** (`database/databasefix_norte_b_2026-11-16.sql`): sus vinos (familias Bicharraco y Corre Que Te Pillo), sus cinco cervezas con nombre en hñähñu, las experiencias Japi, Binu y Zote con precio, cuatro fotos de su web en lugar de la tira panorámica, y `content_verified`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
 ---

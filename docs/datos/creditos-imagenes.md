@@ -175,7 +175,7 @@ Misma regla y mismo destino (`/srv/tequis/uploads/lugares/`), aplicadas con `dat
 | Parque Acuático El Oasis | `parque-acuatico-el-oasis-olas.jpg` | [eloasistequisquiapan.com](https://eloasistequisquiapan.com) (Galería) | [original](https://eloasistequisquiapan.com/storage/media/gallery/fTukBW7e0waplfrJ6gsWbVSx83W8nmn2VxlpWyn0.jpg) |
 | Parque Acuático El Oasis | `parque-acuatico-el-oasis-vista.jpg` | [eloasistequisquiapan.com](https://eloasistequisquiapan.com) (Galería) | [original](https://eloasistequisquiapan.com/storage/media/gallery/TllZIpKDZZVpaKLUN8NKvKLDzSMC5DPdKCKh5DCU.jpg) |
 | Parque Acuático El Oasis | `parque-acuatico-el-oasis-toboganes.jpg` | [eloasistequisquiapan.com](https://eloasistequisquiapan.com) (Galería) | [original](https://eloasistequisquiapan.com/storage/media/gallery/lKqsfgbHsQ4ics3zHeyk8IIrRev0FGEkbkZfAtFg.jpg) |
-| Norte B | `norte-b-bodega.jpg` | [norteb.mx](https://norteb.mx) | [original](https://norteb.mx/wp-content/uploads/2020/02/seccion-vinos.jpg) |
+| Norte B | `norte-b-bodega.jpg` (retirada el 16 nov 2026: tira panorámica; ver abajo) | [norteb.mx](https://norteb.mx) | [original](https://norteb.mx/wp-content/uploads/2020/02/seccion-vinos.jpg) |
 | CR Vinos MX | `cr-vinos-mx-picnic.jpg` | [crvinosmx.com/enotourism/experiences](https://crvinosmx.com/enotourism/experiences) | [original](https://cdn.sanity.io/images/25ql29fy/production/378d1879e986d0d300b66f9620c3afc9c0e937cc-5184x3456.jpg) |
 | CR Vinos MX | `cr-vinos-mx-tanques.jpg` | [crvinosmx.com/enotourism/experiences](https://crvinosmx.com/enotourism/experiences) | [original](https://cdn.sanity.io/images/25ql29fy/production/c02db05fdfa682998843f6b749a685902e90322d-1080x1080.jpg) |
 | CR Vinos MX | `cr-vinos-mx-cartinto.jpg` | [crvinosmx.com/restaurant](https://crvinosmx.com/restaurant) | [original](https://cdn.sanity.io/images/25ql29fy/production/15f23ea55f168cfd49c6c14f1a363e966c13a63f-6240x4160.jpg) |
@@ -238,6 +238,17 @@ La ficha decía que su web no respondía; el 16 nov 2026 [vinicolasp.com.mx](htt
 | Vinícola San Patricio | `vinicola-san-patricio-fachada.jpg` | [vinicolasp.com.mx](https://www.vinicolasp.com.mx/) | [original](https://www.vinicolasp.com.mx/wp-content/uploads/2025/02/378388692_613815600961942_2015451979119934768_n-2.jpg) |
 | Vinícola San Patricio | `vinicola-san-patricio-vinedo.jpg` | [vinicolasp.com.mx](https://www.vinicolasp.com.mx/) | [original](https://www.vinicolasp.com.mx/wp-content/uploads/2025/02/414106465_671552885188213_6995592898515857457_n.jpg) |
 | Vinícola San Patricio | `vinicola-san-patricio-botellas.jpg` | [vinicolasp.com.mx](https://www.vinicolasp.com.mx/) | [original](https://www.vinicolasp.com.mx/wp-content/uploads/2025/07/IMG_6809-1.jpg) (reducida a 1920 px) |
+
+## Norte B (16 nov 2026)
+
+Cuatro fotos de [norteb.mx](https://norteb.mx/) que sustituyen la tira panorámica. Se descartaron las de personas como protagonistas y las panorámicas.
+
+| Lugar | Archivo | Página de origen | Archivo original |
+|---|---|---|---|
+| Norte B | `norte-b-entrada.jpg` | [norteb.mx](https://norteb.mx/) | [original](https://norteb.mx/wp-content/uploads/2022/11/Norte-B-01.jpg) |
+| Norte B | `norte-b-cervezas.jpg` | [norteb.mx/experiencias](https://norteb.mx/experiencias/) | [original](https://norteb.mx/wp-content/uploads/2022/11/japi-01.jpg) |
+| Norte B | `norte-b-cata-vino.jpg` | [norteb.mx/experiencias](https://norteb.mx/experiencias/) | [original](https://norteb.mx/wp-content/uploads/2022/11/binu-03.jpg) |
+| Norte B | `norte-b-quesos.jpg` | [norteb.mx/experiencias](https://norteb.mx/experiencias/) | [original](https://norteb.mx/wp-content/uploads/2022/11/zote-02.jpg) |
 
 ## Fotos de cuentas oficiales en redes (16 nov 2026)
 
