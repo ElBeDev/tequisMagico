@@ -36,7 +36,7 @@ Al 10 nov 2026 hay **114 lugares activos**: 52 de hospedaje, 32 de comida, 20 ex
 
 ## Redes sociales
 
-`instagram_url` y `facebook_url` (columnas nuevas del 16 nov 2026, `database/databasefix_redes_2026-11-16.sql`) guardan la URL completa de la cuenta oficial del negocio. Es oficial si su teléfono, dirección o web coinciden con los del negocio. El panel las edita y rechaza cualquier URL que no sea de instagram.com o facebook.com. El 16 nov 2026 se llenaron 45. Todos los viñedos tienen las dos: los cuatro viñedos revisados ese día, y 39 lugares con web propia, tomadas de los enlaces de su web (`database/databasefix_redes_webs_2026-11-16.sql`, con los descartes explicados). Al dar de alta o revisar un lugar, cópialas de su web o confirma la cuenta como en los viñedos.
+`instagram_url` y `facebook_url` (columnas nuevas del 16 nov 2026, `database/databasefix_redes_2026-11-16.sql`) guardan la URL completa de la cuenta oficial del negocio. Es oficial si su teléfono, dirección o web coinciden con los del negocio. El panel las edita y rechaza cualquier URL que no sea de instagram.com o facebook.com. El 16 nov 2026 se llenaron 45 lugares: los cuatro viñedos revisados ese día; 39 con web propia, con las cuentas que enlaza su web (`database/databasefix_redes_webs_2026-11-16.sql`, con los descartes explicados); y Norte B y Los Rosales (`databasefix_redes_vinedos_2026-11-16.sql`). Los 12 viñedos tienen Instagram y Facebook. Al dar de alta o revisar un lugar, cópialas de su web o confirma la cuenta como en los viñedos.
 
 ## Vocabulario de amenidades, etiquetas y subcategorías
 
