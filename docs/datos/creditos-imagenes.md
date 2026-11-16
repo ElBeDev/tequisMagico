@@ -272,6 +272,8 @@ Para negocios sin web propia. Una cuenta cuenta como oficial si su teléfono, di
 | Queserías La Mexicana Olé | `la-mexicana-ole-carrizal.jpg` | [Instagram @lamexicanaoleoficial, 6 nov 2026](https://www.instagram.com/p/DfZ4ObRj6TG/) (fachada de Carrizal 4) | Su Instagram enlaza a lamexicanaole.com, que da el teléfono de la base |
 | Viña Magal | `vina-magal-terraza.jpg` | [Facebook, 2 jul 2026](https://www.facebook.com/photo.php?fbid=1426564742612600) | Teléfono 427 229 0487, correo y dirección iguales a tequis.travel y queretaro.travel; su Instagram @vinamagal da el mismo número |
 | Viña Magal | `vina-magal-tabla.jpg` | [Instagram @vinamagal, 19 oct 2026](https://www.instagram.com/p/DeribAyxTQx/) | Misma cuenta |
+| Yoot Masajes y Bienestar | `yoot-masajes-cabina.jpg` | [Facebook, 15 jul 2024](https://www.facebook.com/photo.php?fbid=908954097910610) (recortada para quitar dos logos) | Teléfonos 55 3727 1001 / 1020, iguales al DENUE y a Turismo; su Instagram @yoottequisquiapan da los mismos |
+| Yoot Masajes y Bienestar | `yoot-masajes-fachada.jpg` | [Facebook, 23 nov 2024](https://www.facebook.com/photo.php?fbid=1003306398475379) (recortada para quitar el marco y el texto) | Misma cuenta |
 | Balneario La Vega | `balneario-la-vega-albercas.jpg` | [Facebook, 20 may 2025](https://www.facebook.com/photo.php?fbid=122125243784819133) (también es su portada) | Teléfono 414 273 4534 y dirección iguales a su web, y enlaza a balneariolavega.mx. Tiene web, pero sin galería: "Galería" da 404 |
 
 ## Historial anterior
