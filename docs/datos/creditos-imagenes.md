@@ -289,6 +289,9 @@ Para negocios sin web propia. Una cuenta cuenta como oficial si su teléfono, di
 | Yoot Masajes y Bienestar | `yoot-masajes-fachada.jpg` | [Facebook, 23 nov 2024](https://www.facebook.com/photo.php?fbid=1003306398475379) (recortada para quitar el marco y el texto) | Misma cuenta |
 | Xantico Spa | `xantico-spa-jardin.jpg` | [Facebook, 1 sep 2025](https://www.facebook.com/photo.php?fbid=1630734908292314) ("Experiencia Xantico spa Garden") | Su botón de WhatsApp marca 414 114 0271, el del directorio de Turismo; su Instagram @spaxantico da el mismo |
 | Xantico Spa | `xantico-spa-piedras.jpg` | [Facebook, 19 mar 2026](https://www.facebook.com/photo.php?fbid=1815437823155354) | Misma cuenta |
+| Temazcal Tres Marías | `temazcal-tres-marias-temazcal.jpg` | [Facebook, 16 ene 2025](https://www.facebook.com/photo.php?fbid=1053300126602292) | Margarita 42, 427 182 4352 y su correo, iguales al DENUE y a Turismo |
+| Temazcal Tres Marías | `temazcal-tres-marias-alberca.jpg` | [Facebook, 16 ene 2025](https://www.facebook.com/photo.php?fbid=1053300069935631) | Misma cuenta |
+| Temazcal Tres Marías | `temazcal-tres-marias-jacuzzi.jpg` | [Facebook](https://www.facebook.com/photo.php?fbid=927620892503550) | Misma cuenta |
 | Balneario La Vega | `balneario-la-vega-albercas.jpg` | [Facebook, 20 may 2025](https://www.facebook.com/photo.php?fbid=122125243784819133) (también es su portada) | Teléfono 414 273 4534 y dirección iguales a su web, y enlaza a balneariolavega.mx. Tiene web, pero sin galería: "Galería" da 404 |
 
 ## Historial anterior

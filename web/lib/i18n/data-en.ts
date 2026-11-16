@@ -616,8 +616,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Traditional temazcal (sweat lodge) in the community of Fuentezuelas, about 10 km from downtown. Experiences start with a talk and artisanal tea, continue with the steam bath with herbs and fire-heated stones, and can add a mud treatment, a massage, herbal, red wine or ice tubs, and pre-Hispanic food made with organic local ingredients. According to its menu (prices valid through December 2026), a 2-hour temazcal session costs MX$3,300 for 1 to 3 people or MX$950 per person from 4, and 3- to 5-hour packages run from MX$1,500 to MX$3,250 per person for groups of 4 or more. It has one room, Izcalli, with a queen bed and a tub for two, at MX$3,000 a night for one or two people. Book by WhatsApp; bring a towel, sandals and a swimsuit.',
   },
   'f7ca279f-386e-51a8-96eb-db5c93407f5f': { // Temazcal Tres Marías
-    shortDescription: 'Temazcal with massage and exfoliation, near Bordo Blanco',
-    fullDescription: 'Temazcal in the Santa María del Camino neighborhood, near Bordo Blanco, about 5.6 km from downtown. According to the town tourism directory, the temazcal session comes with a relaxing massage and an aloe and mineral salt scrub. It is also listed in INEGI’s DENUE business census. It has no website and doesn’t publish hours or prices: call to book.',
+    shortDescription: 'Private temazcal with a garden, pool and massages, by appointment',
+    fullDescription: 'Temazcal (sweat lodge) in the Santa María del Camino neighborhood, near Bordo Blanco, about 5.6 km from downtown. It is a private, discreet place with gardens, a pool, a hot tub and a massage room with physical therapists; it also offers aromatherapy and arranges special occasions. According to the town tourism directory, the temazcal session comes with a relaxing massage and an aloe and mineral salt scrub. Everything is by appointment, and it doesn’t publish hours or prices: call or message to book.',
   },
   '6663fe98-2d68-549b-968c-e48f9b4f15e9': { // Casa Gayatri
     shortDescription: 'Holistic house with temazcal, massages and yoga',
