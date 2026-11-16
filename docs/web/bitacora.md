@@ -370,6 +370,9 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
   - La web pasa de su página de UENI (plantilla con fotos de banco) a su dominio propio, que está en construcción.
   - Sus 4 sucursales; ahora también es restaurante (desayunos, café, pizzas, cortes).
   - Instagram, Facebook (inactivo desde 2022), la fachada de Carrizal 4 como foto, y `content_verified`.
+- **Finca VAI** (`database/databasefix_finca_vai_2026-11-16.sql`):
+  - Su web quesosvai.com se cayó el 14 nov 2026 y ahora es una página de estacionamiento de GoDaddy, así que se quitó de la ficha. Su correo tampoco recibe (no hay MX).
+  - Redes de la finca (FincaVAI / @fincavai). La marca de quesos y su WhatsApp de pedidos van en el texto.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
@@ -379,6 +382,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 
 | Pendiente | Quién |
 |---|---|
+| quesosvai.com (Finca VAI) muestra una página de estacionamiento desde el 14 nov 2026: si vuelve, reponer el `website` en la ficha | Datos |
 | Revisar las webs que no respondieron el 16 nov 2026: El Atorón, hotelplazatequis.com (4 lugares), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Si siguen caídas, quitar el `website` o la ficha | Datos |
 | Búsqueda de marcas antes de registrar el logo en el IMPI | Tú |
 | **Renovar el dominio** antes del 2 nov 2027 (conviene activar la renovación automática en Hostinger) | Tú |

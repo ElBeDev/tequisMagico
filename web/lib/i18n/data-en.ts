@@ -204,7 +204,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   'eba5f710-5769-5afa-b66c-80006c114be2': { // Finca VAI
     shortDescription: 'Family cheese ranch with tours',
-    fullDescription: 'Cheese ranch with a family history dating back to the 1920s, in Purísima de Cubos, in the municipality of Colón, half an hour from Tequis. The cheese tour goes through the livestock (cows, goats and sheep), the old factory and the aging cellar, and ends with a guided tasting; in November 2026 it cost MX$210 per person, and children under 4 went free. Small groups don’t need to book; groups of more than 10 do.',
+    fullDescription: 'Cheese ranch with a family history dating back to the 1920s, in Purísima de Cubos, in the municipality of Colón, half an hour from Tequis, open to visitors 365 days a year. The cheese tour goes through the livestock (cows, goats and sheep), the old factory and the aging cellar, and ends with a guided tasting; in November 2026 it cost MX$210 per person, and children under 4 went free. Small groups don’t need to book; groups of more than 10 do. Its cheeses are sold under the Quesos VAI brand, which takes orders by WhatsApp at 442 190 7618.',
   },
   'd020202d-8a87-58a6-b976-1d667512b13a': { // Bodegas De Cote
     shortDescription: 'Winery in the Bernal Valley',
