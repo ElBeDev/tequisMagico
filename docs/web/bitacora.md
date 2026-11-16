@@ -366,6 +366,10 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
   - Datos de sus cuentas: sus 3 tiendas en Tequis, sus quesos, y La Carreta, reabierta en dic 2025 como bar de quesos, vino y piano con música en vivo.
   - Dos fotos de producto, sin fotos del local porque no publica ninguna.
   - Redes y `content_verified`.
+- **La Mexicana Olé** (`database/databasefix_la_mexicana_ole_2026-11-16.sql`):
+  - La web pasa de su página de UENI (plantilla con fotos de banco) a su dominio propio, que está en construcción.
+  - Sus 4 sucursales; ahora también es restaurante (desayunos, café, pizzas, cortes).
+  - Instagram, Facebook (inactivo desde 2022), la fachada de Carrizal 4 como foto, y `content_verified`.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 

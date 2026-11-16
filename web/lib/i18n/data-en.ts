@@ -669,8 +669,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Cheese shop with five stores in downtown Tequis; the one at Ezequiel Montes 13 is across from the market, about 120 meters from the main square. It doesn’t make cheese: it selects more than 120 regional and imported cow, goat, sheep and buffalo cheeses, plus fresh cheeses and cold cuts, and you can taste them in its stores. The others are at Heroico Colegio Militar 5 (with parking), Morelos 4 (behind the parish church), Juárez 1 and Niños Héroes at the corner of Guillermo Prieto.',
   },
   '07891ab8-57e9-51dd-8835-d83715910fb2': { // Queserías La Mexicana Olé
-    shortDescription: 'Cheese shop with a wine cellar and three locations',
-    fullDescription: 'Cheese shop at Niños Héroes 42, about 600 meters from the main square, with cow, goat and sheep cheeses, dairy products, cold cuts, salsas, jams and a wine shop with regional and international wines. In November 2026 its page said it was open every day from 10 a.m. to 8 p.m. According to the town tourism office, it has two more locations: Carrizal 4, unit D, downtown, and Francisco Martínez Elías at the corner of Hidalgo, in the Barrio de la Magdalena.',
+    shortDescription: 'Gourmet cheese shop and wine bar, with breakfast and pairings',
+    fullDescription: 'A gourmet shop and wine bar with cow, goat and sheep cheeses, cold cuts, salsas, jams, craft beer and wines from the region and abroad. It started on Carrizal street, at number 4, downtown, where its first shop still sells to take away; it has another at Niños Héroes 42, about 600 meters from the main square, another in the Barrio de la Magdalena and one more in downtown Querétaro. Besides the shop, it serves breakfast, coffee, pizzas, pastas, steaks and cheese boards, and puts together cheese and wine pairings. In November 2026 its UENI page listed 10 AM to 8 PM every day, with cheeses from MX$80 and regional wines from MX$220.',
   },
   'af7165e4-5660-5be0-a6d3-8a173fe288c1': { // Casa del Artesano
     shortDescription: 'Town-run shop and gallery for Tequis crafts',
