@@ -373,6 +373,10 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Finca VAI** (`database/databasefix_finca_vai_2026-11-16.sql`):
   - Su web quesosvai.com se cayó el 14 nov 2026 y ahora es una página de estacionamiento de GoDaddy, así que se quitó de la ficha. Su correo tampoco recibe (no hay MX).
   - Redes de la finca (FincaVAI / @fincavai). La marca de quesos y su WhatsApp de pedidos van en el texto.
+- **Balneario La Vega** (`database/databasefix_balneario_la_vega_2026-11-16.sql`), primero de los balnearios:
+  - Su web es una plantilla a medias: "Galería", "Habitaciones" y "Campamento" dan 404, y el WhatsApp y los botones de redes son de relleno. Los datos nuevos salen de su Facebook oficial.
+  - Precios de sus carteles: entrada general $100 ($50 niños y adultos mayores con credencial), campamento $100, y habitaciones con entrada incluida desde $1,000 (2 personas), $1,400 (4) y $1,800 (6). No se permiten envases de vidrio ni mascotas.
+  - Una foto nueva (alberca, toboganes y jardín) de su Facebook, porque la web no tiene galería. No se agregó el correo (el dominio no recibe) ni el Instagram @balneariolavega (vacío, sin nada que lo ligue al negocio).
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 

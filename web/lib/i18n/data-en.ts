@@ -269,7 +269,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   'fb30e010-d760-5805-ac5b-e9da4570373d': { // Balneario La Vega
     shortDescription: 'Family water park with an Olympic pool, open every day',
-    fullDescription: 'Water park in the Barrio de La Magdalena, a few minutes from the main square, with an Olympic pool, waterslides and a wading pool; it’s open every day, 8 AM to 6 PM. Camping is allowed, and its website offers rooms and palapa or cabin rentals, without prices: ask by phone. In August 2026 admission was MX$100, and MX$50 for children under 12.',
+    fullDescription: 'Water park in the Barrio de La Magdalena, a few minutes from the main square, with an Olympic pool, waterslides, a wading pool and a large garden with palapas; it’s open every day, 8 AM to 6 PM. According to its 2025 and 2026 posters, general admission is MX$100, and MX$50 for children and seniors with ID; camping costs MX$100 per person. It also rents rooms with a private bathroom and park admission included: in February 2026, from MX$1,000 a night for two people, MX$1,400 for four and MX$1,800 for six. Glass containers and pets are not allowed.',
   },
   '66903af1-5db3-55fd-a72a-570eed274001': { // Hotel Río Tequisquiapan
     shortDescription: 'Hotel with pools and gardens, 400 m from the main square',
