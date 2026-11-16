@@ -172,7 +172,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   'a489a939-80e6-490e-982b-183785468864': { // Los Rosales Viñedos
     shortDescription: 'Winery over 40 years old, about 10 minutes from Tequis',
-    fullDescription: 'Winery over 40 years old, about 10 minutes from Tequis on the road to Ezequiel Montes, that has made its own wine since 2011. Its oldest vine, the “Salvador”, came from Bordeaux, and it produces 20,000 to 30,000 bottles a year. It offers guided tours with tastings and meals in the garden, but it has no website of its own and doesn’t publish hours or prices.',
+    fullDescription: 'Winery over 40 years old, about 10 minutes from Tequis on the road to Ezequiel Montes, that has made its own wine since 2011. Its oldest vine, the “Salvador”, came from Bordeaux, and it produces 20,000 to 30,000 bottles a year. It offers guided tours with tastings and meals in the garden. It has no website of its own and doesn’t publish hours or prices: book at 414 280 4939, the number on its Facebook and Instagram.',
   },
   '196ae5dd-edb2-4327-b060-331c51ffc58f': { // Puente Colgante México-Querétaro
     shortDescription: 'Historic bridge from 1910',
@@ -581,7 +581,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   '1d7fc20f-6fe1-55a2-b9d9-2acb315dcfef': { // Norte B
     shortDescription: 'Winery and brewery with tastings paired with cheese',
-    fullDescription: 'Winery and brewery at km 50 of state highway 200, in Fuentezuelas, the same kilometer as Cava Bocanegra. Its three experiences include a visit and a tasting with Bocanegra cheeses: in November 2026 the wine one (3 wines, 45 min) cost MX$450; the beer one (3 beers, 45 min), MX$390; and the combined one (2 wines and 2 beers, 75 min), MX$490. It doesn’t publish opening hours, so check before you go.',
+    fullDescription: 'Winery and brewery at km 50 of state highway 200, in Fuentezuelas, the same kilometer as Cava Bocanegra. Its three experiences include a visit and a tasting with Bocanegra cheeses: in November 2026 the wine one (3 wines, 45 min) cost MX$450; the beer one (3 beers, 45 min), MX$390; and the combined one (2 wines and 2 beers, 75 min), MX$490. It opens Monday, Thursday and Sunday from 11 AM to 6 PM, and Friday and Saturday from 11 AM to 9 PM; it is closed Tuesday and Wednesday. Book at 427 224 6790.',
   },
   'c40d2783-4b09-50ae-bb48-76cbfbf8f507': { // CR Vinos MX
     shortDescription: 'Winery with tours, picnics and the Cartinto House restaurant',
