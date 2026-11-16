@@ -633,8 +633,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Massage and wellness center in Plaza La Capilla, about 120 meters from Plaza Miguel Hidalgo, open since 2010. It offers a 70-minute therapeutic massage, individual and couples massages, hot stones, lymphatic drainage, reiki, energy alignment, Bach flower remedies, facials, wine therapy and chocolate therapy, and sells natural products such as bath salts, candles, incense and essential oils. There is meditation on Wednesdays at 9 AM. Appointments are booked by WhatsApp; for weekends, book ahead. It doesn’t publish prices.',
   },
   'fa22b682-d63a-5f1d-a9bd-7630eedb718a': { // Xantico Spa
-    shortDescription: 'Spa in downtown Tequis',
-    fullDescription: 'Spa at Camelinas 142, about 400 meters from the main square. It is listed in the town tourism directory and in INEGI’s DENUE business census. It has no website and doesn’t publish its services, hours or prices: call before you go.',
+    shortDescription: 'Spa with massages, facials and garden massages',
+    fullDescription: 'Spa in downtown Tequis, about 400 meters from the main square, offering relaxing and deep-tissue massages, hot stones, lymphatic drainage, facials, wine therapy, chocolate therapy, magnetic therapy, body-contouring treatments, manicures and pedicures. It has couples packages and a six-month membership, and offers outdoor massages in its garden. It doesn’t publish hours or prices: book by phone or WhatsApp.',
   },
   '5ac169d9-1f02-5784-a097-8de7024cb625': { // Hecho en Babu
     shortDescription: 'Recycled glass workshop and shop, with classes',

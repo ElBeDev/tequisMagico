@@ -274,6 +274,8 @@ Para negocios sin web propia. Una cuenta cuenta como oficial si su teléfono, di
 | Viña Magal | `vina-magal-tabla.jpg` | [Instagram @vinamagal, 19 oct 2026](https://www.instagram.com/p/DeribAyxTQx/) | Misma cuenta |
 | Yoot Masajes y Bienestar | `yoot-masajes-cabina.jpg` | [Facebook, 15 jul 2024](https://www.facebook.com/photo.php?fbid=908954097910610) (recortada para quitar dos logos) | Teléfonos 55 3727 1001 / 1020, iguales al DENUE y a Turismo; su Instagram @yoottequisquiapan da los mismos |
 | Yoot Masajes y Bienestar | `yoot-masajes-fachada.jpg` | [Facebook, 23 nov 2024](https://www.facebook.com/photo.php?fbid=1003306398475379) (recortada para quitar el marco y el texto) | Misma cuenta |
+| Xantico Spa | `xantico-spa-jardin.jpg` | [Facebook, 1 sep 2025](https://www.facebook.com/photo.php?fbid=1630734908292314) ("Experiencia Xantico spa Garden") | Su botón de WhatsApp marca 414 114 0271, el del directorio de Turismo; su Instagram @spaxantico da el mismo |
+| Xantico Spa | `xantico-spa-piedras.jpg` | [Facebook, 19 mar 2026](https://www.facebook.com/photo.php?fbid=1815437823155354) | Misma cuenta |
 | Balneario La Vega | `balneario-la-vega-albercas.jpg` | [Facebook, 20 may 2025](https://www.facebook.com/photo.php?fbid=122125243784819133) (también es su portada) | Teléfono 414 273 4534 y dirección iguales a su web, y enlaza a balneariolavega.mx. Tiene web, pero sin galería: "Galería" da 404 |
 
 ## Historial anterior

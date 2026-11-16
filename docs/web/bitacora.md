@@ -391,6 +391,9 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
   - Dirección corregida a Guillermo Prieto 3-A (Plaza La Capilla), la que da el propio negocio en todas sus cuentas, con el pin de Google Maps. Antes tenía Salvador Michaus 4 del DENUE.
   - Horario de su cartel fijado (19 oct 2026), servicios de sus carteles, Facebook e Instagram, y `content_verified`.
   - Fotos: sus publicaciones recientes son carteles con imágenes que parecen de IA, pero en las de 2024 hay fotos reales del local con marco o logos. Se usan dos (cabina y fachada), recortadas (`database/databasefix_yoot_fotos_2026-11-16.sql`).
+- **Xantico Spa** (`database/databasefix_xantico_2026-11-16.sql`):
+  - La ficha era mínima (solo DENUE y Turismo). Su Facebook e Instagram confirman el teléfono y dan la dirección real: Ezequiel Montes 142, interior 13 (el DENUE decía Camelinas 142). Pin de Google Maps.
+  - Servicios de sus cuentas, masaje en su jardín, dos fotos reales (jardín y piedras calientes), redes y `content_verified`. No publica horario ni precios vigentes.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
@@ -401,7 +404,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 | Pendiente | Quién |
 |---|---|
 | quesosvai.com (Finca VAI) muestra una página de estacionamiento desde el 14 nov 2026: si vuelve, reponer el `website` en la ficha | Datos |
-| Foto genérica de los spas y temazcales sin foto propia (Xantico Spa, Temazcal Tonatiu Iquzayampa, Temazcal Tres Marías, Casa Gayatri): hoy es "Cata de quesos y vino", la genérica de experiencias. Buscar una de Commons de masaje o temazcal | Datos |
+| Foto genérica de los spas y temazcales sin foto propia (Temazcal Tonatiu Iquzayampa, Temazcal Tres Marías, Casa Gayatri): hoy es "Cata de quesos y vino", la genérica de experiencias. Buscar una de Commons de masaje o temazcal | Datos |
 | Revisar las webs que no respondieron el 16 nov 2026: El Atorón, hotelplazatequis.com (4 lugares), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Si siguen caídas, quitar el `website` o la ficha | Datos |
 | Búsqueda de marcas antes de registrar el logo en el IMPI | Tú |
 | **Renovar el dominio** antes del 2 nov 2027 (conviene activar la renovación automática en Hostinger) | Tú |
