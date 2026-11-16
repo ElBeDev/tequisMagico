@@ -172,7 +172,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   'a489a939-80e6-490e-982b-183785468864': { // Los Rosales Viñedos
     shortDescription: 'Winery over 40 years old, about 10 minutes from Tequis',
-    fullDescription: 'Winery over 40 years old, about 10 minutes from Tequis on the road to Ezequiel Montes, that has made its own wine since 2011. Its oldest vine, the “Salvador”, came from Bordeaux, and it produces 20,000 to 30,000 bottles a year. It offers guided tours with tastings and meals in the garden. It has no website of its own and doesn’t publish hours or prices: book at 414 280 4939, the number on its Facebook and Instagram.',
+    fullDescription: 'Winery over 40 years old, about 10 minutes from Tequis on the road to Ezequiel Montes, that has made its own wine since 2011. Its oldest vine, the “Salvador”, came from Bordeaux, and it produces 20,000 to 30,000 bottles a year. It offers guided tours with tastings and meals in the garden. It has no website of its own and doesn’t publish prices. Its Facebook page lists 9 AM to 6 PM (from 10 AM on Mondays and until 7 PM on weekends), but those hours haven’t been updated in years: check at 414 280 4939, the number on its Facebook and Instagram.',
   },
   '196ae5dd-edb2-4327-b060-331c51ffc58f': { // Puente Colgante México-Querétaro
     shortDescription: 'Historic bridge from 1910',
@@ -589,7 +589,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   'db521ef0-c335-5e8b-b174-74c1ad10289f': { // Viñedo La Revuelta
     shortDescription: 'Winery with the Gran Reserva restaurant and tasting menus',
-    fullDescription: 'Winery in the Fuentezuelas ejido, entered from km 50 of state highway 200, behind Cava Bocanegra; it has a cellar, a shop and the Gran Reserva restaurant. The restaurant serves 5-, 7- and 10-course tasting menus of Mexican, Spanish and Veracruz cooking, with wine pairings; its main wine, La Resistencia, is a Merlot and Cabernet Sauvignon aged 18 months in barrels. Bookings are by WhatsApp, for tables of 4 to 6 people, paid in advance. It doesn’t publish hours or prices.',
+    fullDescription: 'Winery in the Fuentezuelas ejido, entered from km 50 of state highway 200, behind Cava Bocanegra; it has a cellar, a shop and the Gran Reserva restaurant. The restaurant serves 5-, 7- and 10-course tasting menus of Mexican, Spanish and Veracruz cooking, with wine pairings; its main wine, La Resistencia, is a Merlot and Cabernet Sauvignon aged 18 months in barrels. Bookings are by WhatsApp, for tables of 4 to 6 people, paid in advance. It opens every day from 7:30 AM (8 AM on Sundays) and closes between 9:30 and 11 PM, according to its Facebook page. It doesn’t publish prices.',
   },
   'fe390085-9e2e-5ebc-a209-2738cc83206e': { // Viajes y Enoturismo
     shortDescription: 'Winery and cheese tours with transportation from downtown',

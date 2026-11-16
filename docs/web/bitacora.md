@@ -348,6 +348,12 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - Se cargaron 39 más, de los lugares con web propia: se tomaron de los enlaces de su propia web y se revisaron a mano (`database/databasefix_redes_webs_2026-11-16.sql`). En total, 43.
 - Viñedos que faltaban (`database/databasefix_redes_vinedos_2026-11-16.sql`): el Facebook de La Revuelta, Norte B (con su horario actual, de sus bios) y Los Rosales, cuyas cuentas dan el teléfono 414 280 4939 y el km 27. Eso resuelve la dirección en conflicto, y la ficha pasó a `content_verified`. Ya todos los viñedos tienen Instagram y Facebook.
 - **Norte B** (`database/databasefix_norte_b_2026-11-16.sql`): sus vinos (familias Bicharraco y Corre Que Te Pillo), sus cinco cervezas con nombre en hñähñu, las experiencias Japi, Binu y Zote con precio, cuatro fotos de su web en lugar de la tira panorámica, y `content_verified`.
+- **Revisión final de los 12 viñedos** (`database/databasefix_vinedos_revision_2026-11-16.sql`):
+  - Fotos, contacto, mapa y horario revisados contra sus webs y cuentas; todas las webs responden.
+  - Freixenet: cambian la foto de la cabalgata y la tira panorámica por el túnel de la cava y la cata.
+  - La Revuelta pasa a `content_verified`, con su horario reciente de Facebook.
+  - Los Rosales: correo, y su horario de Facebook con aviso porque es viejo.
+  - Norte B: pin oficial.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
 ---
