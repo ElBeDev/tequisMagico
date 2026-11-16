@@ -382,6 +382,11 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
   - Pin real, de su enlace de Google Maps: el anterior era aproximado e idéntico al de Termas del Rey.
   - Facebook ElOasisTx e Instagram @eloasistequisquiapan. Su Instagram enlaza a eloasistequisquiapan.com.mx, que no está registrado.
   - Dos fotos más de la galería de su web (Tierra de la Fantasía y campamento).
+- **Termas del Rey** (`database/databasefix_termas_del_rey_2026-11-16.sql`):
+  - Teléfono resuelto: su Facebook y el texto de su web dan el 441 277 1525; el 442 de su botón de llamar es una errata. Ya cuenta como `content_verified`. WhatsApp nuevo de su Facebook.
+  - Horario: su Facebook fijó el 17 sep 2026 "sábados y domingos de 9 a 18 h" (su web sigue diciendo viernes a domingo). La ficha pide confirmar fuera del verano.
+  - Pin real, del mapa de su página de Contacto. Era el mismo aproximado que tenía El Oasis.
+  - Una foto más de su web (Castillo del Rey). Su galería tiene texto encima de cada foto y hay imágenes hechas con Gemini.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
@@ -392,7 +397,6 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 | Pendiente | Quién |
 |---|---|
 | quesosvai.com (Finca VAI) muestra una página de estacionamiento desde el 14 nov 2026: si vuelve, reponer el `website` en la ficha | Datos |
-| Pin de Termas del Rey: sigue aproximado (km 10), el mismo que tenía El Oasis antes de corregirlo | Datos |
 | Revisar las webs que no respondieron el 16 nov 2026: El Atorón, hotelplazatequis.com (4 lugares), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Si siguen caídas, quitar el `website` o la ficha | Datos |
 | Búsqueda de marcas antes de registrar el logo en el IMPI | Tú |
 | **Renovar el dominio** antes del 2 nov 2027 (conviene activar la renovación automática en Hostinger) | Tú |

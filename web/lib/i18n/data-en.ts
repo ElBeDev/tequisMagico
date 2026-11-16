@@ -232,7 +232,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   'edf8fd31-93ef-5673-8ad5-7341d6fae02d': { // Termas del Rey
     shortDescription: 'Water park with a wave pool and waterslides',
-    fullDescription: 'Water park 10 minutes from Tequis, at km 10 of the road to Ezequiel Montes, with waterslides, a wave pool, wading pools, a diving pit, lakes and palapas. It has a camping area with tent and grill rental, and a VIP area at an extra cost that you book ahead. In November 2026 it was open Friday to Sunday, 9 AM to 6 PM, and admission was MX$199 for adults and MX$125 for children (MX$340 and MX$290 with camping). It advertises discounts for seniors, students, teachers, groups, birthdays and people with disabilities.',
+    fullDescription: 'Water park with four decades of history, 10 minutes from Tequis at km 10 of the road to Ezequiel Montes, with waterslides, a wave pool, wading pools, a diving pit, lakes, a volleyball court, a mini-market and a snack bar. It has palapas, restrooms with hot water, a camping area with tent and grill rental, and a VIP area at an extra cost (changing rooms, tables, chairs, a grill and coolers) that you book ahead. According to its website, admission at the ticket office is MX$199 for adults and MX$125 for children (MX$340 and MX$290 with camping), with 15% off when you buy online, and there are discounts for seniors, students, teachers, groups, birthdays and people with disabilities. Since September 2026 it has been open Saturdays and Sundays, 9 AM to 6 PM; outside summer, confirm by WhatsApp before you go.',
   },
   'cd0b0544-2f71-57d2-b0ca-ecd842577b63': { // El Maravillas
     shortDescription: 'Creative Mexican food with a terrace facing the parish church',

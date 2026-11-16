@@ -87,6 +87,7 @@ Misma regla y mismo destino (`/srv/tequis/uploads/lugares/`), aplicadas con `dat
 | Vinícola San Juanito | `san-juanito-cosecha.jpg` | [www.sanjuanito.com.mx](https://www.sanjuanito.com.mx) | [original](https://www.sanjuanito.com.mx/wp-content/uploads/2024/09/Uva-cosecha.webp) |
 | Termas del Rey | `termas-del-rey-campamento.jpg` | [www.termasdelrey.com](https://www.termasdelrey.com) | [original](https://irp.cdn-website.com/32521487/dms3rep/multi/opt/camp-1920w.jpg) |
 | Termas del Rey | `termas-del-rey-isla.jpg` | [www.termasdelrey.com](https://www.termasdelrey.com) | [original](https://irp.cdn-website.com/32521487/dms3rep/multi/opt/La+Isla-1920w.jpg) |
+| Termas del Rey | `termas-del-rey-castillo.jpg` | [www.termasdelrey.com](https://www.termasdelrey.com) (agregada el 16 nov 2026) | [original](https://irp.cdn-website.com/32521487/dms3rep/multi/IMG_4449.jpg) |
 
 ⚠️ **Permisos**: igual que las anteriores, sin autorización escrita del negocio.
 
