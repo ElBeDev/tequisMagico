@@ -630,7 +630,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   'bd03c95d-85f2-512b-9b53-7e96af294b72': { // Yoot Masajes y Bienestar
     shortDescription: 'Massages, facials and therapies steps from the main square',
-    fullDescription: 'Massage center about 100 meters from the main square. According to the town tourism directory, it offers massages (holistic, Ayurvedic, Swedish and hot stone), reflexology, lymphatic drainage, facials, reiki and a holistic shop, with single and double rooms and home service. INEGI’s DENUE business census lists it at Salvador Michaus 4 and Morelos Norte 5. It has no website and doesn’t publish prices.',
+    fullDescription: 'Massage and wellness center in Plaza La Capilla, about 120 meters from Plaza Miguel Hidalgo, open since 2010. It offers a 70-minute therapeutic massage, individual and couples massages, hot stones, lymphatic drainage, reiki, energy alignment, Bach flower remedies, facials, wine therapy and chocolate therapy, and sells natural products such as bath salts, candles, incense and essential oils. There is meditation on Wednesdays at 9 AM. Appointments are booked by WhatsApp; for weekends, book ahead. It doesn’t publish prices.',
   },
   'fa22b682-d63a-5f1d-a9bd-7630eedb718a': { // Xantico Spa
     shortDescription: 'Spa in downtown Tequis',
