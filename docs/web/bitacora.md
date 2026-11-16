@@ -398,6 +398,10 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
   - Su página del spa dice "abierto a todo público": la ficha ya no da a entender que es solo para huéspedes. Tratamientos de agave, rituales y temazcal; la lista de precios de su web es de 2018-19 y no se usa.
   - Dos fotos más de su web (temazcal y sauna) y `content_verified`.
 - **Spa Studio 7** dado de baja (`is_active = false`, `database/databasefix_spa_studio_7_2026-11-16.sql`). Es el spa del Hotel San Carlos, que sigue con su ficha. Su URL da 404, como la de cualquier lugar dado de baja.
+- **Temazcal Tonatiu Iquzayampa** (`database/databasefix_temazcal_tonatiu_2026-11-16.sql`):
+  - Tiene web en Google Sites (la vieja en negocio.site daba 404) con menú y "precios vigentes a diciembre 2026": paquetes de temazcal, extras (barro, tinas de hierbas, vino y hielo, masajes) y una habitación. Facebook e Instagram oficiales.
+  - Cuatro fotos de su web (interior del temazcal, fuego, hierbas, vapor), pin de su enlace de Google Maps y `content_verified`.
+  - Las imágenes de Google Sites solo se descargan con sesión; Chrome bloquea varias descargas seguidas en el mismo sitio, así que se juntaron en una sola imagen y se separaron después.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
@@ -408,7 +412,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 | Pendiente | Quién |
 |---|---|
 | quesosvai.com (Finca VAI) muestra una página de estacionamiento desde el 14 nov 2026: si vuelve, reponer el `website` en la ficha | Datos |
-| Foto genérica de los spas y temazcales sin foto propia (Temazcal Tonatiu Iquzayampa, Temazcal Tres Marías, Casa Gayatri): hoy es "Cata de quesos y vino", la genérica de experiencias. Buscar una de Commons de masaje o temazcal | Datos |
+| Foto genérica de los spas y temazcales sin foto propia (Temazcal Tres Marías, Casa Gayatri): hoy es "Cata de quesos y vino", la genérica de experiencias. Buscar una de Commons de masaje o temazcal | Datos |
 | Revisar las webs que no respondieron el 16 nov 2026: El Atorón, hotelplazatequis.com (4 lugares), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Si siguen caídas, quitar el `website` o la ficha | Datos |
 | Búsqueda de marcas antes de registrar el logo en el IMPI | Tú |
 | **Renovar el dominio** antes del 2 nov 2027 (conviene activar la renovación automática en Hostinger) | Tú |

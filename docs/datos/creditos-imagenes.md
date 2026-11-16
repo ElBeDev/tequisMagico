@@ -257,6 +257,17 @@ Cuatro fotos de [norteb.mx](https://norteb.mx/) que sustituyen la tira panorámi
 | Norte B | `norte-b-cata-vino.jpg` | [norteb.mx/experiencias](https://norteb.mx/experiencias/) | [original](https://norteb.mx/wp-content/uploads/2022/11/binu-03.jpg) |
 | Norte B | `norte-b-quesos.jpg` | [norteb.mx/experiencias](https://norteb.mx/experiencias/) | [original](https://norteb.mx/wp-content/uploads/2022/11/zote-02.jpg) |
 
+## Temazcal Tonatiu Iquzayampa (16 nov 2026)
+
+De su web propia, [sites.google.com/view/temazcaltonatiuiquzayampa](https://sites.google.com/view/temazcaltonatiuiquzayampa) (portada). Google Sites solo sirve las imágenes con sesión iniciada, así que no hay enlace directo al original.
+
+| Archivo | Qué es |
+|---|---|
+| `temazcal-tonatiu-interior.jpg` | Interior del temazcal (fondo de la cabecera), 1280×853 |
+| `temazcal-tonatiu-fuego.jpg` | Piedra al rojo en olla de barro ("Fuego") |
+| `temazcal-tonatiu-hierbas.jpg` | Hierbas y piedras ("Plantas") |
+| `temazcal-tonatiu-vapor.jpg` | Vapor dentro del temazcal |
+
 ## Fotos de cuentas oficiales en redes (16 nov 2026)
 
 Para negocios sin web propia. Una cuenta cuenta como oficial si su teléfono, dirección o web coinciden con los del negocio. Se descartan las imágenes que Facebook o Instagram marcan como "Contenido generado con IA", los carteles, las de banco y aquellas donde el protagonista es un cliente. Sin permiso escrito todavía, igual que las de webs propias.

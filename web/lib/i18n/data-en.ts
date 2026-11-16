@@ -612,8 +612,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Tour agency at Niños Héroes 42, about 300 meters from the main square. According to the town tourism directory, it specializes in the Cheese and Wine Route through Querétaro’s wineries, and it also goes to the Sierra Gorda, the opal mines and hot air balloon flights. It is listed in INEGI’s DENUE business census. Its website couldn’t be opened and it doesn’t publish schedules or prices: ask when you book.',
   },
   'c4061a09-3138-5fce-897d-668bc2d1d791': { // Temazcal Tonatiu Iquzayampa
-    shortDescription: 'Traditional temazcal sweat lodge in Fuentezuelas, by reservation',
-    fullDescription: 'Temazcal in the community of Fuentezuelas, about 10 km from downtown. According to the state tourism board, the session starts with a talk by the guide, José Antonio “Don Toño”, continues with a welcome meal and the steam bath, with hill and river stones heated without gas and herbal infusions, and ends with tea and a guided meditation. Bring a towel, sandals and a swimsuit, and book ahead. It doesn’t publish hours or prices.',
+    shortDescription: 'Traditional temazcal with mud, soaking tubs and pre-Hispanic food',
+    fullDescription: 'Traditional temazcal (sweat lodge) in the community of Fuentezuelas, about 10 km from downtown. Experiences start with a talk and artisanal tea, continue with the steam bath with herbs and fire-heated stones, and can add a mud treatment, a massage, herbal, red wine or ice tubs, and pre-Hispanic food made with organic local ingredients. According to its menu (prices valid through December 2026), a 2-hour temazcal session costs MX$3,300 for 1 to 3 people or MX$950 per person from 4, and 3- to 5-hour packages run from MX$1,500 to MX$3,250 per person for groups of 4 or more. It has one room, Izcalli, with a queen bed and a tub for two, at MX$3,000 a night for one or two people. Book by WhatsApp; bring a towel, sandals and a swimsuit.',
   },
   'f7ca279f-386e-51a8-96eb-db5c93407f5f': { // Temazcal Tres Marías
     shortDescription: 'Temazcal with massage and exfoliation, near Bordo Blanco',
