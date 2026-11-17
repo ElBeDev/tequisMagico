@@ -848,8 +848,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A restaurant and bar on federal highway 120, in Hacienda Grande, a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   '8d3e175a-5c6a-566a-a207-e368fc3fa0de': { // Quekas TX
-    shortDescription: 'Mexican snacks on 5 de Mayo street, two blocks from the square',
-    fullDescription: 'Mexican antojitos on 5 de Mayo street, about 210 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Stew-filled quesadillas, gorditas and breakfast, two blocks from the square',
+    fullDescription: 'A small eatery at 5 de Mayo 20, about 210 meters from Plaza Miguel Hidalgo, known for quesadillas filled with traditional stews. It also makes gorditas, sopes, huaraches and breakfasts with eggs, chilaquiles and coffee. Free delivery downtown, or order to go. It doesn’t publish hours or prices: check before you go.',
   },
   'f94d63d0-10d8-5b6c-9c56-c12134f4fa56': { // Bucaneros Mariscos
     shortDescription: 'Sinaloa-style seafood, across from the Parador Artesanal',
