@@ -732,8 +732,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A restaurant on Avenida Juárez Poniente, about 280 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   '33592d4d-57f6-5c63-a471-e733acd632ea': { // La Quercia Ristorante
-    shortDescription: 'Italian restaurant a block from the square',
-    fullDescription: 'A restaurant on Niños Héroes street, about 70 meters from Plaza Miguel Hidalgo; going by its name, it serves Italian food. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Italian pasta and pizza a block from the main square',
+    fullDescription: 'Italian restaurant at Niños Héroes 4, about 70 meters from Plaza Miguel Hidalgo, with an arched dining room and tablecloths. It makes pasta such as penne all’amatriciana, pizzas, risotto, antipasti and salads, with tiramisu for dessert and a wine list. It’s open Wednesday to Monday, 2 to 8 PM; closed on Tuesdays. It takes reservations and delivers.',
   },
   'c14f7db9-0727-51c2-b58f-89c39f7b571d': { // Mágico Tequis
     shortDescription: 'Restaurant, café and bar on Juárez Poniente, next to the square',
