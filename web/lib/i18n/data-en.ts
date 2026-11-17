@@ -851,10 +851,6 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Mexican snacks on 5 de Mayo street, two blocks from the square',
     fullDescription: 'Mexican antojitos on 5 de Mayo street, about 210 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
-  'a955962a-80e0-539e-b886-0572b0db9263': { // Sr. Sol
-    shortDescription: 'Tacos and tortas in the Vista Hermosa neighborhood',
-    fullDescription: 'A taco and torta restaurant in the Vista Hermosa neighborhood, about 900 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
-  },
   'f94d63d0-10d8-5b6c-9c56-c12134f4fa56': { // Bucaneros Mariscos
     shortDescription: 'Sinaloa-style seafood, across from the Parador Artesanal',
     fullDescription: 'Family seafood restaurant with a Sinaloa-style kitchen at the Andador Vista Hermosa, on federal highway 120 across from the Parador Artesanal, a kilometer from Plaza Miguel Hidalgo. It makes aguachiles, ceviches, tostadas, seafood cocktails and fish to order, and has outdoor tables. It also does takeout: order at 414 121 8698. It doesn’t publish hours or prices: check before you go.',

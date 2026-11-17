@@ -420,6 +420,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **La Ranchería** (`database/databasefix_la_rancheria_2026-11-16.sql`): su Facebook la confirma; pasa a Parrilla (carnes al carbón y cortes), con desayunos de fin de semana, área de juegos, tres fotos reales y `content_verified`. No publica horario ni precios.
 - **Portal del Cabrito** (`database/databasefix_portal_del_cabrito_2026-11-16.sql`): tiene web propia (cabrito.mx) con menú y precios, horario diario de 13 a 19 h, teléfono y WhatsApp nuevos, redes, cuatro fotos y `content_verified`. El teléfono del directorio de Turismo no aparece en su web.
 - **Bucaneros Mariscos** (`database/databasefix_bucaneros_2026-11-16.sql`): su Facebook resuelve los tres teléfonos (442 391 0412, y 414 121 8698 para pedidos) y la dirección (Andador Vista Hermosa, frente al Parador Artesanal); una foto real y `content_verified`.
+- **Sr. Sol** dado de baja (`database/databasefix_sr_sol_cerrado_2026-11-16.sql`): dejó de publicar como Sr. Sol en 2024 y su página se convirtió en Ramenzilla, un ramen a domicilio en la Ciudad de México con el mismo WhatsApp.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
