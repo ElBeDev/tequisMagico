@@ -588,7 +588,7 @@ export const PLACES_EN: Record<string, PlaceEn> = {
   },
   'fe390085-9e2e-5ebc-a209-2738cc83206e': { // Viajes y Enoturismo
     shortDescription: 'Winery and cheese tours with transportation from downtown',
-    fullDescription: 'Downtown Tequis agency that runs tours of the Art, Cheese and Wine Route, with round-trip transportation from its office at Juárez 16 Poniente. Tours leave every day for groups of 2 or more and, depending on the tour, visit places such as Cava Bocanegra, Bodegas De Cote, Freixenet, Viñedos Azteca and the La Biquette cheese maker. In November 2026 its website still showed 2025 prices: MX$1,300 to MX$1,980 per adult. Book by WhatsApp with a 30% deposit.',
+    fullDescription: 'Downtown Tequis agency that presents itself as the creator of the Querétaro Cheese and Wine Route, in 2007. It runs tours of the Art, Cheese and Wine Route with round-trip transportation from its office at Juárez 16 Poniente; they leave every day with at least 2 people and, depending on the tour, visit places such as Cava Bocanegra, Bodegas De Cote, Freixenet, Viñedos Azteca and La Biquette cheese makers, or add Bernal or a trolley ride through the vineyards. It also goes to the El Redentor mine in La Trinidad to look for opals (4.5 hours). In November 2026 its website still showed 2025 prices: MX$1,300 to MX$1,980 per adult. Book by WhatsApp with a 30% deposit. It has a gourmet products shop at Andador Juárez 5 (9 AM to 7 PM) and a one-room hotel a block from the main square.',
   },
   'b7a72d9a-a81a-56ac-80bc-c0626f290ab1': { // Viña Magal
     shortDescription: 'Family vineyard with a terrace facing the vines and small-batch wine',
