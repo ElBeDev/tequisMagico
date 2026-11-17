@@ -864,8 +864,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A seafood restaurant in the Adolfo López Mateos neighborhood, a little over a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   'f7f8da15-410d-580e-a479-b5f096b49f49': { // Delicias del Mar
-    shortDescription: 'Seafood restaurant on highway 120, in Hacienda Grande',
-    fullDescription: 'A seafood restaurant on federal highway 120, in the Hacienda Grande area, a little over a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Family seafood restaurant with cocktails, fish fillets and shrimp',
+    fullDescription: 'Family seafood restaurant on federal highway 120, in the Hacienda Grande area, a little over a kilometer from Plaza Miguel Hidalgo, that boasts 30 years of experience. According to its September 2026 menu, tostadas cost MX$63 to MX$79, seafood cocktails MX$110 to MX$190, fish fillets MX$170 to MX$200, shrimp dishes MX$225 to MX$250 and soups MX$145 to MX$195; house specialties include a seafood tower (MX$495), a surf-and-turf molcajete (MX$550) and a seafood platter for three (MX$850). It doesn’t take American Express or split orders. It takes orders by WhatsApp.',
   },
   '40baa5fe-ff76-5701-8ba2-c1cc5bc6f825': { // Birria Los Compadres
     shortDescription: 'Birria on the road to San Juan del Río, in Bordo Blanco',
