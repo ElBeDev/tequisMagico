@@ -1023,7 +1023,7 @@ export const GUIDES_EN: Guide[] = [
         id: 'bebidas',
         title: 'Pulque and beer',
         paragraphs: [
-          'To drink, the town recommends pulque, a prickly-pear curado (curado de tuna) or an atole of seasonal fruit. La Jauría, a neo-pulquería in Plaza Los Arcos, across from Parque La Pila, serves pulque from the region, curados and cocktails, and has board games.',
+          'To drink, the town recommends pulque, a prickly-pear curado (curado de tuna) or an atole of seasonal fruit.',
           'For craft beer, Bacha & Co, on 20 de Noviembre street, pairs its Arabic-dough pizza with more than 40 Mexican craft beers, and Ranchito TX, on the road to Querétaro, serves cecina with craft beer next to its farm. Wine has its own [wineries and cheese guide](/en/guides/wineries-and-cheese).',
         ],
       },
@@ -1068,7 +1068,6 @@ export const GUIDES_EN: Guide[] = [
       { label: 'tequis.travel: Cheese', url: TT('quesos_tequisquiapan') },
       { label: 'tequis.travel: Must-sees (Ranchito TX, Nuestra Rompopería)', url: TT('imperdibles_tequisquiapan') },
       { label: 'tequis.travel: Restaurants and cafés', url: TT('restaurantes_tequisquiapan') },
-      { label: 'tequis.travel: La Jauría', url: TT('la_jauria_tequisquiapan') },
       { label: 'queretaro.travel: Tequisquiapan', url: 'https://queretaro.travel/lugares/tequisquiapan/?lang=en' },
       { label: 'Food & Pleasure: towns to eat in Querétaro (April 2024)', url: 'https://foodandpleasure.com/pueblos-para-comer-en-queretaro/' },
       { label: 'BBVA Pueblos Mágicos: Tequisquiapan', url: 'https://www.bbva.mx/pueblos-magicos/estados/Queretaro/tequisquiapan.html' },

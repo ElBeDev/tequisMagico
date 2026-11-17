@@ -799,10 +799,6 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Sala Vivé by Freixenet wine bar, a block from the square',
     fullDescription: 'The wine bar of Sala Vivé, Freixenet de México’s winery in Ezequiel Montes, at Juárez 4C, about 70 meters from Plaza Miguel Hidalgo. It pours its own sparkling and still wines by the glass (Sala Vivé, Viña Dolores, Petillant and Vivante), wine cocktails and Spanish and Italian bottles, with tapas and boards of regional cheeses and cold cuts. It has sommeliers, a wine of the month and a monthly three-wine tasting, sidewalk tables and a rooftop terrace. Check the hours before you go.',
   },
-  'a708db5a-909c-5bd5-9508-2541076268fe': { // La Jauría
-    shortDescription: 'Neo-pulquería with curados and board games, across from Parque La Pila',
-    fullDescription: 'A modern pulque bar in Plaza Los Arcos, across from Parque La Pila, about 400 meters from Plaza Miguel Hidalgo. It serves pulque from the Querétaro region, curados (flavored pulque) and pulque cocktails. According to its tourism office listing, it has board games, welcomes pets and hosts cultural events. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
-  },
   '37597543-1d00-5b62-a2c7-908992e46718': { // Alita Mía
     shortDescription: 'Chicken wings on the road to San Juan del Río',
     fullDescription: 'A chicken wings bar on federal highway 120, in the El Pedregal neighborhood, about 900 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',

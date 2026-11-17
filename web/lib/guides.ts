@@ -1057,7 +1057,7 @@ export const GUIDES: Guide[] = [
         id: 'bebidas',
         title: 'Pulque y cerveza',
         paragraphs: [
-          'Para beber, el municipio recomienda pulque, curado de tuna o un atole de frutas de temporada. La Jauría, una neopulquería en la Plaza Los Arcos, frente al Parque La Pila, sirve pulque de la región, curados y coctelería, y tiene juegos de mesa.',
+          'Para beber, el municipio recomienda pulque, curado de tuna o un atole de frutas de temporada.',
           'Para cerveza artesanal, Bacha & Co, en la calle 20 de Noviembre, acompaña su pizza de masa árabe con más de 40 cervezas artesanales mexicanas, y el Ranchito TX, sobre la carretera a Querétaro, sirve cecina con cerveza artesanal junto a su granja. El vino tiene su propia [guía de viñedos y queserías](/guias/vinedos-y-quesos).',
         ],
       },
@@ -1102,7 +1102,6 @@ export const GUIDES: Guide[] = [
       { label: 'tequis.travel: Quesos', url: TT('quesos_tequisquiapan') },
       { label: 'tequis.travel: Imperdibles (Ranchito TX, Nuestra Rompopería)', url: TT('imperdibles_tequisquiapan') },
       { label: 'tequis.travel: Restaurantes y cafeterías', url: TT('restaurantes_tequisquiapan') },
-      { label: 'tequis.travel: La Jauría', url: TT('la_jauria_tequisquiapan') },
       { label: 'queretaro.travel: Tequisquiapan', url: 'https://queretaro.travel/lugares/tequisquiapan/?lang=en' },
       { label: 'Food & Pleasure: pueblos para comer en Querétaro (abril 2024)', url: 'https://foodandpleasure.com/pueblos-para-comer-en-queretaro/' },
       { label: 'BBVA Pueblos Mágicos: Tequisquiapan', url: 'https://www.bbva.mx/pueblos-magicos/estados/Queretaro/tequisquiapan.html' },
