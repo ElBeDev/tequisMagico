@@ -824,8 +824,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Gorditas and traditional Querétaro food on Juárez Poniente, about 600 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   '9f7c6f4b-7ba2-5e57-8dd5-bd2240660c95': { // La Antigua
-    shortDescription: 'Restaurant on the road to San Juan del Río',
-    fullDescription: 'A restaurant on federal highway 120, in the Adolfo López Mateos neighborhood, about 770 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Family restaurant with a terrace on highway 120',
+    fullDescription: 'Family restaurant on federal highway 120, at km 21.5, in the Adolfo López Mateos neighborhood, about 770 meters from Plaza Miguel Hidalgo. It has a large dining room and a terrace for watching the sunset, and opens at 8 AM with breakfast; it also serves club sandwiches, melted cheese with chistorra and mixed drinks. It doesn’t publish full hours or prices: check before you go.',
   },
   'f45cea0b-b303-5a75-9090-975e85c3a0b6': { // Estación 31
     shortDescription: 'Restaurant on Ezequiel Montes, toward Parque La Pila',

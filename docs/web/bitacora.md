@@ -427,6 +427,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Camino a Bremen** (`database/databasefix_camino_a_bremen_2026-11-16.sql`): pasa a Pizzería (pizza al horno de leña, pasta fresca, pan artesanal); sus cuentas resuelven el teléfono (414 273 4113), desayuno de cochinita los fines de semana, tres fotos y `content_verified`.
 - **La Gallera** (`database/databasefix_la_gallera_2026-11-16.sql`): tiene web propia (lagallera.com.mx) con menú y precios actualizados en mar 2026; horario de 12 a 23 h, servicios, redes y `content_verified`. Las fotos de su web son recortes montados con logo; se usan dos de su Facebook (fachada de noche y guacamole, recortada) (`database/databasefix_la_gallera_fotos_2026-11-16.sql`).
 - **Las Vegas Welcome Fast Food** dado de baja (`database/databasefix_las_vegas_welcome_2026-11-16.sql`) a petición del dueño del sitio.
+- **La Antigua** (`database/databasefix_la_antigua_2026-11-16.sql`): su Facebook la confirma (teléfono en su letrero); terraza, desayunos desde las 8 h, tres fotos reales y `content_verified`. No publica horario completo ni precios.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
