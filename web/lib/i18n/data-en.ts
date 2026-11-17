@@ -788,8 +788,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A coffee shop in Plaza Los Arcos, across from Parque La Pila, about 400 meters from Plaza Miguel Hidalgo. According to its tourism office listing, the shopping arcade is pet friendly. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   'e8f75a71-26f5-5e60-9e5c-cd8ffd9323a3': { // Cafetería Laysu
-    shortDescription: 'Café and pastry shop on Avenida Niños Héroes',
-    fullDescription: 'A café on Avenida Niños Héroes, about 600 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Pastry shop, café and bistro on Niños Héroes avenue',
+    fullDescription: 'Pastry shop, café and bistro at Niños Héroes 43, unit 4, about 600 meters from Plaza Miguel Hidalgo, with house-made fine pastries: red velvet cake, Mississippi mud cake, banana, apple and German tarts, cheese with guava and chocolate mousse, plus espresso coffee; in season, pan de muerto. It’s open Tuesday to Saturday, 9 AM to 9:30 PM, and Sundays 9:30 AM to 8:30 PM; closed on Mondays.',
   },
   '155011ad-8777-59c9-a123-3881bc720414': { // Helados Rollato
     shortDescription: 'Rolled ice cream and bubble tea a block from the square',
