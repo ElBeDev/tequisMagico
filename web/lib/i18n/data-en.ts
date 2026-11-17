@@ -804,8 +804,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A chicken wings spot in the La Lagunita neighborhood, on the road to San Juan del Río, about 900 meters from Plaza Miguel Hidalgo. It serves wings and boneless bites with eleven sauces, from buffalo and mango habanero to tamarind-morita chile and hot parmesan, plus the Suprema chicken breast burger, fries, onion rings, cheese sticks and sharing packs; for dessert, cajeta flan. It’s open Wednesday to Sunday, 2 to 9 PM; orders are by WhatsApp only (414 107 8338), and delivery costs extra.',
   },
   '7e382f7c-268d-540b-8889-74a1ced705aa': { // El Carbonero
-    shortDescription: 'Land, sea and wood-fire cooking, with a garden and fire pit',
-    fullDescription: 'A restaurant cooking meat, seafood and dishes over a wood fire, on Ezequiel Montes street about 380 meters from Plaza Miguel Hidalgo. According to its tourism office listing, it has a garden, an indoor room, a fire pit, screens for sports and live music on special dates, and describes itself as family- and pet-friendly. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Steaks, seafood and wood-fire cooking in a garden with a play area',
+    fullDescription: 'A restaurant of land, sea and wood-fire cooking at Ezequiel Montes 140, about 380 meters from Plaza Miguel Hidalgo, with tables in a garden under the trees. It serves steaks such as rib eye and arrachera (skirt steak), seafood and aguachile, burgers and seasonal dishes, with wine and beer; on Saturdays and Sundays, 9 AM to noon, there’s a breakfast buffet. It has a kids’ play area, welcomes pets, shows sports games and has live music some weekends; it also hosts holiday parties and private events. Reservations at 414 107 8866. Check the hours before you go.',
   },
   'f0b00918-f14b-54b4-b73b-bfab4434e882': { // Cuatro Barrios Bistró Kitchen
     shortDescription: 'Home-style bistro for breakfast and lunch, across from Parque La Pila',
