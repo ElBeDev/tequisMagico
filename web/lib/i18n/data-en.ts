@@ -836,8 +836,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A restaurant on Ezequiel Montes street, about 300 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   '3383db50-565a-51b9-a480-00c4b4a1279c': { // Camino a Bremen
-    shortDescription: 'Delicatessen on Guillermo Prieto, two blocks from the square',
-    fullDescription: 'A delicatessen on Guillermo Prieto street, about 180 meters from Plaza Miguel Hidalgo; INEGI’s national business directory lists it as a restaurant. It also appears in the town’s tourism office directory. Check the hours before you go.',
+    shortDescription: 'Wood-fired pizza, fresh pasta and artisan bread',
+    fullDescription: 'Wood-fired pizza, fresh pasta and artisan bread at Guillermo Prieto Norte 19, about 180 meters from Plaza Miguel Hidalgo, across from the Posada del Virrey and Gran Misiones hotels. Besides pizza and pasta it has ravioli, ossobuco, pies and its own bakery, and on Saturdays and Sundays, 8:30 AM to 1 PM, it serves cochinita pibil breakfasts. It takes reservations; check the hours before you go.',
   },
   '4af01ed2-d8a7-529d-a8c5-fbb7c9038a34': { // Mi Cabaña
     shortDescription: 'Mexican food and steaks since 1980, on the way out to Querétaro',

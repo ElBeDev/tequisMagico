@@ -424,6 +424,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Quekas TX** (`database/databasefix_quekas_tx_2026-11-16.sql`): su Facebook confirma la dirección y da otro teléfono (414 226 1373); quesadillas de guisado, gorditas, desayunos, entrega en el centro, dos fotos (fachada y quesadillas) y `content_verified`.
 - **Suvlaki** dado de baja (`database/databasefix_suvlaki_cerrado_2026-11-16.sql`): el dueño del sitio confirma que ya no está funcionando.
 - **Mi Cabaña** (`database/databasefix_mi_cabana_2026-11-16.sql`): sus cuentas dan el horario (jueves a martes, desayuno 9:30–13 y comida 14–18) y otro teléfono (427 195 0343); comida mexicana y cortes desde 1980, una foto y `content_verified`. Primer horario partido en `schedule_json` ("9:30–13:00 y 14:00–18:00"); `lib/schedule.ts` ya lo entiende.
+- **Camino a Bremen** (`database/databasefix_camino_a_bremen_2026-11-16.sql`): pasa a Pizzería (pizza al horno de leña, pasta fresca, pan artesanal); sus cuentas resuelven el teléfono (414 273 4113), desayuno de cochinita los fines de semana, tres fotos y `content_verified`.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
