@@ -795,9 +795,9 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Rolled ice cream and bubble tea a block from the square',
     fullDescription: 'Rolled ice cream and bubble tea shop at Juárez 3B, next to Hotel Neptuno, about 150 meters from Plaza Miguel Hidalgo. The ice cream is made to order on a cold plate, with a water or milk base, in more than 70 flavors you can combine; the bubble tea comes with black tapioca or popping pearls. It’s open every day, noon to 7 PM.',
   },
-  '540aef3a-0b45-5bb2-87f3-2e97fb434424': { // Wine Bar Freixenet
-    shortDescription: 'Wine bar on Juárez Poniente, next to the square',
-    fullDescription: 'A wine bar on Juárez Poniente, about 70 meters from Plaza Miguel Hidalgo. INEGI’s national business directory lists it under Freixenet de México, and it also appears in the town’s tourism office directory. Check the hours before you go.',
+  '540aef3a-0b45-5bb2-87f3-2e97fb434424': { // Sala Vivé Wine Bar
+    shortDescription: 'Sala Vivé by Freixenet wine bar, a block from the square',
+    fullDescription: 'The wine bar of Sala Vivé, Freixenet de México’s winery in Ezequiel Montes, at Juárez 4C, about 70 meters from Plaza Miguel Hidalgo. It pours its own sparkling and still wines by the glass (Sala Vivé, Viña Dolores, Petillant and Vivante), wine cocktails and Spanish and Italian bottles, with tapas and boards of regional cheeses and cold cuts. It has sommeliers, a wine of the month and a monthly three-wine tasting, sidewalk tables and a rooftop terrace. Check the hours before you go.',
   },
   'a708db5a-909c-5bd5-9508-2541076268fe': { // La Jauría
     shortDescription: 'Neo-pulquería with curados and board games, across from Parque La Pila',

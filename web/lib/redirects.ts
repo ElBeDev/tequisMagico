@@ -11,4 +11,6 @@ export const PLACE_REDIRECTS: Record<string, string> = {
   // 16 nov 2026: "La Pila" era una ficha aparte de la pila de 1567, que está dentro del parque y le da
   // su nombre (misma dirección y coordenadas). Se unió al parque (databasefix_seo_2026-11-16.sql).
   'la-pila': 'parque-la-pila',
+  // 16 nov 2026: "Wine Bar Freixenet" con su nombre real (databasefix_sala_vive_wine_bar_2026-11-16.sql).
+  'wine-bar-freixenet': 'sala-vive-wine-bar',
 };

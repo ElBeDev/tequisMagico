@@ -433,6 +433,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Helados Rollato** (`database/databasefix_helados_rollato_2026-11-16.sql`): sus cuentas dan la dirección exacta (Juárez 3B, junto al Hotel Neptuno), el horario (diario de 12 a 19 h), helado en rollo y bubble tea con más de 70 sabores, una foto y `content_verified`. El teléfono sigue siendo el de Turismo.
 - **Buenos Días, desayunos y café** dado de baja (`database/databasefix_buenos_dias_2026-11-16.sql`) a petición del dueño del sitio.
 - **Cafetería Laysu** (`database/databasefix_cafeteria_laysu_2026-11-16.sql`): sus cuentas resuelven el teléfono (414 273 0383) y dan el horario (martes a domingo); pastelería, café y bistró, dos fotos recortadas y `content_verified`.
+- **Sala Vivé Wine Bar** (`database/databasefix_sala_vive_wine_bar_2026-11-16.sql`): "Wine Bar Freixenet" era el wine bar de Sala Vivé (Freixenet de México); nombre real (redirect `wine-bar-freixenet`), carta 2026, tres fotos de salavive.mx y `content_verified`. Pendiente: horario (no lo publica; su carta trae el teléfono con la lada 441 por error).
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
