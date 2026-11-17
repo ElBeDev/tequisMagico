@@ -417,6 +417,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Delicias del Mar** (`database/databasefix_delicias_del_mar_2026-11-16.sql`): su Facebook resuelve el teléfono y el pin, menú con precios de sep 2026, una foto real (sus fotos recientes de platillos tienen fondos de playa montados) y `content_verified`.
 - **Chiltepín** (`database/databasefix_chiltepin_2026-11-16.sql`): sus cuentas resuelven el teléfono (414 231 0019), horario de jueves a domingo de 13 a 20 h, platillos, redes, tres fotos reales y `content_verified`.
 - **Birria Los Compadres** (`database/databasefix_birria_los_compadres_2026-11-16.sql`): sus cuentas confirman los dos teléfonos y la sucursal de Bordo Blanco; menú, entrega a domicilio, una foto real y `content_verified`. Una publicación de nov 2026 menciona un local en Fernando de Tapia esquina 2 de Abril (de 8 a 17 h) que parece otra sucursal: si es un cambio de local, hay que mover la ficha.
+- **La Ranchería** (`database/databasefix_la_rancheria_2026-11-16.sql`): su Facebook la confirma; pasa a Parrilla (carnes al carbón y cortes), con desayunos de fin de semana, área de juegos, tres fotos reales y `content_verified`. No publica horario ni precios.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
