@@ -780,8 +780,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A chocolate shop on Andador Independencia, about 110 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   '4be92cb3-12aa-5618-b4f0-fdd3c3a279bc': { // La Crepe
-    shortDescription: 'Crêpes, milkshakes and breakfast across from Parque La Pila',
-    fullDescription: 'A crêpe shop in Plaza Los Arcos, across from Parque La Pila, about 400 meters from Plaza Miguel Hidalgo. According to its tourism office listing, it makes sweet and savory crêpes, milkshakes, frappés, smoothies, baguettes, coffee and breakfast, and keeps books to read on site. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Crepes, waffles and milkshakes in Plaza Los Arcos, next to Parque La Pila',
+    fullDescription: 'A crêperie in Plaza Los Arcos, unit 1, next to Parque La Pila, about 400 meters from Plaza Miguel Hidalgo; it opened in 2016 and has a second branch at Juárez 21, a few steps from the Capilla de Padre Jesús. It makes sweet and savory crepes from a homemade batter, waffles, marquesitas (crisp rolled crepes) and baguettes, with milkshakes, frappés, smoothies and coffee; for breakfast, a crepe sandwich. The place is decorated with murals and has books to read. Closed on Tuesdays; on Mondays only the Juárez branch is open. Check the hours before you go.',
   },
   'd20a1e1a-d174-51cf-8552-29e2a7c240b3': { // Dudi Coffee House
     shortDescription: 'Coffee, frappés and tartlets in Plaza Los Arcos, across from Parque La Pila',
