@@ -840,8 +840,9 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A delicatessen on Guillermo Prieto street, about 180 meters from Plaza Miguel Hidalgo; INEGI’s national business directory lists it as a restaurant. It also appears in the town’s tourism office directory. Check the hours before you go.',
   },
   '4af01ed2-d8a7-529d-a8c5-fbb7c9038a34': { // Mi Cabaña
-    shortDescription: 'Restaurant on the way out toward Querétaro',
-    fullDescription: 'A restaurant on the way out of town toward Querétaro, a little over a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Mexican food and steaks since 1980, on the way out to Querétaro',
+    fullDescription: 'Family restaurant serving Mexican food and steaks since 1980, on the way out of town toward Querétaro, a little over a kilometer from Plaza Miguel Hidalgo. Breakfast is 9:30 AM to 1 PM and lunch 2 to 6 PM, Thursday to Tuesday; it’s closed on Wednesdays. Dishes include beef fillet with bone marrow, steaks and, in season, chiles en nogada. It has outdoor tables and takes reservations.',
+    schedule: { lunes: '9:30–13:00 and 14:00–18:00', martes: '9:30–13:00 and 14:00–18:00', jueves: '9:30–13:00 and 14:00–18:00', viernes: '9:30–13:00 and 14:00–18:00', 'sábado': '9:30–13:00 and 14:00–18:00', domingo: '9:30–13:00 and 14:00–18:00' },
   },
   '8d3e175a-5c6a-566a-a207-e368fc3fa0de': { // Quekas TX
     shortDescription: 'Stew-filled quesadillas, gorditas and breakfast, two blocks from the square',
