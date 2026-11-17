@@ -776,8 +776,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A restaurant and café on Juárez Poniente, about 90 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   'd3b92989-1395-5f47-aa5d-e3e8e4449bd5': { // Chocolate Molinillo
-    shortDescription: 'Chocolate shop on Andador Independencia, next to the square',
-    fullDescription: 'A chocolate shop on Andador Independencia, about 110 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Coffee, baked goods and a pottery shop on Andador Independencia',
+    fullDescription: 'A café at Andador Independencia 17, about 110 meters from Plaza Miguel Hidalgo. It serves coffee and pastries baked on site, with tables inside and outdoors, and has a shop of mugs, pottery and home décor. It hosts live music, workshops and art shows. Check the hours before you go.',
   },
   '4be92cb3-12aa-5618-b4f0-fdd3c3a279bc': { // La Crepe
     shortDescription: 'Crepes, waffles and milkshakes in Plaza Los Arcos, next to Parque La Pila',
