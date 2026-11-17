@@ -876,8 +876,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Charcoal-grilled meat restaurant on the road to San Juan del Río, in La Ermita, about five and a half kilometers from Plaza Miguel Hidalgo. It serves grilled steaks, from New York to Tomahawk, mixed grills, beer and mezcal drinks, and breakfast on weekends. It has a play area and a kids’ menu. It doesn’t publish hours or prices: call to confirm before you go.',
   },
   'addc0100-c44c-522b-9473-9ae0b7050418': { // Portal del Cabrito
-    shortDescription: 'Restaurant on the road to San Juan del Río, in La Ermita',
-    fullDescription: 'A restaurant on the road to San Juan del Río, in La Ermita, about five and a half kilometers from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Wood-oven roast kid goat, with a kids’ area',
+    fullDescription: 'Family restaurant on the road to San Juan del Río, at km 15, in La Ermita, about five and a half kilometers from Plaza Miguel Hidalgo, that has specialized for more than 15 years in kid goat (cabrito) roasted in a wood-fired oven, in the northern Mexican and Segovian style. According to its website, cabrito for six costs MX$2,340 and for eight MX$3,000, and individual portions start at MX$345, with soup and salad; there are also machitos (MX$200), melted cheese with chistorra (MX$180), grilled steaks from MX$350 and seasonal escamoles (MX$390). It has a kids’ play area and a kids’ menu. It’s open every day, 1 to 7 PM, and takes reservations by WhatsApp.',
   },
   'c07274f5-3e9a-5156-bd5d-edc58c71f618': { // La Gallera
     shortDescription: 'Restaurant and bar on the way out toward Querétaro',
