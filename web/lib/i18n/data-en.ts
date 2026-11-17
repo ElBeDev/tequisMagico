@@ -827,10 +827,6 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Restaurant on the road to San Juan del Río',
     fullDescription: 'A restaurant on federal highway 120, in the Adolfo López Mateos neighborhood, about 770 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
-  '64b594be-b6af-5aa3-b2a3-705e35c223fc': { // Las Vegas Welcome Fast Food
-    shortDescription: 'Fast food on Juárez Poniente',
-    fullDescription: 'A fast food place on Juárez Poniente, about 570 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
-  },
   'f45cea0b-b303-5a75-9090-975e85c3a0b6': { // Estación 31
     shortDescription: 'Restaurant on Ezequiel Montes, toward Parque La Pila',
     fullDescription: 'A restaurant on Ezequiel Montes street, about 300 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
