@@ -873,8 +873,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Family restaurant on the road to San Juan del Río, at km 15, in La Ermita, about five and a half kilometers from Plaza Miguel Hidalgo, that has specialized for more than 15 years in kid goat (cabrito) roasted in a wood-fired oven, in the northern Mexican and Segovian style. According to its website, cabrito for six costs MX$2,340 and for eight MX$3,000, and individual portions start at MX$345, with soup and salad; there are also machitos (MX$200), melted cheese with chistorra (MX$180), grilled steaks from MX$350 and seasonal escamoles (MX$390). It has a kids’ play area and a kids’ menu. It’s open every day, 1 to 7 PM, and takes reservations by WhatsApp.',
   },
   'c07274f5-3e9a-5156-bd5d-edc58c71f618': { // La Gallera
-    shortDescription: 'Restaurant and bar on the way out toward Querétaro',
-    fullDescription: 'A restaurant and bar on the way out of town toward Querétaro, in the Adolfo López Mateos neighborhood, about two kilometers from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Family restaurant and bar with steaks, mixed grills and micheladas',
+    fullDescription: 'Family restaurant and bar on the way out of town toward Querétaro, in the Adolfo López Mateos neighborhood, about two kilometers from Plaza Miguel Hidalgo. The menu runs from starters, tacos and burgers to steaks and mixed grills: according to its 2026 menu, tacos cost MX$80 to MX$175 per order, a 350 g arrachera MX$280, rib eye MX$310, a molcajete for two MX$475 and a mixed grill for six MX$949; one-liter micheladas start at MX$95. It’s open every day from noon to 11 PM, with live music, a kids’ menu, parking and a smoking area, and it delivers at no extra cost.',
   },
   '1dd7eb21-a7d6-51a2-a1aa-7cd88b3b2c6b': { // La Fromelier
     shortDescription: 'The “house of good cheese”: cheese boards, pairings and Querétaro cheeses',
