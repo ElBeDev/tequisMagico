@@ -860,8 +860,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A seafood restaurant in the Vista Hermosa neighborhood, by the road to San Juan del Río, a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   'efa3b053-6449-54c6-831a-1dc786b70baa': { // Chiltepín
-    shortDescription: 'Seafood and micheladas in the Adolfo López Mateos neighborhood',
-    fullDescription: 'A seafood restaurant in the Adolfo López Mateos neighborhood, a little over a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Family seafood restaurant, Thursday to Sunday',
+    fullDescription: 'Family seafood restaurant at Plan de Guadalupe 58, in the Adolfo López Mateos neighborhood, a little over a kilometer from Plaza Miguel Hidalgo. Dishes include shrimp soup, pescadillas (fried fish turnovers) and a mixed seafood platter. It’s open Thursday to Sunday, 1 to 8 PM. It doesn’t publish a menu or prices; you can ask by WhatsApp.',
   },
   'f7f8da15-410d-580e-a479-b5f096b49f49': { // Delicias del Mar
     shortDescription: 'Family seafood restaurant with cocktails, fish fillets and shrimp',

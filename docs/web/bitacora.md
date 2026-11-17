@@ -415,6 +415,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Viajes y Enoturismo** (`database/databasefix_viajes_y_enoturismo_2026-11-16.sql`): tour a las minas de ópalo, su tienda gourmet y su hotel, correo, y tres fotos reales del tour al ópalo de su web (antes tenía la genérica de quesos y vino; las de los tours de vino son carteles con fotos de banco). Sus precios siguen siendo los de 2025.
 - **Manaly** dado de baja (`database/databasefix_manaly_cerrado_2026-11-16.sql`): sus propias cuentas anunciaron el cierre el 5 sep 2024. El DENUE y el directorio de Turismo 2025 lo seguían listando: los lugares del DENUE sin presencia reciente pueden estar cerrados.
 - **Delicias del Mar** (`database/databasefix_delicias_del_mar_2026-11-16.sql`): su Facebook resuelve el teléfono y el pin, menú con precios de sep 2026, una foto real (sus fotos recientes de platillos tienen fondos de playa montados) y `content_verified`.
+- **Chiltepín** (`database/databasefix_chiltepin_2026-11-16.sql`): sus cuentas resuelven el teléfono (414 231 0019), horario de jueves a domingo de 13 a 20 h, platillos, redes, tres fotos reales y `content_verified`.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
