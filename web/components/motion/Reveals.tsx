@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { EASE, ScrollTrigger, SplitText, gsap, prefersReducedMotion, useGSAP } from '@/lib/motion';
+import { EASE, SPLIT_CLASSES, SPLIT_HIDDEN, ScrollTrigger, SplitText, gsap, prefersReducedMotion, useGSAP } from '@/lib/motion';
 
 /**
  * Anima por atributos lo que traen las páginas (que siguen siendo Server Components):
@@ -79,6 +79,7 @@ export default function Reveals() {
         SplitText.create(el, {
           type: type === 'lines' ? 'lines' : `lines,${type}`,
           mask: type,
+          ...SPLIT_CLASSES,
           autoSplit: true,
           // SplitText pone aria-label en el elemento y esconde los pedazos; en un <p> o <span>
           // aria-label no está permitido, así que ahí se deja el texto partido tal cual.
@@ -87,9 +88,9 @@ export default function Reveals() {
             const parts = type === 'chars' ? self.chars : type === 'words' ? self.words : self.lines;
             const anim = { yPercent: 0, duration: type === 'chars' ? 1 : 1.2, ease: 'expo.out', stagger: type === 'chars' ? 0.025 : 0.08 };
             if (inView(el)) {
-              return gsap.fromTo(parts, { yPercent: 110 }, { ...anim, delay: Number(el.dataset.delay ?? 0.1) });
+              return gsap.fromTo(parts, { yPercent: SPLIT_HIDDEN }, { ...anim, delay: Number(el.dataset.delay ?? 0.1) });
             }
-            return gsap.fromTo(parts, { yPercent: 110 }, { ...anim, scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
+            return gsap.fromTo(parts, { yPercent: SPLIT_HIDDEN }, { ...anim, scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
           },
         });
       });

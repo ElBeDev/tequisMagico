@@ -93,6 +93,15 @@ a { text-underline-offset: 0.18em; text-decoration-thickness: 0.07em; }
   text-wrap: balance;
 }
 
+/* Cajas de SplitText (mask): aire arriba para acentos y abajo para colitas (y, g, p, j), compensado con
+   margen negativo para no mover el interlineado. Ver SPLIT_CLASSES en lib/motion.ts. */
+.split-line-mask,
+.split-word-mask,
+.split-char-mask {
+  padding-block: 0.14em 0.24em;
+  margin-block: -0.14em -0.24em;
+}
+
 /* Dato pequeño (categoría, fecha, estado): en minúsculas normales y a tamaño legible. */
 .meta {
   font-size: var(--step-small);

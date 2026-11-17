@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { ArrowDown, ArrowUp } from 'lucide-react';
-import { ScrollTrigger, SplitText, gsap, isDesktop, prefersReducedMotion, useGSAP } from '@/lib/motion';
+import { SPLIT_CLASSES, SPLIT_HIDDEN, ScrollTrigger, SplitText, gsap, isDesktop, prefersReducedMotion, useGSAP } from '@/lib/motion';
 import { photoAttrs } from '@/lib/images';
 import { href, type Lang } from '@/lib/i18n';
 
@@ -56,7 +56,8 @@ export default function Activities({ items, lang }: { items: Activity[]; lang: L
       SplitText.create(el.querySelector('[data-act-title]'), {
         type: 'chars',
         mask: 'chars',
-        onSplit: (self) => gsap.from(self.chars, { yPercent: down ? 110 : -110, duration: 0.9, ease: 'expo.out', stagger: 0.025 }),
+        ...SPLIT_CLASSES,
+        onSplit: (self) => gsap.from(self.chars, { yPercent: down ? SPLIT_HIDDEN : -SPLIT_HIDDEN, duration: 0.9, ease: 'expo.out', stagger: 0.025 }),
       });
       gsap.from(el.querySelectorAll('[data-act-fade]'), { y: down ? 24 : -24, autoAlpha: 0, duration: 0.8, ease: 'power3.out', stagger: 0.06, delay: 0.15 });
     },

@@ -13,6 +13,14 @@ export const EASE = 'power3.out';
 export const EASE_INOUT = 'expo.inOut';
 
 /** Lo mismo que el CSS: si la persona pidió menos movimiento, no animamos nada. */
+// SplitText con `mask` mete cada pedazo en una caja con overflow: clip del alto del renglón. Con el
+// interlineado cerrado de los títulos (.display 0.92) esa caja cortaba los acentos de arriba y las
+// colitas de abajo (y, g, p, j). Estas clases nombran las cajas (SplitText les agrega "-mask") para que
+// globals.css les dé aire; SPLIT_HIDDEN baja el texto escondido lo suficiente para que no se asome
+// por ese aire antes de animar.
+export const SPLIT_CLASSES = { linesClass: 'split-line', wordsClass: 'split-word', charsClass: 'split-char' };
+export const SPLIT_HIDDEN = 135;
+
 export function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }

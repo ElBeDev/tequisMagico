@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { EASE, SplitText, gsap, prefersReducedMotion, useGSAP } from '@/lib/motion';
+import { EASE, SPLIT_CLASSES, SPLIT_HIDDEN, SplitText, gsap, prefersReducedMotion, useGSAP } from '@/lib/motion';
 import { photoAttrs } from '@/lib/images';
 
 export type HeroSlide = { src: string; alt: string; promise: string };
@@ -101,8 +101,9 @@ export default function Hero({
     const split = SplitText.create(el.querySelector('[data-hero-promise]'), {
       type: 'chars,words',
       mask: 'chars',
+      ...SPLIT_CLASSES,
       aria: 'none', // el texto para lectores de pantalla va en el <span className="sr-only"> de al lado
-      onSplit: (self) => gsap.from(self.chars, { yPercent: 110, duration: 1, ease: 'expo.out', stagger: 0.022, delay: first ? 0.75 : 0.45 }),
+      onSplit: (self) => gsap.from(self.chars, { yPercent: SPLIT_HIDDEN, duration: 1, ease: 'expo.out', stagger: 0.022, delay: first ? 0.75 : 0.45 }),
     });
     tweens.push(gsap.fromTo(el.querySelector(`[data-hero-progress="${index}"]`), { scaleX: 0 }, { scaleX: 1, duration: SLIDE_SECONDS, ease: 'none', onComplete: next }));
     return () => {
