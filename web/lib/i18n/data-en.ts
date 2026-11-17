@@ -620,8 +620,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Temazcal (sweat lodge) in the Santa María del Camino neighborhood, near Bordo Blanco, about 5.6 km from downtown. It is a private, discreet place with gardens, a pool, a hot tub and a massage room with physical therapists; it also offers aromatherapy and arranges special occasions. According to the town tourism directory, the temazcal session comes with a relaxing massage and an aloe and mineral salt scrub. Everything is by appointment, and it doesn’t publish hours or prices: call or message to book.',
   },
   '6663fe98-2d68-549b-968c-e48f9b4f15e9': { // Casa Gayatri
-    shortDescription: 'Holistic house with temazcal, massages and yoga',
-    fullDescription: 'Holistic house in the Santa Fe neighborhood, about 1.4 km from the main square. According to the town tourism directory, it offers temazcal, massages, yoga and meditation classes, and also lodging. INEGI’s DENUE business census lists it as a massage business. It has no working website and doesn’t publish hours or prices: ask when you book.',
+    shortDescription: 'Holistic house with a temazcal every weekend, massages and yoga',
+    fullDescription: 'Holistic house in the Santa Fe neighborhood, about 1.4 km from the main square, with a traditional temazcal (sweat lodge) every weekend. The temazcalli ceremony is held with fire-heated stones, chants and plants, and in November 2026 it cost MX$350 per person, with fruit and tea afterwards and use of its natural pool. Dates and times change every month and are posted on its Instagram calendar. It also offers private temazcal sessions, weekday massages, yoga, workshops, healthy food and pet-friendly lodging, and hosts retreats and holistic weddings. Book by WhatsApp.',
   },
   'bd03c95d-85f2-512b-9b53-7e96af294b72': { // Yoot Masajes y Bienestar
     shortDescription: 'Massages, facials and therapies steps from the main square',

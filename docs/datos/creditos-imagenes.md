@@ -292,6 +292,10 @@ Para negocios sin web propia. Una cuenta cuenta como oficial si su teléfono, di
 | Temazcal Tres Marías | `temazcal-tres-marias-temazcal.jpg` | [Facebook, 16 ene 2025](https://www.facebook.com/photo.php?fbid=1053300126602292) | Margarita 42, 427 182 4352 y su correo, iguales al DENUE y a Turismo |
 | Temazcal Tres Marías | `temazcal-tres-marias-alberca.jpg` | [Facebook, 16 ene 2025](https://www.facebook.com/photo.php?fbid=1053300069935631) | Misma cuenta |
 | Temazcal Tres Marías | `temazcal-tres-marias-jacuzzi.jpg` | [Facebook](https://www.facebook.com/photo.php?fbid=927620892503550) | Misma cuenta |
+| Casa Gayatri | `casa-gayatri-temazcal.jpg` | [Facebook, 7 oct 2026](https://www.facebook.com/photo.php?fbid=1401153138883211) | 414 226 3552 y su correo, iguales a Turismo; su Instagram @casagayatri.temazcal enlaza al mismo WhatsApp |
+| Casa Gayatri | `casa-gayatri-fuego.jpg` | [Facebook, 7 oct 2026](https://www.facebook.com/photo.php?fbid=1401153112216547) | Misma cuenta |
+| Casa Gayatri | `casa-gayatri-camino.jpg` | [Facebook, 7 oct 2026](https://www.facebook.com/photo.php?fbid=1401153115549880) | Misma cuenta |
+| Casa Gayatri | `casa-gayatri-jardin.jpg` | [Facebook, 7 oct 2026](https://www.facebook.com/photo.php?fbid=1401153132216545) | Misma cuenta |
 | Balneario La Vega | `balneario-la-vega-albercas.jpg` | [Facebook, 20 may 2025](https://www.facebook.com/photo.php?fbid=122125243784819133) (también es su portada) | Teléfono 414 273 4534 y dirección iguales a su web, y enlaza a balneariolavega.mx. Tiene web, pero sin galería: "Galería" da 404 |
 
 ## Historial anterior
