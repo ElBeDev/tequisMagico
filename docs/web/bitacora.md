@@ -422,6 +422,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Bucaneros Mariscos** (`database/databasefix_bucaneros_2026-11-16.sql`): su Facebook resuelve los tres teléfonos (442 391 0412, y 414 121 8698 para pedidos) y la dirección (Andador Vista Hermosa, frente al Parador Artesanal); una foto real y `content_verified`.
 - **Sr. Sol** dado de baja (`database/databasefix_sr_sol_cerrado_2026-11-16.sql`): dejó de publicar como Sr. Sol en 2024 y su página se convirtió en Ramenzilla, un ramen a domicilio en la Ciudad de México con el mismo WhatsApp.
 - **Quekas TX** (`database/databasefix_quekas_tx_2026-11-16.sql`): su Facebook confirma la dirección y da otro teléfono (414 226 1373); quesadillas de guisado, gorditas, desayunos, entrega en el centro, dos fotos (fachada y quesadillas) y `content_verified`.
+- **Suvlaki** dado de baja (`database/databasefix_suvlaki_cerrado_2026-11-16.sql`): el dueño del sitio confirma que ya no está funcionando.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 

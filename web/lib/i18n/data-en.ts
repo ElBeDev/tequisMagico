@@ -843,10 +843,6 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Restaurant on the way out toward Querétaro',
     fullDescription: 'A restaurant on the way out of town toward Querétaro, a little over a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
-  'dc350bda-4909-5289-86c2-0b0f4147306a': { // Suvlaki
-    shortDescription: 'Restaurant and bar on highway 120, in Hacienda Grande',
-    fullDescription: 'A restaurant and bar on federal highway 120, in Hacienda Grande, a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
-  },
   '8d3e175a-5c6a-566a-a207-e368fc3fa0de': { // Quekas TX
     shortDescription: 'Stew-filled quesadillas, gorditas and breakfast, two blocks from the square',
     fullDescription: 'A small eatery at 5 de Mayo 20, about 210 meters from Plaza Miguel Hidalgo, known for quesadillas filled with traditional stews. It also makes gorditas, sopes, huaraches and breakfasts with eggs, chilaquiles and coffee. Free delivery downtown, or order to go. It doesn’t publish hours or prices: check before you go.',
