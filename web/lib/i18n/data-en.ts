@@ -867,10 +867,6 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Seafood restaurant on highway 120, in Hacienda Grande',
     fullDescription: 'A seafood restaurant on federal highway 120, in the Hacienda Grande area, a little over a kilometer from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
-  '2c08206b-ba9b-5f84-930e-01b3455c74e2': { // Manaly
-    shortDescription: 'Seafood in the Adolfo López Mateos neighborhood',
-    fullDescription: 'A seafood restaurant in the Adolfo López Mateos neighborhood, about two kilometers from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
-  },
   '40baa5fe-ff76-5701-8ba2-c1cc5bc6f825': { // Birria Los Compadres
     shortDescription: 'Birria on the road to San Juan del Río, in Bordo Blanco',
     fullDescription: 'A birria restaurant on the road to San Juan del Río, in Bordo Blanco, about four kilometers from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
