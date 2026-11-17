@@ -429,6 +429,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Las Vegas Welcome Fast Food** dado de baja (`database/databasefix_las_vegas_welcome_2026-11-16.sql`) a petición del dueño del sitio.
 - **La Antigua** (`database/databasefix_la_antigua_2026-11-16.sql`): su Facebook la confirma (teléfono en su letrero); terraza, desayunos desde las 8 h, tres fotos reales y `content_verified`. No publica horario completo ni precios.
 - **La Quercia Ristorante** (`database/databasefix_la_quercia_2026-11-16.sql`): su Facebook confirma que es italiano, da el horario (miércoles a lunes, 14 a 20 h), platillos, servicio a domicilio y dos fotos reales; `content_verified`. El dominio que enlaza (laquerciatequis.com) no está registrado.
+- **Santo Tomate** (`database/databasefix_santo_tomate_2026-11-16.sql`): su Instagram confirma Juárez Poniente 47 y el teléfono; restaurante bar con desayunos de martes a domingo (8:30–13, buffet en fin de semana), pizzas, música en vivo, una foto y `content_verified`.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 

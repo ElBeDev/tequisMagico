@@ -728,8 +728,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A restaurant at the corner of Andador Morelos and 5 de Mayo, about 130 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   '6fc34abf-c13a-52e3-8ff2-adbcaf897ac8': { // Santo Tomate
-    shortDescription: 'Restaurant on Juárez Poniente, 300 meters from the square',
-    fullDescription: 'A restaurant on Avenida Juárez Poniente, about 280 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Restaurant and bar with breakfast, a weekend buffet and pizza',
+    fullDescription: 'Restaurant and bar at Juárez Poniente 47, about 280 meters from Plaza Miguel Hidalgo. It serves breakfast Tuesday to Sunday, 8:30 AM to 1 PM, with a buffet on Saturdays and Sundays, and later pizza, wings and micheladas; some nights there’s live music. It delivers and takes reservations at 414 122 8544 or 414 107 6927. It doesn’t publish full hours: check before you go.',
   },
   '33592d4d-57f6-5c63-a471-e733acd632ea': { // La Quercia Ristorante
     shortDescription: 'Italian pasta and pizza a block from the main square',
