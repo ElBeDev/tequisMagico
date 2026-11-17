@@ -298,6 +298,7 @@ Para negocios sin web propia. Una cuenta cuenta como oficial si su teléfono, di
 | Casa Gayatri | `casa-gayatri-fuego.jpg` | [Facebook, 7 oct 2026](https://www.facebook.com/photo.php?fbid=1401153112216547) | Misma cuenta |
 | Casa Gayatri | `casa-gayatri-camino.jpg` | [Facebook, 7 oct 2026](https://www.facebook.com/photo.php?fbid=1401153115549880) | Misma cuenta |
 | Casa Gayatri | `casa-gayatri-jardin.jpg` | [Facebook, 7 oct 2026](https://www.facebook.com/photo.php?fbid=1401153132216545) | Misma cuenta |
+| Vino Tours | `vino-tours-barricas.jpg` | [Facebook, 4 jul 2026](https://www.facebook.com/photo.php?fbid=1503530345119951) (Fiesta de la Vendimia) | Niños Héroes 42 y reservaciones@vinotours.mx, iguales al DENUE y a Turismo; su Instagram @vino_tours da la misma dirección |
 | Balneario La Vega | `balneario-la-vega-albercas.jpg` | [Facebook, 20 may 2025](https://www.facebook.com/photo.php?fbid=122125243784819133) (también es su portada) | Teléfono 414 273 4534 y dirección iguales a su web, y enlaza a balneariolavega.mx. Tiene web, pero sin galería: "Galería" da 404 |
 
 ## Historial anterior
