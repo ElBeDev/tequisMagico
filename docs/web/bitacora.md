@@ -416,6 +416,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Manaly** dado de baja (`database/databasefix_manaly_cerrado_2026-11-16.sql`): sus propias cuentas anunciaron el cierre el 5 sep 2024. El DENUE y el directorio de Turismo 2025 lo seguían listando: los lugares del DENUE sin presencia reciente pueden estar cerrados.
 - **Delicias del Mar** (`database/databasefix_delicias_del_mar_2026-11-16.sql`): su Facebook resuelve el teléfono y el pin, menú con precios de sep 2026, una foto real (sus fotos recientes de platillos tienen fondos de playa montados) y `content_verified`.
 - **Chiltepín** (`database/databasefix_chiltepin_2026-11-16.sql`): sus cuentas resuelven el teléfono (414 231 0019), horario de jueves a domingo de 13 a 20 h, platillos, redes, tres fotos reales y `content_verified`.
+- **Birria Los Compadres** (`database/databasefix_birria_los_compadres_2026-11-16.sql`): sus cuentas confirman los dos teléfonos y la sucursal de Bordo Blanco; menú, entrega a domicilio, una foto real y `content_verified`. Una publicación de nov 2026 menciona un local en Fernando de Tapia esquina 2 de Abril (de 8 a 17 h) que parece otra sucursal: si es un cambio de local, hay que mover la ficha.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
@@ -426,6 +427,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 | Pendiente | Quién |
 |---|---|
 | quesosvai.com (Finca VAI) muestra una página de estacionamiento desde el 14 nov 2026: si vuelve, reponer el `website` en la ficha | Datos |
+| Birria Los Compadres: confirmar si el local de Fernando de Tapia esquina 2 de Abril (post del 7 nov 2026) es una segunda sucursal o un cambio de domicilio | Datos |
 | Revisar las webs que no respondieron el 16 nov 2026: El Atorón, hotelplazatequis.com (4 lugares), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Si siguen caídas, quitar el `website` o la ficha | Datos |
 | Búsqueda de marcas antes de registrar el logo en el IMPI | Tú |
 | **Renovar el dominio** antes del 2 nov 2027 (conviene activar la renovación automática en Hostinger) | Tú |

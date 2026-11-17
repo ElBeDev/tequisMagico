@@ -868,8 +868,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'Family seafood restaurant on federal highway 120, in the Hacienda Grande area, a little over a kilometer from Plaza Miguel Hidalgo, that boasts 30 years of experience. According to its September 2026 menu, tostadas cost MX$63 to MX$79, seafood cocktails MX$110 to MX$190, fish fillets MX$170 to MX$200, shrimp dishes MX$225 to MX$250 and soups MX$145 to MX$195; house specialties include a seafood tower (MX$495), a surf-and-turf molcajete (MX$550) and a seafood platter for three (MX$850). It doesn’t take American Express or split orders. It takes orders by WhatsApp.',
   },
   '40baa5fe-ff76-5701-8ba2-c1cc5bc6f825': { // Birria Los Compadres
-    shortDescription: 'Birria on the road to San Juan del Río, in Bordo Blanco',
-    fullDescription: 'A birria restaurant on the road to San Juan del Río, in Bordo Blanco, about four kilometers from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Beef birria, quesabirrias and tacos in Bordo Blanco',
+    fullDescription: 'Birria restaurant on the road to San Juan del Río, at km 16.3, in Bordo Blanco, about four kilometers from Plaza Miguel Hidalgo. It serves traditional beef birria, quesabirrias, tacos and tortas, and has outdoor tables. It also does takeout and delivery: order at 414 104 3252 or 427 488 8392.',
   },
   'e3d8fa86-2533-50d9-951c-1774a75d05d2': { // La Ranchería
     shortDescription: 'Restaurant on the road to San Juan del Río, in La Ermita',
