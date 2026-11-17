@@ -409,6 +409,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
   - Sus cuentas confirman teléfono, correo y dirección. Temazcal cada fin de semana a $350 por persona (con fruta, té y alberca natural, oct 2026), masajes, yoga, talleres, comida saludable y hospedaje pet friendly. Cuatro fotos reales de su Facebook, redes, pin y `content_verified`.
   - Su calendario también anuncia ceremonias con plantas (ayahuasca, peyote, San Pedro): no van en la ficha.
 - Con esto, ningún spa ni temazcal usa ya la foto genérica de "Cata de quesos y vino".
+- **MD Turismo y Experiencias** (`database/databasefix_md_turismo_2026-11-16.sql`), primero de los tours: free tour de los sábados (10 y 16 h, desde la Plaza Miguel Hidalgo, aportación voluntaria), tour nocturno solo adultos, mina de ópalo y dos fotos más de su web. Su tienda en línea oculta los precios.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
