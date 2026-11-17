@@ -437,6 +437,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Dudi Coffee House** (`database/databasefix_dudi_coffee_house_2026-11-16.sql`): su Facebook confirma la dirección; tres fotos de ahí y descripción con lo que vende. Sigue con `content_verified = false`: no da teléfono ni horario y no publica desde el 1 dic 2023. Pendiente: confirmar que siga abierto.
 - **La Jauría** (`database/databasefix_la_jauria_cerrado_2026-11-16.sql`): dada de baja; su Instagram anunció el cierre el 25 oct 2024 ("hasta el 1 de noviembre", como pausa) y no ha vuelto a publicar.
 - **La Crepe** (`database/databasefix_la_crepe_2026-11-16.sql`): sus cuentas confirman teléfono y dirección; dos sucursales (Plaza Los Arcos y Juárez 21), martes cerrado, precios de su cartel, tres fotos y `content_verified`. Sin horario: la nota de Despierta Tequis (16:00–22:00) choca con su happy hour de 15:00 a 17:00.
+- **Alita Mía** (`database/databasefix_alita_mia_2026-11-16.sql`): dirección real (Laguna de Agua Brava 115, La Lagunita; la de Turismo venía mal escrita), horario, menú con precios, subcategoría Restaurante (no es bar), tres fotos sin etiqueta de IA y `content_verified`. Pendiente: afinar el pin.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 

@@ -800,8 +800,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'The wine bar of Sala Vivé, Freixenet de México’s winery in Ezequiel Montes, at Juárez 4C, about 70 meters from Plaza Miguel Hidalgo. It pours its own sparkling and still wines by the glass (Sala Vivé, Viña Dolores, Petillant and Vivante), wine cocktails and Spanish and Italian bottles, with tapas and boards of regional cheeses and cold cuts. It has sommeliers, a wine of the month and a monthly three-wine tasting, sidewalk tables and a rooftop terrace. Check the hours before you go.',
   },
   '37597543-1d00-5b62-a2c7-908992e46718': { // Alita Mía
-    shortDescription: 'Chicken wings on the road to San Juan del Río',
-    fullDescription: 'A chicken wings bar on federal highway 120, in the El Pedregal neighborhood, about 900 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Wings, boneless and chicken burgers on the road to San Juan del Río',
+    fullDescription: 'A chicken wings spot in the La Lagunita neighborhood, on the road to San Juan del Río, about 900 meters from Plaza Miguel Hidalgo. It serves wings and boneless bites with eleven sauces, from buffalo and mango habanero to tamarind-morita chile and hot parmesan, plus the Suprema chicken breast burger, fries, onion rings, cheese sticks and sharing packs; for dessert, cajeta flan. It’s open Wednesday to Sunday, 2 to 9 PM; orders are by WhatsApp only (414 107 8338), and delivery costs extra.',
   },
   '7e382f7c-268d-540b-8889-74a1ced705aa': { // El Carbonero
     shortDescription: 'Land, sea and wood-fire cooking, with a garden and fire pit',
