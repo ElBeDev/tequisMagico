@@ -434,6 +434,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
 - **Buenos Días, desayunos y café** dado de baja (`database/databasefix_buenos_dias_2026-11-16.sql`) a petición del dueño del sitio.
 - **Cafetería Laysu** (`database/databasefix_cafeteria_laysu_2026-11-16.sql`): sus cuentas resuelven el teléfono (414 273 0383) y dan el horario (martes a domingo); pastelería, café y bistró, dos fotos recortadas y `content_verified`.
 - **Sala Vivé Wine Bar** (`database/databasefix_sala_vive_wine_bar_2026-11-16.sql`): "Wine Bar Freixenet" era el wine bar de Sala Vivé (Freixenet de México); nombre real (redirect `wine-bar-freixenet`), carta 2026, tres fotos de salavive.mx y `content_verified`. Pendiente: horario (no lo publica; su carta trae el teléfono con la lada 441 por error).
+- **Dudi Coffee House** (`database/databasefix_dudi_coffee_house_2026-11-16.sql`): su Facebook confirma la dirección; tres fotos de ahí y descripción con lo que vende. Sigue con `content_verified = false`: no da teléfono ni horario y no publica desde el 1 dic 2023. Pendiente: confirmar que siga abierto.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 

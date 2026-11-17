@@ -784,8 +784,8 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     fullDescription: 'A crêpe shop in Plaza Los Arcos, across from Parque La Pila, about 400 meters from Plaza Miguel Hidalgo. According to its tourism office listing, it makes sweet and savory crêpes, milkshakes, frappés, smoothies, baguettes, coffee and breakfast, and keeps books to read on site. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
   'd20a1e1a-d174-51cf-8552-29e2a7c240b3': { // Dudi Coffee House
-    shortDescription: 'Coffee shop in Plaza Los Arcos, across from Parque La Pila',
-    fullDescription: 'A coffee shop in Plaza Los Arcos, across from Parque La Pila, about 400 meters from Plaza Miguel Hidalgo. According to its tourism office listing, the shopping arcade is pet friendly. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
+    shortDescription: 'Coffee, frappés and tartlets in Plaza Los Arcos, across from Parque La Pila',
+    fullDescription: 'A café in Plaza Los Arcos, across from Parque La Pila, about 400 meters from Plaza Miguel Hidalgo. It makes drip coffee and cappuccino, frappés, smoothies and iced teas, and sells fruit, pecan and white chocolate tartlets; eat in or take out. According to its tourism office listing, the shopping arcade welcomes pets. Check the hours before you go.',
   },
   'e8f75a71-26f5-5e60-9e5c-cd8ffd9323a3': { // Cafetería Laysu
     shortDescription: 'Pastry shop, café and bistro on Niños Héroes avenue',
