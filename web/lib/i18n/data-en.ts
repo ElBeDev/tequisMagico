@@ -791,10 +791,6 @@ export const PLACES_EN: Record<string, PlaceEn> = {
     shortDescription: 'Café and pastry shop on Avenida Niños Héroes',
     fullDescription: 'A café on Avenida Niños Héroes, about 600 meters from Plaza Miguel Hidalgo. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
   },
-  '68c0d213-7bc8-500c-b392-26b1dfed53aa': { // Buenos Días, desayunos y café
-    shortDescription: 'All-day breakfast and set lunches in Hacienda Grande',
-    fullDescription: 'Breakfast and à la carte dishes in the Hacienda Grande area, a kilometer and a half from Plaza Miguel Hidalgo. According to its tourism office listing, the breakfast menu is served all day and there is a three-course set lunch that changes daily. It is listed in the town’s tourism office directory and in INEGI’s national business directory (DENUE). Check the hours before you go.',
-  },
   '155011ad-8777-59c9-a123-3881bc720414': { // Helados Rollato
     shortDescription: 'Rolled ice cream and bubble tea a block from the square',
     fullDescription: 'Rolled ice cream and bubble tea shop at Juárez 3B, next to Hotel Neptuno, about 150 meters from Plaza Miguel Hidalgo. The ice cream is made to order on a cold plate, with a water or milk base, in more than 70 flavors you can combine; the bubble tea comes with black tapioca or popping pearls. It’s open every day, noon to 7 PM.',
