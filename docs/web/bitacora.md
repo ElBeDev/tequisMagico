@@ -410,6 +410,7 @@ SQL en `database/databasefix_seo_2026-11-16.sql` (aplicado, con respaldo). El de
   - Su calendario también anuncia ceremonias con plantas (ayahuasca, peyote, San Pedro): no van en la ficha.
 - Con esto, ningún spa ni temazcal usa ya la foto genérica de "Cata de quesos y vino".
 - **MD Turismo y Experiencias** (`database/databasefix_md_turismo_2026-11-16.sql`), primero de los tours: free tour de los sábados (10 y 16 h, desde la Plaza Miguel Hidalgo, aportación voluntaria), tour nocturno solo adultos, mina de ópalo y dos fotos más de su web. Su tienda en línea oculta los precios.
+- **TX Ecotours** (`database/databasefix_tx_ecotours_2026-11-16.sql`): precios de su tienda en línea (rutas de $850 a $1,350 por persona en promoción, más IVA; Ruta del Pedernal $6,500 por vehículo), horario diario de 9 a 21 h, WhatsApp y sus cabañas en Ezequiel Montes.
 - Registro de prospectos sin web o con poca presencia en línea: `docs/negocio/prospectos-presencia-digital.md`.
 - Webs que ese día no respondieron: El Atorón, hotelplazatequis.com (Hotel La Plaza, La Cantina, La Valentina y Las Brasas), hotelstgeorge.mx y pozareal.com.mx (el dominio ya no existe). Quedaron en pendientes.
 
